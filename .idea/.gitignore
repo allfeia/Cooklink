@@ -1,0 +1,30 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+
+# Node.js / npm / pnpm
+node_modules/
+.pnpm-store/
+
+# Vite / Build outputs
+dist/
+build/
+.vite/
+*.tsbuildinfo
+
+# env variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+.DS_Store
+.idea/
+
+
