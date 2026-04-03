@@ -22,7 +22,6 @@ erDiagram
         TIMESTAMPTZ created_at
         TIMESTAMPTZ started_at
         TIMESTAMPTZ completed_at
-        TIMESTAMPTZ expires_at
         INTEGER retry_count
         INTEGER max_retries
         TIMESTAMPTZ processing_timeout_at

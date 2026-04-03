@@ -6,7 +6,16 @@
 ```ts
 
 export type Difficulty = 1 | 2 | 3 | 4 | 5;
-export type JobStatus = 'processing' | 'completed' | 'failed';
+export type JobStatus =
+    | 'pending'      // в очереди
+    | 'processing'   // начата обработка
+    | 'transcribing' // получение/генерация транскрипции
+    | 'llm_processing' // извлечение рецепта через LLM
+    | 'validating'   // валидация JSON схемы
+    | 'generating_pdf' // генерация PDF
+    | 'completed'    // успешно завершено
+    | 'failed'       // ошибка
+    | 'cancelled';   // отменено пользователем
 
 export interface Ingredient {
   name: string;              // min 1, max 100 chars
