@@ -17,8 +17,8 @@
   "difficulty": 1|2|3|4|5,
   "portions": number,
   "ingredients": [{"name": "string", "quantity": number|string, "unit": "string"}],
-  "steps": [{"step_number": number, "description": "string (max 500 chars)"}],
-  "comments": "string (optional, max 500 chars)"
+  "steps": [{"step_number": number, "description": "string (max 1000 chars)"}],
+  "comments": "string (optional, max 1000 chars)"
 }
 
 Транскрипция:
