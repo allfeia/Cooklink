@@ -11,17 +11,13 @@ erDiagram
     }
     
     jobs {
-        UUID job_id PK
+        UUID id PK
         UUID user_id FK
-        VARCHAR source_url
-        VARCHAR video_id
+        VARCHAR video_url
         VARCHAR platform
         VARCHAR status
         VARCHAR error_code
         TEXT error_message
-        TIMESTAMPTZ created_at
-        TIMESTAMPTZ started_at
-        TIMESTAMPTZ completed_at
         INTEGER retry_count
         INTEGER max_retries
         TIMESTAMPTZ processing_timeout_at
@@ -29,9 +25,10 @@ erDiagram
     
     video_metadata {
         UUID id PK
-        VARCHAR video_id
+        VARCHAR UNIQUE(video_url)
         VARCHAR platform
         VARCHAR title
+        VARCHAR channael_name
         INTEGER duration_seconds
         BOOLEAN is_available
         BOOLEAN has_audio
@@ -42,82 +39,33 @@ erDiagram
     %% RECIPE DATA
     %% ─────────────────────────────────────
     transcripts {
-        UUID transcript_id PK
-        UUID job_id FK
+        UUID id PK
+        VARCHAR video_id FK
         VARCHAR language
-        VARCHAR source
-        TEXT content
+        VARCHAR source_platforms
+        VARCHAR transcription
         TIMESTAMPTZ created_at
     }
     
     recipes {
-        UUID recipe_id PK
-        UUID job_id FK
-        VARCHAR title
-        VARCHAR recipe_type
-        INTEGER cooking_time_minutes
-        INTEGER difficulty
-        INTEGER portions
-        TEXT comments
-        VARCHAR dish_image_url
-        BOOLEAN validation_passed
-        TIMESTAMPTZ created_at
-    }
-    
-    recipe_ingredients {
-        UUID ingredient_id PK
-        UUID recipe_id FK
-        VARCHAR name
-        VARCHAR quantity
-        VARCHAR unit
-        INTEGER sort_order
-    }
-    
-    recipe_steps {
-        UUID step_id PK
-        UUID recipe_id FK
-        INTEGER step_number
-        TEXT description
-        INTEGER sort_order
-    }
-    
-    %% ─────────────────────────────────────
-    %% STORAGE & AUDIT
-    %% ─────────────────────────────────────
-    pdf_files {
-        UUID pdf_id PK
-        UUID job_id FK
-        VARCHAR storage_key
-        BIGINT file_size_bytes
-        TIMESTAMPTZ expires_at
-    }
-    
-    request_logs {
-        UUID log_id PK
-        VARCHAR ip_hash
-        VARCHAR endpoint
-        UUID job_id FK
-        INTEGER status_code
-        TIMESTAMPTZ created_at
-    }
-    
-    rate_limit_counters {
         UUID id PK
-        VARCHAR ip_hash
-        TIMESTAMPTZ window_start
-        INTEGER request_count
+        VARCHAR video_id FK
+        JSONB recipe
     }
+    
+%%    rate_limit_counters {
+%%        UUID id PK
+%%        VARCHAR ip_hash
+%%        TIMESTAMPTZ window_start
+%%        INTEGER request_count
+%%    }
     
     %% ─────────────────────────────────────
     %% RELATIONSHIPS
     %% ─────────────────────────────────────
-    users ||--o{ jobs : "creates"
-    jobs ||--o| transcripts : "has"
-    jobs ||--o| recipes : "generates"
-    jobs ||--o| pdf_files : "stores"
-    recipes ||--o{ recipe_ingredients : "contains"
-    recipes ||--o{ recipe_steps : "includes"
-    jobs ||--o{ request_logs : "logs"
-    jobs ||--|{ video_metadata : "video"
-    users ||--o{ rate_limit_counters : "limits"
+    users ||--o{ jobs : ""
+    video_metadata ||--o| transcripts : ""
+    transcripts ||--o| recipes : ""
+    jobs ||--o| video_metadata : ""
+%%    users ||--o{ rate_limit_counters : ""
 ```
