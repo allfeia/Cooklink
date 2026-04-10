@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { Header } from "./components/Header";
-import { InputSection } from "./components/InputSection";
-import { LoadingState } from "./components/LoadingState";
-import { RecipeCard } from "./components/RecipeCard";
-import { Toaster } from "./components/ui/sonner";
-import { Recipe, MOCK_RECIPE } from "./types/recipe";
+import { Header } from "./components/layout/Header";
+import { InputSection } from "./components/forms/InputSection";
+import { LoadingState } from "./components/states/LoadingState";
+import { RecipeCard } from "./components/features/recipe/RecipeCard";
+import { Toaster } from "./components/feedback/sonner";
+import { Recipe, MOCK_RECIPE } from "./components/features/recipe/recipe";
 import { motion, AnimatePresence } from "motion/react";
-import { ThemeProvider } from "./contexts/ThemeContext";
-import { LanguageProvider, useLanguage } from "./contexts/LanguageContext";
-import { searchDishImage } from "./utils/imageSearch";
+import { ThemeProvider } from "./context/ThemeContext";
+import { LanguageProvider, useLanguage } from "./context/LanguageContext";
+import { searchDishImage } from "@/app/components/features/image/imageSearch";
 
 type AppState = "input" | "loading" | "result";
 

@@ -6,14 +6,15 @@ sequenceDiagram
     participant R as Redis
     participant DB as Postgres
     participant MQ as RabbitMQ
-    participant WM as Worker (Metadata yt-dlp)
-    participant WY as Worker (YouTube)
-    participant WA as Worker (Audio yt-dlp)
-    participant WS as Worker (Speech)
+%%    participant WM as Worker (Metadata yt-dlp)
+    participant WYM as Worker (Youtube metadata)
+    participant WYS as Worker (YouTube subtitles)
+%%    participant WA as Worker (Audio yt-dlp)
+%%    participant WS as Worker (Speech)
     participant WP as Worker (PDF generator)
     participant YT as YouTube API
-    participant M as MinIO
-    participant STT as SpeechKit
+%%    participant M as MinIO
+%%    participant STT as SpeechKit
     participant LLM as Qwen72B API
     participant PDF as PDF Service
 
@@ -76,89 +77,91 @@ sequenceDiagram
                 %% ========= FULL PIPELINE =========
                     API->>DB: save video_url
                     API->>R: save video_url
-                    API->>WM: check metadata
-                    WM->>DB: status = scanning
+                    API->>WYM: check metadata
+                    WYM->>DB: status = scanning
                     alt VIDEO_UNAVAILABLE / TOO_LONG / NO_AUDIO
                         API-->>FE: 400
                     else 
-                        WM->>DB: save metadata
+                        WYM->>DB: save metadata
                     end
+                    API->>MQ: publish youtube_queue
 
-                    alt YouTube
-                        API->>MQ: publish youtube_queue
-                    else Other platform
-                        API->>MQ: publish downloading_queue
-                    end
+%%                    alt YouTube
+%%                        API->>MQ: publish youtube_queue
+%%                    else Other platform
+%%                        API->>MQ: publish downloading_queue
+%%                    end
 
                     API-->>FE: GET /recipes/{job_id}
                 end
             end
         end
 %% ================= YOUTUBE WORKER =================
-    WY->>MQ: consume youtube_queue
-    WY->>DB: status = transcribing
+    WYS->>MQ: consume youtube_queue
+    WYS->>DB: status = transcribing
 
-    WY->>YT: get subtitles
+    WYS->>YT: get subtitles
     alt subtitles error
-        WY->>DB: status = failed
+        WYS->>DB: status = failed
     else success
-        WY->>DB: save transcript
-        WY->>DB: status = llm_processing
+        WYS->>DB: save transcript
+        WYS->>DB: status = llm_processing
 
-        WY->>LLM: send transcript
+        WYS->>LLM: send transcript (stream)
         alt AI_EXTRACTION_FAILED / INVALID_JSON
-            WY->>DB: status = failed
+            WYS->>DB: status = failed
         else success
-            WY->>DB: save recipe (JSON)
-            WY->>R: cache recipe
-            WY->>DB: status = generating_pdf
+            LLM-->>WYS: stream recipe
+            WYS->>DB: save recipe (JSON)
+            WYS->>R: cache recipe
+            WYS->>DB: status = generating_pdf
         end
     end
 
 %% ================= OTHER PLATFORM'S TRANSCRIBING =================
 
 %% ================= AUDIO DOWNLOADING =================
-    WA->>MQ: consume downloading_queue
-    WA->>DB: status = downloading
-
-    WA->>R: get video_url
-    WA->>WA: download audio from URL
-    alt EXTRACT_ERROR
-        WA->>DB: status = failed
-    else 
-        WA->>M: putObject(audioKey)
-        alt UPLOAD_ERROR
-            WA->>DB: status = failed
-        else
-            API->>MQ: publish speech_queue
-        end 
-    end
+%%    WA->>MQ: consume downloading_queue
+%%    WA->>DB: status = downloading
+%%
+%%    WA->>R: get video_url
+%%    WA->>WA: download audio from URL
+%%    alt EXTRACT_ERROR
+%%        WA->>DB: status = failed
+%%    else 
+%%        WA->>M: putObject(audioKey)
+%%        alt UPLOAD_ERROR
+%%            WA->>DB: status = failed
+%%        else
+%%            API->>MQ: publish speech_queue
+%%        end 
+%%    end
 
 %% ================= SPEECH WORKER =================
-    WS->>MQ: consume speech_queue
-    WS->>DB: status = transcribing
-    WS->>M: getObject(audioKey)
-    alt DOWNLOAD_ERROR
-        WS->>DB: status = failed
-    else    
-        WS->>STT: send audio for transcribing
-        alt transcription error
-            WS->>DB: status = failed
-        else success
-            WS->>DB: save transcript
-            WS->>M: removeObject(audioKey)
-            WS->>DB: status = llm_processing
-
-            WS->>LLM: send transcript
-            alt AI_EXTRACTION_FAILED / INVALID_JSON
-                WS->>DB: status = failed
-            else success
-                WS->>DB: save recipe (JSON)
-                WY->>R: cache recipe
-                WS->>DB: status = generating_pdf
-            end
-        end
-    end
+%%    WS->>MQ: consume speech_queue
+%%    WS->>DB: status = transcribing
+%%    WS->>M: getObject(audioKey)
+%%    alt DOWNLOAD_ERROR
+%%        WS->>DB: status = failed
+%%    else    
+%%        WS->>STT: send audio for transcribing
+%%        alt transcription error
+%%            WS->>DB: status = failed
+%%        else success
+%%            WS->>DB: save transcript
+%%            WS->>M: removeObject(audioKey)
+%%            WS->>DB: status = llm_processing
+%%
+%%            WS->>LLM: send transcript
+%%            alt AI_EXTRACTION_FAILED / INVALID_JSON
+%%                WS->>DB: status = failed
+%%            else success
+%%                WS->>DB: save recipe (JSON)
+%%                WY->>R: cache recipe
+%%                WS->>DB: status = generating_pdf
+%%            end
+%%        end
+%%    end
 
 %% ================= PDF =================
     WP->>PDF: generate PDF (recipe JSON + HTML template)
