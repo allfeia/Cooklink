@@ -8,7 +8,13 @@ v2r:{сущность}:{идентификатор}[:доп_поля]
 |------------------------------------------|------------|-----|----------------------------------------------------------------------------------------------------------|------------------------------------------|
 | `v2r:ratelimit:ip:{ip_hash}:{window_ts}` | String     | 1ч  | Числовой счётчик (INCR)                                                                                  | Rate limiting: 10 запросов/час на IP     |
 | `v2r:pdf:{url_hash}`                     | String     | 24ч | Ссылка на PDF                                                                                            | Хранение PDF для рецепта, TTL 24 часа    |
-| `v2r:recipe:{video_url_hash}`            | Hash       | нет | Поля JSON рецепта: title, type, cooking_time_minutes, difficulty, portions, ingredients, steps, comments | Основной рецепт, привязанный к видео URL |
-| `v2r:video:{video_url_hash}`             | String     | нет | Ссылка на видео                                                                                          | Чтобы быстро найти рецепт по видео URL   |
+| `v2r:recipe:{video_url_hash}`            | String     | 72ч | Поля JSON рецепта: title, type, cooking_time_minutes, difficulty, portions, ingredients, steps, comments | Основной рецепт, привязанный к видео URL |
+| `v2r:video:{video_url_hash}`             | String     | 72ч | Ссылка на видео                                                                                          | Чтобы быстро найти рецепт по видео URL   |
 
 //тут храним рецепт и пдф с TTL, лимиты
+
+[//]: # (место для оптимизации высокочастотных рецептов)
+
+[//]: # (`v2r:recipe:{video_url_hash}`)
+
+[//]: # (`v2r:video:{video_url_hash}`)
