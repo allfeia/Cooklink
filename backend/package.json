@@ -1,0 +1,28 @@
+{
+  "name": "backend",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "test:1": "node external_services_tests/test-1-metadata.js",
+    "test:1:A": "node external_services_tests/test-1-metadata.js --tool=A",
+    "test:1:B": "node external_services_tests/test-1-metadata.js --tool=B",
+    "test:1:C": "node external_services_tests/test-1-metadata.js --tool=C",
+    "test:2": "node external_services_tests/test-2-subtitles.js",
+    "test:2:A": "node external_services_tests/test-2-subtitles.js --tool=A",
+    "test:2:B": "node external_services_tests/test-2-subtitles.js --tool=B",
+    "test:2:EN": "node external_services_tests/test-2-subtitles.js --langs=en,ru",
+    "test:2:10": "node external_services_tests/test-2-subtitles.js --limit=10",
+    "test:3": "node external_services_tests/test-3-qwen.js",
+    "test:3:single": "node external_services_tests/test-3-qwen.js --limit=1",
+    "model-test": "node external_services_tests/utils/qwen-call.js",
+    "fetch-recipe": "node external_services_tests/utils/fetch-recipe.js"
+  },
+  "dependencies": {
+    "@distube/ytdl-core": "^4.14.4",
+    "axios": "^1.15.1",
+    "dotenv": "^16.4.5",
+    "openai": "^6.34.0",
+    "youtube-transcript": "^1.0.6",
+    "yt-dlp-exec": "^1.0.2"
+  }
+}
