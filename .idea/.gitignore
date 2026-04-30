@@ -10,6 +10,7 @@
 # Node.js / npm / pnpm
 node_modules/
 .pnpm-store/
+backend/node_modules/
 
 # Vite / Build outputs
 dist/
@@ -23,6 +24,9 @@ build/
 .env.development.local
 .env.test.local
 .env.production.local
+
+backend/.env
+backend/external_services_tests/www.youtube.com_cookies.txt
 
 .DS_Store
 .idea/

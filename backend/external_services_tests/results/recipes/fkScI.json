@@ -1,0 +1,109 @@
+{
+  "title": "Белковая пицца",
+  "type": "Пицца",
+  "cooking_time_minutes": 10,
+  "difficulty": 3,
+  "portions": 1,
+  "ingredients": [
+    {
+      "name": "маш",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "зеленый горошек",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "бобовые",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "перец чили",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "чеснок",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "соль",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "манная крупа",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "йогурт",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "масло",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "овощи",
+      "quantity": "немного",
+      "unit": ""
+    },
+    {
+      "name": "панир",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "специи",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "соус",
+      "quantity": "",
+      "unit": ""
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "В блендере измельчите маш, зеленый горошек и бобовые."
+    },
+    {
+      "step_number": 2,
+      "description": "Добавьте перец чили, чеснок, соль и измельчите это."
+    },
+    {
+      "step_number": 3,
+      "description": "Смешайте полученную пасту, манную крупу и йогурт в миске."
+    },
+    {
+      "step_number": 4,
+      "description": "Вылейте тесто на сковороду, смажьте ее маслом."
+    },
+    {
+      "step_number": 5,
+      "description": "Готовьте три-четыре минуты."
+    },
+    {
+      "step_number": 6,
+      "description": "Добавьте в миску немного овощей, панира и специй."
+    },
+    {
+      "step_number": 7,
+      "description": "Намажьте пиццу соусом, добавьте овощи и сыр."
+    },
+    {
+      "step_number": 8,
+      "description": "Готовьте еще 7 минут. Наслаждайтесь."
+    }
+  ],
+  "comments": ""
+}

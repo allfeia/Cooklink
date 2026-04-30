@@ -1,0 +1,892 @@
+{
+  "runAt": "2026-04-29T20:30:07.990Z",
+  "tool_filter": "B",
+  "base_delay_ms": 2000,
+  "urls": [
+    "https://www.youtube.com/watch?v=dsHfh_fNtiM",
+    "https://www.youtube.com/watch?v=bNwFOyVYH74",
+    "https://www.youtube.com/watch?v=GnkeQuKDVAU",
+    "https://www.youtube.com/watch?v=CcC-m7zlEN8",
+    "https://www.youtube.com/watch?v=Wa931WokvT8",
+    "https://www.youtube.com/watch?v=lRpgqYBjVlM",
+    "https://www.youtube.com/watch?v=8AXcxnYjHqs",
+    "https://www.youtube.com/watch?v=ai1d0ofoUog",
+    "https://www.youtube.com/watch?v=va3XHvPN_pY",
+    "https://www.youtube.com/watch?v=Di56ketvhkc",
+    "https://www.youtube.com/watch?v=fdqQJNXSDbI",
+    "https://www.youtube.com/watch?v=KvbDU-8ecFs",
+    "https://www.youtube.com/watch?v=3gzlXDM6gLI",
+    "https://www.youtube.com/watch?v=StUgvePkJbE",
+    "https://www.youtube.com/watch?v=tQBF9ixMUJY",
+    "https://www.youtube.com/watch?v=tg9ycmtarEg",
+    "https://www.youtube.com/watch?v=PvGOKzcQA3o",
+    "https://www.youtube.com/watch?v=UW_0I5xdAH4",
+    "https://www.youtube.com/watch?v=kSb3puePeGk",
+    "https://www.youtube.com/watch?v=sR-O3CBZZsY",
+    "https://www.youtube.com/watch?v=A0luKoqlqOk",
+    "https://www.youtube.com/watch?v=Rv3SWA3pStw",
+    "https://www.youtube.com/watch?v=7NYM4CVAhJo",
+    "https://www.youtube.com/watch?v=MwjKgGtTk5o",
+    "https://www.youtube.com/watch?v=i66s-AjVOXI",
+    "https://www.youtube.com/watch?v=b06GXe9lDxw",
+    "https://www.youtube.com/watch?v=si-CekRHlt0",
+    "https://www.youtube.com/watch?v=Pptf7mFAhWM",
+    "https://www.youtube.com/watch?v=UoyihgHpfus",
+    "https://www.youtube.com/watch?v=UAkyuQP7tMc",
+    "https://www.youtube.com/watch?v=vXWHvfl3cGc",
+    "https://www.youtube.com/watch?v=deCae57jhwo",
+    "https://www.youtube.com/watch?v=1SdcMAF_uYU",
+    "https://www.youtube.com/watch?v=UmwkXfpoR5I",
+    "https://www.youtube.com/watch?v=mjq9gHB52CQ",
+    "https://www.youtube.com/watch?v=Od2e7yYMWHU",
+    "https://www.youtube.com/watch?v=_Z8At_dl2W4",
+    "https://www.youtube.com/watch?v=0vOFdvXJc3Y",
+    "https://www.youtube.com/watch?v=eKp35PBFMMs",
+    "https://www.youtube.com/watch?v=63N4LwEas1I",
+    "https://www.youtube.com/watch?v=BpIze1xV4Xc",
+    "https://www.youtube.com/watch?v=LQA4295X1jU",
+    "https://www.youtube.com/watch?v=fOg-2hqUWnU",
+    "https://www.youtube.com/watch?v=EC6_HL4DWnM",
+    "https://www.youtube.com/watch?v=kWPHIZQf-pI",
+    "https://www.youtube.com/watch?v=QS55NzDtMWc",
+    "https://www.youtube.com/watch?v=7Nj24arIi58",
+    "https://www.youtube.com/watch?v=P5aY7lLq_A8",
+    "https://www.youtube.com/watch?v=GJg0juvYbwE",
+    "https://www.youtube.com/watch?v=WjqWUaS5yqA",
+    "https://www.youtube.com/watch?v=LRWygr8_fDU",
+    "https://www.youtube.com/watch?v=gYYuCAZBKZs",
+    "https://www.youtube.com/watch?v=NR1WdVCmpDM",
+    "https://www.youtube.com/watch?v=zZcUn3ASL1k",
+    "https://www.youtube.com/watch?v=F-rS8L4xhRA",
+    "https://www.youtube.com/watch?v=nIEqh_IIGMo",
+    "https://www.youtube.com/watch?v=ew8RmdNVxUY",
+    "https://www.youtube.com/watch?v=ozFIRORfv6o",
+    "https://www.youtube.com/watch?v=2Xphb7V83Bw",
+    "https://www.youtube.com/watch?v=tM4lENIX8gw",
+    "https://www.youtube.com/watch?v=ffLEYQeXvEc",
+    "https://www.youtube.com/watch?v=4kyTkEItmDc",
+    "https://www.youtube.com/watch?v=lUV6XSELA50",
+    "https://www.youtube.com/watch?v=GszKT9flCsk",
+    "https://www.youtube.com/watch?v=xR9d5DETy-E",
+    "https://www.youtube.com/watch?v=Drg2kdWdkIo",
+    "https://www.youtube.com/watch?v=pGL6_8b6SN8",
+    "https://www.youtube.com/watch?v=gZga9tG3ZYU",
+    "https://www.youtube.com/watch?v=F8C-ww-PDHY",
+    "https://www.youtube.com/watch?v=-kQ57TT9W3A",
+    "https://www.youtube.com/watch?v=TpnMwXZsbK8",
+    "https://www.youtube.com/watch?v=g2tFBnVN7Qw",
+    "https://www.youtube.com/watch?v=9R2PZ3w0Qjo",
+    "https://www.youtube.com/watch?v=fkScI_Aa1ZM",
+    "https://www.youtube.com/watch?v=Eyz5reNsbgQ",
+    "https://www.youtube.com/watch?v=uWoB0_3wSrY",
+    "https://www.youtube.com/watch?v=WbjaSuNy2zg",
+    "https://www.youtube.com/watch?v=vBJb8kcwKsM",
+    "https://www.youtube.com/watch?v=JbC14Zn7plU",
+    "https://www.youtube.com/watch?v=r5QlLcA_Vz4",
+    "https://www.youtube.com/watch?v=cry2mRY_AFc",
+    "https://www.youtube.com/watch?v=nus_e3Gn8FI",
+    "https://www.youtube.com/watch?v=DdmM_URHUfA",
+    "https://www.youtube.com/watch?v=bDrXgas1lN8",
+    "https://www.youtube.com/watch?v=brN_fEm4Usk",
+    "https://www.youtube.com/watch?v=jmxfiKg7dJ4",
+    "https://www.youtube.com/watch?v=FrQyWj-wcvg",
+    "https://www.youtube.com/watch?v=NSP7PIM7mCw",
+    "https://www.youtube.com/watch?v=60RZ72SKsJQ",
+    "https://www.youtube.com/watch?v=OAZpSsu03VA",
+    "https://www.youtube.com/watch?v=3ReQwn2xLPs",
+    "https://www.youtube.com/watch?v=EkVPwu-8n1M",
+    "https://www.youtube.com/watch?v=r5cOTURD1ko",
+    "https://www.youtube.com/watch?v=dfrYuqD9gQ4",
+    "https://www.youtube.com/watch?v=-UEp7o5NK8s",
+    "https://www.youtube.com/watch?v=_8J3FSlghc4",
+    "https://www.youtube.com/watch?v=5iEF18mtwrw",
+    "https://www.youtube.com/watch?v=IxkY8UXXU-0",
+    "https://www.youtube.com/watch?v=hdtKXBVX3XE",
+    "https://www.youtube.com/watch?v=H1Pi1OjQlgg"
+  ],
+  "tool_B": [
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=dsHfh_fNtiM",
+      "video_id": "dsHfh_fNtiM",
+      "char_count": 2830,
+      "subtitle_file": "dsHfh_fNtiM_B__yt_dlp_exec.txt",
+      "duration_ms": 2525
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=bNwFOyVYH74",
+      "video_id": "bNwFOyVYH74",
+      "char_count": 721,
+      "subtitle_file": "bNwFOyVYH74_B__yt_dlp_exec.txt",
+      "duration_ms": 2702
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=GnkeQuKDVAU",
+      "video_id": "GnkeQuKDVAU",
+      "char_count": 213,
+      "subtitle_file": "GnkeQuKDVAU_B__yt_dlp_exec.txt",
+      "duration_ms": 2709
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=CcC-m7zlEN8",
+      "video_id": "CcC-m7zlEN8",
+      "char_count": 3473,
+      "subtitle_file": "CcC-m7zlEN8_B__yt_dlp_exec.txt",
+      "duration_ms": 2587
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=Wa931WokvT8",
+      "video_id": "Wa931WokvT8",
+      "char_count": 2343,
+      "subtitle_file": "Wa931WokvT8_B__yt_dlp_exec.txt",
+      "duration_ms": 2697
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=lRpgqYBjVlM",
+      "video_id": "lRpgqYBjVlM",
+      "char_count": 5574,
+      "subtitle_file": "lRpgqYBjVlM_B__yt_dlp_exec.txt",
+      "duration_ms": 2417
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=8AXcxnYjHqs",
+      "video_id": "8AXcxnYjHqs",
+      "char_count": 3505,
+      "subtitle_file": "8AXcxnYjHqs_B__yt_dlp_exec.txt",
+      "duration_ms": 2522
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=ai1d0ofoUog",
+      "video_id": "ai1d0ofoUog",
+      "char_count": 1920,
+      "subtitle_file": "ai1d0ofoUog_B__yt_dlp_exec.txt",
+      "duration_ms": 2505
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=va3XHvPN_pY",
+      "video_id": "va3XHvPN_pY",
+      "char_count": 223,
+      "subtitle_file": "va3XHvPN_pY_B__yt_dlp_exec.txt",
+      "duration_ms": 2842
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=Di56ketvhkc",
+      "video_id": "Di56ketvhkc",
+      "char_count": 1371,
+      "subtitle_file": "Di56ketvhkc_B__yt_dlp_exec.txt",
+      "duration_ms": 2518
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=fdqQJNXSDbI",
+      "video_id": "fdqQJNXSDbI",
+      "char_count": 2417,
+      "subtitle_file": "fdqQJNXSDbI_B__yt_dlp_exec.txt",
+      "duration_ms": 2633
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=KvbDU-8ecFs",
+      "video_id": "KvbDU-8ecFs",
+      "char_count": 327,
+      "subtitle_file": "KvbDU-8ecFs_B__yt_dlp_exec.txt",
+      "duration_ms": 2765
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=3gzlXDM6gLI",
+      "video_id": "3gzlXDM6gLI",
+      "char_count": 5972,
+      "subtitle_file": "3gzlXDM6gLI_B__yt_dlp_exec.txt",
+      "duration_ms": 2604
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=StUgvePkJbE",
+      "video_id": "StUgvePkJbE",
+      "char_count": 1523,
+      "subtitle_file": "StUgvePkJbE_B__yt_dlp_exec.txt",
+      "duration_ms": 2461
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=tQBF9ixMUJY",
+      "video_id": "tQBF9ixMUJY",
+      "char_count": 1352,
+      "subtitle_file": "tQBF9ixMUJY_B__yt_dlp_exec.txt",
+      "duration_ms": 2701
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=tg9ycmtarEg",
+      "video_id": "tg9ycmtarEg",
+      "char_count": 2582,
+      "subtitle_file": "tg9ycmtarEg_B__yt_dlp_exec.txt",
+      "duration_ms": 2586
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=PvGOKzcQA3o",
+      "video_id": "PvGOKzcQA3o",
+      "char_count": 2353,
+      "subtitle_file": "PvGOKzcQA3o_B__yt_dlp_exec.txt",
+      "duration_ms": 2458
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=UW_0I5xdAH4",
+      "video_id": "UW_0I5xdAH4",
+      "char_count": 1561,
+      "subtitle_file": "UW_0I5xdAH4_B__yt_dlp_exec.txt",
+      "duration_ms": 3646
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=kSb3puePeGk",
+      "video_id": "kSb3puePeGk",
+      "char_count": 2767,
+      "subtitle_file": "kSb3puePeGk_B__yt_dlp_exec.txt",
+      "duration_ms": 4317
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=sR-O3CBZZsY",
+      "video_id": "sR-O3CBZZsY",
+      "char_count": 3084,
+      "subtitle_file": "sR-O3CBZZsY_B__yt_dlp_exec.txt",
+      "duration_ms": 2355
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=A0luKoqlqOk",
+      "video_id": "A0luKoqlqOk",
+      "char_count": 1684,
+      "subtitle_file": "A0luKoqlqOk_B__yt_dlp_exec.txt",
+      "duration_ms": 2661
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=Rv3SWA3pStw",
+      "video_id": "Rv3SWA3pStw",
+      "char_count": 3632,
+      "subtitle_file": "Rv3SWA3pStw_B__yt_dlp_exec.txt",
+      "duration_ms": 2562
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=7NYM4CVAhJo",
+      "video_id": "7NYM4CVAhJo",
+      "char_count": 2029,
+      "subtitle_file": "7NYM4CVAhJo_B__yt_dlp_exec.txt",
+      "duration_ms": 2966
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=MwjKgGtTk5o",
+      "video_id": "MwjKgGtTk5o",
+      "char_count": 737,
+      "subtitle_file": "MwjKgGtTk5o_B__yt_dlp_exec.txt",
+      "duration_ms": 3289
+    },
+    {
+      "status": "error",
+      "url": "https://www.youtube.com/watch?v=i66s-AjVOXI",
+      "video_id": "i66s-AjVOXI",
+      "error": "Subtitle file not written by yt-dlp",
+      "duration_ms": 2305
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=b06GXe9lDxw",
+      "video_id": "b06GXe9lDxw",
+      "char_count": 2844,
+      "subtitle_file": "b06GXe9lDxw_B__yt_dlp_exec.txt",
+      "duration_ms": 2561
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=si-CekRHlt0",
+      "video_id": "si-CekRHlt0",
+      "char_count": 2875,
+      "subtitle_file": "si-CekRHlt0_B__yt_dlp_exec.txt",
+      "duration_ms": 2620
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=Pptf7mFAhWM",
+      "video_id": "Pptf7mFAhWM",
+      "char_count": 1298,
+      "subtitle_file": "Pptf7mFAhWM_B__yt_dlp_exec.txt",
+      "duration_ms": 2365
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=UoyihgHpfus",
+      "video_id": "UoyihgHpfus",
+      "char_count": 1270,
+      "subtitle_file": "UoyihgHpfus_B__yt_dlp_exec.txt",
+      "duration_ms": 2541
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=UAkyuQP7tMc",
+      "video_id": "UAkyuQP7tMc",
+      "char_count": 2448,
+      "subtitle_file": "UAkyuQP7tMc_B__yt_dlp_exec.txt",
+      "duration_ms": 2743
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=vXWHvfl3cGc",
+      "video_id": "vXWHvfl3cGc",
+      "char_count": 2256,
+      "subtitle_file": "vXWHvfl3cGc_B__yt_dlp_exec.txt",
+      "duration_ms": 2559
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=deCae57jhwo",
+      "video_id": "deCae57jhwo",
+      "char_count": 1533,
+      "subtitle_file": "deCae57jhwo_B__yt_dlp_exec.txt",
+      "duration_ms": 2830
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=1SdcMAF_uYU",
+      "video_id": "1SdcMAF_uYU",
+      "char_count": 1846,
+      "subtitle_file": "1SdcMAF_uYU_B__yt_dlp_exec.txt",
+      "duration_ms": 2501
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=UmwkXfpoR5I",
+      "video_id": "UmwkXfpoR5I",
+      "char_count": 840,
+      "subtitle_file": "UmwkXfpoR5I_B__yt_dlp_exec.txt",
+      "duration_ms": 2454
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=mjq9gHB52CQ",
+      "video_id": "mjq9gHB52CQ",
+      "char_count": 624,
+      "subtitle_file": "mjq9gHB52CQ_B__yt_dlp_exec.txt",
+      "duration_ms": 2664
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=Od2e7yYMWHU",
+      "video_id": "Od2e7yYMWHU",
+      "char_count": 3423,
+      "subtitle_file": "Od2e7yYMWHU_B__yt_dlp_exec.txt",
+      "duration_ms": 2718
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=_Z8At_dl2W4",
+      "video_id": "_Z8At_dl2W4",
+      "char_count": 2010,
+      "subtitle_file": "_Z8At_dl2W4_B__yt_dlp_exec.txt",
+      "duration_ms": 2711
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=0vOFdvXJc3Y",
+      "video_id": "0vOFdvXJc3Y",
+      "char_count": 2586,
+      "subtitle_file": "0vOFdvXJc3Y_B__yt_dlp_exec.txt",
+      "duration_ms": 2578
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=eKp35PBFMMs",
+      "video_id": "eKp35PBFMMs",
+      "char_count": 2002,
+      "subtitle_file": "eKp35PBFMMs_B__yt_dlp_exec.txt",
+      "duration_ms": 2933
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=63N4LwEas1I",
+      "video_id": "63N4LwEas1I",
+      "char_count": 696,
+      "subtitle_file": "63N4LwEas1I_B__yt_dlp_exec.txt",
+      "duration_ms": 2291
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=BpIze1xV4Xc",
+      "video_id": "BpIze1xV4Xc",
+      "char_count": 3192,
+      "subtitle_file": "BpIze1xV4Xc_B__yt_dlp_exec.txt",
+      "duration_ms": 2408
+    },
+    {
+      "status": "error",
+      "url": "https://www.youtube.com/watch?v=LQA4295X1jU",
+      "video_id": "LQA4295X1jU",
+      "error": "Subtitle file not written by yt-dlp",
+      "duration_ms": 2222
+    },
+    {
+      "status": "error",
+      "url": "https://www.youtube.com/watch?v=fOg-2hqUWnU",
+      "video_id": "fOg-2hqUWnU",
+      "error": "Subtitle file not written by yt-dlp",
+      "duration_ms": 2361
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=EC6_HL4DWnM",
+      "video_id": "EC6_HL4DWnM",
+      "char_count": 2572,
+      "subtitle_file": "EC6_HL4DWnM_B__yt_dlp_exec.txt",
+      "duration_ms": 2334
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=kWPHIZQf-pI",
+      "video_id": "kWPHIZQf-pI",
+      "char_count": 1079,
+      "subtitle_file": "kWPHIZQf-pI_B__yt_dlp_exec.txt",
+      "duration_ms": 2683
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=QS55NzDtMWc",
+      "video_id": "QS55NzDtMWc",
+      "char_count": 2527,
+      "subtitle_file": "QS55NzDtMWc_B__yt_dlp_exec.txt",
+      "duration_ms": 2693
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=7Nj24arIi58",
+      "video_id": "7Nj24arIi58",
+      "char_count": 86,
+      "subtitle_file": "7Nj24arIi58_B__yt_dlp_exec.txt",
+      "duration_ms": 3869
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=P5aY7lLq_A8",
+      "video_id": "P5aY7lLq_A8",
+      "char_count": 995,
+      "subtitle_file": "P5aY7lLq_A8_B__yt_dlp_exec.txt",
+      "duration_ms": 2584
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=GJg0juvYbwE",
+      "video_id": "GJg0juvYbwE",
+      "char_count": 1215,
+      "subtitle_file": "GJg0juvYbwE_B__yt_dlp_exec.txt",
+      "duration_ms": 2842
+    },
+    {
+      "status": "error",
+      "url": "https://www.youtube.com/watch?v=WjqWUaS5yqA",
+      "video_id": "WjqWUaS5yqA",
+      "error": "Subtitle file not written by yt-dlp",
+      "duration_ms": 5402
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=LRWygr8_fDU",
+      "video_id": "LRWygr8_fDU",
+      "char_count": 8530,
+      "subtitle_file": "LRWygr8_fDU_B__yt_dlp_exec.txt",
+      "duration_ms": 3516
+    },
+    {
+      "status": "error",
+      "url": "https://www.youtube.com/watch?v=gYYuCAZBKZs",
+      "video_id": "gYYuCAZBKZs",
+      "error": "Subtitle file not written by yt-dlp",
+      "duration_ms": 2786
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=NR1WdVCmpDM",
+      "video_id": "NR1WdVCmpDM",
+      "char_count": 860,
+      "subtitle_file": "NR1WdVCmpDM_B__yt_dlp_exec.txt",
+      "duration_ms": 2673
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=zZcUn3ASL1k",
+      "video_id": "zZcUn3ASL1k",
+      "char_count": 26324,
+      "subtitle_file": "zZcUn3ASL1k_B__yt_dlp_exec.txt",
+      "duration_ms": 3139
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=F-rS8L4xhRA",
+      "video_id": "F-rS8L4xhRA",
+      "char_count": 14665,
+      "subtitle_file": "F-rS8L4xhRA_B__yt_dlp_exec.txt",
+      "duration_ms": 3008
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=nIEqh_IIGMo",
+      "video_id": "nIEqh_IIGMo",
+      "char_count": 1332,
+      "subtitle_file": "nIEqh_IIGMo_B__yt_dlp_exec.txt",
+      "duration_ms": 2676
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=ew8RmdNVxUY",
+      "video_id": "ew8RmdNVxUY",
+      "char_count": 710,
+      "subtitle_file": "ew8RmdNVxUY_B__yt_dlp_exec.txt",
+      "duration_ms": 2592
+    },
+    {
+      "status": "error",
+      "url": "https://www.youtube.com/watch?v=ozFIRORfv6o",
+      "video_id": "ozFIRORfv6o",
+      "error": "Subtitle file not written by yt-dlp",
+      "duration_ms": 2137
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=2Xphb7V83Bw",
+      "video_id": "2Xphb7V83Bw",
+      "char_count": 3288,
+      "subtitle_file": "2Xphb7V83Bw_B__yt_dlp_exec.txt",
+      "duration_ms": 3882
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=tM4lENIX8gw",
+      "video_id": "tM4lENIX8gw",
+      "char_count": 521,
+      "subtitle_file": "tM4lENIX8gw_B__yt_dlp_exec.txt",
+      "duration_ms": 2675
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=ffLEYQeXvEc",
+      "video_id": "ffLEYQeXvEc",
+      "char_count": 649,
+      "subtitle_file": "ffLEYQeXvEc_B__yt_dlp_exec.txt",
+      "duration_ms": 3348
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=4kyTkEItmDc",
+      "video_id": "4kyTkEItmDc",
+      "char_count": 1626,
+      "subtitle_file": "4kyTkEItmDc_B__yt_dlp_exec.txt",
+      "duration_ms": 6408
+    },
+    {
+      "status": "error",
+      "url": "https://www.youtube.com/watch?v=lUV6XSELA50",
+      "video_id": "lUV6XSELA50",
+      "error": "HTTP 429: Too Many Requests (retries exhausted)",
+      "duration_ms": 49166
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=GszKT9flCsk",
+      "video_id": "GszKT9flCsk",
+      "char_count": 284,
+      "subtitle_file": "GszKT9flCsk_B__yt_dlp_exec.txt",
+      "duration_ms": 26057
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=xR9d5DETy-E",
+      "video_id": "xR9d5DETy-E",
+      "char_count": 3799,
+      "subtitle_file": "xR9d5DETy-E_B__yt_dlp_exec.txt",
+      "duration_ms": 2607
+    },
+    {
+      "status": "error",
+      "url": "https://www.youtube.com/watch?v=Drg2kdWdkIo",
+      "video_id": "Drg2kdWdkIo",
+      "error": "Subtitle file not written by yt-dlp",
+      "duration_ms": 2080
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=pGL6_8b6SN8",
+      "video_id": "pGL6_8b6SN8",
+      "char_count": 563,
+      "subtitle_file": "pGL6_8b6SN8_B__yt_dlp_exec.txt",
+      "duration_ms": 2516
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=gZga9tG3ZYU",
+      "video_id": "gZga9tG3ZYU",
+      "char_count": 1271,
+      "subtitle_file": "gZga9tG3ZYU_B__yt_dlp_exec.txt",
+      "duration_ms": 2542
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=F8C-ww-PDHY",
+      "video_id": "F8C-ww-PDHY",
+      "char_count": 1138,
+      "subtitle_file": "F8C-ww-PDHY_B__yt_dlp_exec.txt",
+      "duration_ms": 2583
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=-kQ57TT9W3A",
+      "video_id": "-kQ57TT9W3A",
+      "char_count": 2326,
+      "subtitle_file": "-kQ57TT9W3A_B__yt_dlp_exec.txt",
+      "duration_ms": 2766
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=TpnMwXZsbK8",
+      "video_id": "TpnMwXZsbK8",
+      "char_count": 905,
+      "subtitle_file": "TpnMwXZsbK8_B__yt_dlp_exec.txt",
+      "duration_ms": 2687
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=g2tFBnVN7Qw",
+      "video_id": "g2tFBnVN7Qw",
+      "char_count": 735,
+      "subtitle_file": "g2tFBnVN7Qw_B__yt_dlp_exec.txt",
+      "duration_ms": 2380
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=9R2PZ3w0Qjo",
+      "video_id": "9R2PZ3w0Qjo",
+      "char_count": 718,
+      "subtitle_file": "9R2PZ3w0Qjo_B__yt_dlp_exec.txt",
+      "duration_ms": 2655
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=fkScI_Aa1ZM",
+      "video_id": "fkScI_Aa1ZM",
+      "char_count": 1384,
+      "subtitle_file": "fkScI_Aa1ZM_B__yt_dlp_exec.txt",
+      "duration_ms": 2504
+    },
+    {
+      "status": "error",
+      "url": "https://www.youtube.com/watch?v=Eyz5reNsbgQ",
+      "video_id": "Eyz5reNsbgQ",
+      "error": "HTTP 429: Too Many Requests (retries exhausted)",
+      "duration_ms": 45841
+    },
+    {
+      "status": "error",
+      "url": "https://www.youtube.com/watch?v=uWoB0_3wSrY",
+      "video_id": "uWoB0_3wSrY",
+      "error": "Subtitle file not written by yt-dlp",
+      "duration_ms": 2307
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=WbjaSuNy2zg",
+      "video_id": "WbjaSuNy2zg",
+      "char_count": 359,
+      "subtitle_file": "WbjaSuNy2zg_B__yt_dlp_exec.txt",
+      "duration_ms": 44731
+    },
+    {
+      "status": "error",
+      "url": "https://www.youtube.com/watch?v=vBJb8kcwKsM",
+      "video_id": "vBJb8kcwKsM",
+      "error": "Subtitle file not written by yt-dlp",
+      "duration_ms": 2959
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=JbC14Zn7plU",
+      "video_id": "JbC14Zn7plU",
+      "char_count": 4453,
+      "subtitle_file": "JbC14Zn7plU_B__yt_dlp_exec.txt",
+      "duration_ms": 2646
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=r5QlLcA_Vz4",
+      "video_id": "r5QlLcA_Vz4",
+      "char_count": 60,
+      "subtitle_file": "r5QlLcA_Vz4_B__yt_dlp_exec.txt",
+      "duration_ms": 2482
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=cry2mRY_AFc",
+      "video_id": "cry2mRY_AFc",
+      "char_count": 1038,
+      "subtitle_file": "cry2mRY_AFc_B__yt_dlp_exec.txt",
+      "duration_ms": 2770
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=nus_e3Gn8FI",
+      "video_id": "nus_e3Gn8FI",
+      "char_count": 1007,
+      "subtitle_file": "nus_e3Gn8FI_B__yt_dlp_exec.txt",
+      "duration_ms": 2435
+    },
+    {
+      "status": "error",
+      "url": "https://www.youtube.com/watch?v=DdmM_URHUfA",
+      "video_id": "DdmM_URHUfA",
+      "error": "Subtitle file not written by yt-dlp",
+      "duration_ms": 2120
+    },
+    {
+      "status": "error",
+      "url": "https://www.youtube.com/watch?v=bDrXgas1lN8",
+      "video_id": "bDrXgas1lN8",
+      "error": "Subtitle file not written by yt-dlp",
+      "duration_ms": 2216
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=brN_fEm4Usk",
+      "video_id": "brN_fEm4Usk",
+      "char_count": 208,
+      "subtitle_file": "brN_fEm4Usk_B__yt_dlp_exec.txt",
+      "duration_ms": 2514
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=jmxfiKg7dJ4",
+      "video_id": "jmxfiKg7dJ4",
+      "char_count": 1843,
+      "subtitle_file": "jmxfiKg7dJ4_B__yt_dlp_exec.txt",
+      "duration_ms": 4224
+    },
+    {
+      "status": "error",
+      "url": "https://www.youtube.com/watch?v=FrQyWj-wcvg",
+      "video_id": "FrQyWj-wcvg",
+      "error": "Subtitle file not written by yt-dlp",
+      "duration_ms": 1986
+    },
+    {
+      "status": "error",
+      "url": "https://www.youtube.com/watch?v=NSP7PIM7mCw",
+      "video_id": "NSP7PIM7mCw",
+      "error": "HTTP 429: Too Many Requests (retries exhausted)",
+      "duration_ms": 42238
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=60RZ72SKsJQ",
+      "video_id": "60RZ72SKsJQ",
+      "char_count": 2547,
+      "subtitle_file": "60RZ72SKsJQ_B__yt_dlp_exec.txt",
+      "duration_ms": 24609
+    },
+    {
+      "status": "error",
+      "url": "https://www.youtube.com/watch?v=OAZpSsu03VA",
+      "video_id": "OAZpSsu03VA",
+      "error": "Subtitle file not written by yt-dlp",
+      "duration_ms": 2287
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=3ReQwn2xLPs",
+      "video_id": "3ReQwn2xLPs",
+      "char_count": 1515,
+      "subtitle_file": "3ReQwn2xLPs_B__yt_dlp_exec.txt",
+      "duration_ms": 24685
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=EkVPwu-8n1M",
+      "video_id": "EkVPwu-8n1M",
+      "char_count": 8613,
+      "subtitle_file": "EkVPwu-8n1M_B__yt_dlp_exec.txt",
+      "duration_ms": 2650
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=r5cOTURD1ko",
+      "video_id": "r5cOTURD1ko",
+      "char_count": 1854,
+      "subtitle_file": "r5cOTURD1ko_B__yt_dlp_exec.txt",
+      "duration_ms": 2494
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=dfrYuqD9gQ4",
+      "video_id": "dfrYuqD9gQ4",
+      "char_count": 7117,
+      "subtitle_file": "dfrYuqD9gQ4_B__yt_dlp_exec.txt",
+      "duration_ms": 2518
+    },
+    {
+      "status": "error",
+      "url": "https://www.youtube.com/watch?v=-UEp7o5NK8s",
+      "video_id": "-UEp7o5NK8s",
+      "error": "HTTP 429: Too Many Requests (retries exhausted)",
+      "duration_ms": 47263
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=_8J3FSlghc4",
+      "video_id": "_8J3FSlghc4",
+      "char_count": 3828,
+      "subtitle_file": "_8J3FSlghc4_B__yt_dlp_exec.txt",
+      "duration_ms": 46800
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=5iEF18mtwrw",
+      "video_id": "5iEF18mtwrw",
+      "char_count": 376,
+      "subtitle_file": "5iEF18mtwrw_B__yt_dlp_exec.txt",
+      "duration_ms": 2369
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=IxkY8UXXU-0",
+      "video_id": "IxkY8UXXU-0",
+      "char_count": 2738,
+      "subtitle_file": "IxkY8UXXU-0_B__yt_dlp_exec.txt",
+      "duration_ms": 3327
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=hdtKXBVX3XE",
+      "video_id": "hdtKXBVX3XE",
+      "char_count": 2097,
+      "subtitle_file": "hdtKXBVX3XE_B__yt_dlp_exec.txt",
+      "duration_ms": 2313
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=H1Pi1OjQlgg",
+      "video_id": "H1Pi1OjQlgg",
+      "char_count": 1318,
+      "subtitle_file": "H1Pi1OjQlgg_B__yt_dlp_exec.txt",
+      "duration_ms": 2762
+    }
+  ]
+}

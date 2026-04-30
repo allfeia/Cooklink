@@ -1,0 +1,6220 @@
+{
+  "runAt": "2026-04-29T21:01:04.078Z",
+  "model": "qwen-max",
+  "files": [
+    "-UEp7o5NK8s_B__yt_dlp_exec.txt",
+    "-kQ57TT9W3A_B__yt_dlp_exec.txt",
+    "0vOFdvXJc3Y_B__yt_dlp_exec.txt",
+    "1SdcMAF_uYU_B__yt_dlp_exec.txt",
+    "2Xphb7V83Bw_B__yt_dlp_exec.txt",
+    "3ReQwn2xLPs_B__yt_dlp_exec.txt",
+    "3gzlXDM6gLI_B__yt_dlp_exec.txt",
+    "4kyTkEItmDc_B__yt_dlp_exec.txt",
+    "5iEF18mtwrw_B__yt_dlp_exec.txt",
+    "60RZ72SKsJQ_B__yt_dlp_exec.txt",
+    "63N4LwEas1I_B__yt_dlp_exec.txt",
+    "7NYM4CVAhJo_B__yt_dlp_exec.txt",
+    "7Nj24arIi58_B__yt_dlp_exec.txt",
+    "8AXcxnYjHqs_B__yt_dlp_exec.txt",
+    "9R2PZ3w0Qjo_B__yt_dlp_exec.txt",
+    "A0luKoqlqOk_B__yt_dlp_exec.txt",
+    "BpIze1xV4Xc_B__yt_dlp_exec.txt",
+    "CcC-m7zlEN8_B__yt_dlp_exec.txt",
+    "Di56ketvhkc_B__yt_dlp_exec.txt",
+    "EC6_HL4DWnM_B__yt_dlp_exec.txt",
+    "EkVPwu-8n1M_B__yt_dlp_exec.txt",
+    "Eyz5reNsbgQ_B__yt_dlp_exec.txt",
+    "F-rS8L4xhRA_B__yt_dlp_exec.txt",
+    "F8C-ww-PDHY_B__yt_dlp_exec.txt",
+    "GJg0juvYbwE_B__yt_dlp_exec.txt",
+    "GnkeQuKDVAU_B__yt_dlp_exec.txt",
+    "GszKT9flCsk_B__yt_dlp_exec.txt",
+    "H1Pi1OjQlgg_B__yt_dlp_exec.txt",
+    "IxkY8UXXU-0_B__yt_dlp_exec.txt",
+    "JbC14Zn7plU_B__yt_dlp_exec.txt",
+    "KvbDU-8ecFs_B__yt_dlp_exec.txt",
+    "LRWygr8_fDU_B__yt_dlp_exec.txt",
+    "MwjKgGtTk5o_B__yt_dlp_exec.txt",
+    "NR1WdVCmpDM_B__yt_dlp_exec.txt",
+    "NSP7PIM7mCw_B__yt_dlp_exec.txt",
+    "Od2e7yYMWHU_B__yt_dlp_exec.txt",
+    "P5aY7lLq_A8_B__yt_dlp_exec.txt",
+    "Pptf7mFAhWM_B__yt_dlp_exec.txt",
+    "PvGOKzcQA3o_B__yt_dlp_exec.txt",
+    "QS55NzDtMWc_B__yt_dlp_exec.txt",
+    "Rv3SWA3pStw_B__yt_dlp_exec.txt",
+    "StUgvePkJbE_B__yt_dlp_exec.txt",
+    "TpnMwXZsbK8_B__yt_dlp_exec.txt",
+    "UAkyuQP7tMc_B__yt_dlp_exec.txt",
+    "UW_0I5xdAH4_B__yt_dlp_exec.txt",
+    "UmwkXfpoR5I_B__yt_dlp_exec.txt",
+    "UoyihgHpfus_B__yt_dlp_exec.txt",
+    "Wa931WokvT8_B__yt_dlp_exec.txt",
+    "WbjaSuNy2zg_B__yt_dlp_exec.txt",
+    "_8J3FSlghc4_B__yt_dlp_exec.txt",
+    "_Z8At_dl2W4_B__yt_dlp_exec.txt",
+    "ai1d0ofoUog_B__yt_dlp_exec.txt",
+    "b06GXe9lDxw_B__yt_dlp_exec.txt",
+    "bNwFOyVYH74_B__yt_dlp_exec.txt",
+    "brN_fEm4Usk_B__yt_dlp_exec.txt",
+    "cry2mRY_AFc_B__yt_dlp_exec.txt",
+    "deCae57jhwo_B__yt_dlp_exec.txt",
+    "dfrYuqD9gQ4_B__yt_dlp_exec.txt",
+    "dsHfh_fNtiM_B__yt_dlp_exec.txt",
+    "eKp35PBFMMs_B__yt_dlp_exec.txt",
+    "ew8RmdNVxUY_B__yt_dlp_exec.txt",
+    "fdqQJNXSDbI_B__yt_dlp_exec.txt",
+    "ffLEYQeXvEc_B__yt_dlp_exec.txt",
+    "fkScI_Aa1ZM_B__yt_dlp_exec.txt",
+    "g2tFBnVN7Qw_B__yt_dlp_exec.txt",
+    "gZga9tG3ZYU_B__yt_dlp_exec.txt",
+    "hdtKXBVX3XE_B__yt_dlp_exec.txt",
+    "jmxfiKg7dJ4_B__yt_dlp_exec.txt",
+    "kSb3puePeGk_B__yt_dlp_exec.txt",
+    "kWPHIZQf-pI_B__yt_dlp_exec.txt",
+    "lRpgqYBjVlM_B__yt_dlp_exec.txt",
+    "lUV6XSELA50_B__yt_dlp_exec.txt",
+    "mjq9gHB52CQ_B__yt_dlp_exec.txt",
+    "nIEqh_IIGMo_B__yt_dlp_exec.txt",
+    "nus_e3Gn8FI_B__yt_dlp_exec.txt",
+    "pGL6_8b6SN8_B__yt_dlp_exec.txt",
+    "r5QlLcA_Vz4_B__yt_dlp_exec.txt",
+    "r5cOTURD1ko_B__yt_dlp_exec.txt",
+    "sR-O3CBZZsY_B__yt_dlp_exec.txt",
+    "si-CekRHlt0_B__yt_dlp_exec.txt",
+    "tM4lENIX8gw_B__yt_dlp_exec.txt",
+    "tQBF9ixMUJY_B__yt_dlp_exec.txt",
+    "tg9ycmtarEg_B__yt_dlp_exec.txt",
+    "vXWHvfl3cGc_B__yt_dlp_exec.txt",
+    "va3XHvPN_pY_B__yt_dlp_exec.txt",
+    "xR9d5DETy-E_B__yt_dlp_exec.txt",
+    "zZcUn3ASL1k_B__yt_dlp_exec.txt"
+  ],
+  "summary": {
+    "ok": 60,
+    "schema_errors": 27,
+    "api_errors": 0,
+    "total_tokens": 118545
+  },
+  "results": [
+    {
+      "status": "schema_error",
+      "filename": "-UEp7o5NK8s_B__yt_dlp_exec.txt",
+      "video_id": "-UEp7o5NK8s",
+      "duration_ms": 1221,
+      "tokens_in": 489,
+      "tokens_out": 1,
+      "truncated": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "missing title",
+        "ingredients empty",
+        "steps empty"
+      ],
+      "recipe": {},
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "-kQ57TT9W3A_B__yt_dlp_exec.txt",
+      "video_id": "-kQ57TT9W3A",
+      "duration_ms": 7874,
+      "tokens_in": 960,
+      "tokens_out": 605,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Махана Чаат",
+        "type": "закуска",
+        "cooking_time_minutes": 15,
+        "difficulty": 2,
+        "portions": 1,
+        "ingredients": [
+          {
+            "name": "топленое масло",
+            "quantity": "немного",
+            "unit": ""
+          },
+          {
+            "name": "порошок куркумы",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "порошок красного перца чили",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "чаат масала",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "соль",
+            "quantity": "немного",
+            "unit": ""
+          },
+          {
+            "name": "махана",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "жареный арахис",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "лук",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "помидор",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "огурец",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "зеленый перец чили",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "кинза",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "лимонный сок",
+            "quantity": "",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Налейте немного топленого масла в сковороду. Добавьте порошок куркумы, порошок красного перца чили, чаат масала и немного соли."
+          },
+          {
+            "step_number": 2,
+            "description": "Жарьте специи от 10 до 15 секунд."
+          },
+          {
+            "step_number": 3,
+            "description": "Добавьте махану и хорошо обжарьте со специями, но не доводите до хрустящего состояния."
+          },
+          {
+            "step_number": 4,
+            "description": "В миске смешайте жареную махану, жареный арахис, нарезанный лук, помидор, огурец, зеленый перец чили, кинзу и лимонный сок."
+          },
+          {
+            "step_number": 5,
+            "description": "Хорошо перемешайте все ингредиенты."
+          }
+        ],
+        "comments": "Легкий, полезный и вкусный Махана Чаат готов. Попробуйте и получите удовольствие."
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "0vOFdvXJc3Y_B__yt_dlp_exec.txt",
+      "video_id": "0vOFdvXJc3Y",
+      "duration_ms": 11901,
+      "tokens_in": 998,
+      "tokens_out": 868,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Домашняя фунчоза с говядиной и овощами",
+        "type": "основное блюдо",
+        "cooking_time_minutes": 20,
+        "difficulty": 3,
+        "portions": 4,
+        "ingredients": [
+          {
+            "name": "говядина",
+            "quantity": "200-300",
+            "unit": "грамм"
+          },
+          {
+            "name": "стеклянная лапша",
+            "quantity": "1",
+            "unit": "упаковка"
+          },
+          {
+            "name": "морковь",
+            "quantity": "1",
+            "unit": "штука"
+          },
+          {
+            "name": "огурец",
+            "quantity": "1",
+            "unit": "штука"
+          },
+          {
+            "name": "сладкий перец",
+            "quantity": "1",
+            "unit": "штука"
+          },
+          {
+            "name": "чеснок",
+            "quantity": "2-3",
+            "unit": "зубчика"
+          },
+          {
+            "name": "зелёный лук",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "чили",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "соевый соус",
+            "quantity": "2-3",
+            "unit": "столовые ложки"
+          },
+          {
+            "name": "сахар",
+            "quantity": "1-2",
+            "unit": "столовые ложки"
+          },
+          {
+            "name": "рисовый уксус",
+            "quantity": "1-2",
+            "unit": "столовые ложки"
+          },
+          {
+            "name": "сладкая паприка",
+            "quantity": "1-2",
+            "unit": "чайные ложки"
+          },
+          {
+            "name": "кунжут",
+            "quantity": "1-2",
+            "unit": "столовые ложки"
+          },
+          {
+            "name": "растительное масло",
+            "quantity": "2-3",
+            "unit": "столовые ложки"
+          },
+          {
+            "name": "соль",
+            "quantity": "по вкусу",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Нарежьте говядину на тонкие полоски и обжарьте на высоком огне 2-3 минуты. В конце посолите."
+          },
+          {
+            "step_number": 2,
+            "description": "Запарьте стеклянную лапшу согласно инструкции на упаковке."
+          },
+          {
+            "step_number": 3,
+            "description": "Подготовьте овощи: натрите морковь и огурец на Корейской тёрке, нарежьте сладкий перец тонкой соломкой. Сложите все ингредиенты в удобную посуду."
+          },
+          {
+            "step_number": 4,
+            "description": "Мелко нарежьте чеснок и зелёный лук. Добавьте их к овощам, добавьте чили по вкусу."
+          },
+          {
+            "step_number": 5,
+            "description": "Приготовьте заправку: смешайте соевый соус, сахар, рисовый уксус, сладкую паприку и кунжут. Залейте кипящим маслом и хорошо перемешайте."
+          },
+          {
+            "step_number": 6,
+            "description": "Выложите заправку на овощи и хорошо перемешайте. Добавьте готовую лапшу и обжаренную говядину, снова перемешайте."
+          }
+        ],
+        "comments": "Этот рецепт домашней фунчозы с говядиной и овощами получается очень вкусным и насыщенным. Попробуйте приготовить его дома!"
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "1SdcMAF_uYU_B__yt_dlp_exec.txt",
+      "video_id": "1SdcMAF",
+      "duration_ms": 5602,
+      "tokens_in": 791,
+      "tokens_out": 403,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Ленивая лазанья",
+        "type": "основное блюдо",
+        "cooking_time_minutes": 20,
+        "difficulty": 2,
+        "portions": 4,
+        "ingredients": [
+          {
+            "name": "овощи",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "фарш",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "томатный соус",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "вода",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "спагетти",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "моцарелла",
+            "quantity": "",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Обжариваем овощи с фаршем на сковороде."
+          },
+          {
+            "step_number": 2,
+            "description": "Заливаем томатным соусом и добавляем воду."
+          },
+          {
+            "step_number": 3,
+            "description": "Ломаем спагетти аккуратно и добавляем в сковороду, перемешиваем, чтобы каждая спагетти окунулась в соус и не слиплась."
+          },
+          {
+            "step_number": 4,
+            "description": "Тушим под крышкой 10 минут."
+          },
+          {
+            "step_number": 5,
+            "description": "По необходимости доливаем воды и засыпаем моцареллой."
+          },
+          {
+            "step_number": 6,
+            "description": "Оставляем под крышкой ещё на 10 минут."
+          }
+        ],
+        "comments": "Блюдо готовится в одной сковороде, что делает его очень удобным для приготовления. Наслаждайтесь!"
+      },
+      "debug": {}
+    },
+    {
+      "status": "schema_error",
+      "filename": "2Xphb7V83Bw_B__yt_dlp_exec.txt",
+      "video_id": "2Xphb7V83Bw",
+      "duration_ms": 728,
+      "tokens_in": 1232,
+      "tokens_out": 1,
+      "truncated": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "missing title",
+        "ingredients empty",
+        "steps empty"
+      ],
+      "recipe": {},
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "3ReQwn2xLPs_B__yt_dlp_exec.txt",
+      "video_id": "3ReQwn2xLPs",
+      "duration_ms": 5414,
+      "tokens_in": 713,
+      "tokens_out": 390,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Джалджиру",
+        "type": "напиток",
+        "cooking_time_minutes": 15,
+        "difficulty": 2,
+        "portions": 1,
+        "ingredients": [
+          {
+            "name": "тмин",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "чёрная соль",
+            "quantity": "немного",
+            "unit": ""
+          },
+          {
+            "name": "порошок из сушеного манго",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "листья мяты",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "сок кориандра",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "сок лимона",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "вода",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "лед",
+            "quantity": "",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Хорошо обжарьте тмин на сухой сковороде."
+          },
+          {
+            "step_number": 2,
+            "description": "Добавьте немного чёрной соли и порошок из сушеного манго. Измельчите их вместе."
+          },
+          {
+            "step_number": 3,
+            "description": "Добавьте листья мяты, сок кориандра и сок лимона. Перемешайте."
+          },
+          {
+            "step_number": 4,
+            "description": "Добавьте воды и тщательно перемешайте все ингредиенты."
+          },
+          {
+            "step_number": 5,
+            "description": "Добавьте лёд в охлаждённый напиток."
+          }
+        ],
+        "comments": ""
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "3gzlXDM6gLI_B__yt_dlp_exec.txt",
+      "video_id": "3gzlXDM6gLI",
+      "duration_ms": 10783,
+      "tokens_in": 2050,
+      "tokens_out": 737,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Макароны с фаршем и овощами",
+        "type": "основное блюдо",
+        "cooking_time_minutes": 45,
+        "difficulty": 2,
+        "portions": 4,
+        "ingredients": [
+          {
+            "name": "макароны",
+            "quantity": "450",
+            "unit": "г"
+          },
+          {
+            "name": "бульонные кубики",
+            "quantity": "2",
+            "unit": ""
+          },
+          {
+            "name": "лук",
+            "quantity": "800",
+            "unit": "г"
+          },
+          {
+            "name": "морковь",
+            "quantity": "400",
+            "unit": "г"
+          },
+          {
+            "name": "томатная паста",
+            "quantity": "140",
+            "unit": "г"
+          },
+          {
+            "name": "сушёный чеснок",
+            "quantity": "1",
+            "unit": "пакетик"
+          },
+          {
+            "name": "фарш",
+            "quantity": "900",
+            "unit": "г"
+          },
+          {
+            "name": "зелень (петрушка, укроп)",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "растительное масло",
+            "quantity": "100",
+            "unit": "г"
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "В кастрюлю добавьте бульонные кубики и залейте литром кипятка. Оставьте, чтобы кубики растворились."
+          },
+          {
+            "step_number": 2,
+            "description": "В сковороду налейте 100 г растительного масла и выложите 900 г фарша. Обжаривайте, пока фарш не станет золотистым."
+          },
+          {
+            "step_number": 3,
+            "description": "Добавьте 800 г замороженного лука и 400 г моркови. Жарьте, помешивая, до золотистого цвета лука."
+          },
+          {
+            "step_number": 4,
+            "description": "Добавьте 140 г томатной пасты и сушёный чеснок. Прогревайте всё вместе пару минут."
+          },
+          {
+            "step_number": 5,
+            "description": "Добавьте 450 г макарон в сковороду, перемешайте с фаршем и овощами в течение 10 секунд, затем влейте бульон из кастрюли."
+          },
+          {
+            "step_number": 6,
+            "description": "Перемешайте все ингредиенты, накройте крышкой и готовьте на маленьком огне 15 минут."
+          },
+          {
+            "step_number": 7,
+            "description": "После 15 минут добавьте нарезанную зелень (петрушку и укроп), выключите огонь, перемешайте и оставьте под крышкой ещё на 10 минут, чтобы влага впиталась."
+          }
+        ],
+        "comments": "Блюдо получается вкусным и ароматным. Не добавляйте больше воды, чем указано, чтобы избежать превращения макарон в кашу."
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "4kyTkEItmDc_B__yt_dlp_exec.txt",
+      "video_id": "4kyTkEItmDc",
+      "duration_ms": 14865,
+      "tokens_in": 979,
+      "tokens_out": 1158,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Куриная паста с овощами и сыром",
+        "type": "основное блюдо",
+        "cooking_time_minutes": 30,
+        "difficulty": 3,
+        "portions": 4,
+        "ingredients": [
+          {
+            "name": "курица",
+            "quantity": "450",
+            "unit": "г"
+          },
+          {
+            "name": "оливковое масло",
+            "quantity": "2",
+            "unit": "ст. л."
+          },
+          {
+            "name": "соль",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "черный перец",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "смесь специй Фахита",
+            "quantity": "2",
+            "unit": "ст. л."
+          },
+          {
+            "name": "порошок чили",
+            "quantity": "1",
+            "unit": "ч. л."
+          },
+          {
+            "name": "копченая паприка",
+            "quantity": "1",
+            "unit": "ч. л."
+          },
+          {
+            "name": "тмин",
+            "quantity": "1/2",
+            "unit": "ч. л."
+          },
+          {
+            "name": "чесночный порошок",
+            "quantity": "1/2",
+            "unit": "ч. л."
+          },
+          {
+            "name": "лук",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "болгарский перец",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "чеснок",
+            "quantity": "2",
+            "unit": "зубчика"
+          },
+          {
+            "name": "кампанелле (или другая паста)",
+            "quantity": "250",
+            "unit": "г"
+          },
+          {
+            "name": "куриный бульон",
+            "quantity": "2",
+            "unit": "стакана"
+          },
+          {
+            "name": "молоко",
+            "quantity": "2 ¼",
+            "unit": "стакана"
+          },
+          {
+            "name": "тертый сыр (чеддер и моцарелла)",
+            "quantity": "1½",
+            "unit": "стакана"
+          },
+          {
+            "name": "кинза или петрушка",
+            "quantity": "",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Нарежьте 450 г курицы на мелкие кубики, сбрызните 1 ст. л. оливкового масла, приправьте солью и черным перцем. Добавьте 2 ст. л. смеси специй Фахита или 1 ч. л. порошка чили, 1 ч. л. копченой паприки, 1/2 ч. л. тмина и 1/2 ч. л. чесночного порошка. Смешайте руками, чтобы равномерно распределить приправу."
+          },
+          {
+            "step_number": 2,
+            "description": "Разогрейте сковороду на среднем огне, добавьте 1 ст. л. оливкового масла. Готовьте курицу в течение 5-7 минут, помешивая, до готовности. Выньте курицу и отложите в сторону."
+          },
+          {
+            "step_number": 3,
+            "description": "Добавьте 1 ст. л. масла в сковороду, нарежьте лук и готовьте в течение 4 минут до прозрачности. Нарежьте болгарский перец кубиками, добавьте его в сковороду. Нарежьте или измельчите 2 зубчика чеснока, добавьте в сковороду и перемешайте, готовьте еще 1-2 минуты."
+          },
+          {
+            "step_number": 4,
+            "description": "Добавьте 250 г кампанелле (или другой пасты) в сковороду, влейте 2 стакана куриного бульона и 2 ¼ стакана молока. Уменьшите огонь до минимума и дайте пасте вариться почти до готовности, а соусу слегка загустеть. Попробуйте и отрегулируйте вкус с помощью соли, кайенского перца или специй для курицы."
+          },
+          {
+            "step_number": 5,
+            "description": "Когда паста будет готова, снимите кастрюлю с огня. Добавьте 1½ стакана тертого сыра, пока он не расплавится и не станет однородным. Верните курицу в кастрюлю, перемешайте."
+          },
+          {
+            "step_number": 6,
+            "description": "Украсьте мелко нарезанной кинзой или петрушкой. Наслаждайтесь."
+          }
+        ],
+        "comments": "Это блюдо сочетает в себе нежную куриную мякоть, ароматные специи и сливочный соус. Идеально подходит для семейного ужина."
+      },
+      "debug": {}
+    },
+    {
+      "status": "schema_error",
+      "filename": "5iEF18mtwrw_B__yt_dlp_exec.txt",
+      "video_id": "5iEF18mtwrw",
+      "duration_ms": 538,
+      "tokens_in": 434,
+      "tokens_out": 1,
+      "truncated": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "missing title",
+        "ingredients empty",
+        "steps empty"
+      ],
+      "recipe": {},
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "60RZ72SKsJQ_B__yt_dlp_exec.txt",
+      "video_id": "60RZ72SKsJQ",
+      "duration_ms": 5960,
+      "tokens_in": 942,
+      "tokens_out": 403,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Печенье на сковороде с брауни и гриль-персиками",
+        "type": "десерт",
+        "cooking_time_minutes": 20,
+        "difficulty": 3,
+        "portions": 1,
+        "ingredients": [
+          {
+            "name": "тесто для печенья",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "тесто для брауни",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "сливочное масло",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "персики",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "мёд",
+            "quantity": "немного",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Смешайте тесто для печенья и тесто для брауни."
+          },
+          {
+            "step_number": 2,
+            "description": "Разогрейте сковороду на сильном огне."
+          },
+          {
+            "step_number": 3,
+            "description": "Смажьте сковороду сливочным маслом и выложите в неё смесь теста."
+          },
+          {
+            "step_number": 4,
+            "description": "Обжаривайте до образования аппетитной корочки, пока внутри не станет тепло."
+          },
+          {
+            "step_number": 5,
+            "description": "Пожарьте персики на гриле."
+          },
+          {
+            "step_number": 6,
+            "description": "Выложите готовое печенье на тарелку и полейте немного мёдом."
+          }
+        ],
+        "comments": "Это блюдо идеально подходит для летних дней. Наслаждайтесь британской погодой и вкусом."
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "63N4LwEas1I_B__yt_dlp_exec.txt",
+      "video_id": "63N4LwEas1I",
+      "duration_ms": 5014,
+      "tokens_in": 554,
+      "tokens_out": 338,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Бананово-какао пирожное",
+        "type": "десерт",
+        "cooking_time_minutes": 5,
+        "difficulty": 1,
+        "portions": 1,
+        "ingredients": [
+          {
+            "name": "йогурт",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "банан",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "какао",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "протеин",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "кокосовая стружка",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "яйца",
+            "quantity": "2",
+            "unit": "шт"
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Смешай йогурт, банан, какао, протеин и кокосовую стружку в одной миске."
+          },
+          {
+            "step_number": 2,
+            "description": "Добавь два яйца в смесь и перемешай все вилкой до однородности."
+          },
+          {
+            "step_number": 3,
+            "description": "Перелей смесь в подходящую форму для микроволновки."
+          }
+        ],
+        "comments": "Мягкое, сладкое и низкокалорийное пирожное, готовится в микроволновке."
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "7NYM4CVAhJo_B__yt_dlp_exec.txt",
+      "video_id": "7NYM4CVAhJo",
+      "duration_ms": 9406,
+      "tokens_in": 840,
+      "tokens_out": 376,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Быстрый ужин с картофельным пюре и овощами",
+        "type": "main course",
+        "cooking_time_minutes": 30,
+        "difficulty": 2,
+        "portions": 1,
+        "ingredients": [
+          {
+            "name": "картофель",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "сливочное масло",
+            "quantity": "немного",
+            "unit": ""
+          },
+          {
+            "name": "лук",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "морковь",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "вода",
+            "quantity": "немного",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Отварите картофель."
+          },
+          {
+            "step_number": 2,
+            "description": "Добавьте немного сливочного масла и сделайте картофельное пюре, такое сухенькое."
+          },
+          {
+            "step_number": 3,
+            "description": "Нарежьте лук и натрите морковь. Обжарьте лук, затем добавьте морковку и немного воды."
+          },
+          {
+            "step_number": 4,
+            "description": "Выложите все слоями в форму для запекания."
+          },
+          {
+            "step_number": 5,
+            "description": "Поставьте в духовку на некоторое время."
+          }
+        ],
+        "comments": "Этот рецепт идеально подходит для быстрого приготовления ужина. Время приготовления может варьироваться в зависимости от вашей духовки."
+      },
+      "debug": {}
+    },
+    {
+      "status": "schema_error",
+      "filename": "7Nj24arIi58_B__yt_dlp_exec.txt",
+      "video_id": "7Nj24arIi58",
+      "duration_ms": 439,
+      "tokens_in": 355,
+      "tokens_out": 1,
+      "truncated": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "missing title",
+        "ingredients empty",
+        "steps empty"
+      ],
+      "recipe": {},
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "8AXcxnYjHqs_B__yt_dlp_exec.txt",
+      "video_id": "8AXcxnYjHqs",
+      "duration_ms": 9402,
+      "tokens_in": 1227,
+      "tokens_out": 664,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Хрустящие куриные стрипсы",
+        "type": "основное блюдо",
+        "cooking_time_minutes": 120,
+        "difficulty": 3,
+        "portions": 4,
+        "ingredients": [
+          {
+            "name": "куриная грудка",
+            "quantity": "2",
+            "unit": "шт"
+          },
+          {
+            "name": "мука",
+            "quantity": "2",
+            "unit": "стакана"
+          },
+          {
+            "name": "соль",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "паприка",
+            "quantity": "1",
+            "unit": "чайная ложка"
+          },
+          {
+            "name": "смесь перцев",
+            "quantity": "1",
+            "unit": "чайная ложка"
+          },
+          {
+            "name": "яйца",
+            "quantity": "4",
+            "unit": "шт"
+          },
+          {
+            "name": "вода",
+            "quantity": "1",
+            "unit": "стакан"
+          },
+          {
+            "name": "растительное масло",
+            "quantity": "для жарки",
+            "unit": ""
+          },
+          {
+            "name": "майонез",
+            "quantity": "1",
+            "unit": "стакан"
+          },
+          {
+            "name": "чеснок",
+            "quantity": "2",
+            "unit": "зубчика"
+          },
+          {
+            "name": "огурец",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "репчатый лук",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "сок лимона",
+            "quantity": "1",
+            "unit": "столовая ложка"
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Для кляра соединяем муку, соль, паприку, смесь перцев, два яйца, воду и перемешиваем до однородной массы."
+          },
+          {
+            "step_number": 2,
+            "description": "Нарезаем куриную грудку на стрипсы и добавляем в кляр. Маринуем пару часов."
+          },
+          {
+            "step_number": 3,
+            "description": "Готовим соус: смешиваем майонез, чеснок, огурец, репчатый лук и сок лимона."
+          },
+          {
+            "step_number": 4,
+            "description": "Делаем второй кляр из муки и специй. Обваливаем в этом кляре маринованную куриную грудку, убирая лишнее."
+          },
+          {
+            "step_number": 5,
+            "description": "Обжариваем куриные стрипсы в большом количестве растительного масла до золотистой корочки."
+          }
+        ],
+        "comments": "Стрипсы получаются хрустящими и очень вкусными. Приятного приготовления!"
+      },
+      "debug": {}
+    },
+    {
+      "status": "schema_error",
+      "filename": "9R2PZ3w0Qjo_B__yt_dlp_exec.txt",
+      "video_id": "9R2PZ3w0Qjo",
+      "duration_ms": 499,
+      "tokens_in": 533,
+      "tokens_out": 1,
+      "truncated": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "missing title",
+        "ingredients empty",
+        "steps empty"
+      ],
+      "recipe": {},
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "A0luKoqlqOk_B__yt_dlp_exec.txt",
+      "video_id": "A0luKoqlqOk",
+      "duration_ms": 6685,
+      "tokens_in": 776,
+      "tokens_out": 485,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Хрустящая капля самса",
+        "type": "Выпечка",
+        "cooking_time_minutes": 120,
+        "difficulty": 3,
+        "portions": 12,
+        "ingredients": [
+          {
+            "name": "вода",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "соль",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "мука",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "сливочное масло",
+            "quantity": "растопленное",
+            "unit": ""
+          },
+          {
+            "name": "лук",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "фарш",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "зира",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "перец",
+            "quantity": "",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Перемешай воду с солью и добавь муки. Замеси тесто."
+          },
+          {
+            "step_number": 2,
+            "description": "Раздели тесто на три части, сделай шарики и оставь на 30 минут."
+          },
+          {
+            "step_number": 3,
+            "description": "Смажь каждый слой растопленным сливочным маслом, плотно сверни в рулетик, затем в улитку. Отправь в морозильник."
+          },
+          {
+            "step_number": 4,
+            "description": "Для начинки соедини лук, фарш, соль, зиру и перец."
+          },
+          {
+            "step_number": 5,
+            "description": "Тесто раздели на 12 частей, скатай в круг, клади начинку и формируй каплю самсы, как показано на видео."
+          },
+          {
+            "step_number": 6,
+            "description": "Посыпь и выпекай до готовности."
+          }
+        ],
+        "comments": "Очень вкусная и хрустящая капля самса. Сохраняйте рецепт, это нереальная вкуснятина!"
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "BpIze1xV4Xc_B__yt_dlp_exec.txt",
+      "video_id": "BpIze1xV4Xc",
+      "duration_ms": 11238,
+      "tokens_in": 1169,
+      "tokens_out": 507,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Воздушный омлет",
+        "type": "завтрак",
+        "cooking_time_minutes": 30,
+        "difficulty": 2,
+        "portions": 1,
+        "ingredients": [
+          {
+            "name": "яйца",
+            "quantity": "5",
+            "unit": "шт"
+          },
+          {
+            "name": "соль",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "перец",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "молоко",
+            "quantity": "300",
+            "unit": "г"
+          },
+          {
+            "name": "масло растительное или сливочное",
+            "quantity": "для смазывания",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Подготовьте яйца. Яйца не взбиваем, а просто легко размешиваем."
+          },
+          {
+            "step_number": 2,
+            "description": "Добавьте молоко комнатной температуры в количестве, равном весу яиц (в данном случае 300 г). Размешайте, но не взбивайте."
+          },
+          {
+            "step_number": 3,
+            "description": "Посолите и поперчите по вкусу. Можно добавить зелень, если хотите, но это опционально."
+          },
+          {
+            "step_number": 4,
+            "description": "Выберите форму для запекания, желательно узкую и небольшую, чтобы омлет получился высоким. Смажьте форму маслом (растительным или сливочным)."
+          },
+          {
+            "step_number": 5,
+            "description": "Разогрейте духовку. Влейте яично-молочную смесь в форму и поставьте в разогретую духовку."
+          },
+          {
+            "step_number": 6,
+            "description": "Запекайте до готовности, пока омлет не станет воздушным, румяным и нежным."
+          }
+        ],
+        "comments": "Соблюдение всех этих простых правил поможет вам приготовить идеальный воздушный омлет."
+      },
+      "debug": {}
+    },
+    {
+      "status": "schema_error",
+      "filename": "CcC-m7zlEN8_B__yt_dlp_exec.txt",
+      "video_id": "CcC-m7zlEN8",
+      "duration_ms": 1791,
+      "tokens_in": 1207,
+      "tokens_out": 89,
+      "truncated": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "ingredients empty",
+        "steps empty"
+      ],
+      "recipe": {
+        "title": "Лайтовые шоколадные кексы",
+        "type": "десерт",
+        "cooking_time_minutes": 0,
+        "difficulty": 1,
+        "portions": 0,
+        "ingredients": [],
+        "steps": [],
+        "comments": "Подробный рецепт кексов находится под видео. Рекомендуется приготовить."
+      },
+      "debug": {
+        "ingredients": [],
+        "steps": []
+      }
+    },
+    {
+      "status": "ok",
+      "filename": "Di56ketvhkc_B__yt_dlp_exec.txt",
+      "video_id": "Di56ketvhkc",
+      "duration_ms": 5990,
+      "tokens_in": 688,
+      "tokens_out": 440,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Панкейки для особого случая",
+        "type": "Завтрак",
+        "cooking_time_minutes": 30,
+        "difficulty": 2,
+        "portions": 2,
+        "ingredients": [
+          {
+            "name": "яйца",
+            "quantity": "2",
+            "unit": "шт"
+          },
+          {
+            "name": "сахар",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "соль",
+            "quantity": "щепотка",
+            "unit": ""
+          },
+          {
+            "name": "тёплое молоко",
+            "quantity": "2/3",
+            "unit": "стакана"
+          },
+          {
+            "name": "мука",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "разрыхлитель",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "масло",
+            "quantity": "несколько",
+            "unit": "ложек"
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Разбиваем два яйца и смешиваем с сахаром и щепоткой соли."
+          },
+          {
+            "step_number": 2,
+            "description": "Добавляем 2/3 стакана тёплого молока и просеиваем муку с разрыхлителем."
+          },
+          {
+            "step_number": 3,
+            "description": "Активно перемешиваем и проверяем консистенцию. Если тесто слишком жидкое, добавляем ещё немного муки."
+          },
+          {
+            "step_number": 4,
+            "description": "Вливаем несколько ложек масла и даём тесту настояться 15 минут для красивой корочки."
+          },
+          {
+            "step_number": 5,
+            "description": "Жарим на сухой антипригарной сковородке до появления пузырьков."
+          }
+        ],
+        "comments": "Этот рецепт идеально подходит для романтического завтрака."
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "EC6_HL4DWnM_B__yt_dlp_exec.txt",
+      "video_id": "EC6",
+      "duration_ms": 10031,
+      "tokens_in": 1047,
+      "tokens_out": 734,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Харчо",
+        "type": "Суп",
+        "cooking_time_minutes": 90,
+        "difficulty": 3,
+        "portions": 4,
+        "ingredients": [
+          {
+            "name": "масло",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "говяжьи ребра",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "говяжья лопатка",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "кислые сливы",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "чили перец",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "рис",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "лук",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "чеснок",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "томатная паста",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "сахар",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "домашняя аджика",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "красная паприка",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "хмели-сунели",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "сухой базилик",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "соль",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "зелень (базилик, петрушка, укроп, зеленый лук)",
+            "quantity": "",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Нагрейте кастрюлю и налейте масло. Добавьте говяжьи ребра и жарьте до румяного состояния."
+          },
+          {
+            "step_number": 2,
+            "description": "Залейте холодной водой, добавьте говяжью лопатку и кислые сливы с чили перцем. Варите бульон 1-1.5 часа, периодически снимая пену."
+          },
+          {
+            "step_number": 3,
+            "description": "Выньте овощи из бульона, мясо снимите с костей и нарежьте. Процедите бульон."
+          },
+          {
+            "step_number": 4,
+            "description": "Добавьте рис в бульон. Начните пассеровать лук, добавьте чеснок, томатную пасту и сахар. Затем добавьте домашнюю аджику и красную паприку."
+          },
+          {
+            "step_number": 5,
+            "description": "Верните мясо в бульон, добавьте пассировку и специи (хмели-сунели и сухой базилик). Добавьте соль и сахар по вкусу."
+          },
+          {
+            "step_number": 6,
+            "description": "Добавьте измельченный чеснок и зелень (базилик, петрушка, укроп, зеленый лук)."
+          }
+        ],
+        "comments": "Приятного аппетита!"
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "EkVPwu-8n1M_B__yt_dlp_exec.txt",
+      "video_id": "EkVPwu-8n1M",
+      "duration_ms": 9213,
+      "tokens_in": 2462,
+      "tokens_out": 609,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Грязные спагетти",
+        "type": "main course",
+        "cooking_time_minutes": 45,
+        "difficulty": 3,
+        "portions": 4,
+        "ingredients": [
+          {
+            "name": "говяжий фарш",
+            "quantity": "1",
+            "unit": "фунт"
+          },
+          {
+            "name": "итальянская колбаса",
+            "quantity": "1",
+            "unit": "фунт"
+          },
+          {
+            "name": "пшеничная мука",
+            "quantity": "4",
+            "unit": "столовые ложки"
+          },
+          {
+            "name": "томатная паста",
+            "quantity": "2",
+            "unit": "столовые ложки"
+          },
+          {
+            "name": "болгарский перец",
+            "quantity": "1",
+            "unit": ""
+          },
+          {
+            "name": "лук",
+            "quantity": "1",
+            "unit": ""
+          },
+          {
+            "name": "приправа Nature",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "итальянская приправа",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "креольская приправа",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "спагетти",
+            "quantity": "",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Добавьте говяжий фарш и итальянскую колбасу в сковороду."
+          },
+          {
+            "step_number": 2,
+            "description": "Добавьте четыре столовые ложки пшеничной муки и убедитесь, что мука полностью покрыла мясо."
+          },
+          {
+            "step_number": 3,
+            "description": "Добавьте 2 столовые ложки томатной пасты и дайте части горечи выпариться на дне сковороды."
+          },
+          {
+            "step_number": 4,
+            "description": "Добавьте нарезанный болгарский перец."
+          },
+          {
+            "step_number": 5,
+            "description": "Добавьте нарезанный лук."
+          },
+          {
+            "step_number": 6,
+            "description": "Добавьте приправу Nature, итальянскую приправу и креольскую приправу по вкусу."
+          },
+          {
+            "step_number": 7,
+            "description": "Добавьте воду, в которой варились макароны."
+          },
+          {
+            "step_number": 8,
+            "description": "Добавьте все макароны в соус и перемешайте."
+          },
+          {
+            "step_number": 9,
+            "description": "Подавайте блюдо."
+          }
+        ],
+        "comments": "Это блюдо можно дополнить сыром, но это не обязательно. Приятного аппетита!"
+      },
+      "debug": {}
+    },
+    {
+      "status": "schema_error",
+      "filename": "Eyz5reNsbgQ_B__yt_dlp_exec.txt",
+      "video_id": "Eyz5reNsbgQ",
+      "duration_ms": 1174,
+      "tokens_in": 337,
+      "tokens_out": 52,
+      "truncated": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "missing title",
+        "ingredients empty",
+        "steps empty"
+      ],
+      "recipe": {
+        "title": "",
+        "type": "",
+        "cooking_time_minutes": 0,
+        "difficulty": 0,
+        "portions": 0,
+        "ingredients": [],
+        "steps": [],
+        "comments": ""
+      },
+      "debug": {
+        "title": "",
+        "ingredients": [],
+        "steps": []
+      }
+    },
+    {
+      "status": "ok",
+      "filename": "F-rS8L4xhRA_B__yt_dlp_exec.txt",
+      "video_id": "F-rS8L4xhRA",
+      "duration_ms": 8244,
+      "tokens_in": 3857,
+      "tokens_out": 469,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Чатни из помидоров и чеснока",
+        "type": "Салат/соус",
+        "cooking_time_minutes": 20,
+        "difficulty": 2,
+        "portions": 4,
+        "ingredients": [
+          {
+            "name": "Помидоры",
+            "quantity": "700-800",
+            "unit": "г"
+          },
+          {
+            "name": "Чеснок",
+            "quantity": "50-60",
+            "unit": "г"
+          },
+          {
+            "name": "Соль",
+            "quantity": "пол чайной ложки",
+            "unit": ""
+          },
+          {
+            "name": "Зеленый перец чили",
+            "quantity": "5-6",
+            "unit": "штук"
+          },
+          {
+            "name": "Кинза",
+            "quantity": "меньше половины пачки",
+            "unit": ""
+          },
+          {
+            "name": "Мята",
+            "quantity": "одна пачка",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Возьмите 700-800 г помидоров, разрежьте их на две части. Посыпьте солью и оставьте на 8-10 минут под крышкой."
+          },
+          {
+            "step_number": 2,
+            "description": "Снимите кожуру с помидоров и удалите плетение внутри."
+          },
+          {
+            "step_number": 3,
+            "description": "Добавьте 50-60 г чеснока, зеленый перец чили, кинзу и мяту. Измельчите все ингредиенты до крупной крошки."
+          },
+          {
+            "step_number": 4,
+            "description": "Добавьте пол чайной ложки соли и перемешайте."
+          }
+        ],
+        "comments": "Этот чатни можно хранить в холодильнике до 7-8 дней. Подавайте его с далом, рисом, паратой или роти. Приятного аппетита!"
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "F8C-ww-PDHY_B__yt_dlp_exec.txt",
+      "video_id": "F8C-ww-PDHY",
+      "duration_ms": 4337,
+      "tokens_in": 635,
+      "tokens_out": 300,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Шарики Риз",
+        "type": "десерт",
+        "cooking_time_minutes": 30,
+        "difficulty": 2,
+        "portions": 10,
+        "ingredients": [
+          {
+            "name": "порошок арахисового масла",
+            "quantity": "1",
+            "unit": "стакан"
+          },
+          {
+            "name": "яблочное пюре",
+            "quantity": "1",
+            "unit": "стакан"
+          },
+          {
+            "name": "шоколад",
+            "quantity": "1",
+            "unit": "стакан"
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Смешайте порошок арахисового масла с яблочным пюре в большой миске."
+          },
+          {
+            "step_number": 2,
+            "description": "Добавьте шоколад и хорошо перемешайте до получения однородной массы."
+          },
+          {
+            "step_number": 3,
+            "description": "Сформируйте из полученной смеси небольшие шарики."
+          }
+        ],
+        "comments": "Эти шарики Риз — отличный вариант для быстрого и вкусного десерта. Они идеально подходят для любителей арахисового масла и шоколада."
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "GJg0juvYbwE_B__yt_dlp_exec.txt",
+      "video_id": "GJg0juvYbwE",
+      "duration_ms": 5897,
+      "tokens_in": 634,
+      "tokens_out": 438,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Вкусный и простой завтрак",
+        "type": "breakfast",
+        "cooking_time_minutes": 15,
+        "difficulty": 2,
+        "portions": 1,
+        "ingredients": [
+          {
+            "name": "яйца",
+            "quantity": "5",
+            "unit": ""
+          },
+          {
+            "name": "молоко",
+            "quantity": "1",
+            "unit": "стакан"
+          },
+          {
+            "name": "мука",
+            "quantity": "1",
+            "unit": "стакан"
+          },
+          {
+            "name": "соль",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "помидор",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "лук или другая зелень",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "колбаса",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "сыр",
+            "quantity": "кто сколько любит",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Смешайте пять яиц, один стакан молока, один стакан муки и соль по вкусу."
+          },
+          {
+            "step_number": 2,
+            "description": "Добавьте нарезанный помидор, лук или другую зелень, колбасу. Перемешайте все ингредиенты."
+          },
+          {
+            "step_number": 3,
+            "description": "Выложите смесь на разогретую и смазанную сковородку, формируя блинчик."
+          },
+          {
+            "step_number": 4,
+            "description": "Жарьте блинчик на среднем огне, затем переверните его и посыпьте сверху сыром."
+          },
+          {
+            "step_number": 5,
+            "description": "Сложите блинчик пополам. Приятного аппетита!"
+          }
+        ],
+        "comments": ""
+      },
+      "debug": {}
+    },
+    {
+      "status": "schema_error",
+      "filename": "GnkeQuKDVAU_B__yt_dlp_exec.txt",
+      "video_id": "GnkeQuKDVAU",
+      "duration_ms": 430,
+      "tokens_in": 401,
+      "tokens_out": 1,
+      "truncated": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "missing title",
+        "ingredients empty",
+        "steps empty"
+      ],
+      "recipe": {},
+      "debug": {}
+    },
+    {
+      "status": "schema_error",
+      "filename": "GszKT9flCsk_B__yt_dlp_exec.txt",
+      "video_id": "GszKT9flCsk",
+      "duration_ms": 494,
+      "tokens_in": 417,
+      "tokens_out": 1,
+      "truncated": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "missing title",
+        "ingredients empty",
+        "steps empty"
+      ],
+      "recipe": {},
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "H1Pi1OjQlgg_B__yt_dlp_exec.txt",
+      "video_id": "H1Pi1OjQlgg",
+      "duration_ms": 4806,
+      "tokens_in": 695,
+      "tokens_out": 363,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Рисовый микс с курицей в соевом соусе",
+        "type": "Основное блюдо",
+        "cooking_time_minutes": 15,
+        "difficulty": 2,
+        "portions": 1,
+        "ingredients": [
+          {
+            "name": "куриные бедра",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "соевый соус",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "устричный соус",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "черный перец",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "чеснок",
+            "quantity": "большое количество",
+            "unit": ""
+          },
+          {
+            "name": "кока-кола",
+            "quantity": "",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Замаринуйте курицу в соевом соусе, устричном соусе, черном перце и большом количестве чеснока."
+          },
+          {
+            "step_number": 2,
+            "description": "Обжаривайте курицу 4-5 минут или до золотисто-коричневого цвета."
+          },
+          {
+            "step_number": 3,
+            "description": "Добавьте секретный ингредиент — кока-колу. Накройте крышкой и готовьте 7-8 минут."
+          }
+        ],
+        "comments": "Вы также можете использовать куриные грудки вместо бедер."
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "IxkY8UXXU-0_B__yt_dlp_exec.txt",
+      "video_id": "IxkY8UXXU-0",
+      "duration_ms": 8906,
+      "tokens_in": 1080,
+      "tokens_out": 667,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Стейк с рисом и грибами",
+        "type": "основное блюдо",
+        "cooking_time_minutes": 80,
+        "difficulty": 3,
+        "portions": 1,
+        "ingredients": [
+          {
+            "name": "рис",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "лук",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "грибы",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "французский луковый суп",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "говяжий конме",
+            "quantity": "2",
+            "unit": "банки"
+          },
+          {
+            "name": "вода",
+            "quantity": "немного",
+            "unit": ""
+          },
+          {
+            "name": "сливочное масло",
+            "quantity": "пачка",
+            "unit": ""
+          },
+          {
+            "name": "тертый сыр",
+            "quantity": "небольшое количество",
+            "unit": ""
+          },
+          {
+            "name": "стейк",
+            "quantity": "1",
+            "unit": "шт."
+          },
+          {
+            "name": "чесночный порошок",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "соль",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "перец",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "зелень",
+            "quantity": "небольшое количество",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Смешайте рис с луком, грибами, французским луковым супом и двумя банками говяжьего конме, добавив немного воды. Перемешайте."
+          },
+          {
+            "step_number": 2,
+            "description": "Положите сверху пачку сливочного масла. Посыпьте небольшим количеством тертого сыра."
+          },
+          {
+            "step_number": 3,
+            "description": "Приправьте стейк чесночным порошком, солью и перцем, затем положите его сверху. Посыпьте еще немного сыра."
+          },
+          {
+            "step_number": 4,
+            "description": "Накройте фольгой и выпекайте при температуре 350° примерно 50 минут."
+          },
+          {
+            "step_number": 5,
+            "description": "Снимите крышку и запекайте еще 20-30 минут или до тех пор, пока жидкость не впитается и рис не сварится."
+          },
+          {
+            "step_number": 6,
+            "description": "Украсьте блюдо небольшим количеством зелени."
+          }
+        ],
+        "comments": "Это вкусное и ароматное блюдо, которое может стать отличным вариантом для ужина."
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "JbC14Zn7plU_B__yt_dlp_exec.txt",
+      "video_id": "JbC14Zn7plU",
+      "duration_ms": 10045,
+      "tokens_in": 1450,
+      "tokens_out": 772,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Куриные отбивные с томатным соусом и кокосовым молоком",
+        "type": "основное блюдо",
+        "cooking_time_minutes": 30,
+        "difficulty": 2,
+        "portions": 2,
+        "ingredients": [
+          {
+            "name": "куриные грудки",
+            "quantity": "несколько",
+            "unit": ""
+          },
+          {
+            "name": "мука",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "чеснок",
+            "quantity": "пара зубчиков",
+            "unit": ""
+          },
+          {
+            "name": "оливковое масло",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "томатная паста",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "орегано",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "хлопья красного перца",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "куриный бульон",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "кокосовое молоко",
+            "quantity": "лёгкое",
+            "unit": ""
+          },
+          {
+            "name": "вяленые помидоры",
+            "quantity": "несколько вилочек",
+            "unit": ""
+          },
+          {
+            "name": "свежий шпинат",
+            "quantity": "немного",
+            "unit": ""
+          },
+          {
+            "name": "сливки",
+            "quantity": "немного",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Обрежьте, приправьте и посыпьте мукой несколько куриных грудок. Отложите их в сторону."
+          },
+          {
+            "step_number": 2,
+            "description": "Измельчите пару зубчиков чеснока."
+          },
+          {
+            "step_number": 3,
+            "description": "Поставьте сковороду на средний огонь и немного подрумяньте куриные отбивные, обжарив их с обеих сторон в оливковом масле."
+          },
+          {
+            "step_number": 4,
+            "description": "В той же сковороде добавьте измельченный чеснок и обжаривайте его до появления аромата."
+          },
+          {
+            "step_number": 5,
+            "description": "Добавьте томатную пасту, орегано и хлопья красного перца. Сбрызните куриным бульоном."
+          },
+          {
+            "step_number": 6,
+            "description": "После того, как соус на сковороде выпарится, добавьте кокосовое молоко."
+          },
+          {
+            "step_number": 7,
+            "description": "Добавьте несколько вилочек вяленых помидоров."
+          },
+          {
+            "step_number": 8,
+            "description": "Добавьте немного свежего рубленого шпината и еще немного сливок."
+          },
+          {
+            "step_number": 9,
+            "description": "Подавайте невероятно нежное, томатное блюдо из курицы с мясом и пастой."
+          }
+        ],
+        "comments": "Это блюдо получило более 15 000 пятизвездочных отзывов и является одним из самых популярных рецептов 2020 года."
+      },
+      "debug": {}
+    },
+    {
+      "status": "schema_error",
+      "filename": "KvbDU-8ecFs_B__yt_dlp_exec.txt",
+      "video_id": "KvbDU-8ecFs",
+      "duration_ms": 1420,
+      "tokens_in": 406,
+      "tokens_out": 60,
+      "truncated": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "ingredients empty",
+        "steps empty"
+      ],
+      "recipe": {
+        "title": "Зебра",
+        "type": "десерт",
+        "cooking_time_minutes": 0,
+        "difficulty": 0,
+        "portions": 0,
+        "ingredients": [],
+        "steps": [],
+        "comments": ""
+      },
+      "debug": {
+        "ingredients": [],
+        "steps": []
+      }
+    },
+    {
+      "status": "ok",
+      "filename": "LRWygr8_fDU_B__yt_dlp_exec.txt",
+      "video_id": "LRWygr8",
+      "duration_ms": 9064,
+      "tokens_in": 2799,
+      "tokens_out": 613,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Жареные орехи бетеля",
+        "type": "закуска",
+        "cooking_time_minutes": 30,
+        "difficulty": 2,
+        "portions": 4,
+        "ingredients": [
+          {
+            "name": "орех бетеля",
+            "quantity": "100",
+            "unit": "г"
+          },
+          {
+            "name": "порошок чили",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "порошок кумина",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "анисовый порошок",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "порошок кориандра",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "соль",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "черный горох",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "зеленый перец чили",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "имбирь",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "семена тмина",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "йогурт",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "жареные бананы",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "пахта",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "листья бетеля",
+            "quantity": "",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Обжарьте и измельчите орех бетеля."
+          },
+          {
+            "step_number": 2,
+            "description": "Добавьте обжаренный и молотый порошок чили, порошок кумина, анисовый порошок, свежий порошок кориандра и соль. Перемешайте все специи."
+          },
+          {
+            "step_number": 3,
+            "description": "Добавьте черный горох, зеленый перец чили, имбирь и семена тмина. Измельчите их."
+          },
+          {
+            "step_number": 4,
+            "description": "Натрите специями орех бетеля и обжарьте в масле."
+          },
+          {
+            "step_number": 5,
+            "description": "Приготовьте соус из пахты с листьями бетеля. Подуйте в суп и перемешайте."
+          }
+        ],
+        "comments": "Это блюдо можно есть как закуску или добавлять к основному блюду. Оно полезнее, чем чипсы, и понравится детям."
+      },
+      "debug": {}
+    },
+    {
+      "status": "schema_error",
+      "filename": "MwjKgGtTk5o_B__yt_dlp_exec.txt",
+      "video_id": "MwjKgGtTk5o",
+      "duration_ms": 1684,
+      "tokens_in": 496,
+      "tokens_out": 92,
+      "truncated": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "ingredients empty",
+        "steps empty"
+      ],
+      "recipe": {
+        "title": "Тушёная картошечка",
+        "type": "Основное блюдо",
+        "cooking_time_minutes": 0,
+        "difficulty": 1,
+        "portions": 0,
+        "ingredients": [],
+        "steps": [],
+        "comments": "Подробности рецепта не указаны, но это простое блюдо, которое подходит для всей семьи."
+      },
+      "debug": {
+        "ingredients": [],
+        "steps": []
+      }
+    },
+    {
+      "status": "schema_error",
+      "filename": "NR1WdVCmpDM_B__yt_dlp_exec.txt",
+      "video_id": "NR1WdVCmpDM",
+      "duration_ms": 1149,
+      "tokens_in": 557,
+      "tokens_out": 56,
+      "truncated": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "missing title",
+        "ingredients empty",
+        "steps empty"
+      ],
+      "recipe": {
+        "title": "",
+        "type": "",
+        "cooking_time_minutes": 0,
+        "difficulty": 0,
+        "portions": 0,
+        "ingredients": [],
+        "steps": [],
+        "comments": ""
+      },
+      "debug": {
+        "title": "",
+        "ingredients": [],
+        "steps": []
+      }
+    },
+    {
+      "status": "schema_error",
+      "filename": "NSP7PIM7mCw_B__yt_dlp_exec.txt",
+      "video_id": "NSP7PIM7mCw",
+      "duration_ms": 691,
+      "tokens_in": 416,
+      "tokens_out": 1,
+      "truncated": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "missing title",
+        "ingredients empty",
+        "steps empty"
+      ],
+      "recipe": {},
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "Od2e7yYMWHU_B__yt_dlp_exec.txt",
+      "video_id": "Od2e7yYMWHU",
+      "duration_ms": 14129,
+      "tokens_in": 1191,
+      "tokens_out": 991,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Классическая лазанья",
+        "type": "Итальянская кухня",
+        "cooking_time_minutes": 90,
+        "difficulty": 3,
+        "portions": 4,
+        "ingredients": [
+          {
+            "name": "Лук",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "Морковь",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "Подсолнечное масло",
+            "quantity": "2-3",
+            "unit": "ст. л."
+          },
+          {
+            "name": "Сливочное масло",
+            "quantity": "50",
+            "unit": "г"
+          },
+          {
+            "name": "Фарш",
+            "quantity": "500",
+            "unit": "г"
+          },
+          {
+            "name": "Соль",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "Специи",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "Чеснок",
+            "quantity": "3-4",
+            "unit": "зубчика"
+          },
+          {
+            "name": "Томаты в собственном соку",
+            "quantity": "400",
+            "unit": "г"
+          },
+          {
+            "name": "Сыр",
+            "quantity": "200",
+            "unit": "г"
+          },
+          {
+            "name": "Молоко",
+            "quantity": "500",
+            "unit": "мл"
+          },
+          {
+            "name": "Мука",
+            "quantity": "50",
+            "unit": "г"
+          },
+          {
+            "name": "Чёрный перец",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "Листы для лазаньи",
+            "quantity": "12-15",
+            "unit": "шт"
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Очистить и нарезать лук, натереть морковь."
+          },
+          {
+            "step_number": 2,
+            "description": "На сковороде разогреть подсолнечное и сливочное масло, обжарить морковь с луком до золотистого цвета."
+          },
+          {
+            "step_number": 3,
+            "description": "Добавить фарш, соль и специи, обжаривать до почти полной готовности, пока фарш не начнет разваливаться."
+          },
+          {
+            "step_number": 4,
+            "description": "Добавить очищенный и измельченный чеснок, томаты в собственном соку, хорошо перемешать и тушить еще пару минут."
+          },
+          {
+            "step_number": 5,
+            "description": "Натереть сыр на крупной терке, налить молоко в сотейник и нагреть его."
+          },
+          {
+            "step_number": 6,
+            "description": "В другой сковороде растопить сливочное масло, добавить муку, хорошо перемешать."
+          },
+          {
+            "step_number": 7,
+            "description": "Когда молоко почти закипит, добавить соль, чёрный перец и мучную смесь, уменьшить огонь и помешивая, ждать, пока соус загустеет."
+          },
+          {
+            "step_number": 8,
+            "description": "Форму для запекания смазать маслом, выложить немного соуса на дно, затем слой листьев лазаньи (не помещающиеся листы можно поломать)."
+          },
+          {
+            "step_number": 9,
+            "description": "Сверху на листья выложить фарш, затем соус, посыпать сыром. Повторять слои: листья, фарш, соус, сыр."
+          },
+          {
+            "step_number": 10,
+            "description": "На последний слой добавить соус, посыпать сыром, накрыть фольгой и отправить в духовку на 45 минут при 180°C."
+          },
+          {
+            "step_number": 11,
+            "description": "По истечении 45 минут достать, снять фольгу и вернуть в духовку до образования золотистой корочки."
+          }
+        ],
+        "comments": "Этот рецепт классической лазаньи прост в приготовлении и очень вкусный. Приятного аппетита!"
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "P5aY7lLq_A8_B__yt_dlp_exec.txt",
+      "video_id": "P5aY7lLq",
+      "duration_ms": 6536,
+      "tokens_in": 577,
+      "tokens_out": 493,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Паста Альфредо",
+        "type": "main course",
+        "cooking_time_minutes": 30,
+        "difficulty": 3,
+        "portions": 2,
+        "ingredients": [
+          {
+            "name": "спагетти",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "мясо курицы или индейки",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "оливковое масло",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "лук",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "чеснок",
+            "quantity": "несколько",
+            "unit": "зубчиков"
+          },
+          {
+            "name": "сливки",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "сливочное масло",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "желток",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "сыр",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "специи",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "вода из-под спагетти",
+            "quantity": "немного",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Отварите спагетти."
+          },
+          {
+            "step_number": 2,
+            "description": "В другой посуде обжарьте мясо курицы или индейки на оливковом масле."
+          },
+          {
+            "step_number": 3,
+            "description": "Мелко нарежьте лук и чеснок, затем обжарьте их в отдельной посуде."
+          },
+          {
+            "step_number": 4,
+            "description": "Добавьте сливки, сливочное масло, желток, сыр и специи. Потушите все вместе пару минут."
+          },
+          {
+            "step_number": 5,
+            "description": "Добавьте немного воды из-под спагетти и сами спагетти. Перемешайте все ингредиенты."
+          }
+        ],
+        "comments": "Невероятно вкусная паста Альфредо готова!"
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "Pptf7mFAhWM_B__yt_dlp_exec.txt",
+      "video_id": "Pptf7mFAhWM",
+      "duration_ms": 6570,
+      "tokens_in": 642,
+      "tokens_out": 471,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Бархатные блинчики",
+        "type": "breakfast",
+        "cooking_time_minutes": 30,
+        "difficulty": 2,
+        "portions": 4,
+        "ingredients": [
+          {
+            "name": "яйца",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "соль",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "сахар",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "молоко",
+            "quantity": "2.5",
+            "unit": "стакана"
+          },
+          {
+            "name": "мука",
+            "quantity": "1.5",
+            "unit": "стакана"
+          },
+          {
+            "name": "растительное масло",
+            "quantity": "1",
+            "unit": "столовая ложка"
+          },
+          {
+            "name": "кипяток",
+            "quantity": "1",
+            "unit": "стакан"
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "В миске смешиваем яйца, соль и сахар."
+          },
+          {
+            "step_number": 2,
+            "description": "Постепенно вливаем стакан молока, перемешиваем."
+          },
+          {
+            "step_number": 3,
+            "description": "Добавляем полтора стакана муки, хорошо перемешиваем, чтобы не было комочков."
+          },
+          {
+            "step_number": 4,
+            "description": "Добавляем второй стакан молока и столовую ложку растительного масла, снова перемешиваем."
+          },
+          {
+            "step_number": 5,
+            "description": "Вливаем стакан кипятка, аккуратно перемешиваем, чтобы заварить муку."
+          },
+          {
+            "step_number": 6,
+            "description": "Разогреваем сковороду и выпекаем блинчики, переворачивая их, когда одна сторона подрумянится."
+          }
+        ],
+        "comments": "Блинчики получаются нежными и тонкими, легко переворачиваются и не рвутся."
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "PvGOKzcQA3o_B__yt_dlp_exec.txt",
+      "video_id": "PvGOKzcQA3o",
+      "duration_ms": 9621,
+      "tokens_in": 981,
+      "tokens_out": 650,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Манты",
+        "type": "Основное блюдо",
+        "cooking_time_minutes": 30,
+        "difficulty": 3,
+        "portions": 4,
+        "ingredients": [
+          {
+            "name": "тесто",
+            "quantity": "для мантов",
+            "unit": ""
+          },
+          {
+            "name": "соль",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "лук",
+            "quantity": "много",
+            "unit": ""
+          },
+          {
+            "name": "говядина (филе)",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "бараний жир (курдюк)",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "специи",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "чёрный перец",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "кориандр",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "паприка",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "сыр",
+            "quantity": "",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Замешиваем тесто на воде и соли. Тесто должно получиться плотным по консистенции."
+          },
+          {
+            "step_number": 2,
+            "description": "Убираем тесто в пакет и ставим в холодильник на сутки."
+          },
+          {
+            "step_number": 3,
+            "description": "Для начинки тонко режем лук и мелко кубиками режем филе говядины. Добавляем бараний жир (курдюк) для сочности."
+          },
+          {
+            "step_number": 4,
+            "description": "Добавляем специи: соль, чёрный перец, кориандр, паприку и сыр. Слегка перетираем пальцами."
+          },
+          {
+            "step_number": 5,
+            "description": "Делим тесто на небольшие кусочки весом не более 20 г. Раскатываем их и кладём побольше начинки."
+          },
+          {
+            "step_number": 6,
+            "description": "Залепляем манты крепко, закрывая косичкой, чтобы начинка была полностью закрыта. Придаём мантам округлую форму."
+          },
+          {
+            "step_number": 7,
+            "description": "Кладём манты на лист на расстоянии друг от друга. Парим в мантышнице или мантоварке 30 минут на сильном огне."
+          }
+        ],
+        "comments": "Нежные манты с очень сочной мясной начинкой. Тесто невероятно тонкое, а аромат специй разгоняет аппетит."
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "QS55NzDtMWc_B__yt_dlp_exec.txt",
+      "video_id": "QS55NzDtMWc",
+      "duration_ms": 10346,
+      "tokens_in": 1006,
+      "tokens_out": 716,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Домашние люля-кебаб",
+        "type": "основное блюдо",
+        "cooking_time_minutes": 40,
+        "difficulty": 2,
+        "portions": 5,
+        "ingredients": [
+          {
+            "name": "фарш",
+            "quantity": "1",
+            "unit": "килограмм"
+          },
+          {
+            "name": "картошка",
+            "quantity": "2",
+            "unit": "штуки"
+          },
+          {
+            "name": "репчатый лук",
+            "quantity": "2",
+            "unit": "штуки"
+          },
+          {
+            "name": "морковь",
+            "quantity": "2",
+            "unit": "штуки"
+          },
+          {
+            "name": "болгарский перец",
+            "quantity": "1",
+            "unit": "штука"
+          },
+          {
+            "name": "зелень",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "соль",
+            "quantity": "1",
+            "unit": "чайная ложка"
+          },
+          {
+            "name": "чёрный молотый перец",
+            "quantity": "0.5",
+            "unit": "чайной ложки"
+          },
+          {
+            "name": "чеснок",
+            "quantity": "несколько",
+            "unit": "зубчиков"
+          },
+          {
+            "name": "куриные яйца",
+            "quantity": "2",
+            "unit": "штуки"
+          },
+          {
+            "name": "растительное масло",
+            "quantity": "для смазывания",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Натереть две картошки на крупную тёрку."
+          },
+          {
+            "step_number": 2,
+            "description": "Измельчить два репчатых лука и две оранжевых морковки."
+          },
+          {
+            "step_number": 3,
+            "description": "Мелко нарезать болгарский перец и добавить побольше любимой зелени."
+          },
+          {
+            "step_number": 4,
+            "description": "Добавить чайную ложечку соли и пол чайной ложки чёрного молотого перца."
+          },
+          {
+            "step_number": 5,
+            "description": "Пропустить несколько зубчиков чеснока через пресс и добавить два куриных яйца."
+          },
+          {
+            "step_number": 6,
+            "description": "Хорошенечко рукой отбить весь фарш."
+          },
+          {
+            "step_number": 7,
+            "description": "Выложить фарш на противень, смазанный растительным маслом, и сделать крупные, добротные котлетки весом примерно 200 г."
+          },
+          {
+            "step_number": 8,
+            "description": "Украсить котлетки ложечкой и сделать красивый рисунок."
+          },
+          {
+            "step_number": 9,
+            "description": "Запечь в духовке примерно 30-40 минут при температуре 180°."
+          }
+        ],
+        "comments": "Получим очень сочные, ароматные, вкусные люля-кебаб по-домашнему."
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "Rv3SWA3pStw_B__yt_dlp_exec.txt",
+      "video_id": "Rv3SWA3pStw",
+      "duration_ms": 10234,
+      "tokens_in": 1237,
+      "tokens_out": 767,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Ужин в одной кастрюле",
+        "type": "Основное блюдо",
+        "cooking_time_minutes": 60,
+        "difficulty": 2,
+        "portions": 4,
+        "ingredients": [
+          {
+            "name": "растительное масло",
+            "quantity": "немного",
+            "unit": ""
+          },
+          {
+            "name": "куриное филе (бедро)",
+            "quantity": "0.5",
+            "unit": "кг"
+          },
+          {
+            "name": "соль",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "луковица",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "морковь",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "приправа для мяса",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "помидоры",
+            "quantity": "2",
+            "unit": "шт"
+          },
+          {
+            "name": "картофель",
+            "quantity": "3",
+            "unit": "шт"
+          },
+          {
+            "name": "болгарский перец",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "чеснок",
+            "quantity": "4",
+            "unit": "зубчика"
+          },
+          {
+            "name": "капуста",
+            "quantity": "250",
+            "unit": "г"
+          },
+          {
+            "name": "зелень",
+            "quantity": "добротный пучок",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "В кастрюлю наливаем немного растительного масла и выкладываем куриное филе (полкилограмма). Присолим немного."
+          },
+          {
+            "step_number": 2,
+            "description": "Нарезаем овощи крупно и выкладываем слоями, не перемешивая. Первым слоем выкладываем одну среднюю луковицу."
+          },
+          {
+            "step_number": 3,
+            "description": "Следующий слой - одна средняя морковь. Снова немного присолим и добавляем приправу для мяса."
+          },
+          {
+            "step_number": 4,
+            "description": "Добавляем два крупных помидора, три средних картофеля, один средний болгарский перец, четыре зубчика чеснока. Добавляем любимые приправы и соль по вкусу."
+          },
+          {
+            "step_number": 5,
+            "description": "Добавляем 250 г капусты и добротный пучок зелени."
+          },
+          {
+            "step_number": 6,
+            "description": "Накрываем крышкой, включаем средний газ. Когда закипит, тушим примерно 1 час, может быть чуть больше."
+          },
+          {
+            "step_number": 7,
+            "description": "Выключаем, снимаем с плиты. Овощи полностью приготовились, капуста тоже. Внизу небольшой бульончик."
+          },
+          {
+            "step_number": 8,
+            "description": "Перемешиваем и накладываем в тарелку. Сверху кладем кусочек мяса."
+          }
+        ],
+        "comments": "Ароматное и вкусное блюдо, которое понравится всей семье. Приятного аппетита!"
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "StUgvePkJbE_B__yt_dlp_exec.txt",
+      "video_id": "StUgvePkJbE",
+      "duration_ms": 5715,
+      "tokens_in": 733,
+      "tokens_out": 378,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Запеченный картофель с куриным бедром и овощами",
+        "type": "Основное блюдо",
+        "cooking_time_minutes": 90,
+        "difficulty": 3,
+        "portions": 2,
+        "ingredients": [
+          {
+            "name": "картофель",
+            "quantity": "1 кг",
+            "unit": "кг"
+          },
+          {
+            "name": "куриные бедра",
+            "quantity": "4 шт",
+            "unit": "шт"
+          },
+          {
+            "name": "овощи",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "сыр",
+            "quantity": "100 г",
+            "unit": "г"
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Нарежьте картофель на крупные куски и выложите в форму для запекания."
+          },
+          {
+            "step_number": 2,
+            "description": "Добавьте куриные бедра поверх картофеля."
+          },
+          {
+            "step_number": 3,
+            "description": "Порежьте овощи по вкусу и добавьте их в форму."
+          },
+          {
+            "step_number": 4,
+            "description": "Посыпьте всё тертым сыром сверху."
+          },
+          {
+            "step_number": 5,
+            "description": "Запекайте в духовке при 180°C в течение 60-70 минут до золотистой корочки."
+          }
+        ],
+        "comments": "Блюдо получается очень сытным и ароматным. Идеально подходит для семейного обеда или ужина."
+      },
+      "debug": {}
+    },
+    {
+      "status": "schema_error",
+      "filename": "TpnMwXZsbK8_B__yt_dlp_exec.txt",
+      "video_id": "TpnMwXZsbK8",
+      "duration_ms": 508,
+      "tokens_in": 593,
+      "tokens_out": 1,
+      "truncated": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "missing title",
+        "ingredients empty",
+        "steps empty"
+      ],
+      "recipe": {},
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "UAkyuQP7tMc_B__yt_dlp_exec.txt",
+      "video_id": "UAkyuQP7tMc",
+      "duration_ms": 7799,
+      "tokens_in": 982,
+      "tokens_out": 552,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Простая шарлотка с яблоками и мандарином",
+        "type": "десерт",
+        "cooking_time_minutes": 40,
+        "difficulty": 2,
+        "portions": 1,
+        "ingredients": [
+          {
+            "name": "яйца",
+            "quantity": "3",
+            "unit": "шт"
+          },
+          {
+            "name": "сахар",
+            "quantity": "меньше стакана",
+            "unit": ""
+          },
+          {
+            "name": "мука",
+            "quantity": "1",
+            "unit": "стакан"
+          },
+          {
+            "name": "разрыхлитель",
+            "quantity": "1 чайная ложка с горкой",
+            "unit": ""
+          },
+          {
+            "name": "соль",
+            "quantity": "немножко",
+            "unit": ""
+          },
+          {
+            "name": "ванилин",
+            "quantity": "немножко",
+            "unit": ""
+          },
+          {
+            "name": "яблока",
+            "quantity": "2",
+            "unit": "шт"
+          },
+          {
+            "name": "мандарин",
+            "quantity": "1",
+            "unit": "шт"
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Взбейте три яйца с меньше чем стаканом сахара."
+          },
+          {
+            "step_number": 2,
+            "description": "Добавьте стакан муки, чайную ложку с горкой разрыхлителя, немного соли и ванилина. Перемешайте все ингредиенты."
+          },
+          {
+            "step_number": 3,
+            "description": "Очистите два яблока от кожуры и нарежьте их кубиками. Добавьте нарезанные яблоки в тесто."
+          },
+          {
+            "step_number": 4,
+            "description": "Нарежьте одну мандаринку (или апельсин) и добавьте её в тесто. Перемешайте."
+          },
+          {
+            "step_number": 5,
+            "description": "Выложите тесто в форму для выпечки и поставьте в духовку на 40 минут."
+          },
+          {
+            "step_number": 6,
+            "description": "После выпекания дайте пирогу немного остыть перед тем, как его пробовать."
+          }
+        ],
+        "comments": "Этот простой рецепт шарлотки с добавлением мандарина или апельсина делает пирог особенно вкусным и ароматным."
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "UW_0I5xdAH4_B__yt_dlp_exec.txt",
+      "video_id": "UW",
+      "duration_ms": 16157,
+      "tokens_in": 758,
+      "tokens_out": 415,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Белковые бомбочки",
+        "type": "запеканка",
+        "cooking_time_minutes": 45,
+        "difficulty": 2,
+        "portions": 9,
+        "ingredients": [
+          {
+            "name": "куриное филе",
+            "quantity": "200",
+            "unit": "г"
+          },
+          {
+            "name": "творог",
+            "quantity": "1",
+            "unit": "пачка"
+          },
+          {
+            "name": "яйцо",
+            "quantity": "1",
+            "unit": ""
+          },
+          {
+            "name": "помидор",
+            "quantity": "1",
+            "unit": ""
+          },
+          {
+            "name": "соль",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "сыр",
+            "quantity": "лёгкий",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Выложите 200 г куриного филе в форму для запекания."
+          },
+          {
+            "step_number": 2,
+            "description": "Добавьте пачку творога, разбейте яйцо и добавьте помидор."
+          },
+          {
+            "step_number": 3,
+            "description": "Посолите и всё перемешайте."
+          },
+          {
+            "step_number": 4,
+            "description": "Уберите в духовку на полчаса при температуре 180°."
+          },
+          {
+            "step_number": 5,
+            "description": "Достаньте из духовки, посыпьте лёгким сыром и уберите ещё на 15 минут в духовку."
+          }
+        ],
+        "comments": "Эти белковые запеканочки содержат почти 100 г белка на порцию и всего 550 калорий. Идеально подходит для тех, кто худеет."
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "UmwkXfpoR5I_B__yt_dlp_exec.txt",
+      "video_id": "UmwkXfpoR5I",
+      "duration_ms": 5138,
+      "tokens_in": 551,
+      "tokens_out": 378,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Вкусные бутерброды с яйцами и колбасой",
+        "type": "breakfast",
+        "cooking_time_minutes": 15,
+        "difficulty": 2,
+        "portions": 1,
+        "ingredients": [
+          {
+            "name": "яйца",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "свежий помидор",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "колбаса",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "сыр",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "хлеб",
+            "quantity": "1",
+            "unit": "ломтик"
+          },
+          {
+            "name": "кетчуп",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "свежая зелень",
+            "quantity": "",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Смешайте яйца, свежий помидор, колбасу и сыр в одной миске."
+          },
+          {
+            "step_number": 2,
+            "description": "Хлеб смажьте кетчупом."
+          },
+          {
+            "step_number": 3,
+            "description": "Выложите полученную массу на хлеб."
+          },
+          {
+            "step_number": 4,
+            "description": "Отправьте бутерброды в духовку на 15 минут при температуре 200°."
+          }
+        ],
+        "comments": "Посыпьте свежей зеленью перед подачей. Отличный вариант для завтрака или перекуса."
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "UoyihgHpfus_B__yt_dlp_exec.txt",
+      "video_id": "UoyihgHpfus",
+      "duration_ms": 6654,
+      "tokens_in": 641,
+      "tokens_out": 498,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Рыба с овощами",
+        "type": "основное блюдо",
+        "cooking_time_minutes": 30,
+        "difficulty": 2,
+        "portions": 1,
+        "ingredients": [
+          {
+            "name": "рыба",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "лук",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "помидоры",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "болгарский перец",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "чеснок",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "соль",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "перец",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "специи для рыбы",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "сливочное масло",
+            "quantity": "куски",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Солим рыбу по вкусу."
+          },
+          {
+            "step_number": 2,
+            "description": "Выкладываем нарезанный лук в сковородку."
+          },
+          {
+            "step_number": 3,
+            "description": "Добавляем помидоры, нарезанные кружочком."
+          },
+          {
+            "step_number": 4,
+            "description": "Добавляем измельченный болгарский перец и чеснок."
+          },
+          {
+            "step_number": 5,
+            "description": "Перчим по вкусу."
+          },
+          {
+            "step_number": 6,
+            "description": "Выкладываем рыбу сверху."
+          },
+          {
+            "step_number": 7,
+            "description": "Добавляем специи для рыбы."
+          },
+          {
+            "step_number": 8,
+            "description": "Добавляем кусочки сливочного масла."
+          },
+          {
+            "step_number": 9,
+            "description": "Накрываем крышкой и готовим на минимальном огне 30 минут."
+          }
+        ],
+        "comments": "Блюдо получается вкусным и полезным. В телеграме Алёнка Краснодар можно найти больше рецептов."
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "Wa931WokvT8_B__yt_dlp_exec.txt",
+      "video_id": "Wa931WokvT8",
+      "duration_ms": 10150,
+      "tokens_in": 951,
+      "tokens_out": 741,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Макароны по-флотски",
+        "type": "Основное блюдо",
+        "cooking_time_minutes": 60,
+        "difficulty": 2,
+        "portions": 4,
+        "ingredients": [
+          {
+            "name": "репчатый лук",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "сладкие перцы",
+            "quantity": "2",
+            "unit": "шт"
+          },
+          {
+            "name": "сливочное масло",
+            "quantity": "1",
+            "unit": "ст. л."
+          },
+          {
+            "name": "растительное масло",
+            "quantity": "1",
+            "unit": "ст. л."
+          },
+          {
+            "name": "мясной фарш",
+            "quantity": "500",
+            "unit": "г"
+          },
+          {
+            "name": "соль",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "перец",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "кориандр",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "томатное пюре",
+            "quantity": "2",
+            "unit": "ст. л."
+          },
+          {
+            "name": "чеснок",
+            "quantity": "1",
+            "unit": "головка"
+          },
+          {
+            "name": "бульон",
+            "quantity": "500",
+            "unit": "мл"
+          },
+          {
+            "name": "макароны (ракушки)",
+            "quantity": "300",
+            "unit": "г"
+          },
+          {
+            "name": "зелень",
+            "quantity": "по вкусу",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Мелко нарезаем репчатый лук и сладкие перцы."
+          },
+          {
+            "step_number": 2,
+            "description": "На смеси сливочного и растительного масла, при умеренном огне, сначала жарим лук, затем добавляем перцы и греем ещё пару минут."
+          },
+          {
+            "step_number": 3,
+            "description": "Поднимаем нагрев на максимум, добавляем мясной фарш, даём ему слегка прижаться, затем разбиваем, чтобы не было комков. Готовим до выпаривания всей влаги и появления корочки."
+          },
+          {
+            "step_number": 4,
+            "description": "Добавляем соль, перец и кориандр. Вливаем томатное пюре и греем ещё минуту."
+          },
+          {
+            "step_number": 5,
+            "description": "Огонь уменьшаем до среднего, добавляем целую головку чеснока, вливаем бульон и готовим 40 минут."
+          },
+          {
+            "step_number": 6,
+            "description": "Достаём чеснок, чтобы не мешал, и всыпаем макароны (лучше взять ракушки). Варим до готовности."
+          },
+          {
+            "step_number": 7,
+            "description": "По готовности макарон добавляем зелень и размятый чеснок."
+          }
+        ],
+        "comments": "Это блюдо можно сделать чуть интереснее, добавив свои любимые специи."
+      },
+      "debug": {}
+    },
+    {
+      "status": "schema_error",
+      "filename": "WbjaSuNy2zg_B__yt_dlp_exec.txt",
+      "video_id": "WbjaSuNy2zg",
+      "duration_ms": 494,
+      "tokens_in": 417,
+      "tokens_out": 1,
+      "truncated": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "missing title",
+        "ingredients empty",
+        "steps empty"
+      ],
+      "recipe": {},
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "_8J3FSlghc4_B__yt_dlp_exec.txt",
+      "video_id": "",
+      "duration_ms": 11057,
+      "tokens_in": 1352,
+      "tokens_out": 797,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Мексиканские спагетти в мультиварке",
+        "type": "основное блюдо",
+        "cooking_time_minutes": 60,
+        "difficulty": 3,
+        "portions": 4,
+        "ingredients": [
+          {
+            "name": "луковица",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "перец халапеньо",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "говяжий фарш",
+            "quantity": "2",
+            "unit": "фунта"
+          },
+          {
+            "name": "приправа для тако",
+            "quantity": "2",
+            "unit": "пакетика по 28 г"
+          },
+          {
+            "name": "сальса",
+            "quantity": "450",
+            "unit": "г"
+          },
+          {
+            "name": "сыр пеппер джек",
+            "quantity": "8",
+            "unit": "унций"
+          },
+          {
+            "name": "сливочный сыр",
+            "quantity": "8",
+            "unit": "унций"
+          },
+          {
+            "name": "зеленый перец чили хатч",
+            "quantity": "8",
+            "unit": "унций"
+          },
+          {
+            "name": "консервы Rotel",
+            "quantity": "1",
+            "unit": "банка (10,5 унций)"
+          },
+          {
+            "name": "спагетти",
+            "quantity": "450",
+            "unit": "г"
+          },
+          {
+            "name": "куриный или говяжий бульон",
+            "quantity": "3",
+            "unit": "чашки"
+          },
+          {
+            "name": "сыр чеддер",
+            "quantity": "немного",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Мелко нарежьте одну маленькую луковицу и один перец халапеньо."
+          },
+          {
+            "step_number": 2,
+            "description": "Обжарьте 2 фунта говяжьего фарша до золотистой корочки и обсушите."
+          },
+          {
+            "step_number": 3,
+            "description": "Добавьте два пакетика приправы для тако, 450 г сальсы, 8 унций сыра пеппер джек, 8 унций сливочного сыра, 8 унций зеленого перца чили хатч и одну банку консервов Rotel объемом 10,5 унций в мультиварку. Включите мультиварку на медленный режим, закройте крышкой и готовьте примерно 30 минут, затем тщательно перемешайте."
+          },
+          {
+            "step_number": 4,
+            "description": "Добавьте 450 г спагетти и 3 чашки куриного или говяжьего бульона. Плотно утрамбуйте пасту в жидкости, чтобы она полностью покрылась ею. Включите мультиварку на высокую температуру, закройте крышкой и готовьте еще 30 минут."
+          },
+          {
+            "step_number": 5,
+            "description": "Добавьте немного сыра чеддер, перемешайте, и блюдо готово к подаче."
+          }
+        ],
+        "comments": "Это блюдо получается очень ароматным и вкусным. Регулируйте остроту по своему вкусу."
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "_Z8At_dl2W4_B__yt_dlp_exec.txt",
+      "video_id": "",
+      "duration_ms": 10649,
+      "tokens_in": 837,
+      "tokens_out": 799,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Солянка",
+        "type": "суп",
+        "cooking_time_minutes": 150,
+        "difficulty": 3,
+        "portions": 4,
+        "ingredients": [
+          {
+            "name": "говядина",
+            "quantity": "1",
+            "unit": "кг"
+          },
+          {
+            "name": "копчёные рёбра",
+            "quantity": "1",
+            "unit": "кг"
+          },
+          {
+            "name": "лук",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "солёные огурцы",
+            "quantity": "2-3",
+            "unit": "шт"
+          },
+          {
+            "name": "томатная паста",
+            "quantity": "2-3",
+            "unit": "ст. л."
+          },
+          {
+            "name": "копчёная колбаса",
+            "quantity": "150",
+            "unit": "г"
+          },
+          {
+            "name": "ветчина",
+            "quantity": "150",
+            "unit": "г"
+          },
+          {
+            "name": "сосиски",
+            "quantity": "150",
+            "unit": "г"
+          },
+          {
+            "name": "оливки",
+            "quantity": "100",
+            "unit": "г"
+          },
+          {
+            "name": "маслины",
+            "quantity": "100",
+            "unit": "г"
+          },
+          {
+            "name": "рассол из маслин",
+            "quantity": "100",
+            "unit": "мл"
+          },
+          {
+            "name": "сок лимона",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "лавровый лист",
+            "quantity": "2-3",
+            "unit": "шт"
+          },
+          {
+            "name": "соль",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "сахар",
+            "quantity": "по вкусу",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Сварите бульон, добавив в него мясо говядины и копчёные рёбра. Варите около полутора часов."
+          },
+          {
+            "step_number": 2,
+            "description": "Нарежьте лук и солёные огурцы, как показано на видео. Обжарьте лук до золотистого цвета, затем добавьте огурцы и обжаривайте ещё пару минут."
+          },
+          {
+            "step_number": 3,
+            "description": "Добавьте томатную пасту и обжаривайте 5 минут. Затем влейте эту смесь в бульон и варите 7 минут."
+          },
+          {
+            "step_number": 4,
+            "description": "В это время нарежьте копчёную колбасу, ветчину, сосиски, мясо и рёбра, которые варились на бульоне. Добавьте их в бульон вместе с оливками и маслинами. Доведите до кипения."
+          },
+          {
+            "step_number": 5,
+            "description": "Влейте рассол из маслин, выжмите сок лимона, добавьте лавровый лист, соль и сахар по вкусу. Варите 15 минут, затем накройте крышкой и дайте настояться 30 минут."
+          }
+        ],
+        "comments": "Этот рецепт солянки подходит для любителей сытных и ароматных блюд. Настояние под крышкой позволяет всем ингредиентам лучше раскрыть свой вкус."
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "ai1d0ofoUog_B__yt_dlp_exec.txt",
+      "video_id": "ai1d0ofoUog",
+      "duration_ms": 11875,
+      "tokens_in": 781,
+      "tokens_out": 386,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Тосты с сыром и напиток",
+        "type": "завтрак",
+        "cooking_time_minutes": 5,
+        "difficulty": 1,
+        "portions": 1,
+        "ingredients": [
+          {
+            "name": "хлеб",
+            "quantity": "несколько",
+            "unit": "кусочков"
+          },
+          {
+            "name": "сыр",
+            "quantity": "достаточно",
+            "unit": "г"
+          },
+          {
+            "name": "сахар",
+            "quantity": "немного",
+            "unit": "г"
+          },
+          {
+            "name": "вода",
+            "quantity": "достаточно",
+            "unit": "мл"
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Нарежьте хлеб на одинаковые кусочки."
+          },
+          {
+            "step_number": 2,
+            "description": "Положите сыр на хлеб."
+          },
+          {
+            "step_number": 3,
+            "description": "Переложите тосты в микроволновку, разогретую до 180°, и готовьте примерно 40 секунд."
+          },
+          {
+            "step_number": 4,
+            "description": "Для приготовления напитка взбейте воду до образования белых пузырьков и перелейте её в чайник."
+          },
+          {
+            "step_number": 5,
+            "description": "Добавьте немного сахара в напиток для вкуса и сладости."
+          },
+          {
+            "step_number": 6,
+            "description": "Подавайте тосты с сыром и напиток вместе."
+          }
+        ],
+        "comments": "Простой и быстрый завтрак, который поднимет настроение."
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "b06GXe9lDxw_B__yt_dlp_exec.txt",
+      "video_id": "b06GXe9lDxw",
+      "duration_ms": 8187,
+      "tokens_in": 1058,
+      "tokens_out": 580,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Меренговый рулет с ягодной начинкой",
+        "type": "десерт",
+        "cooking_time_minutes": 45,
+        "difficulty": 3,
+        "portions": 1,
+        "ingredients": [
+          {
+            "name": "яйца",
+            "quantity": "несколько",
+            "unit": "штук"
+          },
+          {
+            "name": "сахарная пудра",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "лимонная кислота",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "кукурузный крахмал",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "ягодная начинка",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "густой плотный крем",
+            "quantity": "",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Разделите яйца на белки и желтки. Обязательно используйте холодные белки."
+          },
+          {
+            "step_number": 2,
+            "description": "Взбейте белки на высоких оборотах, затем добавьте сахарную пудру и продолжайте взбивать на средних оборотах примерно 10-15 минут."
+          },
+          {
+            "step_number": 3,
+            "description": "Добавьте лимонную кислоту и кукурузный крахмал, перемешайте."
+          },
+          {
+            "step_number": 4,
+            "description": "Подготовьте пергамент, выложите на него массу и отправьте в разогретую до 150 градусов духовку на 20 минут."
+          },
+          {
+            "step_number": 5,
+            "description": "Пока корж выпекается, подготовьте ягодную начинку и густой плотный крем."
+          },
+          {
+            "step_number": 6,
+            "description": "Достаньте корж из духовки, уберите лишнюю бумагу и дайте немного остыть."
+          },
+          {
+            "step_number": 7,
+            "description": "Выложите на корж сначала крем, а потом ягодную начинку."
+          },
+          {
+            "step_number": 8,
+            "description": "Сверните рулет, обрежьте ненужные края и украсьте мятой."
+          }
+        ],
+        "comments": "Этот меренговый рулет с ягодной начинкой гарантированно получится у каждого. Главный дегустатор остался доволен!"
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "bNwFOyVYH74_B__yt_dlp_exec.txt",
+      "video_id": "bNwFOyVYH74",
+      "duration_ms": 5117,
+      "tokens_in": 509,
+      "tokens_out": 365,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Картошка на шпажках в микроволновке",
+        "type": "Закуска",
+        "cooking_time_minutes": 10,
+        "difficulty": 2,
+        "portions": 1,
+        "ingredients": [
+          {
+            "name": "картошка",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "палочки для суши",
+            "quantity": "несколько",
+            "unit": ""
+          },
+          {
+            "name": "масло",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "специи",
+            "quantity": "по вкусу",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Почистите картошку."
+          },
+          {
+            "step_number": 2,
+            "description": "Возьмите палочки для суши и с одной стороны нарежьте ровно, а с другой под углом."
+          },
+          {
+            "step_number": 3,
+            "description": "Наденьте нарезанную картошку на шпажки."
+          },
+          {
+            "step_number": 4,
+            "description": "Помажьте картошку маслом."
+          },
+          {
+            "step_number": 5,
+            "description": "Посыпьте картошку специями по вкусу."
+          },
+          {
+            "step_number": 6,
+            "description": "Отправьте картошку в микроволновку на несколько минут."
+          }
+        ],
+        "comments": "Этот рецепт простой и быстрый, идеально подходит для легкого обеда или закуски."
+      },
+      "debug": {}
+    },
+    {
+      "status": "schema_error",
+      "filename": "brN_fEm4Usk_B__yt_dlp_exec.txt",
+      "video_id": "brN",
+      "duration_ms": 2762,
+      "tokens_in": 402,
+      "tokens_out": 85,
+      "truncated": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "ingredients empty"
+      ],
+      "recipe": {
+        "title": "Нагревание",
+        "type": "Не указано",
+        "cooking_time_minutes": 0,
+        "difficulty": 1,
+        "portions": 0,
+        "ingredients": [],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Нагревать."
+          }
+        ],
+        "comments": ""
+      },
+      "debug": {
+        "ingredients": []
+      }
+    },
+    {
+      "status": "schema_error",
+      "filename": "cry2mRY_AFc_B__yt_dlp_exec.txt",
+      "video_id": "cry2mRY",
+      "duration_ms": 1227,
+      "tokens_in": 607,
+      "tokens_out": 56,
+      "truncated": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "missing title",
+        "ingredients empty",
+        "steps empty"
+      ],
+      "recipe": {
+        "title": "",
+        "type": "",
+        "cooking_time_minutes": 0,
+        "difficulty": 0,
+        "portions": 0,
+        "ingredients": [],
+        "steps": [],
+        "comments": ""
+      },
+      "debug": {
+        "title": "",
+        "ingredients": [],
+        "steps": []
+      }
+    },
+    {
+      "status": "ok",
+      "filename": "deCae57jhwo_B__yt_dlp_exec.txt",
+      "video_id": "deCae57jhwo",
+      "duration_ms": 5527,
+      "tokens_in": 677,
+      "tokens_out": 389,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Гранатовый мармелад",
+        "type": "десерт",
+        "cooking_time_minutes": 30,
+        "difficulty": 2,
+        "portions": 1,
+        "ingredients": [
+          {
+            "name": "гранат",
+            "quantity": "170",
+            "unit": "мл"
+          },
+          {
+            "name": "натуральный загуститель",
+            "quantity": "",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Очистите гранат и извлеките зёрна."
+          },
+          {
+            "step_number": 2,
+            "description": "Взбейте зёрна граната в блендере, чтобы получить сок."
+          },
+          {
+            "step_number": 3,
+            "description": "Процедите сок через сито, чтобы удалить зёрна. У вас должно получиться около 170 мл чистого гранатового сока."
+          },
+          {
+            "step_number": 4,
+            "description": "Разогрейте гранатовый сок и добавьте натуральный загуститель, следуя инструкции на упаковке."
+          },
+          {
+            "step_number": 5,
+            "description": "Разлейте смесь по формочкам для мармелада."
+          },
+          {
+            "step_number": 6,
+            "description": "Дождитесь, пока мармелад остынет и застынет."
+          }
+        ],
+        "comments": "Мармелад готов! Особенно удобно кушать такие сердечки маленьким детям."
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "dfrYuqD9gQ4_B__yt_dlp_exec.txt",
+      "video_id": "dfrYuqD9gQ4",
+      "duration_ms": 12595,
+      "tokens_in": 2123,
+      "tokens_out": 881,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Салат из пасты с курицей по-буффало",
+        "type": "салат",
+        "cooking_time_minutes": 30,
+        "difficulty": 2,
+        "portions": 4,
+        "ingredients": [
+          {
+            "name": "красный болгарский перец",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "сельдерей",
+            "quantity": "несколько стеблей",
+            "unit": ""
+          },
+          {
+            "name": "красный лук",
+            "quantity": "немного",
+            "unit": ""
+          },
+          {
+            "name": "паста с высоким содержанием белка",
+            "quantity": "по вкусу",
+            "unit": "г"
+          },
+          {
+            "name": "курица-гриль",
+            "quantity": "готовая",
+            "unit": ""
+          },
+          {
+            "name": "морковь",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "сыр чеддер",
+            "quantity": "по вкусу",
+            "unit": "г"
+          },
+          {
+            "name": "шнитт-лук",
+            "quantity": "немного",
+            "unit": ""
+          },
+          {
+            "name": "маринованные огурцы",
+            "quantity": "по вкусу",
+            "unit": "г"
+          },
+          {
+            "name": "натуральный греческий йогурт",
+            "quantity": "немного",
+            "unit": "г"
+          },
+          {
+            "name": "лёгкий майонез",
+            "quantity": "немного",
+            "unit": "г"
+          },
+          {
+            "name": "специи",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "приправа для ранчо",
+            "quantity": "по вкусу",
+            "unit": "г"
+          },
+          {
+            "name": "чесночный порошок",
+            "quantity": "немного",
+            "unit": "г"
+          },
+          {
+            "name": "лимонный сок",
+            "quantity": "немного",
+            "unit": "мл"
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Нарежьте кубиками красный болгарский перец."
+          },
+          {
+            "step_number": 2,
+            "description": "Измельчите сельдерей в овощерезке."
+          },
+          {
+            "step_number": 3,
+            "description": "Добавьте немного нарезанного красного лука."
+          },
+          {
+            "step_number": 4,
+            "description": "Отварите пасту с высоким содержанием белка согласно инструкции на упаковке."
+          },
+          {
+            "step_number": 5,
+            "description": "Добавьте готовую курицу-гриль, нарезанную на кусочки."
+          },
+          {
+            "step_number": 6,
+            "description": "Натрите свежую морковь и добавьте её в миску."
+          },
+          {
+            "step_number": 7,
+            "description": "Добавьте сыр чеддер, нарезанный кубиками или натёртый."
+          },
+          {
+            "step_number": 8,
+            "description": "Добавьте шнитт-лук, маринованные огурцы, натуральный греческий йогурт и лёгкий майонез."
+          },
+          {
+            "step_number": 9,
+            "description": "Посолите и поперчите по вкусу, добавьте приправу для ранчо и чесночный порошок."
+          },
+          {
+            "step_number": 10,
+            "description": "Добавьте лимонный сок и хорошо перемешайте все ингредиенты."
+          }
+        ],
+        "comments": "Этот салат из пасты с курицей по-буффало — отличный вариант для быстрого и питательного обеда. Он богат белком и клетчаткой, что делает его полезным и вкусным."
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "dsHfh_fNtiM_B__yt_dlp_exec.txt",
+      "video_id": "dsHfh",
+      "duration_ms": 10538,
+      "tokens_in": 1097,
+      "tokens_out": 786,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Соус к шашлыку",
+        "type": "соус",
+        "cooking_time_minutes": 10,
+        "difficulty": 2,
+        "portions": 1,
+        "ingredients": [
+          {
+            "name": "сухой чеснок",
+            "quantity": "1",
+            "unit": "чайная ложка"
+          },
+          {
+            "name": "зира",
+            "quantity": "0.5",
+            "unit": "чайная ложка"
+          },
+          {
+            "name": "сушёный чили перец",
+            "quantity": "маленький кусочек",
+            "unit": ""
+          },
+          {
+            "name": "кинза",
+            "quantity": "пучок",
+            "unit": ""
+          },
+          {
+            "name": "укроп",
+            "quantity": "немного",
+            "unit": ""
+          },
+          {
+            "name": "лук",
+            "quantity": "нарезанный",
+            "unit": ""
+          },
+          {
+            "name": "чеснок",
+            "quantity": "0.5",
+            "unit": "зубчика"
+          },
+          {
+            "name": "томатная паста",
+            "quantity": "200",
+            "unit": "г"
+          },
+          {
+            "name": "яблочный сок",
+            "quantity": "100",
+            "unit": "мл"
+          },
+          {
+            "name": "анчоусы",
+            "quantity": "2",
+            "unit": "филешки"
+          },
+          {
+            "name": "соевый соус",
+            "quantity": "1",
+            "unit": "столовая ложка"
+          },
+          {
+            "name": "винный уксус",
+            "quantity": "0.5",
+            "unit": "столовой ложки"
+          },
+          {
+            "name": "соль",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "чёрный перец",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "растительное масло",
+            "quantity": "2",
+            "unit": "столовые ложки"
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Смешайте сухой чеснок, зиру и небольшой кусочек сушёного чили перца в однородную массу."
+          },
+          {
+            "step_number": 2,
+            "description": "Мелко нарежьте кинзу и укроп. Добавьте нарезанный лук и половинку зубчика чеснока, нарезанного пластинками."
+          },
+          {
+            "step_number": 3,
+            "description": "Добавьте нарезанные травы и чеснок в контейнер, где находится 200 г томатной пасты. Влейте 100 мл яблочного сока, добавьте две филешки анчоусов, столовую ложку соевого соуса, половину столовой ложки винного уксуса, соль и чёрный перец по вкусу, а также две столовые ложки растительного масла и перемолотые специи."
+          },
+          {
+            "step_number": 4,
+            "description": "Закройте контейнер и несколько раз нажмите на кнопку блендера, чтобы смешать все ингредиенты, но не доводите до однородности."
+          }
+        ],
+        "comments": "Этот соус сделает ваши майские праздники яркими, вкусными и ароматными. Приятного аппетита!"
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "eKp35PBFMMs_B__yt_dlp_exec.txt",
+      "video_id": "eKp35PBFMMs",
+      "duration_ms": 5873,
+      "tokens_in": 831,
+      "tokens_out": 395,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Грузинское блюдо из томатов и перца",
+        "type": "breakfast",
+        "cooking_time_minutes": 30,
+        "difficulty": 2,
+        "portions": 4,
+        "ingredients": [
+          {
+            "name": "томаты",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "перец",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "лук",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "чеснок",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "оливковое масло",
+            "quantity": "немного",
+            "unit": ""
+          },
+          {
+            "name": "сливочное масло",
+            "quantity": "немного",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Подготовьте томаты: сделайте крестики на дне, опустите в кипяток, снимите кожицу и нарежьте."
+          },
+          {
+            "step_number": 2,
+            "description": "Нарежьте перец соломкой."
+          },
+          {
+            "step_number": 3,
+            "description": "Очистите и измельчите лук и чеснок."
+          },
+          {
+            "step_number": 4,
+            "description": "В сковороду налейте немного оливкового масла с добавлением сливочного."
+          },
+          {
+            "step_number": 5,
+            "description": "Сначала обжарьте чеснок, затем добавьте лук, перец и в конце томаты."
+          }
+        ],
+        "comments": "Блюдо получается очень вкусным и ароматным. Насладитесь им сначала сами, а потом поделитесь с родными."
+      },
+      "debug": {}
+    },
+    {
+      "status": "schema_error",
+      "filename": "ew8RmdNVxUY_B__yt_dlp_exec.txt",
+      "video_id": "ew8RmdNVxUY",
+      "duration_ms": 525,
+      "tokens_in": 538,
+      "tokens_out": 1,
+      "truncated": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "missing title",
+        "ingredients empty",
+        "steps empty"
+      ],
+      "recipe": {},
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "fdqQJNXSDbI_B__yt_dlp_exec.txt",
+      "video_id": "fdqQJNXSDbI",
+      "duration_ms": 8958,
+      "tokens_in": 954,
+      "tokens_out": 660,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Куриные голяшки с орзой",
+        "type": "Основное блюдо",
+        "cooking_time_minutes": 30,
+        "difficulty": 2,
+        "portions": 4,
+        "ingredients": [
+          {
+            "name": "куриные голяшки",
+            "quantity": "несколько",
+            "unit": ""
+          },
+          {
+            "name": "лук",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "паприка",
+            "quantity": "немного",
+            "unit": ""
+          },
+          {
+            "name": "соль",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "перец",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "специи для курицы",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "чеснок",
+            "quantity": "немного",
+            "unit": ""
+          },
+          {
+            "name": "томатная паста",
+            "quantity": "столовая ложка",
+            "unit": ""
+          },
+          {
+            "name": "вода",
+            "quantity": "стакан",
+            "unit": ""
+          },
+          {
+            "name": "сахар",
+            "quantity": "небольшое количество",
+            "unit": ""
+          },
+          {
+            "name": "орза (макароны)",
+            "quantity": "стакан",
+            "unit": ""
+          },
+          {
+            "name": "сыр",
+            "quantity": "для посыпки",
+            "unit": ""
+          },
+          {
+            "name": "зелёный лук",
+            "quantity": "для посыпки",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Моем куриные голяшки, снимаем кожицу и убираем сустав. Нарезаем мелким кубиком лук."
+          },
+          {
+            "step_number": 2,
+            "description": "Обжариваем ножки со всех сторон до золотистой корочки. Добавляем немного паприки, соль, перец, специи для курицы и чеснок."
+          },
+          {
+            "step_number": 3,
+            "description": "Смешиваем томатную пасту с водой и небольшим количеством сахара. Добавляем эту смесь в сковороду с куриными ножками."
+          },
+          {
+            "step_number": 4,
+            "description": "Добавляем орзу (маленькие макарошки) и тушим под крышкой 10 минут."
+          },
+          {
+            "step_number": 5,
+            "description": "Перед тем как подавать, посыпаем тёртым сыром и зелёным луком. Пробуем и наслаждаемся."
+          }
+        ],
+        "comments": "Блюдо получается очень вкусным и ароматным. Обязательно попробуйте!"
+      },
+      "debug": {}
+    },
+    {
+      "status": "schema_error",
+      "filename": "ffLEYQeXvEc_B__yt_dlp_exec.txt",
+      "video_id": "ffLEYQeXvEc",
+      "duration_ms": 485,
+      "tokens_in": 487,
+      "tokens_out": 1,
+      "truncated": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "missing title",
+        "ingredients empty",
+        "steps empty"
+      ],
+      "recipe": {},
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "fkScI_Aa1ZM_B__yt_dlp_exec.txt",
+      "video_id": "fkScI",
+      "duration_ms": 7088,
+      "tokens_in": 720,
+      "tokens_out": 552,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Белковая пицца",
+        "type": "Пицца",
+        "cooking_time_minutes": 10,
+        "difficulty": 3,
+        "portions": 1,
+        "ingredients": [
+          {
+            "name": "маш",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "зеленый горошек",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "бобовые",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "перец чили",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "чеснок",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "соль",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "манная крупа",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "йогурт",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "масло",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "овощи",
+            "quantity": "немного",
+            "unit": ""
+          },
+          {
+            "name": "панир",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "специи",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "соус",
+            "quantity": "",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "В блендере измельчите маш, зеленый горошек и бобовые."
+          },
+          {
+            "step_number": 2,
+            "description": "Добавьте перец чили, чеснок, соль и измельчите это."
+          },
+          {
+            "step_number": 3,
+            "description": "Смешайте полученную пасту, манную крупу и йогурт в миске."
+          },
+          {
+            "step_number": 4,
+            "description": "Вылейте тесто на сковороду, смажьте ее маслом."
+          },
+          {
+            "step_number": 5,
+            "description": "Готовьте три-четыре минуты."
+          },
+          {
+            "step_number": 6,
+            "description": "Добавьте в миску немного овощей, панира и специй."
+          },
+          {
+            "step_number": 7,
+            "description": "Намажьте пиццу соусом, добавьте овощи и сыр."
+          },
+          {
+            "step_number": 8,
+            "description": "Готовьте еще 7 минут. Наслаждайтесь."
+          }
+        ],
+        "comments": ""
+      },
+      "debug": {}
+    },
+    {
+      "status": "schema_error",
+      "filename": "g2tFBnVN7Qw_B__yt_dlp_exec.txt",
+      "video_id": "g2tFBnVN7Qw",
+      "duration_ms": 498,
+      "tokens_in": 497,
+      "tokens_out": 1,
+      "truncated": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "missing title",
+        "ingredients empty",
+        "steps empty"
+      ],
+      "recipe": {},
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "gZga9tG3ZYU_B__yt_dlp_exec.txt",
+      "video_id": "gZga9tG3ZYU",
+      "duration_ms": 11465,
+      "tokens_in": 677,
+      "tokens_out": 811,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Разнообразное меню",
+        "type": "main course",
+        "cooking_time_minutes": 120,
+        "difficulty": 3,
+        "portions": 4,
+        "ingredients": [
+          {
+            "name": "белый рис",
+            "quantity": "2",
+            "unit": "порции"
+          },
+          {
+            "name": "бобы мунг",
+            "quantity": "1",
+            "unit": "порция"
+          },
+          {
+            "name": "рыбья голова",
+            "quantity": "1",
+            "unit": "штука"
+          },
+          {
+            "name": "картофель",
+            "quantity": "несколько",
+            "unit": "дольки"
+          },
+          {
+            "name": "йогуртовый парфе",
+            "quantity": "1",
+            "unit": "порция"
+          },
+          {
+            "name": "каракатица",
+            "quantity": "1",
+            "unit": "штука"
+          },
+          {
+            "name": "рыба Пабда",
+            "quantity": "8",
+            "unit": "штуки"
+          },
+          {
+            "name": "манго",
+            "quantity": "2",
+            "unit": "штуки"
+          },
+          {
+            "name": "креветка",
+            "quantity": "1",
+            "unit": "порция"
+          },
+          {
+            "name": "манговый чатни",
+            "quantity": "1",
+            "unit": "порция"
+          },
+          {
+            "name": "пападам",
+            "quantity": "несколько",
+            "unit": "штук"
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Начните с приготовления белого риса. Приготовьте две порции риса по вашему обычному рецепту."
+          },
+          {
+            "step_number": 2,
+            "description": "Приготовьте бобы мунг с рыбьей головой. Сварите бобы и добавьте к ним рыбью голову, готовьте до полной готовности."
+          },
+          {
+            "step_number": 3,
+            "description": "Подготовьте картофельные дольки. Нарежьте картофель на дольки, обжарьте их до золотистого цвета."
+          },
+          {
+            "step_number": 4,
+            "description": "Приготовьте йогуртовый парфе. Подавайте его охлажденным."
+          },
+          {
+            "step_number": 5,
+            "description": "Приготовьте каракатицу. Очистите и приготовьте каракатицу по вашему любимому рецепту."
+          },
+          {
+            "step_number": 6,
+            "description": "Приготовьте рыбу Пабда. Жарьте рыбу до готовности, каждому гостю должно достаться по две штуки."
+          },
+          {
+            "step_number": 7,
+            "description": "Порежьте спелые манго на кусочки и подавайте как отдельное блюдо или гарнир."
+          },
+          {
+            "step_number": 8,
+            "description": "Приготовьте креветки. Обжарьте креветки до готовности."
+          },
+          {
+            "step_number": 9,
+            "description": "Приготовьте манговый чатни. Подавайте его как соус к основным блюдам."
+          },
+          {
+            "step_number": 10,
+            "description": "Закончите приготовление, жаря пападам до хрустящего состояния."
+          }
+        ],
+        "comments": "Это разнообразное меню включает в себя несколько блюд, которые можно приготовить для семейного ужина или праздника. Убедитесь, что все ингредиенты свежие и качественные."
+      },
+      "debug": {}
+    },
+    {
+      "status": "schema_error",
+      "filename": "hdtKXBVX3XE_B__yt_dlp_exec.txt",
+      "video_id": "hdtKXBVX3XE",
+      "duration_ms": 1190,
+      "tokens_in": 942,
+      "tokens_out": 52,
+      "truncated": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "missing title",
+        "ingredients empty",
+        "steps empty"
+      ],
+      "recipe": {
+        "title": "",
+        "type": "",
+        "cooking_time_minutes": 0,
+        "difficulty": 0,
+        "portions": 0,
+        "ingredients": [],
+        "steps": [],
+        "comments": ""
+      },
+      "debug": {
+        "title": "",
+        "ingredients": [],
+        "steps": []
+      }
+    },
+    {
+      "status": "ok",
+      "filename": "jmxfiKg7dJ4_B__yt_dlp_exec.txt",
+      "video_id": "jmxfiKg7dJ4",
+      "duration_ms": 4557,
+      "tokens_in": 801,
+      "tokens_out": 300,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Тыква-горлянка с творогом",
+        "type": "Салат",
+        "cooking_time_minutes": 10,
+        "difficulty": 1,
+        "portions": 1,
+        "ingredients": [
+          {
+            "name": "тыква-горлянка",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "творог",
+            "quantity": "по вкусу",
+            "unit": "г"
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Подготовьте тыкву-горлянку, очистите и нарежьте на кусочки."
+          },
+          {
+            "step_number": 2,
+            "description": "Смешайте нарезанную тыкву-горлянку с творогом в миске."
+          }
+        ],
+        "comments": "Этот простой рецепт сочетает в себе тыкву-горлянку и творог. Он особенно полезен в сезон дождей, так как помогает увлажнить организм и избежать простуды.\\nНе рекомендуется добавлять огурец, так как это может вызвать охлаждающий эффект."
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "kSb3puePeGk_B__yt_dlp_exec.txt",
+      "video_id": "kSb3puePeGk",
+      "duration_ms": 5934,
+      "tokens_in": 952,
+      "tokens_out": 410,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Как варить брокколи",
+        "type": "Вегетарианское блюдо",
+        "cooking_time_minutes": 5,
+        "difficulty": 1,
+        "portions": 1,
+        "ingredients": [
+          {
+            "name": "брокколи",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "вода",
+            "quantity": "1",
+            "unit": "литр"
+          },
+          {
+            "name": "соль",
+            "quantity": "1",
+            "unit": "чайная ложка"
+          },
+          {
+            "name": "сок лимона",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "оливковое масло",
+            "quantity": "",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Обрезаем все соцветия брокколи, чтобы они были одинакового размера."
+          },
+          {
+            "step_number": 2,
+            "description": "Наливаем литр воды в кастрюльку и доводим до кипения."
+          },
+          {
+            "step_number": 3,
+            "description": "Добавляем чайную ложку соли в кипящую воду и отправляем туда брокколи."
+          },
+          {
+            "step_number": 4,
+            "description": "Выставляем таймер на 2 минуты. После этого перекладываем брокколи в холодную воду (можно со льдом)."
+          },
+          {
+            "step_number": 5,
+            "description": "Перекладываем охлаждённые брокколи на тарелочку, поливаем соком лимона и оливковым маслом."
+          }
+        ],
+        "comments": "Блюдо получается вкусным и хрустящим, идеально подходит для любителей здорового питания."
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "kWPHIZQf-pI_B__yt_dlp_exec.txt",
+      "video_id": "kWPHIZQf-pI",
+      "duration_ms": 5833,
+      "tokens_in": 592,
+      "tokens_out": 423,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Семейный бутерброд",
+        "type": "закуска",
+        "cooking_time_minutes": 20,
+        "difficulty": 2,
+        "portions": 1,
+        "ingredients": [
+          {
+            "name": "батон",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "помидоры",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "сыр",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "сливочное масло",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "чеснок",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "зелень",
+            "quantity": "",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Возьмите свежий ароматный батон."
+          },
+          {
+            "step_number": 2,
+            "description": "Разрежьте батон вдоль, чтобы получилась лодочка."
+          },
+          {
+            "step_number": 3,
+            "description": "Начинайте наполнять батон. Добавьте помидоры для сочности."
+          },
+          {
+            "step_number": 4,
+            "description": "Посыпьте начинку сыром."
+          },
+          {
+            "step_number": 5,
+            "description": "Добавьте второй слой начинки и посыпьте его сыром."
+          },
+          {
+            "step_number": 6,
+            "description": "Смажьте верхнюю часть батона сливочным маслом, добавьте чеснок и зелень."
+          },
+          {
+            "step_number": 7,
+            "description": "Поставьте бутерброд в печь на 20 минут."
+          }
+        ],
+        "comments": "Начинка может быть абсолютно любой, главное — добавить помидоры для сочности."
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "lRpgqYBjVlM_B__yt_dlp_exec.txt",
+      "video_id": "lRpgqYBjVlM",
+      "duration_ms": 9726,
+      "tokens_in": 1668,
+      "tokens_out": 685,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Творожные сырники",
+        "type": "breakfast",
+        "cooking_time_minutes": 30,
+        "difficulty": 2,
+        "portions": 9,
+        "ingredients": [
+          {
+            "name": "творог",
+            "quantity": "400",
+            "unit": "г"
+          },
+          {
+            "name": "куриное яйцо",
+            "quantity": "1",
+            "unit": ""
+          },
+          {
+            "name": "соль",
+            "quantity": "щепотка",
+            "unit": ""
+          },
+          {
+            "name": "сахар",
+            "quantity": "2",
+            "unit": "столовые ложки"
+          },
+          {
+            "name": "подсластитель",
+            "quantity": "3",
+            "unit": "пакетика"
+          },
+          {
+            "name": "ванилин",
+            "quantity": "1,5",
+            "unit": "г"
+          },
+          {
+            "name": "изюм",
+            "quantity": "небольшая горсть",
+            "unit": ""
+          },
+          {
+            "name": "мука",
+            "quantity": "2",
+            "unit": "столовые ложки с горкой"
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Возьмите 400 г творога (девятипроцентный, рассыпчатый). Добавьте одно куриное яйцо, щепотку соли, две столовые ложки сахара, три пакетика подсластителя, 1,5 г ванилина и небольшую горсть изюма (предварительно промытого и замоченного на 15 минут в горячей воде)."
+          },
+          {
+            "step_number": 2,
+            "description": "Добавьте две столовые ложки муки. С помощью вилки хорошо разомните творог до однородной консистенции. Попробуйте на соль и сахар, при необходимости добавьте их."
+          },
+          {
+            "step_number": 3,
+            "description": "На отдельную тарелку влажными руками сформируйте небольшие шарики из творожной массы."
+          },
+          {
+            "step_number": 4,
+            "description": "Разогрейте сковороду со средним огнем, налейте небольшое количество растительного масла. Возьмите творожный шарик, слегка припудрите его мукой и выложите на сковороду."
+          },
+          {
+            "step_number": 5,
+            "description": "Обжарьте сырники с одной стороны, затем переверните. Уменьшите огонь до минимума, накройте крышкой и обжарьте с другой стороны. Не торопитесь, пусть готовятся медленно, чтобы не подгорели."
+          }
+        ],
+        "comments": "Из указанного количества ингредиентов получается 9 штук сырников. Приятного аппетита!"
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "lUV6XSELA50_B__yt_dlp_exec.txt",
+      "video_id": "lUV6XSELA50",
+      "duration_ms": 6275,
+      "tokens_in": 2661,
+      "tokens_out": 384,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Чау-мейн с яйцом и миндалем",
+        "type": "Основное блюдо",
+        "cooking_time_minutes": 20,
+        "difficulty": 2,
+        "portions": 1,
+        "ingredients": [
+          {
+            "name": "лапша",
+            "quantity": "1",
+            "unit": "порция"
+          },
+          {
+            "name": "яйцо",
+            "quantity": "1",
+            "unit": "шт."
+          },
+          {
+            "name": "миндаль",
+            "quantity": "немного",
+            "unit": ""
+          },
+          {
+            "name": "перец чили",
+            "quantity": "немного",
+            "unit": ""
+          },
+          {
+            "name": "красный соус",
+            "quantity": "немного",
+            "unit": ""
+          },
+          {
+            "name": "лук",
+            "quantity": "немного",
+            "unit": ""
+          },
+          {
+            "name": "огурец",
+            "quantity": "немного",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Добавьте лапшу в воду и варите до готовности."
+          },
+          {
+            "step_number": 2,
+            "description": "Добавьте яйцо к лапше и перемешайте."
+          },
+          {
+            "step_number": 3,
+            "description": "Добавьте немного миндаля и перемешайте."
+          },
+          {
+            "step_number": 4,
+            "description": "Добавьте нарезанный лук и огурец для салата."
+          },
+          {
+            "step_number": 5,
+            "description": "Добавьте немного перца чили и красного соуса по вкусу."
+          }
+        ],
+        "comments": "Блюдо получается вкусным и ароматным. Приятного аппетита!"
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "mjq9gHB52CQ_B__yt_dlp_exec.txt",
+      "video_id": "mjq9gHB52CQ",
+      "duration_ms": 5804,
+      "tokens_in": 571,
+      "tokens_out": 411,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Морковный кекс",
+        "type": "десерт",
+        "cooking_time_minutes": 20,
+        "difficulty": 2,
+        "portions": 1,
+        "ingredients": [
+          {
+            "name": "морковь",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "яйца",
+            "quantity": "2",
+            "unit": "шт"
+          },
+          {
+            "name": "сахар",
+            "quantity": "6-8",
+            "unit": "столовых ложек"
+          },
+          {
+            "name": "мука",
+            "quantity": "3/4",
+            "unit": "стакана"
+          },
+          {
+            "name": "изюм",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "сливочное масло",
+            "quantity": "",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Трём морковку на тёрке."
+          },
+          {
+            "step_number": 2,
+            "description": "Взбиваем яйца с сахаром до бела (можно использовать миксер)."
+          },
+          {
+            "step_number": 3,
+            "description": "Добавляем муку и хорошо перемешиваем."
+          },
+          {
+            "step_number": 4,
+            "description": "Добавляем изюм и снова перемешиваем."
+          },
+          {
+            "step_number": 5,
+            "description": "Хорошо смазываем форму сливочным маслом."
+          },
+          {
+            "step_number": 6,
+            "description": "Выкладываем тесто в форму и ставим в разогретую духовку на 15-20 минут. Периодически проверяем готовность."
+          }
+        ],
+        "comments": "Если нет духовки, можно воспользоваться микроволновкой, но лучше использовать духовку для лучшего результата."
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "nIEqh_IIGMo_B__yt_dlp_exec.txt",
+      "video_id": "nIEqh",
+      "duration_ms": 4630,
+      "tokens_in": 668,
+      "tokens_out": 348,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Томатная лапша Maggi",
+        "type": "Блюдо из лапши",
+        "cooking_time_minutes": 15,
+        "difficulty": 2,
+        "portions": 1,
+        "ingredients": [
+          {
+            "name": "помидоры",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "чеснок",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "соль",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "красный перец чили в порошке",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "Maggi масала",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "вода",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "лапша Maggi",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "кинза",
+            "quantity": "свежая",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Отварите помидоры и чеснок, затем разомните их."
+          },
+          {
+            "step_number": 2,
+            "description": "Добавьте соль и красный перец чили в порошке."
+          },
+          {
+            "step_number": 3,
+            "description": "Добавьте Maggi масала, воду и лапшу Maggi. Хорошо сварите."
+          },
+          {
+            "step_number": 4,
+            "description": "Украсьте свежей кинзой."
+          }
+        ],
+        "comments": ""
+      },
+      "debug": {}
+    },
+    {
+      "status": "schema_error",
+      "filename": "nus_e3Gn8FI_B__yt_dlp_exec.txt",
+      "video_id": "nus",
+      "duration_ms": 509,
+      "tokens_in": 600,
+      "tokens_out": 1,
+      "truncated": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "missing title",
+        "ingredients empty",
+        "steps empty"
+      ],
+      "recipe": {},
+      "debug": {}
+    },
+    {
+      "status": "schema_error",
+      "filename": "pGL6_8b6SN8_B__yt_dlp_exec.txt",
+      "video_id": "pGL6",
+      "duration_ms": 682,
+      "tokens_in": 488,
+      "tokens_out": 5,
+      "truncated": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "missing title",
+        "ingredients empty",
+        "steps empty"
+      ],
+      "recipe": {},
+      "debug": {}
+    },
+    {
+      "status": "schema_error",
+      "filename": "r5QlLcA_Vz4_B__yt_dlp_exec.txt",
+      "video_id": "r5QlLcA",
+      "duration_ms": 620,
+      "tokens_in": 341,
+      "tokens_out": 1,
+      "truncated": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "missing title",
+        "ingredients empty",
+        "steps empty"
+      ],
+      "recipe": {},
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "r5cOTURD1ko_B__yt_dlp_exec.txt",
+      "video_id": "r5cOTURD1ko",
+      "duration_ms": 5398,
+      "tokens_in": 753,
+      "tokens_out": 361,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Жареный нут с добавлением мяты и овощей",
+        "type": "основное блюдо",
+        "cooking_time_minutes": 30,
+        "difficulty": 2,
+        "portions": 4,
+        "ingredients": [
+          {
+            "name": "нут",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "мята",
+            "quantity": "много",
+            "unit": ""
+          },
+          {
+            "name": "лук",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "перец чили",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "зеленый перец чили",
+            "quantity": "",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Начните готовить нут. Если не планируете добавлять мяту, лучше не начинайте приготовление."
+          },
+          {
+            "step_number": 2,
+            "description": "Добавьте всю мяту в нут, чтобы раскрыть его вкус."
+          },
+          {
+            "step_number": 3,
+            "description": "Мелко нарежьте лук и добавьте его к нуту."
+          },
+          {
+            "step_number": 4,
+            "description": "Обжарьте перец чили и зеленый перец чили, затем добавьте их к нуту."
+          }
+        ],
+        "comments": "Блюдо будет готово, когда будет готов дал вал (традиционный индийский хлеб). Также рекомендуется попробовать приготовить это блюдо в тандыре для получения особого вкуса."
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "sR-O3CBZZsY_B__yt_dlp_exec.txt",
+      "video_id": "sR-O3CBZZsY",
+      "duration_ms": 6178,
+      "tokens_in": 1144,
+      "tokens_out": 420,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Сытный салат без мяса",
+        "type": "салат",
+        "cooking_time_minutes": 15,
+        "difficulty": 2,
+        "portions": 4,
+        "ingredients": [
+          {
+            "name": "фасоль",
+            "quantity": "1",
+            "unit": "банка"
+          },
+          {
+            "name": "помидоры",
+            "quantity": "3",
+            "unit": "шт"
+          },
+          {
+            "name": "отварные яйца",
+            "quantity": "4",
+            "unit": "шт"
+          },
+          {
+            "name": "сыр",
+            "quantity": "1",
+            "unit": "кусочек"
+          },
+          {
+            "name": "чеснок",
+            "quantity": "2",
+            "unit": "зубчика"
+          },
+          {
+            "name": "майонез",
+            "quantity": "",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Промойте фасоль и слейте воду."
+          },
+          {
+            "step_number": 2,
+            "description": "Порежьте три помидора кубиком, извлекая семена и жидкость."
+          },
+          {
+            "step_number": 3,
+            "description": "Нарежьте четыре отварных яйца кубиком."
+          },
+          {
+            "step_number": 4,
+            "description": "Натрите кусочек сыра на тёрку."
+          },
+          {
+            "step_number": 5,
+            "description": "Добавьте два зубчика чеснока."
+          },
+          {
+            "step_number": 6,
+            "description": "Заправьте салат майонезом и перемешайте."
+          }
+        ],
+        "comments": "Этот салат идеально подходит для тех, кто любит вкусно и сытно поесть, но не хочет долго стоять на кухне. Он готовится быстро и из простых продуктов."
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "si-CekRHlt0_B__yt_dlp_exec.txt",
+      "video_id": "si-CekRHlt0",
+      "duration_ms": 7974,
+      "tokens_in": 1022,
+      "tokens_out": 596,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Треугольники из лаваша с начинкой",
+        "type": "закуска",
+        "cooking_time_minutes": 20,
+        "difficulty": 2,
+        "portions": 4,
+        "ingredients": [
+          {
+            "name": "лаваш",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "колбасные изделия",
+            "quantity": "150",
+            "unit": "г"
+          },
+          {
+            "name": "сыр",
+            "quantity": "100",
+            "unit": "г"
+          },
+          {
+            "name": "зелень петрушки",
+            "quantity": "пол",
+            "unit": "пучка"
+          },
+          {
+            "name": "помидор",
+            "quantity": "1",
+            "unit": "шт"
+          },
+          {
+            "name": "чёрный молотый перец",
+            "quantity": "1/3",
+            "unit": "чайной ложки"
+          },
+          {
+            "name": "майонез",
+            "quantity": "2",
+            "unit": "столовых ложки"
+          },
+          {
+            "name": "кетчуп",
+            "quantity": "1",
+            "unit": "столовая ложка"
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Натереть колбасные изделия и сыр на крупную тёрку."
+          },
+          {
+            "step_number": 2,
+            "description": "Добавить пол пучка свежей зелени петрушки."
+          },
+          {
+            "step_number": 3,
+            "description": "Нарезать один спелый помидор на небольшие кубики и добавить в начинку."
+          },
+          {
+            "step_number": 4,
+            "description": "Добавить 1/3 чайной ложки чёрного молотого перца, две столовых ложки майонеза и одну столовую ложку кетчупа. Перемешать все ингредиенты."
+          },
+          {
+            "step_number": 5,
+            "description": "Разрезать лаваш на полоски примерно 10 см толщиной."
+          },
+          {
+            "step_number": 6,
+            "description": "Выложить начинку на край полоски лаваша и завернуть в форме треугольника, чтобы начинка плотно держалась внутри."
+          },
+          {
+            "step_number": 7,
+            "description": "Обжарить треугольники на разогретой сковороде с двух сторон до румяной хрустящей корочки."
+          }
+        ],
+        "comments": "Очень вкусная и сочная закуска, готовится легко и быстро."
+      },
+      "debug": {}
+    },
+    {
+      "status": "schema_error",
+      "filename": "tM4lENIX8gw_B__yt_dlp_exec.txt",
+      "video_id": "tM4lENIX8gw",
+      "duration_ms": 1140,
+      "tokens_in": 485,
+      "tokens_out": 56,
+      "truncated": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "missing title",
+        "ingredients empty",
+        "steps empty"
+      ],
+      "recipe": {
+        "title": "",
+        "type": "",
+        "cooking_time_minutes": 0,
+        "difficulty": 1,
+        "portions": 0,
+        "ingredients": [],
+        "steps": [],
+        "comments": ""
+      },
+      "debug": {
+        "title": "",
+        "ingredients": [],
+        "steps": []
+      }
+    },
+    {
+      "status": "ok",
+      "filename": "tQBF9ixMUJY_B__yt_dlp_exec.txt",
+      "video_id": "tQBF9ixMUJY",
+      "duration_ms": 7804,
+      "tokens_in": 684,
+      "tokens_out": 592,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Чудесный китайский рис",
+        "type": "main course",
+        "cooking_time_minutes": 20,
+        "difficulty": 3,
+        "portions": 4,
+        "ingredients": [
+          {
+            "name": "рис",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "растительное масло",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "чеснок",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "соль",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "кипяток",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "желтки",
+            "quantity": "4",
+            "unit": ""
+          },
+          {
+            "name": "лук",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "морковь",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "сельдерей",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "сладкий перец",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "кукуруза",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "горошек",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "яичный белок",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "зелень",
+            "quantity": "",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "На растительном масле обжариваем чеснок."
+          },
+          {
+            "step_number": 2,
+            "description": "Засыпаем рис и обжариваем в течение 1 минуты."
+          },
+          {
+            "step_number": 3,
+            "description": "Посолим, заливаем кипятком и готовим на среднем огне под крышкой до готовности. Остужаем рис."
+          },
+          {
+            "step_number": 4,
+            "description": "Добавляем четыре желтка и перемешиваем."
+          },
+          {
+            "step_number": 5,
+            "description": "На растительном масле обжариваем чеснок, лук, морковь, сельдерей, сладкий перец, кукурузу и горошек."
+          },
+          {
+            "step_number": 6,
+            "description": "Выкладываем рис, заливаем яичный белок и перемешиваем до свёртывания белка."
+          },
+          {
+            "step_number": 7,
+            "description": "Посыпаем зеленью и с удовольствием съедаем."
+          }
+        ],
+        "comments": ""
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "tg9ycmtarEg_B__yt_dlp_exec.txt",
+      "video_id": "tg9ycmtarEg",
+      "duration_ms": 8256,
+      "tokens_in": 1001,
+      "tokens_out": 604,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Сырники в духовке",
+        "type": "Выпечка",
+        "cooking_time_minutes": 25,
+        "difficulty": 2,
+        "portions": 8,
+        "ingredients": [
+          {
+            "name": "творог",
+            "quantity": "500",
+            "unit": "г"
+          },
+          {
+            "name": "соль",
+            "quantity": "1/3",
+            "unit": "чайной ложки"
+          },
+          {
+            "name": "яйцо",
+            "quantity": "1",
+            "unit": ""
+          },
+          {
+            "name": "сахар",
+            "quantity": "2-4",
+            "unit": "столовые ложки"
+          },
+          {
+            "name": "ванильный сахар",
+            "quantity": "1",
+            "unit": "пачка"
+          },
+          {
+            "name": "картофельный крахмал",
+            "quantity": "2",
+            "unit": "столовые ложки"
+          },
+          {
+            "name": "мука",
+            "quantity": "1.5",
+            "unit": "столовые ложки"
+          },
+          {
+            "name": "разрыхлитель",
+            "quantity": "1/3",
+            "unit": "чайной ложки"
+          },
+          {
+            "name": "кокосовая стружка",
+            "quantity": "",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Отжимаем творог, чтобы он был не сильно влажный."
+          },
+          {
+            "step_number": 2,
+            "description": "Добавляем 1/3 чайной ложки соли, одно яйцо, две столовые ложки сахара и одну пачку ванильного сахара. Если любите послаще, добавьте ещё пару столовых ложек сахара."
+          },
+          {
+            "step_number": 3,
+            "description": "Добавляем две столовые ложки картофельного крахмала (можно заменить на кукурузный) и полторы столовые ложки муки."
+          },
+          {
+            "step_number": 4,
+            "description": "Добавляем 1/3 чайной ложки разрыхлителя и всё хорошенько перемешиваем."
+          },
+          {
+            "step_number": 5,
+            "description": "Если масса получается жидкой, значит, недостаточно отжали творог. Влажными руками формируем колобочки весом примерно по 60 г."
+          },
+          {
+            "step_number": 6,
+            "description": "Обваливаем колобочки в кокосовой стружке."
+          }
+        ],
+        "comments": "Готовим при 180° 20-25 минут."
+      },
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "vXWHvfl3cGc_B__yt_dlp_exec.txt",
+      "video_id": "vXWHvfl3cGc",
+      "duration_ms": 7575,
+      "tokens_in": 876,
+      "tokens_out": 461,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Хрустящие макаронные чипсы",
+        "type": "закуска",
+        "cooking_time_minutes": 70,
+        "difficulty": 2,
+        "portions": 1,
+        "ingredients": [
+          {
+            "name": "макароны",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "соль",
+            "quantity": "немного",
+            "unit": ""
+          },
+          {
+            "name": "масло",
+            "quantity": "немного",
+            "unit": ""
+          },
+          {
+            "name": "перец",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "паприка",
+            "quantity": "",
+            "unit": ""
+          },
+          {
+            "name": "чеснок",
+            "quantity": "",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Поставьте отваривать макароны в слегка подсоленой воде с маслом. Варите их до полной готовности."
+          },
+          {
+            "step_number": 2,
+            "description": "Сцедите воду и добавьте в макароны специи: соль, перец, паприку и чеснок. Залейте небольшим количеством масла и перемешайте."
+          },
+          {
+            "step_number": 3,
+            "description": "Застелите противень пергаментной бумагой и выложите на него макароны, разровняйте тонким слоем."
+          },
+          {
+            "step_number": 4,
+            "description": "Отправьте макароны в разогретую духовку примерно на час. После этого дайте им полностью остыть."
+          },
+          {
+            "step_number": 5,
+            "description": "Пересыпьте макароны в миску. Чипсы готовы к употреблению."
+          }
+        ],
+        "comments": "Безумно-безумно вкусное хрустящее блюдо, которое можно съесть всю мисочку."
+      },
+      "debug": {}
+    },
+    {
+      "status": "schema_error",
+      "filename": "va3XHvPN_pY_B__yt_dlp_exec.txt",
+      "video_id": "va3XHvPN",
+      "duration_ms": 422,
+      "tokens_in": 417,
+      "tokens_out": 1,
+      "truncated": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "missing title",
+        "ingredients empty",
+        "steps empty"
+      ],
+      "recipe": {},
+      "debug": {}
+    },
+    {
+      "status": "schema_error",
+      "filename": "xR9d5DETy-E_B__yt_dlp_exec.txt",
+      "video_id": "xR9d5DETy-E",
+      "duration_ms": 696,
+      "tokens_in": 1282,
+      "tokens_out": 1,
+      "truncated": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "missing title",
+        "ingredients empty",
+        "steps empty"
+      ],
+      "recipe": {},
+      "debug": {}
+    },
+    {
+      "status": "ok",
+      "filename": "zZcUn3ASL1k_B__yt_dlp_exec.txt",
+      "video_id": "zZcUn3ASL1k",
+      "duration_ms": 14235,
+      "tokens_in": 6389,
+      "tokens_out": 770,
+      "truncated": false,
+      "schema_valid": true,
+      "schema_errors": [],
+      "recipe": {
+        "title": "Капустная парату с манной крупой",
+        "type": "Второе блюдо",
+        "cooking_time_minutes": 45,
+        "difficulty": 3,
+        "portions": 4,
+        "ingredients": [
+          {
+            "name": "капуста",
+            "quantity": "1",
+            "unit": "кочан"
+          },
+          {
+            "name": "лук",
+            "quantity": "1",
+            "unit": "шт."
+          },
+          {
+            "name": "болгарский перец",
+            "quantity": "1",
+            "unit": "шт."
+          },
+          {
+            "name": "кинза",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "манная крупа",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "соль",
+            "quantity": "по вкусу",
+            "unit": ""
+          },
+          {
+            "name": "красный перец чили",
+            "quantity": "1",
+            "unit": "ч. л."
+          },
+          {
+            "name": "куркума",
+            "quantity": "немного",
+            "unit": ""
+          },
+          {
+            "name": "тмин",
+            "quantity": "немного",
+            "unit": ""
+          },
+          {
+            "name": "порошок карри",
+            "quantity": "немного",
+            "unit": ""
+          },
+          {
+            "name": "нутовая мука",
+            "quantity": "1",
+            "unit": "ст. л."
+          },
+          {
+            "name": "пшеничная мука",
+            "quantity": "2-3",
+            "unit": "ст. л."
+          },
+          {
+            "name": "масло",
+            "quantity": "для жарки",
+            "unit": ""
+          }
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "description": "Разрежьте капусту на кусочки, не слишком тонкие и вертикальные."
+          },
+          {
+            "step_number": 2,
+            "description": "Мелко нарежьте лук, болгарский перец и кинзу."
+          },
+          {
+            "step_number": 3,
+            "description": "В кастрюле варите капусту, добавьте манную крупу и хорошо перемешайте."
+          },
+          {
+            "step_number": 4,
+            "description": "Добавьте измельченные овощи, красный перец чили, куркуму, тмин, порошок карри и нутовую муку. Хорошо перемешайте."
+          },
+          {
+            "step_number": 5,
+            "description": "Добавьте пшеничную муку и немного воды, чтобы смесь была средней консистенции. Тщательно перемешайте."
+          },
+          {
+            "step_number": 6,
+            "description": "Разогрейте сковороду без масла, выложите небольшую порцию смеси, придайте круглую форму, накройте крышкой и готовьте на среднем огне 4 минуты."
+          },
+          {
+            "step_number": 7,
+            "description": "Снимите крышку, добавьте немного масла сверху, переверните парату и обжарьте до золотисто-красного цвета."
+          }
+        ],
+        "comments": "Это блюдо подходит для завтрака, обеда или ужина. Оно полезное и питательное, особенно для тех, кто следит за фигурой. Подавайте с творогом или чатни."
+      },
+      "debug": {}
+    }
+  ]
+}

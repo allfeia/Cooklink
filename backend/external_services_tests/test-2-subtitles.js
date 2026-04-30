@@ -18,7 +18,6 @@
  *   node test-2-subtitles.js                     # check + download (default)
  *   node test-2-subtitles.js --tool=A            # check available langs only (fast)
  *   node test-2-subtitles.js --tool=B            # download subtitles to .txt files
- *   node test-2-subtitles.js --langs=ru,en       # language priority order
  *   node test-2-subtitles.js --delay=3000        # ms between requests (default: 2000)
  *   node test-2-subtitles.js --limit=10          # process first N URLs only
  */
@@ -32,9 +31,6 @@ const TEST_URLS = require('./results/test-urls-auto');
 // ── Config ────────────────────────────────────────────────────────────────────
 const arg         = process.argv.find(a => a.startsWith('--tool='));
 const TOOL_FILTER = arg ? arg.split('=')[1].toUpperCase() : 'BOTH';
-
-const langArg   = process.argv.find(a => a.startsWith('--langs='));
-const LANG_PRIO = (langArg ? langArg.split('=')[1] : 'ru,en').split(',');
 
 const delayArg      = process.argv.find(a => a.startsWith('--delay='));
 const BASE_DELAY_MS = delayArg ? parseInt(delayArg.split('=')[1], 10) : 2000;
@@ -91,24 +87,15 @@ async function checkSubsAvailability(url) {
         noCheckCertificates: true,
     });
 
-    const manual = Object.keys(info.subtitles ?? {});
-    const auto   = Object.keys(info.automatic_captions ?? {});
+    const hasSubs =
+        Object.keys(info.subtitles ?? {}).length > 0 ||
+        Object.keys(info.automatic_captions ?? {}).length > 0;
 
-    let langUsed = null;
-    let langType = null;
-    for (const lang of LANG_PRIO) {
-        if (manual.some(l => l.startsWith(lang))) { langUsed = lang; langType = 'manual'; break; }
-        if (auto.some(l => l.startsWith(lang)))   { langUsed = lang; langType = 'auto';   break; }
+    if (!hasSubs) {
+        throw new Error('NO_SUBTITLES');
     }
 
-    if (!langUsed) {
-        throw new Error(
-            `NO_SUBTITLES — manual: [${manual.slice(0,5).join(', ')}], ` +
-            `auto: [${auto.slice(0,5).join(', ')}]`
-        );
-    }
-
-    return { videoId, langUsed, langType, availableLangs: { manual, auto } };
+    return { videoId };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -119,59 +106,19 @@ async function downloadSubs(url, attempt = 1) {
     const videoId = extractVideoId(url);
     if (!videoId) throw new Error('Cannot extract video ID from URL');
 
-    // Pass 1: check availability
-    let info;
-    try {
-        info = await ytDlp(url, {
-            dumpSingleJson:      true,
-            skipDownload:        true,
-            noWarnings:          true,
-            noCheckCertificates: true,
-        });
-    } catch (err) {
-        if (err.message?.includes('429') && attempt <= MAX_RETRIES) {
-            const wait = jitter(BASE_DELAY_MS * Math.pow(2, attempt));
-            console.log(`\n  ⏳ 429 on metadata, retry ${attempt}/${MAX_RETRIES} in ${wait}ms…`);
-            await sleep(wait);
-            return downloadSubs(url, attempt + 1);
-        }
-        throw err;
-    }
-
-    const manual = Object.keys(info.subtitles ?? {});
-    const auto   = Object.keys(info.automatic_captions ?? {});
-
-    let langUsed = null;
-    let langType = null;
-    for (const lang of LANG_PRIO) {
-        if (manual.some(l => l.startsWith(lang))) { langUsed = lang; langType = 'manual'; break; }
-        if (auto.some(l => l.startsWith(lang)))   { langUsed = lang; langType = 'auto';   break; }
-    }
-
-    if (!langUsed) {
-        throw new Error(
-            `NO_SUBTITLES — manual: [${manual.slice(0,5).join(', ')}], ` +
-            `auto: [${auto.slice(0,5).join(', ')}]`
-        );
-    }
-
-    // Pass 2: download subtitle file
-    // Remove leftover .vtt/.srt files for this video first
-    fs.readdirSync(SUBTITLES_DIR)
-        .filter(f => f.startsWith(videoId) && (f.endsWith('.vtt') || f.endsWith('.srt')))
-        .forEach(f => fs.unlinkSync(path.join(SUBTITLES_DIR, f)));
-
-    const outTemplate = path.join(SUBTITLES_DIR, `${videoId}_yt-dlp.%(ext)s`);
+    const outTemplate = path.join(SUBTITLES_DIR, `${videoId}_yt-dlp_exec`);
     try {
         await ytDlp(url, {
+            // dumpSingleJson:      true,
             skipDownload:        true,
-            writeSubs:           langType === 'manual',
-            writeAutoSubs:       langType === 'auto',
-            subLangs:            langUsed,
-            subFormat:           'vtt/srt/best',
-            noWarnings:          true,
-            noCheckCertificates: true,
+            writeSubs:           true,
+            writeAutoSubs:       true,
+            subLangs:            'ru',
+            subFormat:           'vtt',
             output:              outTemplate,
+            // noWarnings:          true,
+            noCheckCertificate: true,
+            cookies: path.join(__dirname, './www.youtube.com_cookies.txt'),
         });
     } catch (err) {
         if (err.message?.includes('429') && attempt <= MAX_RETRIES) {
@@ -188,13 +135,18 @@ async function downloadSubs(url, attempt = 1) {
         .filter(f => f.startsWith(videoId) && f.includes('yt-dlp') && !f.endsWith('.txt'));
     if (!candidates.length) throw new Error('Subtitle file not written by yt-dlp');
 
-    const raw        = fs.readFileSync(path.join(SUBTITLES_DIR, candidates[0]), 'utf-8');
+    const raw= fs.readFileSync(path.join(SUBTITLES_DIR, candidates[0]), 'utf-8');
     const transcript = stripMarkup(raw);
+
+    if (!transcript || transcript.trim().length === 0) {
+        candidates.forEach(c => fs.unlinkSync(path.join(SUBTITLES_DIR, c)));
+        throw new Error('EMPTY_TRANSCRIPT');
+    }
 
     // Clean up raw .vtt/.srt — keep only the .txt
     candidates.forEach(f => fs.unlinkSync(path.join(SUBTITLES_DIR, f)));
 
-    return { transcript, langUsed, langType, videoId, availableLangs: { manual, auto } };
+    return { transcript, videoId };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -202,7 +154,7 @@ async function downloadSubs(url, attempt = 1) {
 // ─────────────────────────────────────────────────────────────────────────────
 async function runTool(label, fetchFn, urls) {
     console.log(`\n${'─'.repeat(55)}`);
-    console.log(`  Tool ${label} | langs: ${LANG_PRIO.join(' > ')} | delay: ~${BASE_DELAY_MS}ms`);
+    console.log(`  Tool ${label} | delay: ~${BASE_DELAY_MS}ms`);
     console.log(`${'─'.repeat(55)}`);
 
     const results = [];
@@ -219,26 +171,22 @@ async function runTool(label, fetchFn, urls) {
 
             if (result.transcript !== undefined) {
                 // Full download mode — save .txt
-                const filename = `${videoId}_B__yt_dlp_exec__${result.langUsed}.txt`;
+                const filename = `${videoId}_B__yt_dlp_exec.txt`;
                 fs.writeFileSync(path.join(SUBTITLES_DIR, filename), result.transcript, 'utf-8');
                 console.log(
-                    `✅ ${duration_ms}ms | lang=${result.langUsed} (${result.langType}) | ` +
+                    `✅ ${duration_ms}ms | ` +
                     `${result.transcript.length} chars → ${filename}`
                 );
                 results.push({
                     status: 'ok', url, video_id: videoId,
-                    lang: result.langUsed, lang_type: result.langType,
                     char_count: result.transcript.length,
                     subtitle_file: filename, duration_ms,
-                    available_langs: result.availableLangs,
                 });
             } else {
                 // Check-only mode
-                console.log(`✅ ${duration_ms}ms | lang=${result.langUsed} (${result.langType})`);
+                console.log(`✅ ${duration_ms}ms`);
                 results.push({
-                    status: 'ok', url, video_id: videoId,
-                    lang: result.langUsed, lang_type: result.langType,
-                    duration_ms, available_langs: result.availableLangs,
+                    status: 'ok', url, video_id: videoId, duration_ms
                 });
             }
 
@@ -268,7 +216,6 @@ async function main() {
     console.log('═══════════════════════════════════════════════════════');
     console.log('  TEST 2 — YouTube Subtitles (yt-dlp)');
     console.log(`  URLs     : ${urls.length}${LIMIT < Infinity ? ` (limited from ${TEST_URLS.length})` : ''}`);
-    console.log(`  Languages: ${LANG_PRIO.join(' > ')}`);
     console.log(`  Tool     : ${TOOL_FILTER}`);
     console.log(`  Delay    : ~${BASE_DELAY_MS}ms between requests (+ jitter)`);
     console.log(`  Output   : ${SUBTITLES_DIR}`);
@@ -276,7 +223,6 @@ async function main() {
 
     const report = {
         runAt: new Date().toISOString(),
-        lang_priority: LANG_PRIO,
         tool_filter: TOOL_FILTER,
         base_delay_ms: BASE_DELAY_MS,
         urls,

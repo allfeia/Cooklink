@@ -1,0 +1,72 @@
+{
+  "title": "Джалджиру",
+  "type": "напиток",
+  "cooking_time_minutes": 15,
+  "difficulty": 2,
+  "portions": 1,
+  "ingredients": [
+    {
+      "name": "тмин",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "чёрная соль",
+      "quantity": "немного",
+      "unit": ""
+    },
+    {
+      "name": "порошок из сушеного манго",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "листья мяты",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "сок кориандра",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "сок лимона",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "вода",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "лед",
+      "quantity": "",
+      "unit": ""
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "Хорошо обжарьте тмин на сухой сковороде."
+    },
+    {
+      "step_number": 2,
+      "description": "Добавьте немного чёрной соли и порошок из сушеного манго. Измельчите их вместе."
+    },
+    {
+      "step_number": 3,
+      "description": "Добавьте листья мяты, сок кориандра и сок лимона. Перемешайте."
+    },
+    {
+      "step_number": 4,
+      "description": "Добавьте воды и тщательно перемешайте все ингредиенты."
+    },
+    {
+      "step_number": 5,
+      "description": "Добавьте лёд в охлаждённый напиток."
+    }
+  ],
+  "comments": ""
+}
