@@ -1,0 +1,93 @@
+{
+  "title": "Рыба с овощами",
+  "type": "основное блюдо",
+  "cooking_time_minutes": 30,
+  "difficulty": 2,
+  "portions": 1,
+  "ingredients": [
+    {
+      "name": "рыба",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "лук",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "помидоры",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "болгарский перец",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "чеснок",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "соль",
+      "quantity": "по вкусу",
+      "unit": ""
+    },
+    {
+      "name": "перец",
+      "quantity": "по вкусу",
+      "unit": ""
+    },
+    {
+      "name": "специи для рыбы",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "сливочное масло",
+      "quantity": "куски",
+      "unit": ""
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "Солим рыбу по вкусу."
+    },
+    {
+      "step_number": 2,
+      "description": "Выкладываем нарезанный лук в сковородку."
+    },
+    {
+      "step_number": 3,
+      "description": "Добавляем помидоры, нарезанные кружочком."
+    },
+    {
+      "step_number": 4,
+      "description": "Добавляем измельченный болгарский перец и чеснок."
+    },
+    {
+      "step_number": 5,
+      "description": "Перчим по вкусу."
+    },
+    {
+      "step_number": 6,
+      "description": "Выкладываем рыбу сверху."
+    },
+    {
+      "step_number": 7,
+      "description": "Добавляем специи для рыбы."
+    },
+    {
+      "step_number": 8,
+      "description": "Добавляем кусочки сливочного масла."
+    },
+    {
+      "step_number": 9,
+      "description": "Накрываем крышкой и готовим на минимальном огне 30 минут."
+    }
+  ],
+  "comments": "Блюдо получается вкусным и полезным. В телеграме Алёнка Краснодар можно найти больше рецептов."
+}

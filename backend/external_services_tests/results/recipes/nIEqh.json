@@ -1,0 +1,68 @@
+{
+  "title": "Томатная лапша Maggi",
+  "type": "Блюдо из лапши",
+  "cooking_time_minutes": 15,
+  "difficulty": 2,
+  "portions": 1,
+  "ingredients": [
+    {
+      "name": "помидоры",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "чеснок",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "соль",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "красный перец чили в порошке",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "Maggi масала",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "вода",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "лапша Maggi",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "кинза",
+      "quantity": "свежая",
+      "unit": ""
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "Отварите помидоры и чеснок, затем разомните их."
+    },
+    {
+      "step_number": 2,
+      "description": "Добавьте соль и красный перец чили в порошке."
+    },
+    {
+      "step_number": 3,
+      "description": "Добавьте Maggi масала, воду и лапшу Maggi. Хорошо сварите."
+    },
+    {
+      "step_number": 4,
+      "description": "Украсьте свежей кинзой."
+    }
+  ],
+  "comments": ""
+}

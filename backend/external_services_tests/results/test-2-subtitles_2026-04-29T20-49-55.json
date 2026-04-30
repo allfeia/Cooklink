@@ -1,0 +1,45 @@
+{
+  "runAt": "2026-04-29T20:49:37.329Z",
+  "tool_filter": "B",
+  "base_delay_ms": 2000,
+  "urls": [
+    "https://www.youtube.com/watch?v=lUV6XSELA50",
+    "https://www.youtube.com/watch?v=Eyz5reNsbgQ",
+    "https://www.youtube.com/watch?v=NSP7PIM7mCw",
+    "https://www.youtube.com/watch?v=-UEp7o5NK8s"
+  ],
+  "tool_B": [
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=lUV6XSELA50",
+      "video_id": "lUV6XSELA50",
+      "char_count": 8973,
+      "subtitle_file": "lUV6XSELA50_B__yt_dlp_exec.txt",
+      "duration_ms": 2828
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=Eyz5reNsbgQ",
+      "video_id": "Eyz5reNsbgQ",
+      "char_count": 44,
+      "subtitle_file": "Eyz5reNsbgQ_B__yt_dlp_exec.txt",
+      "duration_ms": 2374
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=NSP7PIM7mCw",
+      "video_id": "NSP7PIM7mCw",
+      "char_count": 358,
+      "subtitle_file": "NSP7PIM7mCw_B__yt_dlp_exec.txt",
+      "duration_ms": 2516
+    },
+    {
+      "status": "ok",
+      "url": "https://www.youtube.com/watch?v=-UEp7o5NK8s",
+      "video_id": "-UEp7o5NK8s",
+      "char_count": 687,
+      "subtitle_file": "-UEp7o5NK8s_B__yt_dlp_exec.txt",
+      "duration_ms": 2354
+    }
+  ]
+}

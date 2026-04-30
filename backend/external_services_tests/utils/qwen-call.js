@@ -8,7 +8,7 @@ const client = new OpenAI({
 
 async function test() {
     const res = await client.chat.completions.create({
-        model: "qwen-turbo",
+        model: "qwen-max",
         messages: [
             { role: "user", content: "Say hello" }
         ],

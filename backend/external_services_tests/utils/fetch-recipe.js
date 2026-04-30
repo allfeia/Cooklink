@@ -4,8 +4,6 @@ const fs = require('fs');
 
 const path = require('path');
 
-const URLS_FILE = path.join(__dirname, '../results', 'urls.js');
-
 const API_KEY = process.env.YOUTUBE_API_KEY;
 const BASE_URL = 'https://www.googleapis.com/youtube/v3';
 

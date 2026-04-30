@@ -1,0 +1,63 @@
+{
+  "title": "Вкусные бутерброды с яйцами и колбасой",
+  "type": "breakfast",
+  "cooking_time_minutes": 15,
+  "difficulty": 2,
+  "portions": 1,
+  "ingredients": [
+    {
+      "name": "яйца",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "свежий помидор",
+      "quantity": "1",
+      "unit": "шт"
+    },
+    {
+      "name": "колбаса",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "сыр",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "хлеб",
+      "quantity": "1",
+      "unit": "ломтик"
+    },
+    {
+      "name": "кетчуп",
+      "quantity": "",
+      "unit": ""
+    },
+    {
+      "name": "свежая зелень",
+      "quantity": "",
+      "unit": ""
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "Смешайте яйца, свежий помидор, колбасу и сыр в одной миске."
+    },
+    {
+      "step_number": 2,
+      "description": "Хлеб смажьте кетчупом."
+    },
+    {
+      "step_number": 3,
+      "description": "Выложите полученную массу на хлеб."
+    },
+    {
+      "step_number": 4,
+      "description": "Отправьте бутерброды в духовку на 15 минут при температуре 200°."
+    }
+  ],
+  "comments": "Посыпьте свежей зеленью перед подачей. Отличный вариант для завтрака или перекуса."
+}
