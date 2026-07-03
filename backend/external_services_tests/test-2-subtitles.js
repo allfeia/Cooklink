@@ -109,14 +109,12 @@ async function downloadSubs(url, attempt = 1) {
     const outTemplate = path.join(SUBTITLES_DIR, `${videoId}_yt-dlp_exec`);
     try {
         await ytDlp(url, {
-            // dumpSingleJson:      true,
             skipDownload:        true,
             writeSubs:           true,
             writeAutoSubs:       true,
             subLangs:            'ru',
             subFormat:           'vtt',
             output:              outTemplate,
-            // noWarnings:          true,
             noCheckCertificate: true,
             cookies: path.join(__dirname, './www.youtube.com_cookies.txt'),
         });

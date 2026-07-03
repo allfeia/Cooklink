@@ -81,10 +81,9 @@ sequenceDiagram
                     WYM->>DB: status = scanning
                     alt VIDEO_UNAVAILABLE / TOO_LONG / NO_AUDIO
                         API-->>FE: 400
-                    else 
-                        WYM->>DB: save metadata
+                    else OK
+                        API->>MQ: publish youtube_queue
                     end
-                    API->>MQ: publish youtube_queue
 
 %%                    alt YouTube
 %%                        API->>MQ: publish youtube_queue
