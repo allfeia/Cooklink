@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Youtube, Check, AlertCircle } from "lucide-react";
+import { Youtube, Check } from "lucide-react";
 import { EXAMPLE_RECIPES } from "../features/recipe/recipe";
 import { motion } from "motion/react";
 import { useLanguage } from "../../context/LanguageContext";
+import {parseVideoUrl, ValidVideoUrl} from "../../../../common/validation/validatePipeline";
 
 interface InputSectionProps {
   onSubmit: (url: string) => void;
@@ -11,47 +12,34 @@ interface InputSectionProps {
 export function InputSection({ onSubmit }: InputSectionProps) {
   const [url, setUrl] = useState("");
   const [isValid, setIsValid] = useState<boolean | null>(null);
-  const [error, setError] = useState("");
+  const [parsed, setParsed] = useState<ValidVideoUrl | null>(null);
   const { t } = useLanguage();
-
-  const validateYouTubeUrl = (url: string): boolean => {
-    if (!url) return false;
-    const patterns = [
-      /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+/,
-    ];
-    return patterns.some(pattern => pattern.test(url));
-  };
 
   const handleUrlChange = (value: string) => {
     setUrl(value);
-    setError("");
-
-    if (value.length === 0) {
-      setIsValid(null);
-      return;
+    if (!value) {
+        setIsValid(null);
+        setParsed(null);
+        return;
     }
-
-    const valid = validateYouTubeUrl(value);
-    setIsValid(valid);
-
-    if (!valid && value.length > 10) {
-      setError(t("invalidYouTubeUrl"));
-    }
+    const result = parseVideoUrl(value);
+    setIsValid(result !== null);
+    setParsed(result);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (isValid) {
-      onSubmit(url);
+    if (parsed) {
+        alert("URL корретный")
+      // onSubmit(url);
     }
   };
 
-  const handleExampleClick = (exampleUrl: string) => {
-    setUrl(exampleUrl);
-    setIsValid(true);
-    setError("");
-    onSubmit(exampleUrl);
-  };
+  // const handleExampleClick = (exampleUrl: string) => {
+  //   setUrl(exampleUrl);
+  //   setIsValid(true);
+  //   onSubmit(exampleUrl);
+  // };
 
   return (
     <div className="flex-1 flex items-center justify-center px-4 py-12 md:py-20">
@@ -80,7 +68,7 @@ export function InputSection({ onSubmit }: InputSectionProps) {
                 bg-background
                 ${isValid === null ? "border-border" : ""}
                 ${isValid === true ? "border-green-500 shadow-lg shadow-green-500/20" : ""}
-                ${isValid === false && url.length > 10 ? "border-red-500" : ""}
+                ${isValid === false ? "border-red-500" : ""}
                 focus-within:border-[#2563EB] focus-within:shadow-lg focus-within:shadow-blue-500/20
               `}
             >
@@ -102,19 +90,7 @@ export function InputSection({ onSubmit }: InputSectionProps) {
                   <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
                 </motion.div>
               )}
-              {isValid === false && url.length > 10 && (
-                <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
-              )}
             </div>
-            {error && (
-              <motion.p
-                className="text-sm text-red-500 mt-2 ml-1"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-              >
-                {error}
-              </motion.p>
-            )}
           </div>
 
           <button
@@ -142,7 +118,7 @@ export function InputSection({ onSubmit }: InputSectionProps) {
             {Object.entries(EXAMPLE_RECIPES).map(([key, example]) => (
               <button
                 key={key}
-                onClick={() => handleExampleClick(example.url)}
+                // onClick={() => handleExampleClick(example.url)}
                 className="px-4 py-2 rounded-lg bg-muted hover:bg-accent text-sm text-foreground transition-colors"
               >
                 {t(`example${key.charAt(0).toUpperCase() + key.slice(1)}`)}
