@@ -20,10 +20,9 @@ sequenceDiagram
 
 %% ================= CREATE JOB =================
     U->>FE: Вставляет ссылку
-    FE->>API: POST /recipes
-    API->>DB: create job (status=processing)
+    FE->>FE: validate URL
+    FE->>API: POST /recipes {source_url}
     
-    API->>DB: status = validation
     API->>R: check rate limit
     alt RATE_LIMIT_EXCEEDED
         API-->>FE: 429
@@ -31,11 +30,10 @@ sequenceDiagram
         API->>API: validate URL
         alt INVALID_URL
             API-->>FE: 400
-        else VALID_URL
+        else build canonical_key
 
         %% ========= CACHE FIRST =========
-            API->>DB: status = searching
-            API->>R: get by video_url
+            API->>R: get by canonical_key
             alt found in Redis
 
                 API->>R: check pdf_url
@@ -54,7 +52,7 @@ sequenceDiagram
             else not in Redis
 
             %% ========= DB FALLBACK =========
-                API->>DB: find by video_url
+                API->>DB: find by canonical_key
                 alt found in DB
 
                     API->>DB: check pdf_url
@@ -75,10 +73,10 @@ sequenceDiagram
                 else not found in DB
 
                 %% ========= FULL PIPELINE =========
-                    API->>DB: save video_url
-                    API->>R: save video_url
+                    API->>DB: create job (status = scanning)
+                    API->>DB: save source_url, canonical_key
+                    API->>R: save source_url, canonical_key
                     API->>WYM: check metadata
-                    WYM->>DB: status = scanning
                     alt VIDEO_UNAVAILABLE / TOO_LONG / NO_AUDIO
                         API-->>FE: 400
                     else OK
@@ -123,7 +121,7 @@ sequenceDiagram
 %%    WA->>MQ: consume downloading_queue
 %%    WA->>DB: status = downloading
 %%
-%%    WA->>R: get video_url
+%%    WA->>R: get source_url
 %%    WA->>WA: download audio from URL
 %%    alt EXTRACT_ERROR
 %%        WA->>DB: status = failed

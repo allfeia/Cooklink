@@ -57,13 +57,13 @@
 
 ```json
 {
-  "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 }
 ```
 
 Ограничения:
 
-- `video_url` — обязательное поле, валидный URL домена `youtube.com` / `youtu.be` или `rutube.ru`
+- `source_url` — обязательное поле, валидный URL домена `youtube.com` / `youtu.be` или `rutube.ru`
 - Видео должно быть публичным и доступным
 - Максимальная длительность видео: **15 минут** (проверяется на бэкенде)
 
@@ -72,14 +72,12 @@
 ```json
 {
   "job_id": "550e8400-e29b-41d4-a716-446655440000",
-  "status": "processing",
-  "estimated_time_sec": 30
+  "status": "searching"
 }
 ```
 
 - `job_id` — UUID v4, используется для поллинга статуса
-- `estimated_time_sec` — ориентировочное время обработки (для отображения прогресса)
-
+- 
 **Возможные ошибки:**
 
 - `400` — `INVALID_URL` (неверный формат ссылки)
@@ -106,12 +104,9 @@
 ```json
 {
   "job_id": "550e8400-e29b-41d4-a716-446655440000",
-  "status": "processing",
-  "progress_percent": 45
+  "status": "processing"
 }
 ```
-- `progress_percent` — 0–100, для отображения прогресс-бара
-
 **Ответ (200) — задача завершена успешно:**
 
 ```json

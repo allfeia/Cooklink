@@ -1,18 +1,20 @@
 import { useState } from "react";
-import { Youtube, Check } from "lucide-react";
+import {Youtube, Check, AlertCircle} from "lucide-react";
 import { EXAMPLE_RECIPES } from "../features/recipe/recipe";
 import { motion } from "motion/react";
 import { useLanguage } from "../../context/LanguageContext";
 import {parseVideoUrl, ValidVideoUrl} from "../../../../common/validation/validatePipeline";
+import {createRecipeJob, RecipeApiError} from "@/app/api/recipesApi";
 
 interface InputSectionProps {
-  onSubmit: (url: string) => void;
+  onSubmit: (jobId: string) => void;
 }
 
 export function InputSection({ onSubmit }: InputSectionProps) {
   const [url, setUrl] = useState("");
   const [isValid, setIsValid] = useState<boolean | null>(null);
   const [parsed, setParsed] = useState<ValidVideoUrl | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { t } = useLanguage();
 
   const handleUrlChange = (value: string) => {
@@ -27,12 +29,22 @@ export function InputSection({ onSubmit }: InputSectionProps) {
     setParsed(result);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (parsed) {
-        alert("URL корретный")
-      // onSubmit(url);
+    if (!parsed || isSubmitting) return;
+
+    setIsSubmitting(true);
+    try {
+        const { job_id } = await createRecipeJob(parsed.sourceUrl);
+        onSubmit(job_id);
+    } catch (error) {
+        if (error instanceof RecipeApiError) {
+            console.log(error.message);
+        }
+    } finally {
+        setIsSubmitting(false);
     }
+
   };
 
   // const handleExampleClick = (exampleUrl: string) => {
@@ -80,6 +92,7 @@ export function InputSection({ onSubmit }: InputSectionProps) {
                 placeholder={t("placeholder")}
                 className="flex-1 bg-transparent outline-none text-foreground placeholder:text-muted-foreground"
                 aria-label={t("placeholder")}
+                disabled={isSubmitting}
               />
               {isValid === true && (
                 <motion.div
@@ -90,22 +103,25 @@ export function InputSection({ onSubmit }: InputSectionProps) {
                   <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
                 </motion.div>
               )}
+                {isValid === false && (
+                    <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
+                )}
             </div>
           </div>
 
           <button
             type="submit"
-            disabled={!isValid}
+            disabled={!isValid || isSubmitting}
             className={`
               w-full py-4 rounded-xl font-medium text-white transition-all
-              ${isValid
+              ${isValid && !isSubmitting
                 ? "bg-[#2563EB] hover:bg-[#1d4ed8] shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40"
                 : "bg-muted text-muted-foreground cursor-not-allowed"
               }
             `}
             aria-label={t("generateRecipe")}
           >
-            {t("generateRecipe")}
+            {isSubmitting ? t("submitting") : t("generateRecipe")}
           </button>
         </form>
 
