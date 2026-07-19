@@ -1,4 +1,4 @@
-## Схема данных рецепта (TypeScript-интерфейс)
+````## Схема данных рецепта (TypeScript-интерфейс)
 
 Для типизации на фронтенде и валидации на бэкенде:
 
@@ -7,9 +7,6 @@
 
 export type Difficulty = 1 | 2 | 3 | 4 | 5;
 export type JobStatus =
-    | 'processing'   // начата обработка
-    | 'validation'   // валидация ссылки и проверка лимитов пользователя
-    | 'searching'   // поиск наличия рецепта в базе или готового pdf
     | 'scanning'    // получение метаданных видео
     | 'downloading' // скачивание аудиофайла по ссылке
     | 'transcribing' // получение/генерация транскрипции
@@ -27,7 +24,7 @@ export interface Ingredient {
 // если quantity="по вкусу", то unit=""
 
 export interface RecipeStep {
-  step_number: number;       // 1..20
+  step_number: number;       // 1..50
   description: string;       // min 10, max 1000 chars
 }
 
@@ -46,8 +43,9 @@ export interface RecipeData {
 
 export interface RecipeJob {
   job_id: string;            // UUID v4
-  recipe_id: string;         // UUID v4
-  source_url: string;        // нормализованный You(Ru)Tube URL
+  recipe_id?: string;         // UUID v4
+  source_url: string;        // URL
+  canonical_key: string;     // составной ключ видео из домена + id видео
   status: JobStatus;
   data?: RecipeData;         // присутствует только если status === 'completed'
   error_code?: string;       // присутствует только если status === 'failed'
@@ -57,3 +55,4 @@ export interface RecipeJob {
   created_at: string;        // ISO 8601 timestamp
 }
 ```
+````

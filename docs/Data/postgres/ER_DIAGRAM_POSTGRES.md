@@ -14,7 +14,7 @@ erDiagram
         UUID id PK
         UUID user_id FK
         VARCHAR video_url
-        VARCHAR platform
+        VARCHAR canonicalKey
         VARCHAR status
         VARCHAR error_code
         TEXT error_message
@@ -24,8 +24,7 @@ erDiagram
     }
     
     video_metadata {
-        UUID id PK
-        VARCHAR UNIQUE(video_url)
+        VARCHAR video_id PK
         VARCHAR platform
         VARCHAR title
         VARCHAR channael_name

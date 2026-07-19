@@ -14,18 +14,24 @@
     "test:3": "node external_services_tests/test-3-llm.js",
     "test:3:single": "node external_services_tests/test-3-llm.js --limit=1",
     "model-test": "node external_services_tests/utils/qwen-call.js",
-    "fetch-recipe": "node external_services_tests/utils/fetch-recipe.js"
+    "fetch-recipe": "node external_services_tests/utils/fetch-recipe.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts"
   },
   "dependencies": {
     "@distube/ytdl-core": "^4.14.4",
     "axios": "^1.15.1",
+    "cors": "^2.8.6",
     "dotenv": "^16.4.5",
+    "express": "^5.2.1",
     "openai": "^6.34.0",
     "youtube-transcript": "^1.0.6",
     "yt-dlp-exec": "^1.0.2"
   },
   "devDependencies": {
-    "@types/node": "^26.1.1",
+    "@types/cors": "^2.8.19",
+    "@types/node": "^22.20.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.3",
     "vitest": "^4.1.10"
   }
 }
