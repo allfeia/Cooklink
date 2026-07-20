@@ -7,7 +7,6 @@
     "strict": true,
     "skipLibCheck": true,
     "outDir": "dist",
-    "rootDir": "."
   },
-  "include": ["src/**/*", "../common/**/*"]
+  "include": ["src/**/*", "../common/**/*", "types/**/*.d.ts"]
 }
