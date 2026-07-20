@@ -27,10 +27,8 @@ erDiagram
         VARCHAR video_id PK
         VARCHAR platform
         VARCHAR title
-        VARCHAR channael_name
+        VARCHAR channel_name
         INTEGER duration_seconds
-        BOOLEAN is_available
-        BOOLEAN has_audio
         TIMESTAMPTZ fetched_at
     }
     

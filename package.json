@@ -4,7 +4,8 @@
   "version": "0.0.1",
   "scripts": {
     "build": "vite build",
-    "dev": "vite"
+    "dev": "vite",
+    "test": "vitest run"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",

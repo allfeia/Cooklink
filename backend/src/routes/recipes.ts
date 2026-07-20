@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { randomUUID } from 'crypto';
 import { parseVideoUrl } from '../../../common/validation/validatePipeline';
 import { recipeJobStore, type RecipeJob } from './recipeJobStore';
+import {checkVideoMetadata, MetadataError} from "./videoMetadataService";
 
 const router = Router();
 
@@ -32,6 +33,21 @@ router.post('/recipes', async (req, res) => {
     };
 
     await recipeJobStore.create(job);
+
+    try {
+        await checkVideoMetadata(parsed.sourceUrl, parsed.videoId, parsed.platform);
+    } catch (err) {
+        if (err instanceof MetadataError) {
+            return res.status(400).json({
+                error: {
+                    code: err.code,
+                    message: err.message,
+                    details: err.details,
+                }
+            })
+        }
+        throw err;
+    }
 
     return res.status(202).json(job);
 });
