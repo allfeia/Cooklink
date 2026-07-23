@@ -21,6 +21,7 @@ export default defineConfig({
             // Alias @ to the src directory
             '@': path.resolve(__dirname, './src'),
             'yt-dlp-exec': path.resolve(__dirname, 'backend/node_modules/yt-dlp-exec'),
+            'axios': path.resolve(__dirname, 'backend/node_modules/axios'),
 
         },
     },
