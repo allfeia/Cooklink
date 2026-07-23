@@ -1,7 +1,6 @@
 export type JobStatus =
     | 'scanning'    // получение метаданных видео
-    | 'downloading' // скачивание аудиофайла по ссылке
-    | 'transcribing' // получение/генерация транскрипции
+    | 'transcribing' // генерация транскрипции
     | 'llm_processing' // извлечение рецепта через LLM
     | 'generating_pdf' // генерация PDF
     | 'completed'    // успешно завершено
@@ -19,6 +18,7 @@ export interface RecipeJob {
 
 export interface RecipeJobRepository {
     create(job: RecipeJob): Promise<void>;
+    updateStatus(jobId: string, status: JobStatus): Promise<void>;
 }
 
 export class InMemoryRecipeJobRepository implements RecipeJobRepository {
@@ -28,6 +28,14 @@ export class InMemoryRecipeJobRepository implements RecipeJobRepository {
     async create(job: RecipeJob): Promise<void> {
         this.jobsById.set(job.job_id, job);
         this.jobIdByCanonicalKey.set(job.canonical_key, job.job_id);
+    }
+
+    async updateStatus(jobId: string, status: JobStatus): Promise<void> {
+        const job = this.jobsById.get(jobId);
+        if (!job) {
+            throw new Error(`Job not found: ${jobId}`);
+        }
+        job.status = status;
     }
 }
 

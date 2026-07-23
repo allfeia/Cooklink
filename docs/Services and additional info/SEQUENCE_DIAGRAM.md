@@ -80,6 +80,7 @@ sequenceDiagram
                     alt VIDEO_UNAVAILABLE / TOO_LONG / NO_AUDIO
                         API-->>FE: 400
                     else OK
+                        WYM->>DB: status = transcribing
                         API->>MQ: publish youtube_queue
                     end
 
@@ -95,7 +96,6 @@ sequenceDiagram
         end
 %% ================= YOUTUBE WORKER =================
     WYS->>MQ: consume youtube_queue
-    WYS->>DB: status = transcribing
 
     WYS->>YT: get subtitles
     alt subtitles error
