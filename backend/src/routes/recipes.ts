@@ -3,6 +3,7 @@ import { randomUUID } from 'crypto';
 import { parseVideoUrl } from '../../../common/validation/validatePipeline';
 import { recipeJobStore, type RecipeJob } from './recipeJobStore';
 import { runMetadataCheck, MetadataError } from '../workers/metadataWorker';
+import { runSubtitlesFetch, SubtitlesError } from '../workers/subtitlesWorker';
 
 const router = Router();
 
@@ -38,6 +39,21 @@ router.post('/recipes', async (req, res) => {
         await runMetadataCheck(job.job_id, parsed.sourceUrl, parsed.videoId, parsed.platform);
     } catch (err) {
         if (err instanceof MetadataError) {
+            return res.status(400).json({
+                error: {
+                    code: err.code,
+                    message: err.message,
+                    details: err.details,
+                }
+            })
+        }
+        throw err;
+    }
+
+    try {
+        await runSubtitlesFetch(job.job_id, parsed.sourceUrl, parsed.videoId);
+    } catch (err) {
+        if (err instanceof SubtitlesError) {
             return res.status(400).json({
                 error: {
                     code: err.code,
