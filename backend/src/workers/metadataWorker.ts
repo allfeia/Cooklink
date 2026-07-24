@@ -12,7 +12,13 @@ export async function runMetadataCheck(
     videoId: string,
     platform: Platform
 ): Promise<VideoMetadata> {
-    const metadata = await checkVideoMetadata(sourceUrl, videoId, platform);
+    let metadata: VideoMetadata;
+    try {
+        metadata = await checkVideoMetadata(sourceUrl, videoId, platform);
+    } catch (err) {
+        console.error('checkVideoMetadata failed:', err);
+        throw err;
+    }
     console.log('checkVideoMetadata:', metadata);
     await recipeJobStore.updateStatus(jobId, 'transcribing');
     return metadata;

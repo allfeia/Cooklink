@@ -3,7 +3,7 @@ import { randomUUID } from 'crypto';
 import { parseVideoUrl } from '../../../common/validation/validatePipeline';
 import { recipeJobStore, type RecipeJob } from './recipeJobStore';
 import { runMetadataCheck, MetadataError } from '../workers/metadataWorker';
-import { runSubtitlesFetch, SubtitlesError } from '../workers/subtitlesWorker';
+import { runSubtitlesAndExtraction, SubtitlesError, LlmExtractionError } from '../workers/subtitlesWorker';
 
 const router = Router();
 
@@ -50,8 +50,9 @@ router.post('/recipes', async (req, res) => {
         throw err;
     }
 
+    let recipe;
     try {
-        await runSubtitlesFetch(job.job_id, parsed.sourceUrl, parsed.videoId);
+        recipe = await runSubtitlesAndExtraction(job.job_id, parsed.sourceUrl, parsed.videoId);
     } catch (err) {
         if (err instanceof SubtitlesError) {
             return res.status(400).json({
@@ -62,10 +63,21 @@ router.post('/recipes', async (req, res) => {
                 }
             })
         }
+        if (err instanceof LlmExtractionError) {
+            return res.status(422).json({
+                error: {
+                    code: err.code,
+                    message: err.message,
+                    details: err.details,
+                }
+            })
+        }
         throw err;
     }
 
-    return res.status(202).json(job);
+    await recipeJobStore.updateStatus(job.job_id, 'completed');
+
+    return res.status(202).json({ ...job, data: recipe });
 });
 
 export default router;

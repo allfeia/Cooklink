@@ -1,11 +1,14 @@
+import type { ApiRecipeData } from "../components/features/recipe/recipe";
+
 const BASE_URL = import.meta.env.API_BASE_URL ?? "http://localhost:8000/v1";
 
 export interface CreateRecipeJobResponse {
     job_id: string;
-    status: 'scanning';
+    status: string;
     canonical_key: string;
     source_url: string;
     created_at: string;
+    data?: ApiRecipeData;
 }
 
 export class RecipeApiError extends Error {
