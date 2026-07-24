@@ -5,9 +5,10 @@ import { motion } from "motion/react";
 import { useLanguage } from "../../context/LanguageContext";
 import { parseVideoUrl, type ValidVideoUrl } from "../../../../common/validation/validatePipeline";
 import { createRecipeJob, RecipeApiError } from "@/app/api/recipesApi";
+import type { ApiRecipeData } from "../features/recipe/recipe";
 
 interface InputSectionProps {
-    onSubmit: (jobId: string) => void;
+    onSubmit: (result: { recipe: ApiRecipeData; sourceUrl: string }) => void;
 }
 
 export function InputSection({ onSubmit }: InputSectionProps) {
@@ -19,10 +20,14 @@ export function InputSection({ onSubmit }: InputSectionProps) {
     const { t } = useLanguage();
 
     const errorMessageByCode: Record<string, string> = {
-        INVALID_URL: t("Invalid URl"),
-        VIDEO_UNAVAILABLE: t("Video unavailable"),
-        VIDEO_TOO_LONG: t("Video too long"),
-        VIDEO_NO_AUDIO: t("Video has no audio"),
+        INVALID_URL: t("errorInvalidUrl"),
+        VIDEO_UNAVAILABLE: t("errorVideoUnavailable"),
+        VIDEO_TOO_LONG: t("errorVideoTooLong"),
+        VIDEO_NO_AUDIO: t("errorVideoNoAudio"),
+        NO_SUBTITLES: t("errorNoSubtitles"),
+        SUBTITLES_FETCH_FAILED: t("errorSubtitlesFetchFailed"),
+        AI_EXTRACTION_FAILED: t("errorAiExtractionFailed"),
+        INVALID_JSON_SCHEMA: t("errorInvalidJsonSchema"),
     };
 
     const handleUrlChange = (value: string) => {
@@ -40,7 +45,7 @@ export function InputSection({ onSubmit }: InputSectionProps) {
         setParsed(result);
 
         if (result === null && value.length > 10) {
-            setErrorMessage(t("Invalid URL"));
+            setErrorMessage(t("invalidYouTubeUrl"));
         }
     };
 
@@ -51,13 +56,17 @@ export function InputSection({ onSubmit }: InputSectionProps) {
         setIsSubmitting(true);
         setErrorMessage(null);
         try {
-            const { job_id } = await createRecipeJob(parsed.sourceUrl);
-            onSubmit(job_id);
+            const { data } = await createRecipeJob(parsed.sourceUrl);
+            if (!data) {
+                setErrorMessage(t("errorInternalServer"));
+                return;
+            }
+            onSubmit({ recipe: data, sourceUrl: parsed.sourceUrl });
         } catch (error) {
             if (error instanceof RecipeApiError) {
-                setErrorMessage(errorMessageByCode[error.code] ?? t("Internal server error"));
+                setErrorMessage(errorMessageByCode[error.code] ?? t("errorInternalServer"));
             } else {
-                setErrorMessage(t("Internal server error"));
+                setErrorMessage(t("errorInternalServer"));
             }
         } finally {
             setIsSubmitting(false);

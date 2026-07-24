@@ -26,6 +26,16 @@ const translations = {
     generateRecipe: "Сгенерировать рецепт",
     invalidYouTubeUrl: "Неверная ссылка на YouTube",
     tryExamples: "Попробуйте примеры для быстрого теста:",
+    // Errors
+    errorInvalidUrl: "Неверный формат ссылки",
+    errorVideoUnavailable: "Видео недоступно",
+    errorVideoTooLong: "Видео длиннее 15 минут",
+    errorVideoNoAudio: "В видео отсутствует аудиодорожка",
+    errorNoSubtitles: "В видео нет субтитров",
+    errorSubtitlesFetchFailed: "Не удалось получить субтитры, попробуйте позже",
+    errorAiExtractionFailed: "Не удалось извлечь рецепт из видео",
+    errorInvalidJsonSchema: "Не удалось обработать ответ AI, попробуйте ещё раз",
+    errorInternalServer: "Внутренняя ошибка сервера",
     // Loading
     analyzing: "Анализируем видео...",
     extracting: "Извлекаем ингредиенты и шаги...",
@@ -89,6 +99,16 @@ const translations = {
     generateRecipe: "Generate recipe",
     invalidYouTubeUrl: "Invalid YouTube URL",
     tryExamples: "Try examples for a quick test:",
+    // Errors
+    errorInvalidUrl: "Invalid link format",
+    errorVideoUnavailable: "Video unavailable",
+    errorVideoTooLong: "Video is longer than 15 minutes",
+    errorVideoNoAudio: "Video has no audio track",
+    errorNoSubtitles: "No subtitles available for this video",
+    errorSubtitlesFetchFailed: "Failed to fetch subtitles, please try again",
+    errorAiExtractionFailed: "Couldn't extract a recipe from this video",
+    errorInvalidJsonSchema: "Failed to process the AI response, please try again",
+    errorInternalServer: "Internal server error",
     // Loading
     analyzing: "Analyzing video...",
     extracting: "Extracting ingredients and steps...",

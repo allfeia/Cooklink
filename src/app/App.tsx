@@ -4,7 +4,7 @@ import { InputSection } from "./components/forms/InputSection";
 import { LoadingState } from "./components/states/LoadingState";
 import { RecipeCard } from "./components/features/recipe/RecipeCard";
 import { Toaster } from "./components/feedback/sonner";
-import { Recipe, MOCK_RECIPE } from "./components/features/recipe/recipe";
+import { Recipe, ApiRecipeData, mapApiRecipeToRecipe } from "./components/features/recipe/recipe";
 import { motion, AnimatePresence } from "motion/react";
 import { ThemeProvider } from "./context/ThemeContext";
 import { LanguageProvider, useLanguage } from "./context/LanguageContext";
@@ -17,26 +17,14 @@ function AppContent() {
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const { t } = useLanguage();
 
-  const handleSubmit = async (url: string) => {
+  const handleSubmit = async ({ recipe: apiRecipe, sourceUrl }: { recipe: ApiRecipeData; sourceUrl: string }) => {
     setState("loading");
 
-    // Симуляция обработки (в реальном приложении здесь будет API запрос)
-    setTimeout(async () => {
-      const recipeWithYoutube = {
-        ...MOCK_RECIPE,
-        youtubeUrl: url,
-      };
+    const mapped = mapApiRecipeToRecipe(apiRecipe, sourceUrl);
+    const dishImage = await searchDishImage(mapped.title);
 
-      // Generate dish image based on recipe title
-      const dishImage = await searchDishImage(recipeWithYoutube.title);
-      const finalRecipe = {
-        ...recipeWithYoutube,
-        dishImage,
-      };
-
-      setRecipe(finalRecipe);
-      setState("result");
-    }, 6000); // 6 секунд для демонстрации
+    setRecipe({ ...mapped, dishImage });
+    setState("result");
   };
 
   const handleCancel = () => {

@@ -1,4 +1,4 @@
-import { ArrowLeft, Download, Share2, Clock, Users, ChefHat, ExternalLink } from "lucide-react";
+import { ArrowLeft, Download, Share2, Clock, Users, ChefHat, ExternalLink, Gauge } from "lucide-react";
 import { Recipe } from "./recipe";
 import { DifficultyIndicator } from "./DifficultyIndicator";
 import { motion } from "motion/react";
@@ -39,7 +39,8 @@ export function RecipeCard({ recipe, onBack, onNewRecipe }: RecipeCardProps) {
       doc.setFontSize(10);
 
       recipe.ingredients.forEach((ing) => {
-        const text = `• ${ing.quantity} ${ing.unit} ${ing.name}`.trim();
+        const amount = [ing.quantity, ing.unit].filter(Boolean).join(" ").trim();
+        const text = amount ? `• ${ing.name} — ${amount}` : `• ${ing.name}`;
         doc.text(text, margin + 5, y);
         y += 6;
       });
@@ -189,12 +190,13 @@ export function RecipeCard({ recipe, onBack, onNewRecipe }: RecipeCardProps) {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <div className="w-5 h-5 flex items-center">
-                    <DifficultyIndicator level={recipe.difficulty} />
-                  </div>
+                  <Gauge className="w-5 h-5 text-muted-foreground" />
                   <div>
                     <p className="text-sm text-muted-foreground">{t("difficulty")}</p>
-                    <p className="font-medium">{recipe.difficulty}/5</p>
+                    <div className="flex items-center gap-2">
+                      <DifficultyIndicator level={recipe.difficulty} />
+                      <span className="font-medium">{recipe.difficulty}/5</span>
+                    </div>
                   </div>
                 </div>
 
@@ -224,20 +226,29 @@ export function RecipeCard({ recipe, onBack, onNewRecipe }: RecipeCardProps) {
                   {t("ingredients")}
                 </h2>
                 <ul className="space-y-3">
-                  {recipe.ingredients.map((ingredient, index) => (
-                    <li
-                      key={index}
-                      className="flex items-start gap-3 text-foreground"
-                    >
-                      <span className="w-2 h-2 rounded-full bg-[#2563EB] mt-2 flex-shrink-0" />
-                      <span>
-                        <span className="font-medium">
-                          {ingredient.quantity} {ingredient.unit}
-                        </span>{" "}
-                        — {ingredient.name}
-                      </span>
-                    </li>
-                  ))}
+                  {recipe.ingredients.map((ingredient, index) => {
+                    const amount = [ingredient.quantity, ingredient.unit]
+                      .filter(Boolean)
+                      .join(" ")
+                      .trim();
+                    return (
+                      <li
+                        key={index}
+                        className="flex items-start gap-3 text-foreground"
+                      >
+                        <span className="w-2 h-2 rounded-full bg-[#2563EB] mt-2 flex-shrink-0" />
+                        <span>
+                          {ingredient.name}
+                          {amount && (
+                            <>
+                              {" "}—{" "}
+                              <span className="font-medium">{amount}</span>
+                            </>
+                          )}
+                        </span>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
 

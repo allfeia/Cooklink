@@ -1,5 +1,3 @@
-// vite.config.ts
-
 /// <reference types="vitest/config" />
 import { defineConfig } from 'vite'
 import path from 'path'
@@ -22,6 +20,7 @@ export default defineConfig({
             '@': path.resolve(__dirname, './src'),
             'yt-dlp-exec': path.resolve(__dirname, 'backend/node_modules/yt-dlp-exec'),
             'axios': path.resolve(__dirname, 'backend/node_modules/axios'),
+            'openai': path.resolve(__dirname, 'backend/node_modules/openai'),
 
         },
     },
