@@ -1,12 +1,12 @@
 import { recipeJobStore } from '../routes/recipeJobStore';
-import { fetchSubtitles, SubtitlesError } from '../routes/subtitlesService';
-import type { Transcript } from '../routes/subtitlesStore';
-import { extractRecipe, LlmExtractionError } from '../routes/llmService';
-import type { RecipeData } from '../routes/recipeStore';
+import { fetchSubtitles, SubtitlesError } from '../routes/subtitles/subtitlesService';
+import type { Transcript } from '../routes/subtitles/subtitlesStore';
+import { extractRecipe, LlmExtractionError } from '../routes/llm/llmService';
+import type { RecipeData } from '../routes/recipe/recipeStore';
 
 export { SubtitlesError, LlmExtractionError };
-export type { SubtitlesErrorCode } from '../routes/subtitlesService';
-export type { LlmErrorCode } from '../routes/llmService';
+export type { SubtitlesErrorCode } from '../routes/subtitles/subtitlesService';
+export type { LlmErrorCode } from '../routes/llm/llmService';
 
 export async function runSubtitlesAndExtraction(
     jobId: string,
@@ -18,6 +18,9 @@ export async function runSubtitlesAndExtraction(
         transcript = await fetchSubtitles(sourceUrl, videoId);
     } catch (err) {
         console.error('fetchSubtitles failed:', err);
+        const code = err instanceof SubtitlesError ? err.code : 'INTERNAL_SERVER_ERROR';
+        const message = err instanceof Error ? err.message : 'Внутренняя ошибка сервера';
+        await recipeJobStore.markFailed(jobId, code, message);
         throw err;
     }
     console.log('fetchSubtitles:', transcript);
@@ -28,6 +31,9 @@ export async function runSubtitlesAndExtraction(
         recipe = await extractRecipe(transcript.transcript_text, videoId);
     } catch (err) {
         console.error('extractRecipe failed:', err);
+        const code = err instanceof LlmExtractionError ? err.code : 'INTERNAL_SERVER_ERROR';
+        const message = err instanceof Error ? err.message : 'Внутренняя ошибка сервера';
+        await recipeJobStore.markFailed(jobId, code, message);
         throw err;
     }
     console.log('extractRecipe:', recipe);

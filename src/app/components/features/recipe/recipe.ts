@@ -9,6 +9,7 @@ export interface Recipe {
   comment?: string;
   youtubeUrl?: string;
   dishImage?: string;
+  pdfUrl?: string;
 }
 
 export interface Ingredient {
@@ -42,7 +43,7 @@ function normalizeQuantity(rawQuantity: string | number, unit: string): string {
   return quantity;
 }
 
-export function mapApiRecipeToRecipe(data: ApiRecipeData, sourceUrl: string): Recipe {
+export function mapApiRecipeToRecipe(data: ApiRecipeData, sourceUrl: string, pdfUrl?: string): Recipe {
   return {
     title: data.title,
     time: data.cooking_time_minutes,
@@ -63,6 +64,7 @@ export function mapApiRecipeToRecipe(data: ApiRecipeData, sourceUrl: string): Re
     comment: data.comments,
     youtubeUrl: sourceUrl,
     dishImage: "",
+    pdfUrl,
   };
 }
 

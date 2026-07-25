@@ -8,7 +8,7 @@ import { createRecipeJob, RecipeApiError } from "@/app/api/recipesApi";
 import type { ApiRecipeData } from "../features/recipe/recipe";
 
 interface InputSectionProps {
-    onSubmit: (result: { recipe: ApiRecipeData; sourceUrl: string }) => void;
+    onSubmit: (result: { recipe: ApiRecipeData; sourceUrl: string; pdfUrl?: string }) => void;
 }
 
 export function InputSection({ onSubmit }: InputSectionProps) {
@@ -56,12 +56,12 @@ export function InputSection({ onSubmit }: InputSectionProps) {
         setIsSubmitting(true);
         setErrorMessage(null);
         try {
-            const { data } = await createRecipeJob(parsed.sourceUrl);
+            const { data, pdf_url } = await createRecipeJob(parsed.sourceUrl);
             if (!data) {
                 setErrorMessage(t("errorInternalServer"));
                 return;
             }
-            onSubmit({ recipe: data, sourceUrl: parsed.sourceUrl });
+            onSubmit({ recipe: data, sourceUrl: parsed.sourceUrl, pdfUrl: pdf_url });
         } catch (error) {
             if (error instanceof RecipeApiError) {
                 setErrorMessage(errorMessageByCode[error.code] ?? t("errorInternalServer"));

@@ -17,10 +17,10 @@ function AppContent() {
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const { t } = useLanguage();
 
-  const handleSubmit = async ({ recipe: apiRecipe, sourceUrl }: { recipe: ApiRecipeData; sourceUrl: string }) => {
+  const handleSubmit = async ({ recipe: apiRecipe, sourceUrl, pdfUrl }: { recipe: ApiRecipeData; sourceUrl: string; pdfUrl?: string }) => {
     setState("loading");
 
-    const mapped = mapApiRecipeToRecipe(apiRecipe, sourceUrl);
+    const mapped = mapApiRecipeToRecipe(apiRecipe, sourceUrl, pdfUrl);
     const dishImage = await searchDishImage(mapped.title);
 
     setRecipe({ ...mapped, dishImage });

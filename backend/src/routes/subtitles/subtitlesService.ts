@@ -1,6 +1,6 @@
 import ytDlp from 'yt-dlp-exec';
 import axios from 'axios';
-import { sleep } from '../utils/sleep';
+import { sleep } from '../../utils/sleep';
 import { subtitlesStore, type Transcript } from './subtitlesStore';
 
 export const MAX_RETRIES = 3;

@@ -49,13 +49,15 @@ describe('runMetadataCheck', () => {
         expect(job.status).toBe('transcribing');
     });
 
-    it('leaves the job status untouched when metadata check fails', async () => {
+    it('marks the job as failed when metadata check fails', async () => {
         mockYtDlp.mockResolvedValue(buildRaw({ availability: 'private' }));
 
         await expect(
             runMetadataCheck(job.job_id, job.source_url, 'abc', 'youtube')
         ).rejects.toMatchObject({ code: 'VIDEO_UNAVAILABLE' });
 
-        expect(job.status).toBe('scanning');
+        expect(job.status).toBe('failed');
+        expect(job.error_code).toBe('VIDEO_UNAVAILABLE');
+        expect(job.error_message).toBeTruthy();
     });
 });

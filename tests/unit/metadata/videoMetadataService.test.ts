@@ -1,5 +1,5 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest';
-import { checkVideoMetadata, MAX_DURATION_SEC } from '../../../backend/src/routes/videoMetadataService';
+import { checkVideoMetadata, MAX_DURATION_SEC } from '../../../backend/src/routes/metadata/videoMetadataService';
 
 const { mockYtDlp } = vi.hoisted(() => ({
     mockYtDlp: vi.fn(),

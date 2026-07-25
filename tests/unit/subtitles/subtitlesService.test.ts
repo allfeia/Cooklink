@@ -3,7 +3,7 @@ import {
     fetchSubtitles,
     computeBackoffDelayMs,
     MAX_RETRIES,
-} from '../../../backend/src/routes/subtitlesService';
+} from '../../../backend/src/routes/subtitles/subtitlesService';
 
 const { mockYtDlp, mockAxiosGet, mockSleep } = vi.hoisted(() => ({
     mockYtDlp: vi.fn(),
