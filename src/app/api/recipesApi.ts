@@ -9,6 +9,7 @@ export interface CreateRecipeJobResponse {
     source_url: string;
     created_at: string;
     data?: ApiRecipeData;
+    pdf_url?: string;
 }
 
 export class RecipeApiError extends Error {
@@ -30,7 +31,11 @@ export async function createRecipeJob(sourceUrl: string): Promise<CreateRecipeJo
     });
 
     if (response.status === 202) {
-        return response.json();
+        const body: CreateRecipeJobResponse = await response.json();
+        if (body.pdf_url) {
+            body.pdf_url = new URL(body.pdf_url, BASE_URL).href;
+        }
+        return body;
     }
 
     const body = await response.json().catch(() => null);

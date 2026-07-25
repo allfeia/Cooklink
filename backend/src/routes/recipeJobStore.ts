@@ -13,12 +13,16 @@ export interface RecipeJob {
     source_url: string;        // URL
     canonical_key: string;     // составной ключ видео из домена + id видео
     status: JobStatus;
+    error_code?: string;       // присутствует только если status === 'failed'
+    error_message?: string;    // описание ошибки
     created_at: string;        // ISO 8601 timestamp
 }
 
 export interface RecipeJobRepository {
     create(job: RecipeJob): Promise<void>;
     updateStatus(jobId: string, status: JobStatus): Promise<void>;
+    markFailed(jobId: string, errorCode: string, errorMessage: string): Promise<void>;
+    findById(jobId: string): Promise<RecipeJob | undefined>;
 }
 
 export class InMemoryRecipeJobRepository implements RecipeJobRepository {
@@ -36,6 +40,20 @@ export class InMemoryRecipeJobRepository implements RecipeJobRepository {
             throw new Error(`Job not found: ${jobId}`);
         }
         job.status = status;
+    }
+
+    async markFailed(jobId: string, errorCode: string, errorMessage: string): Promise<void> {
+        const job = this.jobsById.get(jobId);
+        if (!job) {
+            throw new Error(`Job not found: ${jobId}`);
+        }
+        job.status = 'failed';
+        job.error_code = errorCode;
+        job.error_message = errorMessage;
+    }
+
+    async findById(jobId: string): Promise<RecipeJob | undefined> {
+        return this.jobsById.get(jobId);
     }
 }
 

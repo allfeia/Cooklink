@@ -86,18 +86,19 @@ describe('runSubtitlesAndExtraction', () => {
         expect(job.status).toBe('generating_pdf');
     });
 
-    it('leaves the job status untouched when no subtitles are found', async () => {
+    it('marks the job as failed when no subtitles are found', async () => {
         mockYtDlp.mockResolvedValue({ subtitles: {}, automatic_captions: {} });
 
         await expect(
             runSubtitlesAndExtraction(job.job_id, job.source_url, 'abc')
         ).rejects.toMatchObject({ code: 'NO_SUBTITLES' });
 
-        expect(job.status).toBe('transcribing');
+        expect(job.status).toBe('failed');
+        expect(job.error_code).toBe('NO_SUBTITLES');
         expect(mockCreate).not.toHaveBeenCalled();
     });
 
-    it('leaves the job at llm_processing when recipe extraction fails', async () => {
+    it('marks the job as failed when recipe extraction fails', async () => {
         mockYtDlp.mockResolvedValue({ subtitles: { ru: [{ ext: 'vtt', url: 'https://cdn/ru.vtt' }] } });
         mockAxiosGet.mockResolvedValue({ data: RU_VTT });
         mockCreate.mockResolvedValue(streamOf(''));
@@ -106,6 +107,7 @@ describe('runSubtitlesAndExtraction', () => {
             runSubtitlesAndExtraction(job.job_id, job.source_url, 'abc')
         ).rejects.toMatchObject({ code: 'AI_EXTRACTION_FAILED' });
 
-        expect(job.status).toBe('llm_processing');
+        expect(job.status).toBe('failed');
+        expect(job.error_code).toBe('AI_EXTRACTION_FAILED');
     });
 });

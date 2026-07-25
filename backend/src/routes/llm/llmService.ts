@@ -1,8 +1,8 @@
 import OpenAI from 'openai';
-import { recipeStore, RECIPE_TYPES, type RecipeData } from './recipeStore';
+import { recipeStore, RECIPE_TYPES, type RecipeData } from '../recipe/recipeStore';
 
-export type { RecipeData } from './recipeStore';
-export { RECIPE_TYPES } from './recipeStore';
+export type { RecipeData } from '../recipe/recipeStore';
+export { RECIPE_TYPES } from '../recipe/recipeStore';
 
 export const MAX_RETRIES = 3;
 

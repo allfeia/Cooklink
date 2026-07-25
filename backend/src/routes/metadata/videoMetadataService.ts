@@ -1,5 +1,5 @@
 import ytDlp from 'yt-dlp-exec';
-import type { Platform } from '../../../common/validation/domainDetection';
+import type { Platform } from '../../../../common/validation/domainDetection';
 import { videoMetadataStore, type VideoMetadata } from './videoMetadataStore';
 
 export const MAX_DURATION_SEC = 900; // 15 минут

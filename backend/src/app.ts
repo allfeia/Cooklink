@@ -1,6 +1,6 @@
 import express, { type NextFunction, type Request, type Response } from 'express';
 import cors from 'cors';
-import recipesRouter from './routes/recipes';
+import recipesRouter from './routes/recipe/recipes';
 
 const app = express();
 

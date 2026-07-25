@@ -1,5 +1,5 @@
 import { describe, expect, it, beforeEach } from 'vitest';
-import { InMemoryTranscriptRepository, type Transcript } from '../../../backend/src/routes/subtitlesStore';
+import { InMemoryTranscriptRepository, type Transcript } from '../../../backend/src/routes/subtitles/subtitlesStore';
 
 describe('InMemoryTranscriptRepository', () => {
     let repo: InMemoryTranscriptRepository;

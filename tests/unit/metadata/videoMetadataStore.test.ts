@@ -1,5 +1,5 @@
 import { describe, expect, it, beforeEach } from 'vitest';
-import { InMemoryVideoMetadataRepository, type VideoMetadata } from '../../../backend/src/routes/videoMetadataStore';
+import { InMemoryVideoMetadataRepository, type VideoMetadata } from '../../../backend/src/routes/metadata/videoMetadataStore';
 
 describe('InMemoryVideoMetadataRepository', () => {
     let repo: InMemoryVideoMetadataRepository;

@@ -1,9 +1,9 @@
 import { ArrowLeft, Download, Share2, Clock, Users, ChefHat, ExternalLink, Gauge } from "lucide-react";
+import { useState } from "react";
 import { Recipe } from "./recipe";
 import { DifficultyIndicator } from "./DifficultyIndicator";
 import { motion } from "motion/react";
 import { toast } from "sonner";
-import jsPDF from "jspdf";
 import { useLanguage } from "../../../context/LanguageContext";
 
 interface RecipeCardProps {
@@ -14,92 +14,37 @@ interface RecipeCardProps {
 
 export function RecipeCard({ recipe, onBack, onNewRecipe }: RecipeCardProps) {
   const { t } = useLanguage();
+  const [isDownloading, setIsDownloading] = useState(false);
 
-  const handleDownloadPDF = () => {
+  const handleDownloadPDF = async () => {
+    if (!recipe.pdfUrl || isDownloading) {
+      toast.error(t("pdfError"));
+      return;
+    }
+
+    setIsDownloading(true);
     try {
-      const doc = new jsPDF();
-      const pageWidth = doc.internal.pageSize.getWidth();
-      const margin = 20;
-      let y = 20;
-
-      // Заголовок
-      doc.setFontSize(20);
-      doc.text(recipe.title, margin, y);
-      y += 15;
-
-      // Мета информация
-      doc.setFontSize(10);
-      doc.text(`${t("time")}: ${recipe.time} ${t("minutes")} | ${t("difficulty")}: ${recipe.difficulty}/5 | ${t("servings")}: ${recipe.servings} | ${recipe.type}`, margin, y);
-      y += 15;
-
-      // Ингредиенты
-      doc.setFontSize(14);
-      doc.text(t("ingredients"), margin, y);
-      y += 8;
-      doc.setFontSize(10);
-
-      recipe.ingredients.forEach((ing) => {
-        const amount = [ing.quantity, ing.unit].filter(Boolean).join(" ").trim();
-        const text = amount ? `• ${ing.name} — ${amount}` : `• ${ing.name}`;
-        doc.text(text, margin + 5, y);
-        y += 6;
-      });
-      y += 10;
-
-      // Приготовление
-      doc.setFontSize(14);
-      doc.text(t("preparation"), margin, y);
-      y += 8;
-      doc.setFontSize(10);
-
-      recipe.steps.forEach((step, index) => {
-        const lines = doc.splitTextToSize(`${index + 1}. ${step}`, pageWidth - margin * 2 - 5);
-        lines.forEach((line: string) => {
-          if (y > doc.internal.pageSize.getHeight() - 20) {
-            doc.addPage();
-            y = 20;
-          }
-          doc.text(line, margin + 5, y);
-          y += 6;
-        });
-        y += 4;
-      });
-
-      // Комментарий
-      if (recipe.comment) {
-        y += 10;
-        if (y > doc.internal.pageSize.getHeight() - 40) {
-          doc.addPage();
-          y = 20;
-        }
-        doc.setFontSize(12);
-        doc.text(t("note"), margin, y);
-        y += 8;
-        doc.setFontSize(10);
-        const commentLines = doc.splitTextToSize(recipe.comment, pageWidth - margin * 2);
-        commentLines.forEach((line: string) => {
-          doc.text(line, margin, y);
-          y += 6;
-        });
+      const response = await fetch(recipe.pdfUrl);
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
       }
 
-      // YouTube ссылка
-      if (recipe.youtubeUrl) {
-        y += 10;
-        if (y > doc.internal.pageSize.getHeight() - 20) {
-          doc.addPage();
-          y = 20;
-        }
-        doc.setFontSize(10);
-        doc.text(`${t("sourceVideo")}: ${recipe.youtubeUrl}`, margin, y);
-      }
+      const blob = await response.blob();
+      const objectUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = objectUrl;
+      link.download = `${recipe.title}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(objectUrl);
 
-      // Сохранение
-      doc.save(`${recipe.title}.pdf`);
       toast.success(t("pdfSuccess"));
     } catch (error) {
-      console.error("Ошибка при создании PDF:", error);
+      console.error("Ошибка при скачивании PDF:", error);
       toast.error(t("pdfError"));
+    } finally {
+      setIsDownloading(false);
     }
   };
 
@@ -143,7 +88,8 @@ export function RecipeCard({ recipe, onBack, onNewRecipe }: RecipeCardProps) {
             </button>
             <button
               onClick={handleDownloadPDF}
-              className="px-4 py-2 flex items-center gap-2 rounded-lg bg-[#2563EB] text-white hover:bg-[#1d4ed8] transition-colors shadow-lg shadow-blue-500/30"
+              disabled={isDownloading}
+              className="px-4 py-2 flex items-center gap-2 rounded-lg bg-[#2563EB] text-white hover:bg-[#1d4ed8] transition-colors shadow-lg shadow-blue-500/30 disabled:opacity-60 disabled:cursor-not-allowed"
               aria-label={t("downloadPDF")}
             >
               <Download className="w-4 h-4" />
@@ -299,7 +245,8 @@ export function RecipeCard({ recipe, onBack, onNewRecipe }: RecipeCardProps) {
           <div className="mt-8 flex flex-col sm:flex-row gap-4 max-w-5xl mx-auto">
             <button
               onClick={handleDownloadPDF}
-              className="flex-1 py-4 px-6 flex items-center justify-center gap-2 rounded-xl bg-[#2563EB] text-white hover:bg-[#1d4ed8] transition-colors shadow-lg shadow-blue-500/30"
+              disabled={isDownloading}
+              className="flex-1 py-4 px-6 flex items-center justify-center gap-2 rounded-xl bg-[#2563EB] text-white hover:bg-[#1d4ed8] transition-colors shadow-lg shadow-blue-500/30 disabled:opacity-60 disabled:cursor-not-allowed"
             >
               <Download className="w-5 h-5" />
               {t("downloadPDF")}
@@ -318,7 +265,8 @@ export function RecipeCard({ recipe, onBack, onNewRecipe }: RecipeCardProps) {
       <div className="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-background border-t border-border">
         <button
           onClick={handleDownloadPDF}
-          className="w-full py-4 flex items-center justify-center gap-2 rounded-xl bg-[#2563EB] text-white shadow-lg shadow-blue-500/30"
+          disabled={isDownloading}
+          className="w-full py-4 flex items-center justify-center gap-2 rounded-xl bg-[#2563EB] text-white shadow-lg shadow-blue-500/30 disabled:opacity-60 disabled:cursor-not-allowed"
         >
           <Download className="w-5 h-5" />
           {t("downloadPDF")}
