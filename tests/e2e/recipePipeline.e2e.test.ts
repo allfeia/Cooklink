@@ -30,6 +30,26 @@ vi.mock('openai', () => ({
     }),
 }));
 
+vi.mock('../../backend/src/routes/recipeJobStore', async (importOriginal) => {
+    const actual = await importOriginal<typeof import('../../backend/src/routes/recipeJobStore')>();
+    return { ...actual, recipeJobStore: new actual.InMemoryRecipeJobRepository() };
+});
+
+vi.mock('../../backend/src/routes/metadata/videoMetadataStore', async (importOriginal) => {
+    const actual = await importOriginal<typeof import('../../backend/src/routes/metadata/videoMetadataStore')>();
+    return { ...actual, videoMetadataStore: new actual.InMemoryVideoMetadataRepository() };
+});
+
+vi.mock('../../backend/src/routes/subtitles/subtitlesStore', async (importOriginal) => {
+    const actual = await importOriginal<typeof import('../../backend/src/routes/subtitles/subtitlesStore')>();
+    return { ...actual, subtitlesStore: new actual.InMemoryTranscriptRepository() };
+});
+
+vi.mock('../../backend/src/routes/recipe/recipeStore', async (importOriginal) => {
+    const actual = await importOriginal<typeof import('../../backend/src/routes/recipe/recipeStore')>();
+    return { ...actual, recipeStore: new actual.InMemoryRecipeRepository() };
+});
+
 import app from '../../backend/src/app';
 
 const RU_VTT = `WEBVTT

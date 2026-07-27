@@ -13,14 +13,14 @@ erDiagram
     jobs {
         UUID id PK
         UUID user_id FK
-        VARCHAR video_url
-        VARCHAR canonicalKey
+        VARCHAR source_url
+        VARCHAR canonical_key
         VARCHAR status
         VARCHAR error_code
         TEXT error_message
         INTEGER retry_count
         INTEGER max_retries
-        TIMESTAMPTZ processing_timeout_at
+        TIMESTAMP created_at
     }
     
     video_metadata {
@@ -39,9 +39,8 @@ erDiagram
         UUID id PK
         VARCHAR video_id FK
         VARCHAR language
-        VARCHAR source_platforms
-        VARCHAR transcription
-        TIMESTAMPTZ created_at
+        TEXT transcript_text
+        TIMESTAMPTZ fetched_at
     }
     
     recipes {

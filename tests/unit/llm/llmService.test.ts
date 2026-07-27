@@ -12,6 +12,11 @@ vi.mock('openai', () => ({
     }),
 }));
 
+vi.mock('../../../backend/src/routes/recipe/recipeStore', async (importOriginal) => {
+    const actual = await importOriginal<typeof import('../../../backend/src/routes/recipe/recipeStore')>();
+    return { ...actual, recipeStore: new actual.InMemoryRecipeRepository() };
+});
+
 function streamOf(text: string) {
     return {
         [Symbol.asyncIterator]: async function* () {
