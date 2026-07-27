@@ -4,6 +4,11 @@ import { pdfStore } from '../../../backend/src/routes/pdf/pdfStore';
 import { recipeJobStore, type RecipeJob } from '../../../backend/src/routes/recipeJobStore';
 import type { RecipeData } from '../../../backend/src/routes/recipe/recipeStore';
 
+vi.mock('../../../backend/src/routes/recipeJobStore', async (importOriginal) => {
+    const actual = await importOriginal<typeof import('../../../backend/src/routes/recipeJobStore')>();
+    return { ...actual, recipeJobStore: new actual.InMemoryRecipeJobRepository() };
+});
+
 const recipe: RecipeData = {
     title: 'Паста Карбонара',
     type: 'Горячее',

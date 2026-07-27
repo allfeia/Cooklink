@@ -1,3 +1,7 @@
+import { eq } from 'drizzle-orm';
+import { db } from '../db/client';
+import { jobs } from '../db/schema';
+
 export type JobStatus =
     | 'scanning'    // получение метаданных видео
     | 'transcribing' // генерация транскрипции
@@ -57,4 +61,53 @@ export class InMemoryRecipeJobRepository implements RecipeJobRepository {
     }
 }
 
-export const recipeJobStore: RecipeJobRepository = new InMemoryRecipeJobRepository();
+function toDomain(row: typeof jobs.$inferSelect): RecipeJob {
+    return {
+        job_id: row.id,
+        source_url: row.sourceUrl,
+        canonical_key: row.canonicalKey,
+        status: row.status as JobStatus,
+        error_code: row.errorCode ?? undefined,
+        error_message: row.errorMessage ?? undefined,
+        created_at: row.createdAt.toISOString(),
+    };
+}
+
+export class PostgresRecipeJobRepository implements RecipeJobRepository {
+    async create(job: RecipeJob): Promise<void> {
+        await db.insert(jobs).values({
+            id: job.job_id,
+            sourceUrl: job.source_url,
+            canonicalKey: job.canonical_key,
+            status: job.status,
+            errorCode: job.error_code,
+            errorMessage: job.error_message,
+            createdAt: new Date(job.created_at),
+        });
+    }
+
+    async updateStatus(jobId: string, status: JobStatus): Promise<void> {
+        const result = await db.update(jobs).set({ status }).where(eq(jobs.id, jobId)).returning({ id: jobs.id });
+        if (result.length === 0) {
+            throw new Error(`Job not found: ${jobId}`);
+        }
+    }
+
+    async markFailed(jobId: string, errorCode: string, errorMessage: string): Promise<void> {
+        const result = await db
+            .update(jobs)
+            .set({ status: 'failed', errorCode, errorMessage })
+            .where(eq(jobs.id, jobId))
+            .returning({ id: jobs.id });
+        if (result.length === 0) {
+            throw new Error(`Job not found: ${jobId}`);
+        }
+    }
+
+    async findById(jobId: string): Promise<RecipeJob | undefined> {
+        const [row] = await db.select().from(jobs).where(eq(jobs.id, jobId)).limit(1);
+        return row ? toDomain(row) : undefined;
+    }
+}
+
+export const recipeJobStore: RecipeJobRepository = new PostgresRecipeJobRepository();

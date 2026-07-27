@@ -11,6 +11,16 @@ vi.mock('yt-dlp-exec', () => ({
     default: mockYtDlp,
 }));
 
+vi.mock('../../../backend/src/routes/recipeJobStore', async (importOriginal) => {
+    const actual = await importOriginal<typeof import('../../../backend/src/routes/recipeJobStore')>();
+    return { ...actual, recipeJobStore: new actual.InMemoryRecipeJobRepository() };
+});
+
+vi.mock('../../../backend/src/routes/metadata/videoMetadataStore', async (importOriginal) => {
+    const actual = await importOriginal<typeof import('../../../backend/src/routes/metadata/videoMetadataStore')>();
+    return { ...actual, videoMetadataStore: new actual.InMemoryVideoMetadataRepository() };
+});
+
 const buildRaw = (overrides: Partial<{
     title: string;
     channel: string | null;

@@ -25,6 +25,11 @@ vi.mock('../../../backend/src/utils/sleep', () => ({
     sleep: mockSleep,
 }));
 
+vi.mock('../../../backend/src/routes/subtitles/subtitlesStore', async (importOriginal) => {
+    const actual = await importOriginal<typeof import('../../../backend/src/routes/subtitles/subtitlesStore')>();
+    return { ...actual, subtitlesStore: new actual.InMemoryTranscriptRepository() };
+});
+
 const RU_VTT = `WEBVTT
 
 1
