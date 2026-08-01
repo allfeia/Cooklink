@@ -9,6 +9,7 @@ sequenceDiagram
 %%    participant WM as Worker (Metadata yt-dlp)
     participant WYM as Worker (Youtube metadata)
     participant WYS as Worker (YouTube subtitles)
+    participant WL as Worker (LLM extraction)
 %%    participant WA as Worker (Audio yt-dlp)
 %%    participant WS as Worker (Speech)
     participant WP as Worker (PDF generator)
@@ -94,7 +95,7 @@ sequenceDiagram
                 end
             end
         end
-%% ================= YOUTUBE WORKER =================
+%% ================= SUBTITLES WORKER =================
     WYS->>MQ: consume youtube_queue
 
     WYS->>YT: get subtitles
@@ -103,16 +104,21 @@ sequenceDiagram
     else success
         WYS->>DB: save transcript
         WYS->>DB: status = llm_processing
+        WYS->>MQ: publish llm_queue
+    end
 
-        WYS->>LLM: send transcript (stream)
-        alt AI_EXTRACTION_FAILED / INVALID_JSON
-            WYS->>DB: status = failed
-        else success
-            LLM-->>WYS: stream recipe
-            WYS->>DB: save recipe (JSON)
-            WYS->>R: cache recipe
-            WYS->>DB: status = generating_pdf
-        end
+%% ================= LLM WORKER =================
+    WL->>MQ: consume llm_queue
+
+    WL->>LLM: send transcript (stream)
+    alt AI_EXTRACTION_FAILED / INVALID_JSON
+        WL->>DB: status = failed
+    else success
+        LLM-->>WL: stream recipe
+        WL->>DB: save recipe (JSON)
+        WL->>R: cache recipe
+        WL->>DB: status = generating_pdf
+        WL->>MQ: publish pdf_queue
     end
 
 %% ================= OTHER PLATFORM'S TRANSCRIBING =================
@@ -161,6 +167,7 @@ sequenceDiagram
 %%    end
 
 %% ================= PDF =================
+    WP->>MQ: consume pdf_queue
     WP->>PDF: generate PDF (recipe JSON + HTML template)
     PDF-->>WP: pdf_url
     WP->>R: save pdf_url (TTL 24h)

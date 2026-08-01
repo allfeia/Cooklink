@@ -17,35 +17,35 @@ export interface RecipeData {
 }
 
 export interface RecipeRepository {
-    save(videoId: string, recipe: RecipeData): Promise<void>;
-    get(videoId: string): Promise<RecipeData | undefined>;
+    save(canonicalKey: string, recipe: RecipeData): Promise<void>;
+    get(canonicalKey: string): Promise<RecipeData | undefined>;
 }
 
 export class InMemoryRecipeRepository implements RecipeRepository {
-    private recipeByVideoId = new Map<string, RecipeData>();
+    private recipeByCanonicalKey = new Map<string, RecipeData>();
 
-    async save(videoId: string, recipe: RecipeData): Promise<void> {
-        this.recipeByVideoId.set(videoId, recipe);
+    async save(canonicalKey: string, recipe: RecipeData): Promise<void> {
+        this.recipeByCanonicalKey.set(canonicalKey, recipe);
     }
 
-    async get(videoId: string): Promise<RecipeData | undefined> {
-        return this.recipeByVideoId.get(videoId);
+    async get(canonicalKey: string): Promise<RecipeData | undefined> {
+        return this.recipeByCanonicalKey.get(canonicalKey);
     }
 }
 
 export class PostgresRecipeRepository implements RecipeRepository {
-    async save(videoId: string, recipe: RecipeData): Promise<void> {
+    async save(canonicalKey: string, recipe: RecipeData): Promise<void> {
         await db
             .insert(recipes)
-            .values({ videoId, recipe })
-            .onConflictDoUpdate({ target: recipes.videoId, set: { recipe } });
+            .values({ canonicalKey, recipe })
+            .onConflictDoUpdate({ target: recipes.canonicalKey, set: { recipe } });
     }
 
-    async get(videoId: string): Promise<RecipeData | undefined> {
+    async get(canonicalKey: string): Promise<RecipeData | undefined> {
         const [row] = await db
             .select()
             .from(recipes)
-            .where(eq(recipes.videoId, videoId))
+            .where(eq(recipes.canonicalKey, canonicalKey))
             .limit(1);
         return row ? (row.recipe as RecipeData) : undefined;
     }

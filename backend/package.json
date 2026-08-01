@@ -20,7 +20,6 @@
     "db:migrate": "drizzle-kit migrate"
   },
   "dependencies": {
-    "@distube/ytdl-core": "^4.14.4",
     "axios": "^1.15.1",
     "cors": "^2.8.6",
     "dotenv": "^16.4.5",
@@ -28,7 +27,6 @@
     "express": "^5.2.1",
     "openai": "^6.34.0",
     "pg": "^8.22.0",
-    "youtube-transcript": "^1.0.6",
     "yt-dlp-exec": "^1.0.2"
   },
   "devDependencies": {

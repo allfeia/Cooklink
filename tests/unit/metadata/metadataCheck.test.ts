@@ -1,5 +1,5 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest';
-import { runMetadataCheck } from '../../../backend/src/workers/metadataWorker';
+import { runMetadataCheck } from '../../../backend/src/routes/metadata/metadataCheck';
 import { recipeJobStore, type RecipeJob } from '../../../backend/src/routes/recipeJobStore';
 
 const { mockYtDlp } = vi.hoisted(() => ({

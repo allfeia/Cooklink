@@ -160,7 +160,6 @@ describe('PostgresTranscriptRepository (PGlite)', () => {
 });
 
 describe('PostgresRecipeRepository (PGlite)', () => {
-    const metadataRepo = new PostgresVideoMetadataRepository();
     const repo = new PostgresRecipeRepository();
 
     const buildRecipe = (overrides: Partial<RecipeData> = {}): RecipeData => ({
@@ -175,28 +174,26 @@ describe('PostgresRecipeRepository (PGlite)', () => {
     });
 
     it('save + get roundtrip', async () => {
-        const videoId = randomUUID().slice(0, 11);
-        await metadataRepo.save(buildMetadata(videoId));
+        const canonicalKey = `youtube:${randomUUID().slice(0, 11)}`;
         const recipe = buildRecipe();
 
-        await repo.save(videoId, recipe);
-        const found = await repo.get(videoId);
+        await repo.save(canonicalKey, recipe);
+        const found = await repo.get(canonicalKey);
 
         expect(found).toEqual(recipe);
     });
 
-    it('get returns undefined for an unknown video', async () => {
-        await expect(repo.get(randomUUID().slice(0, 11))).resolves.toBeUndefined();
+    it('get returns undefined for an unknown canonical_key', async () => {
+        await expect(repo.get(`youtube:${randomUUID().slice(0, 11)}`)).resolves.toBeUndefined();
     });
 
-    it('save overwrites (upsert) an existing recipe for the same video_id', async () => {
-        const videoId = randomUUID().slice(0, 11);
-        await metadataRepo.save(buildMetadata(videoId));
-        await repo.save(videoId, buildRecipe({ title: 'Старый рецепт' }));
+    it('save overwrites (upsert) an existing recipe for the same canonical_key', async () => {
+        const canonicalKey = `youtube:${randomUUID().slice(0, 11)}`;
+        await repo.save(canonicalKey, buildRecipe({ title: 'Старый рецепт' }));
 
-        await repo.save(videoId, buildRecipe({ title: 'Новый рецепт' }));
+        await repo.save(canonicalKey, buildRecipe({ title: 'Новый рецепт' }));
 
-        const found = await repo.get(videoId);
+        const found = await repo.get(canonicalKey);
         expect(found?.title).toBe('Новый рецепт');
     });
 });

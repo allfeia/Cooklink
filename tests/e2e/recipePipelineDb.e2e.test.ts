@@ -176,13 +176,14 @@ describe('POST /v1/recipes — полный пайплайн пишет корр
         expect(jobRow!.errorCode).toBeNull();
 
         const videoId = 'eeeeeeeeeee';
+        const canonicalKey = `youtube:${videoId}`;
         const [metadataRow] = await db.select().from(videoMetadata).where(eq(videoMetadata.videoId, videoId)).limit(1);
         expect(metadataRow?.title).toBe('Паста Карбонара');
 
         const [transcriptRow] = await db.select().from(transcripts).where(eq(transcripts.videoId, videoId)).limit(1);
         expect(transcriptRow?.language).toBe('ru');
 
-        const [recipeRow] = await db.select().from(recipes).where(eq(recipes.videoId, videoId)).limit(1);
+        const [recipeRow] = await db.select().from(recipes).where(eq(recipes.canonicalKey, canonicalKey)).limit(1);
         expect((recipeRow?.recipe as { title: string }).title).toBe('Паста Карбонара');
     });
 

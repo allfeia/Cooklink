@@ -1,5 +1,5 @@
 {
-  "id": "88bff783-edfc-4b0e-a388-efc6b9b328d6",
+  "id": "843af69b-ff34-4665-b92c-bafbb46fc93a",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -87,9 +87,9 @@
           "notNull": true,
           "default": "gen_random_uuid()"
         },
-        "video_id": {
-          "name": "video_id",
-          "type": "varchar(32)",
+        "canonical_key": {
+          "name": "canonical_key",
+          "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
         },
@@ -101,28 +101,14 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {
-        "recipes_video_id_video_metadata_video_id_fk": {
-          "name": "recipes_video_id_video_metadata_video_id_fk",
-          "tableFrom": "recipes",
-          "tableTo": "video_metadata",
-          "columnsFrom": [
-            "video_id"
-          ],
-          "columnsTo": [
-            "video_id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "recipes_video_id_unique": {
-          "name": "recipes_video_id_unique",
+        "recipes_canonical_key_unique": {
+          "name": "recipes_canonical_key_unique",
           "nullsNotDistinct": false,
           "columns": [
-            "video_id"
+            "canonical_key"
           ]
         }
       },

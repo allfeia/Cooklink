@@ -23,12 +23,12 @@ describe('InMemoryRecipeRepository', () => {
         await expect(repo.save('abc', buildRecipe())).resolves.toBeUndefined();
     });
 
-    it('saves recipes for distinct video ids independently', async () => {
-        await repo.save('video-a', buildRecipe());
-        await expect(repo.save('video-b', buildRecipe())).resolves.toBeUndefined();
+    it('saves recipes for distinct canonical keys independently', async () => {
+        await repo.save('youtube:video-a', buildRecipe());
+        await expect(repo.save('youtube:video-b', buildRecipe())).resolves.toBeUndefined();
     });
 
-    it('overwrites existing recipe for the same video_id', async () => {
+    it('overwrites existing recipe for the same canonical_key', async () => {
         await repo.save('abc', buildRecipe({ title: 'Старый рецепт' }));
         await expect(repo.save('abc', buildRecipe({ title: 'Новый рецепт' }))).resolves.toBeUndefined();
     });
