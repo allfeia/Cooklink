@@ -1,10 +1,10 @@
-import type { Platform } from '../../../common/validation/domainDetection';
-import { recipeJobStore } from '../routes/recipeJobStore';
-import { checkVideoMetadata, MetadataError } from '../routes/metadata/videoMetadataService';
-import type { VideoMetadata } from '../routes/metadata/videoMetadataStore';
+import type { Platform } from '../../../../common/validation/domainDetection';
+import { recipeJobStore } from '../recipeJobStore';
+import { checkVideoMetadata, MetadataError } from './videoMetadataService';
+import type { VideoMetadata } from './videoMetadataStore';
 
 export { MetadataError };
-export type { MetadataErrorCode } from '../routes/metadata/videoMetadataService';
+export type { MetadataErrorCode } from './videoMetadataService';
 
 export async function runMetadataCheck(
     jobId: string,

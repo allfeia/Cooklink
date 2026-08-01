@@ -31,6 +31,6 @@ export const transcripts = pgTable('transcripts', {
 
 export const recipes = pgTable('recipes', {
     id: uuid('id').primaryKey().defaultRandom(),
-    videoId: varchar('video_id', { length: 32 }).notNull().unique().references(() => videoMetadata.videoId),
+    canonicalKey: varchar('canonical_key', { length: 255 }).notNull().unique(),
     recipe: jsonb('recipe').notNull(),
 });

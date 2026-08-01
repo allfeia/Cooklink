@@ -45,7 +45,7 @@ erDiagram
     
     recipes {
         UUID id PK
-        VARCHAR video_id FK
+        VARCHAR canonical_key
         JSONB recipe
     }
     
@@ -55,13 +55,12 @@ erDiagram
 %%        TIMESTAMPTZ window_start
 %%        INTEGER request_count
 %%    }
-    
+
     %% ─────────────────────────────────────
     %% RELATIONSHIPS
     %% ─────────────────────────────────────
     users ||--o{ jobs : ""
     video_metadata ||--o| transcripts : ""
-    transcripts ||--o| recipes : ""
     jobs ||--o| video_metadata : ""
 %%    users ||--o{ rate_limit_counters : ""
 ```

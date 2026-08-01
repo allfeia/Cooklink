@@ -2,8 +2,9 @@ import { Router } from 'express';
 import { randomUUID } from 'crypto';
 import { parseVideoUrl } from '../../../../common/validation/validatePipeline';
 import { recipeJobStore, type RecipeJob } from '../recipeJobStore';
-import { runMetadataCheck, MetadataError } from '../../workers/metadataWorker';
-import { runSubtitlesAndExtraction, SubtitlesError, LlmExtractionError } from '../../workers/subtitlesWorker';
+import { runMetadataCheck, MetadataError } from '../metadata/metadataCheck';
+import { runSubtitlesFetch, SubtitlesError } from '../../workers/subtitlesWorker';
+import { runRecipeExtraction, LlmExtractionError } from '../../workers/llmWorker';
 import { runPdfGeneration, PdfGenerationError } from '../../workers/pdfWorker';
 import { pdfStore } from '../pdf/pdfStore';
 
@@ -52,9 +53,9 @@ router.post('/recipes', async (req, res) => {
         throw err;
     }
 
-    let recipe;
+    let transcript;
     try {
-        recipe = await runSubtitlesAndExtraction(job.job_id, parsed.sourceUrl, parsed.videoId);
+        transcript = await runSubtitlesFetch(job.job_id, parsed.sourceUrl, parsed.videoId);
     } catch (err) {
         if (err instanceof SubtitlesError) {
             return res.status(400).json({
@@ -65,6 +66,13 @@ router.post('/recipes', async (req, res) => {
                 }
             })
         }
+        throw err;
+    }
+
+    let recipe;
+    try {
+        recipe = await runRecipeExtraction(job.job_id, transcript.transcript_text, parsed.canonicalKey);
+    } catch (err) {
         if (err instanceof LlmExtractionError) {
             return res.status(422).json({
                 error: {

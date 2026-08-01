@@ -10,9 +10,9 @@ CREATE TABLE "jobs" (
 --> statement-breakpoint
 CREATE TABLE "recipes" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
-	"video_id" varchar(32) NOT NULL,
+	"canonical_key" varchar(255) NOT NULL,
 	"recipe" jsonb NOT NULL,
-	CONSTRAINT "recipes_video_id_unique" UNIQUE("video_id")
+	CONSTRAINT "recipes_canonical_key_unique" UNIQUE("canonical_key")
 );
 --> statement-breakpoint
 CREATE TABLE "transcripts" (
@@ -33,6 +33,5 @@ CREATE TABLE "video_metadata" (
 	"fetched_at" timestamp with time zone NOT NULL
 );
 --> statement-breakpoint
-ALTER TABLE "recipes" ADD CONSTRAINT "recipes_video_id_video_metadata_video_id_fk" FOREIGN KEY ("video_id") REFERENCES "public"."video_metadata"("video_id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "transcripts" ADD CONSTRAINT "transcripts_video_id_video_metadata_video_id_fk" FOREIGN KEY ("video_id") REFERENCES "public"."video_metadata"("video_id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 CREATE INDEX "idx_jobs_canonical_key" ON "jobs" USING btree ("canonical_key");

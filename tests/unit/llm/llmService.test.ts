@@ -105,6 +105,20 @@ describe('extractRecipe', () => {
             expect(mockCreate).toHaveBeenCalledTimes(MAX_RETRIES);
         });
 
+        it('rejects non-numeric cooking_time_minutes/difficulty/portions (HTML-injection guard for the PDF template)', async () => {
+            const malicious = JSON.stringify({
+                ...JSON.parse(VALID_RECIPE_JSON),
+                difficulty: '<img src=x onerror=alert(1)>',
+            });
+            mockCreate.mockResolvedValue(streamOf(malicious));
+
+            await expect(
+                extractRecipe('транскрипт', 'abc')
+            ).rejects.toMatchObject({ code: 'INVALID_JSON_SCHEMA' });
+
+            expect(mockCreate).toHaveBeenCalledTimes(MAX_RETRIES);
+        });
+
         it('retries when type is outside the fixed enum and eventually throws', async () => {
             const invalidType = JSON.stringify({
                 ...JSON.parse(VALID_RECIPE_JSON),

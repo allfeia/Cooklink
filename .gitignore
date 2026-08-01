@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.DS_Store
+.idea/
+
+.env
+.env.*.local
+
+backend/external_services_tests/*cookies*.txt

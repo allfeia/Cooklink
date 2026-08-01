@@ -139,6 +139,9 @@ function isValidRecipeData(value: unknown): value is RecipeData {
 
     if (typeof candidate.title !== 'string' || !candidate.title.trim()) return false;
     if (!RECIPE_TYPES.includes(candidate.type as (typeof RECIPE_TYPES)[number])) return false;
+    if (typeof candidate.cooking_time_minutes !== 'number' || !Number.isFinite(candidate.cooking_time_minutes) || candidate.cooking_time_minutes <= 0) return false;
+    if (typeof candidate.difficulty !== 'number' || ![1, 2, 3, 4, 5].includes(candidate.difficulty)) return false;
+    if (typeof candidate.portions !== 'number' || !Number.isFinite(candidate.portions) || candidate.portions <= 0) return false;
     if (!Array.isArray(candidate.ingredients) || candidate.ingredients.length === 0) return false;
     if (!candidate.ingredients.every(isValidIngredient)) return false;
     if (!Array.isArray(candidate.steps) || candidate.steps.length === 0) return false;
@@ -147,13 +150,13 @@ function isValidRecipeData(value: unknown): value is RecipeData {
     return true;
 }
 
-export async function extractRecipe(transcriptText: string, videoId: string): Promise<RecipeData> {
-    console.log('[llm] extractRecipe start', { video_id: videoId, transcript_chars: transcriptText.length });
+export async function extractRecipe(transcriptText: string, canonicalKey: string): Promise<RecipeData> {
+    console.log('[llm] extractRecipe start', { canonical_key: canonicalKey, transcript_chars: transcriptText.length });
 
     const firstResponse = await callLlm(transcriptText);
 
     if (!firstResponse.trim()) {
-        console.warn('[llm] empty response — treating as AI_EXTRACTION_FAILED', { video_id: videoId });
+        console.warn('[llm] empty response — treating as AI_EXTRACTION_FAILED', { canonical_key: canonicalKey });
         throw new LlmExtractionError('AI_EXTRACTION_FAILED', 'Не удалось извлечь рецепт');
     }
 
@@ -173,7 +176,7 @@ export async function extractRecipe(transcriptText: string, videoId: string): Pr
 
         const schemaValid = parsed !== undefined && isValidRecipeData(parsed);
         console.log('[llm] parse attempt', {
-            video_id: videoId,
+            canonical_key: canonicalKey,
             attempt,
             json_parse_ok: parsed !== undefined,
             parse_error: parseError,
@@ -181,14 +184,14 @@ export async function extractRecipe(transcriptText: string, videoId: string): Pr
         });
 
         if (schemaValid) {
-            await recipeStore.save(videoId, parsed as RecipeData);
-            console.log('[llm] extractRecipe success', { video_id: videoId, attempt });
+            await recipeStore.save(canonicalKey, parsed as RecipeData);
+            console.log('[llm] extractRecipe success', { canonical_key: canonicalKey, attempt });
             return parsed as RecipeData;
         }
 
         if (attempt === MAX_RETRIES) {
             console.error('[llm] extractRecipe failed — INVALID_JSON_SCHEMA', {
-                video_id: videoId,
+                canonical_key: canonicalKey,
                 retry_count: attempt - 1,
                 ai_ans: preview(cleaned),
             });
