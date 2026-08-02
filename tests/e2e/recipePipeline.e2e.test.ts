@@ -1,6 +1,14 @@
 import { describe, expect, it, vi, beforeAll, afterAll, beforeEach } from 'vitest';
 import type { Server } from 'http';
 
+/**
+ * Backend теперь оркестрирует пайплайн через HTTP-вызовы к 4 отдельным
+ * воркер-сервисам (см. backend/src/workers-http/*) вместо прямых вызовов
+ * функций в процессе. Поэтому e2e-тест сначала поднимает все 4 воркера
+ * на случайных портах, прописывает их адреса в process.env и только потом
+ * импортирует backend/src/app — он читает *_WORKER_URL при загрузке модуля.
+ */
+
 const { mockYtDlp, mockAxiosGet, mockSleep, mockCreate, mockFetch } = vi.hoisted(() => ({
     mockYtDlp: vi.fn(),
     mockAxiosGet: vi.fn(),
@@ -50,8 +58,6 @@ vi.mock('../../backend/src/routes/recipe/recipeStore', async (importOriginal) =>
     return { ...actual, recipeStore: new actual.InMemoryRecipeRepository() };
 });
 
-import app from '../../backend/src/app';
-
 const RU_VTT = `WEBVTT
 
 1
@@ -98,7 +104,16 @@ function buildRaw(overrides: Partial<{
     };
 }
 
-let server: Server;
+async function listenOnEphemeralPort(app: import('express').Express): Promise<{ server: Server; url: string }> {
+    const server: Server = await new Promise((resolve) => {
+        const s = app.listen(0, () => resolve(s));
+    });
+    const address = server.address();
+    const port = typeof address === 'object' && address ? address.port : 0;
+    return { server, url: `http://127.0.0.1:${port}` };
+}
+
+let servers: Server[] = [];
 let origin: string;
 let baseUrl: string;
 let realFetch: typeof fetch;
@@ -106,17 +121,31 @@ let realFetch: typeof fetch;
 beforeAll(async () => {
     realFetch = global.fetch.bind(global);
 
-    await new Promise<void>((resolve) => {
-        server = app.listen(0, () => resolve());
-    });
-    const address = server.address();
-    const port = typeof address === 'object' && address ? address.port : 0;
-    origin = `http://127.0.0.1:${port}`;
+    const metadataServer = await import('../../backend/src/workers-http/metadataServer');
+    const subtitlesServer = await import('../../backend/src/workers-http/subtitlesServer');
+    const llmServer = await import('../../backend/src/workers-http/llmServer');
+    const pdfServer = await import('../../backend/src/workers-http/pdfServer');
+
+    const metadata = await listenOnEphemeralPort(metadataServer.app);
+    const subtitles = await listenOnEphemeralPort(subtitlesServer.app);
+    const llm = await listenOnEphemeralPort(llmServer.app);
+    const pdf = await listenOnEphemeralPort(pdfServer.app);
+
+    process.env.METADATA_WORKER_URL = metadata.url;
+    process.env.SUBTITLES_WORKER_URL = subtitles.url;
+    process.env.LLM_WORKER_URL = llm.url;
+    process.env.PDF_WORKER_URL = pdf.url;
+
+    const { default: app } = await import('../../backend/src/app');
+    const backend = await listenOnEphemeralPort(app);
+
+    servers = [metadata.server, subtitles.server, llm.server, pdf.server, backend.server];
+    origin = backend.url;
     baseUrl = `${origin}/v1`;
 });
 
 afterAll(() => {
-    server.close();
+    servers.forEach((s) => s.close());
 });
 
 beforeEach(() => {
@@ -126,7 +155,6 @@ beforeEach(() => {
     mockSleep.mockResolvedValue(undefined);
     mockCreate.mockReset();
     mockFetch.mockReset();
-
 
     mockFetch.mockImplementation(async (url: unknown, init?: unknown) => {
         if (String(url).includes('/forms/chromium/convert/html')) {
@@ -149,7 +177,7 @@ async function postRecipe(sourceUrl: string) {
     });
 }
 
-describe('POST /v1/recipes — полный пайплайн (e2e)', () => {
+describe('POST /v1/recipes — полный пайплайн (e2e, через HTTP-воркеры)', () => {
     it('happy path: metadata -> subtitles -> llm -> pdf -> completed, PDF скачивается', async () => {
         mockYtDlp.mockResolvedValue(
             buildRaw({ subtitles: { ru: [{ ext: 'vtt', url: 'https://cdn.example/ru.vtt' }] } })
