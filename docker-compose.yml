@@ -7,18 +7,97 @@ services:
   postgres:
     image: postgres:16
     environment:
-      POSTGRES_USER: recipe
-      POSTGRES_PASSWORD: recipe
-      POSTGRES_DB: recipe_generator
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5434:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U recipe -d recipe_generator"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 5s
       timeout: 5s
       retries: 10
+
+  metadata-worker:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile.metadata-worker
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      PORT: 4001
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  subtitles-worker:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile.subtitles-worker
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      PORT: 4002
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  llm-worker:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile.llm-worker
+    env_file:
+      - backend/.env
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      PORT: 4003
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  pdf-worker:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile.pdf-worker
+    environment:
+      GOTENBERG_URL: http://gotenberg:3000
+      PORT: 4004
+    depends_on:
+      - gotenberg
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      METADATA_WORKER_URL: http://metadata-worker:4001
+      SUBTITLES_WORKER_URL: http://subtitles-worker:4002
+      LLM_WORKER_URL: http://llm-worker:4003
+      PDF_WORKER_URL: http://pdf-worker:4004
+      PORT: 8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      metadata-worker:
+        condition: service_started
+      subtitles-worker:
+        condition: service_started
+      llm-worker:
+        condition: service_started
+      pdf-worker:
+        condition: service_started
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
 
 volumes:
   postgres_data:

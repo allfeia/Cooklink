@@ -51,7 +51,6 @@ vi.mock('../../backend/src/db/client', async () => {
     return { db };
 });
 
-import app from '../../backend/src/app';
 import { db } from '../../backend/src/db/client';
 import { jobs, videoMetadata, transcripts, recipes } from '../../backend/src/db/schema';
 
@@ -101,7 +100,16 @@ function buildRaw(overrides: Partial<{
     };
 }
 
-let server: Server;
+async function listenOnEphemeralPort(app: import('express').Express): Promise<{ server: Server; url: string }> {
+    const server: Server = await new Promise((resolve) => {
+        const s = app.listen(0, () => resolve(s));
+    });
+    const address = server.address();
+    const port = typeof address === 'object' && address ? address.port : 0;
+    return { server, url: `http://127.0.0.1:${port}` };
+}
+
+let servers: Server[] = [];
 let origin: string;
 let baseUrl: string;
 let realFetch: typeof fetch;
@@ -109,17 +117,31 @@ let realFetch: typeof fetch;
 beforeAll(async () => {
     realFetch = global.fetch.bind(global);
 
-    await new Promise<void>((resolve) => {
-        server = app.listen(0, () => resolve());
-    });
-    const address = server.address();
-    const port = typeof address === 'object' && address ? address.port : 0;
-    origin = `http://127.0.0.1:${port}`;
+    const metadataServer = await import('../../backend/src/workers-http/metadataServer');
+    const subtitlesServer = await import('../../backend/src/workers-http/subtitlesServer');
+    const llmServer = await import('../../backend/src/workers-http/llmServer');
+    const pdfServer = await import('../../backend/src/workers-http/pdfServer');
+
+    const metadata = await listenOnEphemeralPort(metadataServer.app);
+    const subtitles = await listenOnEphemeralPort(subtitlesServer.app);
+    const llm = await listenOnEphemeralPort(llmServer.app);
+    const pdf = await listenOnEphemeralPort(pdfServer.app);
+
+    process.env.METADATA_WORKER_URL = metadata.url;
+    process.env.SUBTITLES_WORKER_URL = subtitles.url;
+    process.env.LLM_WORKER_URL = llm.url;
+    process.env.PDF_WORKER_URL = pdf.url;
+
+    const { default: app } = await import('../../backend/src/app');
+    const backend = await listenOnEphemeralPort(app);
+
+    servers = [metadata.server, subtitles.server, llm.server, pdf.server, backend.server];
+    origin = backend.url;
     baseUrl = `${origin}/v1`;
 });
 
 afterAll(() => {
-    server.close();
+    servers.forEach((s) => s.close());
 });
 
 beforeEach(() => {

@@ -1,6 +1,9 @@
 import type { ApiRecipeData } from "../components/features/recipe/recipe";
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8000/v1";
+// В проде фронт отдаётся через nginx на том же origin, что и API (см. nginx.conf,
+// проксирует /v1 на backend) — относительный путь работает без какой-либо настройки.
+// В деве (vite dev server на 5173) бэкенд крутится отдельно на 8000 — нужен абсолютный URL.
+const BASE_URL = import.meta.env.VITE_API_BASE_URL ?? (import.meta.env.DEV ? "http://localhost:8000/v1" : "/v1");
 
 export interface CreateRecipeJobResponse {
     job_id: string;
@@ -32,7 +35,10 @@ export async function createRecipeJob(sourceUrl: string): Promise<CreateRecipeJo
 
     if (response.status === 202) {
         const body: CreateRecipeJobResponse = await response.json();
-        if (body.pdf_url) {
+        // pdf_url приходит с сервера уже как абсолютный путь ("/v1/recipes/{id}/pdf").
+        // Достраиваем до полного URL только если BASE_URL сам абсолютный (дев-режим,
+        // отдельный порт) — new URL() не принимает относительную строку как base.
+        if (body.pdf_url && /^https?:\/\//.test(BASE_URL)) {
             body.pdf_url = new URL(body.pdf_url, BASE_URL).href;
         }
         return body;

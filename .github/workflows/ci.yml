@@ -25,3 +25,47 @@ jobs:
 
       - name: Run tests
         run: npm run test
+
+  deploy:
+    needs: check
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup SSH key
+        uses: webfactory/ssh-agent@v0.9.1
+        with:
+          ssh-private-key: ${{ secrets.BEGET_SSH_KEY }}
+
+      - name: Deploy via SSH
+        run: |
+          ssh -o StrictHostKeyChecking=no root@85.117.234.255 << 'EOF'
+          set -euo pipefail
+          cd ~/recipe-generator-app
+
+          ROOT_ENV_CONTENT=$(cat << 'EOT'
+          POSTGRES_USER=${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_DB=${{ secrets.POSTGRES_DB }}
+          EOT
+          )
+
+          rm -f .env
+          printf '%s\n' "$ROOT_ENV_CONTENT" | tee .env > /dev/null
+          chmod 600 .env
+
+          BACKEND_ENV_CONTENT=$(cat << 'EOT'
+          GROQ_API_KEY=${{ secrets.GROQ_API_KEY }}
+          DATABASE_URL=${{ secrets.DATABASE_URL }}
+          GOTENBERG_URL=${{ secrets.GOTENBERG_URL }}
+          EOT
+          )
+
+          rm -f backend/.env
+          printf '%s\n' "$BACKEND_ENV_CONTENT" | tee backend/.env > /dev/null
+          chmod 600 backend/.env
+
+          git pull origin main
+          make run
+          EOF

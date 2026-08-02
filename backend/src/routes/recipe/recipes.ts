@@ -2,13 +2,20 @@ import { Router } from 'express';
 import { randomUUID } from 'crypto';
 import { parseVideoUrl } from '../../../../common/validation/validatePipeline';
 import { recipeJobStore, type RecipeJob } from '../recipeJobStore';
-import { runMetadataCheck, MetadataError } from '../metadata/metadataCheck';
-import { runSubtitlesFetch, SubtitlesError } from '../../workers/subtitlesWorker';
-import { runRecipeExtraction, LlmExtractionError } from '../../workers/llmWorker';
-import { runPdfGeneration, PdfGenerationError } from '../../workers/pdfWorker';
 import { pdfStore } from '../pdf/pdfStore';
+import type { Transcript } from '../subtitles/subtitlesStore';
+import type { RecipeData } from '../recipe/recipeStore';
+
+const METADATA_WORKER_URL = process.env.METADATA_WORKER_URL ?? 'http://localhost:4001';
+const SUBTITLES_WORKER_URL = process.env.SUBTITLES_WORKER_URL ?? 'http://localhost:4002';
+const LLM_WORKER_URL = process.env.LLM_WORKER_URL ?? 'http://localhost:4003';
+const PDF_WORKER_URL = process.env.PDF_WORKER_URL ?? 'http://localhost:4004';
 
 const router = Router();
+
+interface WorkerErrorBody {
+    error: { code: string; message: string; details?: Record<string, unknown> };
+}
 
 router.post('/recipes', async (req, res) => {
     const { source_url } = req.body;
@@ -38,69 +45,70 @@ router.post('/recipes', async (req, res) => {
 
     await recipeJobStore.create(job);
 
-    try {
-        await runMetadataCheck(job.job_id, parsed.sourceUrl, parsed.videoId, parsed.platform);
-    } catch (err) {
-        if (err instanceof MetadataError) {
-            return res.status(400).json({
-                error: {
-                    code: err.code,
-                    message: err.message,
-                    details: err.details,
-                }
-            })
-        }
-        throw err;
+    // ── метаданные ────────────────────────────────────────────────
+    const metaRes = await fetch(`${METADATA_WORKER_URL}/check`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            jobId: job.job_id,
+            sourceUrl: parsed.sourceUrl,
+            videoId: parsed.videoId,
+            platform: parsed.platform,
+        }),
+    });
+    if (!metaRes.ok) {
+        const body = (await metaRes.json()) as WorkerErrorBody;
+        return res.status(metaRes.status).json(body);
     }
 
-    let transcript;
-    try {
-        transcript = await runSubtitlesFetch(job.job_id, parsed.sourceUrl, parsed.videoId);
-    } catch (err) {
-        if (err instanceof SubtitlesError) {
-            return res.status(400).json({
-                error: {
-                    code: err.code,
-                    message: err.message,
-                    details: err.details,
-                }
-            })
-        }
-        throw err;
+    // ── субтитры ──────────────────────────────────────────────────
+    const subRes = await fetch(`${SUBTITLES_WORKER_URL}/fetch`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            jobId: job.job_id,
+            sourceUrl: parsed.sourceUrl,
+            videoId: parsed.videoId,
+        }),
+    });
+    if (!subRes.ok) {
+        const body = (await subRes.json()) as WorkerErrorBody;
+        return res.status(subRes.status).json(body);
     }
+    const { transcript } = (await subRes.json()) as { transcript: Transcript };
 
-    let recipe;
-    try {
-        recipe = await runRecipeExtraction(job.job_id, transcript.transcript_text, parsed.canonicalKey);
-    } catch (err) {
-        if (err instanceof LlmExtractionError) {
-            return res.status(422).json({
-                error: {
-                    code: err.code,
-                    message: err.message,
-                    details: err.details,
-                }
-            })
-        }
-        throw err;
+    // ── извлечение рецепта через LLM ─────────────────────────────
+    const llmRes = await fetch(`${LLM_WORKER_URL}/extract`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            jobId: job.job_id,
+            transcriptText: transcript.transcript_text,
+            canonicalKey: parsed.canonicalKey,
+        }),
+    });
+    if (!llmRes.ok) {
+        const body = (await llmRes.json()) as WorkerErrorBody;
+        return res.status(llmRes.status).json(body);
     }
+    const { recipe } = (await llmRes.json()) as { recipe: RecipeData };
 
-    try {
-        await runPdfGeneration(job.job_id, recipe);
-    } catch (err) {
-        if (err instanceof PdfGenerationError) {
-            return res.status(500).json({
-                error: {
-                    code: err.code,
-                    message: err.message,
-                    details: err.details,
-                }
-            })
-        }
-        throw err;
+    // ── генерация PDF ─────────────────────────────────────────────
+    const pdfRes = await fetch(`${PDF_WORKER_URL}/generate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ recipe }),
+    });
+    if (!pdfRes.ok) {
+        const body = (await pdfRes.json()) as WorkerErrorBody;
+        await recipeJobStore.markFailed(job.job_id, body.error.code, body.error.message);
+        return res.status(pdfRes.status).json(body);
     }
+    const pdfBuffer = Buffer.from(await pdfRes.arrayBuffer());
+    await pdfStore.save(job.job_id, pdfBuffer);
+    await recipeJobStore.updateStatus(job.job_id, 'completed');
 
-    return res.status(202).json({ ...job, data: recipe, pdf_url: `/v1/recipes/${job.job_id}/pdf` });
+    return res.status(202).json({ ...job, status: 'completed', data: recipe, pdf_url: `/v1/recipes/${job.job_id}/pdf` });
 });
 
 router.get('/recipes/:job_id/pdf', async (req, res) => {
