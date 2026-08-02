@@ -1,4 +1,5 @@
 import OpenAI from 'openai';
+import { ProxyAgent } from 'undici';
 import { recipeStore, RECIPE_TYPES, type RecipeData } from '../recipe/recipeStore';
 
 export type { RecipeData } from '../recipe/recipeStore';
@@ -51,10 +52,14 @@ export class LlmExtractionError extends Error {
     }
 }
 
+const GROQ_PROXY_URL = process.env.GROQ_PROXY_URL;
+const proxyDispatcher = GROQ_PROXY_URL ? new ProxyAgent(GROQ_PROXY_URL) : undefined;
+
 function getClient(): OpenAI {
     return new OpenAI({
         baseURL: GROQ_BASE_URL,
         apiKey: process.env.GROQ_API_KEY,
+        ...(proxyDispatcher ? { fetchOptions: { dispatcher: proxyDispatcher } } : {}),
     });
 }
 
