@@ -177,6 +177,21 @@ async function postRecipe(sourceUrl: string) {
     });
 }
 
+async function pollJob(jobId: string, { timeoutMs = 5000, intervalMs = 20 } = {}) {
+    const deadline = Date.now() + timeoutMs;
+    for (;;) {
+        const res = await fetch(`${baseUrl}/recipes/${jobId}`);
+        const body = await res.json();
+        if (body.status === 'completed' || body.status === 'failed') {
+            return body;
+        }
+        if (Date.now() > deadline) {
+            throw new Error(`pollJob timed out, last status: ${body.status}`);
+        }
+        await new Promise((resolve) => setTimeout(resolve, intervalMs));
+    }
+}
+
 describe('POST /v1/recipes — полный пайплайн (e2e, через HTTP-воркеры)', () => {
     it('happy path: metadata -> subtitles -> llm -> pdf -> completed, PDF скачивается', async () => {
         mockYtDlp.mockResolvedValue(
@@ -186,9 +201,11 @@ describe('POST /v1/recipes — полный пайплайн (e2e, через HT
         mockCreate.mockResolvedValue(streamOf(VALID_RECIPE_JSON));
 
         const response = await postRecipe('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
-
         expect(response.status).toBe(202);
-        const body = await response.json();
+        const created = await response.json();
+        expect(created.status).toBe('scanning');
+
+        const body = await pollJob(created.job_id);
         expect(body.status).toBe('completed');
         expect(body.data.title).toBe('Паста Карбонара');
         expect(body.data.ingredients).toHaveLength(1);
@@ -214,11 +231,12 @@ describe('POST /v1/recipes — полный пайплайн (e2e, через HT
         mockYtDlp.mockResolvedValue(buildRaw({ duration: 901 }));
 
         const response = await postRecipe('https://www.youtube.com/watch?v=aaaaaaaaaaa');
+        expect(response.status).toBe(202);
+        const created = await response.json();
 
-        expect(response.status).toBe(400);
-        const body = await response.json();
+        const body = await pollJob(created.job_id);
+        expect(body.status).toBe('failed');
         expect(body.error.code).toBe('VIDEO_TOO_LONG');
-        expect(body.error.details).toMatchObject({ max_duration_sec: 900 });
         expect(mockAxiosGet).not.toHaveBeenCalled();
     });
 
@@ -226,9 +244,11 @@ describe('POST /v1/recipes — полный пайплайн (e2e, через HT
         mockYtDlp.mockResolvedValue(buildRaw());
 
         const response = await postRecipe('https://www.youtube.com/watch?v=bbbbbbbbbbb');
+        expect(response.status).toBe(202);
+        const created = await response.json();
 
-        expect(response.status).toBe(400);
-        const body = await response.json();
+        const body = await pollJob(created.job_id);
+        expect(body.status).toBe('failed');
         expect(body.error.code).toBe('NO_SUBTITLES');
         expect(mockCreate).not.toHaveBeenCalled();
     });
@@ -241,9 +261,11 @@ describe('POST /v1/recipes — полный пайплайн (e2e, через HT
         mockCreate.mockResolvedValue(streamOf(''));
 
         const response = await postRecipe('https://www.youtube.com/watch?v=ccccccccccc');
+        expect(response.status).toBe(202);
+        const created = await response.json();
 
-        expect(response.status).toBe(422);
-        const body = await response.json();
+        const body = await pollJob(created.job_id);
+        expect(body.status).toBe('failed');
         expect(body.error.code).toBe('AI_EXTRACTION_FAILED');
     });
 
@@ -261,9 +283,11 @@ describe('POST /v1/recipes — полный пайплайн (e2e, через HT
         });
 
         const response = await postRecipe('https://www.youtube.com/watch?v=ddddddddddd');
+        expect(response.status).toBe(202);
+        const created = await response.json();
 
-        expect(response.status).toBe(500);
-        const body = await response.json();
+        const body = await pollJob(created.job_id);
+        expect(body.status).toBe('failed');
         expect(body.error.code).toBe('PDF_GENERATION_FAILED');
     });
 });

@@ -178,6 +178,20 @@ async function findJobBySourceUrl(sourceUrl: string) {
     return row;
 }
 
+async function pollJobRow(sourceUrl: string, { timeoutMs = 5000, intervalMs = 20 } = {}) {
+    const deadline = Date.now() + timeoutMs;
+    for (;;) {
+        const row = await findJobBySourceUrl(sourceUrl);
+        if (row && (row.status === 'completed' || row.status === 'failed')) {
+            return row;
+        }
+        if (Date.now() > deadline) {
+            throw new Error(`pollJobRow timed out, last status: ${row?.status}`);
+        }
+        await new Promise((resolve) => setTimeout(resolve, intervalMs));
+    }
+}
+
 describe('POST /v1/recipes — полный пайплайн пишет корректные данные в БД (e2e)', () => {
     it('happy path: в jobs/video_metadata/transcripts/recipes появляются согласованные строки', async () => {
         const sourceUrl = 'https://www.youtube.com/watch?v=eeeeeeeeeee';
@@ -191,11 +205,10 @@ describe('POST /v1/recipes — полный пайплайн пишет корр
         expect(response.status).toBe(202);
         const body = await response.json();
 
-        const jobRow = await findJobBySourceUrl(sourceUrl);
-        expect(jobRow).toBeDefined();
-        expect(jobRow!.id).toBe(body.job_id);
-        expect(jobRow!.status).toBe('completed');
-        expect(jobRow!.errorCode).toBeNull();
+        const jobRow = await pollJobRow(sourceUrl);
+        expect(jobRow.id).toBe(body.job_id);
+        expect(jobRow.status).toBe('completed');
+        expect(jobRow.errorCode).toBeNull();
 
         const videoId = 'eeeeeeeeeee';
         const canonicalKey = `youtube:${videoId}`;
@@ -214,12 +227,12 @@ describe('POST /v1/recipes — полный пайплайн пишет корр
         mockYtDlp.mockResolvedValue(buildRaw({ duration: 901 }));
 
         const response = await postRecipe(sourceUrl);
-        expect(response.status).toBe(400);
+        expect(response.status).toBe(202);
 
-        const jobRow = await findJobBySourceUrl(sourceUrl);
-        expect(jobRow?.status).toBe('failed');
-        expect(jobRow?.errorCode).toBe('VIDEO_TOO_LONG');
-        expect(jobRow?.errorMessage).toBeTruthy();
+        const jobRow = await pollJobRow(sourceUrl);
+        expect(jobRow.status).toBe('failed');
+        expect(jobRow.errorCode).toBe('VIDEO_TOO_LONG');
+        expect(jobRow.errorMessage).toBeTruthy();
     });
 
     it('падение на этапе субтитров (NO_SUBTITLES) переводит job в failed с error_code', async () => {
@@ -227,11 +240,11 @@ describe('POST /v1/recipes — полный пайплайн пишет корр
         mockYtDlp.mockResolvedValue(buildRaw());
 
         const response = await postRecipe(sourceUrl);
-        expect(response.status).toBe(400);
+        expect(response.status).toBe(202);
 
-        const jobRow = await findJobBySourceUrl(sourceUrl);
-        expect(jobRow?.status).toBe('failed');
-        expect(jobRow?.errorCode).toBe('NO_SUBTITLES');
+        const jobRow = await pollJobRow(sourceUrl);
+        expect(jobRow.status).toBe('failed');
+        expect(jobRow.errorCode).toBe('NO_SUBTITLES');
     });
 
     it('падение на этапе LLM (AI_EXTRACTION_FAILED) переводит job в failed с error_code', async () => {
@@ -243,11 +256,11 @@ describe('POST /v1/recipes — полный пайплайн пишет корр
         mockCreate.mockResolvedValue(streamOf(''));
 
         const response = await postRecipe(sourceUrl);
-        expect(response.status).toBe(422);
+        expect(response.status).toBe(202);
 
-        const jobRow = await findJobBySourceUrl(sourceUrl);
-        expect(jobRow?.status).toBe('failed');
-        expect(jobRow?.errorCode).toBe('AI_EXTRACTION_FAILED');
+        const jobRow = await pollJobRow(sourceUrl);
+        expect(jobRow.status).toBe('failed');
+        expect(jobRow.errorCode).toBe('AI_EXTRACTION_FAILED');
     });
 
     it('падение на этапе PDF (PDF_GENERATION_FAILED) переводит job в failed с error_code', async () => {
@@ -265,10 +278,10 @@ describe('POST /v1/recipes — полный пайплайн пишет корр
         });
 
         const response = await postRecipe(sourceUrl);
-        expect(response.status).toBe(500);
+        expect(response.status).toBe(202);
 
-        const jobRow = await findJobBySourceUrl(sourceUrl);
-        expect(jobRow?.status).toBe('failed');
-        expect(jobRow?.errorCode).toBe('PDF_GENERATION_FAILED');
+        const jobRow = await pollJobRow(sourceUrl);
+        expect(jobRow.status).toBe('failed');
+        expect(jobRow.errorCode).toBe('PDF_GENERATION_FAILED');
     });
 });

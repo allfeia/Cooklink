@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { Youtube, Check, AlertCircle } from "lucide-react";
-import { EXAMPLE_RECIPES } from "../features/recipe/recipe";
 import { motion } from "motion/react";
 import { useLanguage } from "../../context/LanguageContext";
 import { parseVideoUrl, type ValidVideoUrl } from "../../../../common/validation/validatePipeline";
-import { createRecipeJob, RecipeApiError } from "@/app/api/recipesApi";
+import { createRecipeJob, pollRecipeJob, RecipeApiError } from "@/app/api/recipesApi";
 import type { ApiRecipeData } from "../features/recipe/recipe";
 
 interface InputSectionProps {
@@ -28,6 +27,7 @@ export function InputSection({ onSubmit }: InputSectionProps) {
         SUBTITLES_FETCH_FAILED: t("errorSubtitlesFetchFailed"),
         AI_EXTRACTION_FAILED: t("errorAiExtractionFailed"),
         INVALID_JSON_SCHEMA: t("errorInvalidJsonSchema"),
+        LLM_RATE_LIMITED: t("errorLlmRateLimited"),
     };
 
     const handleUrlChange = (value: string) => {
@@ -56,7 +56,8 @@ export function InputSection({ onSubmit }: InputSectionProps) {
         setIsSubmitting(true);
         setErrorMessage(null);
         try {
-            const { data, pdf_url } = await createRecipeJob(parsed.sourceUrl);
+            const { job_id } = await createRecipeJob(parsed.sourceUrl);
+            const { data, pdf_url } = await pollRecipeJob(job_id);
             if (!data) {
                 setErrorMessage(t("errorInternalServer"));
                 return;
@@ -72,12 +73,6 @@ export function InputSection({ onSubmit }: InputSectionProps) {
             setIsSubmitting(false);
         }
     };
-
-    // const handleExampleClick = (exampleUrl: string) => {
-    //   setUrl(exampleUrl);
-    //   setIsValid(true);
-    //   onSubmit(exampleUrl);
-    // };
 
     return (
         <div className="flex-1 flex items-center justify-center px-4 py-12 md:py-20">
@@ -159,25 +154,6 @@ export function InputSection({ onSubmit }: InputSectionProps) {
                         {t("generateRecipe")}
                     </button>
                 </form>
-
-                {/* Examples */}
-                <div className="space-y-3">
-                    <p className="text-sm text-muted-foreground text-center">
-                        {t("tryExamples")}
-                    </p>
-                    <div className="flex flex-wrap gap-2 justify-center">
-                        {Object.entries(EXAMPLE_RECIPES).map(([key, example]) => (
-                            <button
-                                key={key}
-                                // onClick={() => handleExampleClick(example.url)}
-                                className="px-4 py-2 rounded-lg bg-muted hover:bg-accent text-sm text-foreground transition-colors"
-                                disabled={isSubmitting}
-                            >
-                                {t(`example${key.charAt(0).toUpperCase() + key.slice(1)}`)}
-                            </button>
-                        ))}
-                    </div>
-                </div>
             </motion.div>
         </div>
     );

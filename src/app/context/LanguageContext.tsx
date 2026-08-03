@@ -25,7 +25,6 @@ const translations = {
     placeholder: "https://youtube.com/watch?v=...",
     generateRecipe: "Сгенерировать рецепт",
     invalidYouTubeUrl: "Неверная ссылка на YouTube",
-    tryExamples: "Попробуйте примеры для быстрого теста:",
     // Errors
     errorInvalidUrl: "Неверный формат ссылки",
     errorVideoUnavailable: "Видео недоступно",
@@ -35,6 +34,7 @@ const translations = {
     errorSubtitlesFetchFailed: "Не удалось получить субтитры, попробуйте позже",
     errorAiExtractionFailed: "Не удалось извлечь рецепт из видео",
     errorInvalidJsonSchema: "Не удалось обработать ответ AI, попробуйте ещё раз",
+    errorLlmRateLimited: "Сервис генерации рецептов временно перегружен, попробуйте позже",
     errorInternalServer: "Внутренняя ошибка сервера",
     // Loading
     analyzing: "Анализируем видео...",
@@ -77,10 +77,6 @@ const translations = {
     note: "Примечание:",
     noteText:
       "Для наилучших результатов используйте видео с четкими инструкциями и списком ингредиентов.",
-    // Examples
-    exampleCarbonara: "Паста Карбонара",
-    exampleBorscht: "Классический Борщ",
-    exampleNapoleon: "Торт Наполеон",
     // Recipe types
     mainDish: "Основное блюдо",
     dessert: "Десерт",
@@ -98,7 +94,6 @@ const translations = {
     placeholder: "https://youtube.com/watch?v=...",
     generateRecipe: "Generate recipe",
     invalidYouTubeUrl: "Invalid YouTube URL",
-    tryExamples: "Try examples for a quick test:",
     // Errors
     errorInvalidUrl: "Invalid link format",
     errorVideoUnavailable: "Video unavailable",
@@ -108,6 +103,7 @@ const translations = {
     errorSubtitlesFetchFailed: "Failed to fetch subtitles, please try again",
     errorAiExtractionFailed: "Couldn't extract a recipe from this video",
     errorInvalidJsonSchema: "Failed to process the AI response, please try again",
+    errorLlmRateLimited: "Recipe generation service is temporarily overloaded, please try again later",
     errorInternalServer: "Internal server error",
     // Loading
     analyzing: "Analyzing video...",
@@ -149,10 +145,6 @@ const translations = {
     note: "Note:",
     noteText:
       "For best results, use videos with clear instructions and ingredient lists.",
-    // Examples
-    exampleCarbonara: "Pasta Carbonara",
-    exampleBorscht: "Classic Borscht",
-    exampleNapoleon: "Napoleon Cake",
     // Recipe types
     mainDish: "Main dish",
     dessert: "Dessert",
