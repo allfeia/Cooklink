@@ -37,7 +37,7 @@ export function RecipeCard({ recipe, onBack, onNewRecipe }: RecipeCardProps) {
       document.body.appendChild(link);
       link.click();
       link.remove();
-      URL.revokeObjectURL(objectUrl);
+      setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
 
       toast.success(t("pdfSuccess"));
     } catch (error) {
