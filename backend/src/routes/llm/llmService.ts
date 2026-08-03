@@ -5,7 +5,7 @@ import { recipeStore, RECIPE_TYPES, type RecipeData } from '../recipe/recipeStor
 export type { RecipeData } from '../recipe/recipeStore';
 export { RECIPE_TYPES } from '../recipe/recipeStore';
 
-export const MAX_RETRIES = 3;
+export const MAX_RETRIES = 2;
 
 const GROQ_BASE_URL = process.env.GROQ_BASE_URL ?? 'https://api.groq.com/openai/v1';
 const GROQ_MODEL = process.env.GROQ_MODEL ?? 'llama-3.3-70b-versatile';
@@ -39,7 +39,7 @@ const SYSTEM_PROMPT = `Ты — эксперт по кулинарии. Извл
 Схема ответа:
 ${RECIPE_SCHEMA}`;
 
-export type LlmErrorCode = 'AI_EXTRACTION_FAILED' | 'INVALID_JSON_SCHEMA';
+export type LlmErrorCode = 'AI_EXTRACTION_FAILED' | 'INVALID_JSON_SCHEMA' | 'LLM_RATE_LIMITED';
 
 export class LlmExtractionError extends Error {
     constructor(
@@ -90,11 +90,20 @@ async function callLlm(transcriptText: string): Promise<string> {
             ],
         });
     } catch (err) {
+        const status = (err as { status?: number })?.status;
+        const code = (err as { code?: string })?.code;
         console.error('[llm] request failed', {
-            status: (err as { status?: number })?.status,
-            code: (err as { code?: string })?.code,
+            status,
+            code,
             message: err instanceof Error ? err.message : String(err),
         });
+        if (status === 429) {
+            throw new LlmExtractionError(
+                'LLM_RATE_LIMITED',
+                'Сервис генерации рецептов временно перегружен, попробуйте позже',
+                { status, code }
+            );
+        }
         throw err;
     }
 
@@ -180,6 +189,12 @@ export async function extractRecipe(transcriptText: string, canonicalKey: string
         }
 
         const schemaValid = parsed !== undefined && isValidRecipeData(parsed);
+        const isEmptyObject =
+            parsed !== undefined &&
+            typeof parsed === 'object' &&
+            parsed !== null &&
+            !Array.isArray(parsed) &&
+            Object.keys(parsed).length === 0;
         console.log('[llm] parse attempt', {
             canonical_key: canonicalKey,
             attempt,
@@ -192,6 +207,14 @@ export async function extractRecipe(transcriptText: string, canonicalKey: string
             await recipeStore.save(canonicalKey, parsed as RecipeData);
             console.log('[llm] extractRecipe success', { canonical_key: canonicalKey, attempt });
             return parsed as RecipeData;
+        }
+
+        if (isEmptyObject) {
+            console.warn('[llm] empty object response — treating as AI_EXTRACTION_FAILED', {
+                canonical_key: canonicalKey,
+                attempt,
+            });
+            throw new LlmExtractionError('AI_EXTRACTION_FAILED', 'Не удалось извлечь рецепт');
         }
 
         if (attempt === MAX_RETRIES) {

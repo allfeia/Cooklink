@@ -16,7 +16,7 @@ app.post('/extract', async (req, res) => {
         res.status(200).json({ recipe });
     } catch (err) {
         if (err instanceof LlmExtractionError) {
-            sendError(res, 422, err);
+            sendError(res, err.code === 'LLM_RATE_LIMITED' ? 429 : 422, err);
             return;
         }
         console.error('[llm-worker] unexpected error', err);

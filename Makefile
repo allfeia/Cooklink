@@ -5,5 +5,5 @@ run:
 	cd backend && npm ci && npx drizzle-kit migrate
 
 # с логами
-#run:
-#	docker compose logs -f
+logs:
+	docker compose logs -f

@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import { randomUUID } from 'crypto';
-import { parseVideoUrl } from '../../../../common/validation/validatePipeline';
+import { parseVideoUrl, type ValidVideoUrl } from '../../../../common/validation/validatePipeline';
 import { recipeJobStore, type RecipeJob } from '../recipeJobStore';
 import { pdfStore } from '../pdf/pdfStore';
+import { recipeStore, type RecipeData } from '../recipe/recipeStore';
 import type { Transcript } from '../subtitles/subtitlesStore';
-import type { RecipeData } from '../recipe/recipeStore';
 
 const METADATA_WORKER_URL = process.env.METADATA_WORKER_URL ?? 'http://localhost:4001';
 const SUBTITLES_WORKER_URL = process.env.SUBTITLES_WORKER_URL ?? 'http://localhost:4002';
@@ -15,6 +15,81 @@ const router = Router();
 
 interface WorkerErrorBody {
     error: { code: string; message: string; details?: Record<string, unknown> };
+}
+
+async function runPipeline(job: RecipeJob, parsed: ValidVideoUrl): Promise<void> {
+    console.log(`[pipeline] job ${job.job_id}: scanning`);
+
+    // метаданные
+    const metaRes = await fetch(`${METADATA_WORKER_URL}/check`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            jobId: job.job_id,
+            sourceUrl: parsed.sourceUrl,
+            videoId: parsed.videoId,
+            platform: parsed.platform,
+        }),
+    });
+    if (!metaRes.ok) {
+        const body = (await metaRes.json()) as WorkerErrorBody;
+        console.error(`[pipeline] job ${job.job_id}: failed at metadata (${body.error.code})`);
+        return;
+    }
+
+    // субтитры
+    console.log(`[pipeline] job ${job.job_id}: transcribing`);
+    const subRes = await fetch(`${SUBTITLES_WORKER_URL}/fetch`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            jobId: job.job_id,
+            sourceUrl: parsed.sourceUrl,
+            videoId: parsed.videoId,
+        }),
+    });
+    if (!subRes.ok) {
+        const body = (await subRes.json()) as WorkerErrorBody;
+        console.error(`[pipeline] job ${job.job_id}: failed at subtitles (${body.error.code})`);
+        return;
+    }
+    const { transcript } = (await subRes.json()) as { transcript: Transcript };
+
+    // извлечение рецепта через LLM
+    console.log(`[pipeline] job ${job.job_id}: llm_processing`);
+    const llmRes = await fetch(`${LLM_WORKER_URL}/extract`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            jobId: job.job_id,
+            transcriptText: transcript.transcript_text,
+            canonicalKey: parsed.canonicalKey,
+        }),
+    });
+    if (!llmRes.ok) {
+        const body = (await llmRes.json()) as WorkerErrorBody;
+        console.error(`[pipeline] job ${job.job_id}: failed at llm (${body.error.code})`);
+        return;
+    }
+    const { recipe } = (await llmRes.json()) as { recipe: RecipeData };
+
+    // генерация PDF
+    console.log(`[pipeline] job ${job.job_id}: generating_pdf`);
+    const pdfRes = await fetch(`${PDF_WORKER_URL}/generate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ recipe }),
+    });
+    if (!pdfRes.ok) {
+        const body = (await pdfRes.json()) as WorkerErrorBody;
+        await recipeJobStore.markFailed(job.job_id, body.error.code, body.error.message);
+        console.error(`[pipeline] job ${job.job_id}: failed at pdf (${body.error.code})`);
+        return;
+    }
+    const pdfBuffer = Buffer.from(await pdfRes.arrayBuffer());
+    await pdfStore.save(job.job_id, pdfBuffer);
+    await recipeJobStore.updateStatus(job.job_id, 'completed');
+    console.log(`[pipeline] job ${job.job_id}: completed`);
 }
 
 router.post('/recipes', async (req, res) => {
@@ -44,71 +119,34 @@ router.post('/recipes', async (req, res) => {
     };
 
     await recipeJobStore.create(job);
+    res.status(202).json(job);
 
-    // ── метаданные ────────────────────────────────────────────────
-    const metaRes = await fetch(`${METADATA_WORKER_URL}/check`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            jobId: job.job_id,
-            sourceUrl: parsed.sourceUrl,
-            videoId: parsed.videoId,
-            platform: parsed.platform,
-        }),
+    runPipeline(job, parsed).catch((err) => {
+        console.error(`[pipeline] job ${job.job_id}: crashed unexpectedly`, err);
     });
-    if (!metaRes.ok) {
-        const body = (await metaRes.json()) as WorkerErrorBody;
-        return res.status(metaRes.status).json(body);
+});
+
+router.get('/recipes/:job_id', async (req, res) => {
+    const job = await recipeJobStore.findById(req.params.job_id);
+    if (!job) {
+        return res.status(404).json({
+            error: { code: 'JOB_NOT_FOUND', message: 'Задача с указанным идентификатором не найдена' },
+        });
     }
 
-    // ── субтитры ──────────────────────────────────────────────────
-    const subRes = await fetch(`${SUBTITLES_WORKER_URL}/fetch`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            jobId: job.job_id,
-            sourceUrl: parsed.sourceUrl,
-            videoId: parsed.videoId,
-        }),
-    });
-    if (!subRes.ok) {
-        const body = (await subRes.json()) as WorkerErrorBody;
-        return res.status(subRes.status).json(body);
+    if (job.status === 'failed') {
+        return res.status(200).json({
+            ...job,
+            error: { code: job.error_code, message: job.error_message },
+        });
     }
-    const { transcript } = (await subRes.json()) as { transcript: Transcript };
 
-    // ── извлечение рецепта через LLM ─────────────────────────────
-    const llmRes = await fetch(`${LLM_WORKER_URL}/extract`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            jobId: job.job_id,
-            transcriptText: transcript.transcript_text,
-            canonicalKey: parsed.canonicalKey,
-        }),
-    });
-    if (!llmRes.ok) {
-        const body = (await llmRes.json()) as WorkerErrorBody;
-        return res.status(llmRes.status).json(body);
+    if (job.status === 'completed') {
+        const recipe = await recipeStore.get(job.canonical_key);
+        return res.status(200).json({ ...job, data: recipe, pdf_url: `/v1/recipes/${job.job_id}/pdf` });
     }
-    const { recipe } = (await llmRes.json()) as { recipe: RecipeData };
 
-    // ── генерация PDF ─────────────────────────────────────────────
-    const pdfRes = await fetch(`${PDF_WORKER_URL}/generate`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ recipe }),
-    });
-    if (!pdfRes.ok) {
-        const body = (await pdfRes.json()) as WorkerErrorBody;
-        await recipeJobStore.markFailed(job.job_id, body.error.code, body.error.message);
-        return res.status(pdfRes.status).json(body);
-    }
-    const pdfBuffer = Buffer.from(await pdfRes.arrayBuffer());
-    await pdfStore.save(job.job_id, pdfBuffer);
-    await recipeJobStore.updateStatus(job.job_id, 'completed');
-
-    return res.status(202).json({ ...job, status: 'completed', data: recipe, pdf_url: `/v1/recipes/${job.job_id}/pdf` });
+    return res.status(200).json(job);
 });
 
 router.get('/recipes/:job_id/pdf', async (req, res) => {
