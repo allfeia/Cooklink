@@ -24,20 +24,17 @@ export function RecipeCard({ recipe, onBack, onNewRecipe }: RecipeCardProps) {
 
     setIsDownloading(true);
     try {
-      const response = await fetch(recipe.pdfUrl);
+      const response = await fetch(recipe.pdfUrl, { method: "HEAD" });
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
       }
 
-      const blob = await response.blob();
-      const objectUrl = URL.createObjectURL(blob);
       const link = document.createElement("a");
-      link.href = objectUrl;
+      link.href = recipe.pdfUrl;
       link.download = `${recipe.title}.pdf`;
       document.body.appendChild(link);
       link.click();
       link.remove();
-      setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
 
       toast.success(t("pdfSuccess"));
     } catch (error) {
