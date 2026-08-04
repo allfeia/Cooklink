@@ -1,31 +1,25 @@
-import { useState, useEffect } from "react";
 import { Progress } from "../ui/progress";
 import { motion } from "motion/react";
 import { X } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext";
+import type { JobStatus } from "@/app/api/recipesApi";
 
 interface LoadingStateProps {
+  status: JobStatus;
   onCancel: () => void;
 }
 
-export function LoadingState({ onCancel }: LoadingStateProps) {
+export function LoadingState({ status, onCancel }: LoadingStateProps) {
   const { t } = useLanguage();
-  const [currentStage, setCurrentStage] = useState(0);
 
-  const LOADING_STAGES = [
-    { text: t("analyzing"), progress: 33 },
-    { text: t("extracting"), progress: 66 },
-    { text: t("generating"), progress: 100 },
-  ];
+  const ACTIVE_STAGE_BY_STATUS: Partial<Record<JobStatus, { text: string; progress: number }>> = {
+    scanning: { text: t("analyzing"), progress: 20 },
+    transcribing: { text: t("fetchingSubtitles"), progress: 45 },
+    llm_processing: { text: t("extracting"), progress: 70 },
+    generating_pdf: { text: t("generating"), progress: 95 },
+  };
 
-  useEffect(() => {
-    const timers = [
-      setTimeout(() => setCurrentStage(1), 2000),
-      setTimeout(() => setCurrentStage(2), 4000),
-    ];
-
-    return () => timers.forEach(timer => clearTimeout(timer));
-  }, []);
+  const stage = ACTIVE_STAGE_BY_STATUS[status] ?? ACTIVE_STAGE_BY_STATUS.generating_pdf!;
 
   return (
     <div className="flex-1 flex items-center justify-center px-4 py-12">
@@ -49,20 +43,20 @@ export function LoadingState({ onCancel }: LoadingStateProps) {
         <div className="space-y-4">
           <div className="text-center space-y-2">
             <motion.p
-              key={currentStage}
+              key={status}
               className="text-lg font-medium text-foreground"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
             >
-              {LOADING_STAGES[currentStage].text}
+              {stage.text}
             </motion.p>
             <Progress
-              value={LOADING_STAGES[currentStage].progress}
+              value={stage.progress}
               className="h-2"
             />
             <p className="text-sm text-muted-foreground">
-              {LOADING_STAGES[currentStage].progress}%
+              {stage.progress}%
             </p>
           </div>
 

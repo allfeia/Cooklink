@@ -38,6 +38,7 @@ const translations = {
     errorInternalServer: "Внутренняя ошибка сервера",
     // Loading
     analyzing: "Анализируем видео...",
+    fetchingSubtitles: "Получаем субтитры...",
     extracting: "Извлекаем ингредиенты и шаги...",
     generating: "Генерируем красивый рецепт...",
     cancel: "Отмена",
@@ -107,6 +108,7 @@ const translations = {
     errorInternalServer: "Internal server error",
     // Loading
     analyzing: "Analyzing video...",
+    fetchingSubtitles: "Fetching subtitles...",
     extracting: "Extracting ingredients and steps...",
     generating: "Generating beautiful recipe...",
     cancel: "Cancel",

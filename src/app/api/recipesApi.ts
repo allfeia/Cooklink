@@ -33,6 +33,13 @@ export class RecipeApiError extends Error {
     }
 }
 
+export class PollCancelledError extends Error {
+    constructor() {
+        super("Polling cancelled");
+        this.name = "PollCancelledError";
+    }
+}
+
 function resolvePdfUrl(body: RecipeJobResponse): void {
     if (body.pdf_url && /^https?:\/\//.test(BASE_URL)) {
         body.pdf_url = new URL(body.pdf_url, BASE_URL).href;
@@ -56,8 +63,8 @@ export async function createRecipeJob(sourceUrl: string): Promise<RecipeJobRespo
     throw new RecipeApiError(code, message, body?.error?.details);
 }
 
-export async function getRecipeJob(jobId: string): Promise<RecipeJobResponse> {
-    const response = await fetch(`${BASE_URL}/recipes/${jobId}`);
+export async function getRecipeJob(jobId: string, signal?: AbortSignal): Promise<RecipeJobResponse> {
+    const response = await fetch(`${BASE_URL}/recipes/${jobId}`, { signal });
 
     if (response.ok) {
         const body: RecipeJobResponse = await response.json();
@@ -73,12 +80,45 @@ export async function getRecipeJob(jobId: string): Promise<RecipeJobResponse> {
 
 const POLL_INTERVAL_MS = 2000;
 
+function delay(ms: number, signal?: AbortSignal): Promise<void> {
+    return new Promise((resolve, reject) => {
+        if (signal?.aborted) {
+            reject(new PollCancelledError());
+            return;
+        }
+        const timer = setTimeout(resolve, ms);
+        signal?.addEventListener(
+            "abort",
+            () => {
+                clearTimeout(timer);
+                reject(new PollCancelledError());
+            },
+            { once: true }
+        );
+    });
+}
+
 export async function pollRecipeJob(
     jobId: string,
-    onStatusChange?: (status: JobStatus) => void
+    options?: { onStatusChange?: (status: JobStatus) => void; signal?: AbortSignal }
 ): Promise<RecipeJobResponse> {
+    const { onStatusChange, signal } = options ?? {};
+
     for (;;) {
-        const job = await getRecipeJob(jobId);
+        if (signal?.aborted) {
+            throw new PollCancelledError();
+        }
+
+        let job: RecipeJobResponse;
+        try {
+            job = await getRecipeJob(jobId, signal);
+        } catch (err) {
+            if (signal?.aborted) {
+                throw new PollCancelledError();
+            }
+            throw err;
+        }
+
         console.log(`[poll] job ${jobId}: ${job.status}`);
         onStatusChange?.(job.status);
 
@@ -92,6 +132,6 @@ export async function pollRecipeJob(
             );
         }
 
-        await new Promise((resolve) => setTimeout(resolve, POLL_INTERVAL_MS));
+        await delay(POLL_INTERVAL_MS, signal);
     }
 }

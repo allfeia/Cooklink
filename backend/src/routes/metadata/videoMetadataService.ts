@@ -1,6 +1,7 @@
 import ytDlp from 'yt-dlp-exec';
 import type { Platform } from '../../../../common/validation/domainDetection';
 import { videoMetadataStore, type VideoMetadata } from './videoMetadataStore';
+import { getYtDlpCookiesOption } from '../../utils/ytDlpCookies';
 
 export const MAX_DURATION_SEC = 900; // 15 минут
 
@@ -24,6 +25,7 @@ async function fetchRawMetadata(sourceUrl: string) {
             noWarnings: true,
             noCheckCertificates: true,
             skipDownload: true,
+            ...getYtDlpCookiesOption(),
         });
         return raw;
     } catch (err) {
