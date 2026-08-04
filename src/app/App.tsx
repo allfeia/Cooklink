@@ -1,33 +1,61 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { toast } from "sonner";
 import { Header } from "./components/layout/Header";
 import { InputSection } from "./components/forms/InputSection";
 import { LoadingState } from "./components/states/LoadingState";
 import { RecipeCard } from "./components/features/recipe/RecipeCard";
 import { Toaster } from "./components/feedback/sonner";
-import { Recipe, ApiRecipeData, mapApiRecipeToRecipe } from "./components/features/recipe/recipe";
+import { Recipe, mapApiRecipeToRecipe } from "./components/features/recipe/recipe";
 import { motion, AnimatePresence } from "motion/react";
 import { ThemeProvider } from "./context/ThemeContext";
 import { LanguageProvider, useLanguage } from "./context/LanguageContext";
 import { searchDishImage } from "@/app/components/features/image/imageSearch";
+import { pollRecipeJob, PollCancelledError, RecipeApiError, type JobStatus } from "@/app/api/recipesApi";
+import { getRecipeErrorMessage } from "@/app/lib/recipeErrorMessages";
 
 type AppState = "input" | "loading" | "result";
 
 function AppContent() {
   const [state, setState] = useState<AppState>("input");
   const [recipe, setRecipe] = useState<Recipe | null>(null);
+  const [jobStatus, setJobStatus] = useState<JobStatus>("scanning");
+  const pollAbortRef = useRef<AbortController | null>(null);
   const { t } = useLanguage();
 
-  const handleSubmit = async ({ recipe: apiRecipe, sourceUrl, pdfUrl }: { recipe: ApiRecipeData; sourceUrl: string; pdfUrl?: string }) => {
+  const handleJobCreated = ({ jobId, sourceUrl }: { jobId: string; sourceUrl: string }) => {
+    setJobStatus("scanning");
     setState("loading");
 
-    const mapped = mapApiRecipeToRecipe(apiRecipe, sourceUrl, pdfUrl);
-    const dishImage = await searchDishImage(mapped.title);
+    const controller = new AbortController();
+    pollAbortRef.current = controller;
 
-    setRecipe({ ...mapped, dishImage });
-    setState("result");
+    pollRecipeJob(jobId, { onStatusChange: setJobStatus, signal: controller.signal })
+      .then(async (job) => {
+        if (!job.data) {
+          toast.error(t("errorInternalServer"));
+          setState("input");
+          return;
+        }
+        const mapped = mapApiRecipeToRecipe(job.data, sourceUrl, job.pdf_url);
+        const dishImage = await searchDishImage(mapped.title);
+        setRecipe({ ...mapped, dishImage });
+        setState("result");
+      })
+      .catch((error) => {
+        if (error instanceof PollCancelledError) {
+          return;
+        }
+        const message =
+          error instanceof RecipeApiError
+            ? getRecipeErrorMessage(error.code, t)
+            : t("errorInternalServer");
+        toast.error(message);
+        setState("input");
+      });
   };
 
   const handleCancel = () => {
+    pollAbortRef.current?.abort();
     setState("input");
     setRecipe(null);
   };
@@ -55,7 +83,7 @@ function AppContent() {
             transition={{ duration: 0.3 }}
             className="flex-1 flex flex-col"
           >
-            <InputSection onSubmit={handleSubmit} />
+            <InputSection onJobCreated={handleJobCreated} />
 
             {/* Footer */}
             <footer className="border-t border-border py-6">
@@ -85,7 +113,7 @@ function AppContent() {
             transition={{ duration: 0.3 }}
             className="flex-1"
           >
-            <LoadingState onCancel={handleCancel} />
+            <LoadingState status={jobStatus} onCancel={handleCancel} />
           </motion.div>
         )}
 

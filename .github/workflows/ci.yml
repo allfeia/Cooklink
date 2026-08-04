@@ -67,6 +67,10 @@ jobs:
           printf '%s\n' "$BACKEND_ENV_CONTENT" | tee backend/.env > /dev/null
           chmod 600 backend/.env
 
+          rm -f youtube_cookies.txt
+          printf '%s\n' "${{ secrets.YOUTUBE_COOKIES_TXT }}" | tee youtube_cookies.txt > /dev/null
+          chmod 600 youtube_cookies.txt
+
           git pull origin main
           make run
           EOF

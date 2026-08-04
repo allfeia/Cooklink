@@ -3,32 +3,20 @@ import { Youtube, Check, AlertCircle } from "lucide-react";
 import { motion } from "motion/react";
 import { useLanguage } from "../../context/LanguageContext";
 import { parseVideoUrl, type ValidVideoUrl } from "../../../../common/validation/validatePipeline";
-import { createRecipeJob, pollRecipeJob, RecipeApiError } from "@/app/api/recipesApi";
-import type { ApiRecipeData } from "../features/recipe/recipe";
+import { createRecipeJob, RecipeApiError } from "@/app/api/recipesApi";
+import { getRecipeErrorMessage } from "@/app/lib/recipeErrorMessages";
 
 interface InputSectionProps {
-    onSubmit: (result: { recipe: ApiRecipeData; sourceUrl: string; pdfUrl?: string }) => void;
+    onJobCreated: (result: { jobId: string; sourceUrl: string }) => void;
 }
 
-export function InputSection({ onSubmit }: InputSectionProps) {
+export function InputSection({ onJobCreated }: InputSectionProps) {
     const [url, setUrl] = useState("");
     const [isValid, setIsValid] = useState<boolean | null>(null);
     const [parsed, setParsed] = useState<ValidVideoUrl | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const { t } = useLanguage();
-
-    const errorMessageByCode: Record<string, string> = {
-        INVALID_URL: t("errorInvalidUrl"),
-        VIDEO_UNAVAILABLE: t("errorVideoUnavailable"),
-        VIDEO_TOO_LONG: t("errorVideoTooLong"),
-        VIDEO_NO_AUDIO: t("errorVideoNoAudio"),
-        NO_SUBTITLES: t("errorNoSubtitles"),
-        SUBTITLES_FETCH_FAILED: t("errorSubtitlesFetchFailed"),
-        AI_EXTRACTION_FAILED: t("errorAiExtractionFailed"),
-        INVALID_JSON_SCHEMA: t("errorInvalidJsonSchema"),
-        LLM_RATE_LIMITED: t("errorLlmRateLimited"),
-    };
 
     const handleUrlChange = (value: string) => {
         setUrl(value);
@@ -57,15 +45,10 @@ export function InputSection({ onSubmit }: InputSectionProps) {
         setErrorMessage(null);
         try {
             const { job_id } = await createRecipeJob(parsed.sourceUrl);
-            const { data, pdf_url } = await pollRecipeJob(job_id);
-            if (!data) {
-                setErrorMessage(t("errorInternalServer"));
-                return;
-            }
-            onSubmit({ recipe: data, sourceUrl: parsed.sourceUrl, pdfUrl: pdf_url });
+            onJobCreated({ jobId: job_id, sourceUrl: parsed.sourceUrl });
         } catch (error) {
             if (error instanceof RecipeApiError) {
-                setErrorMessage(errorMessageByCode[error.code] ?? t("errorInternalServer"));
+                setErrorMessage(getRecipeErrorMessage(error.code, t));
             } else {
                 setErrorMessage(t("errorInternalServer"));
             }

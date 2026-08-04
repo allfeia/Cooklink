@@ -27,6 +27,9 @@ services:
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       PORT: 4001
+      YOUTUBE_COOKIES_PATH: /app/youtube_cookies.txt
+    volumes:
+      - ./youtube_cookies.txt:/app/youtube_cookies.txt
     depends_on:
       postgres:
         condition: service_healthy
@@ -38,6 +41,9 @@ services:
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       PORT: 4002
+      YOUTUBE_COOKIES_PATH: /app/youtube_cookies.txt
+    volumes:
+      - ./youtube_cookies.txt:/app/youtube_cookies.txt
     depends_on:
       postgres:
         condition: service_healthy
