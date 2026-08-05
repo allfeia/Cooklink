@@ -10,7 +10,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { ThemeProvider } from "./context/ThemeContext";
 import { LanguageProvider, useLanguage } from "./context/LanguageContext";
 import { searchDishImage } from "@/app/components/features/image/imageSearch";
-import { pollRecipeJob, PollCancelledError, RecipeApiError, type JobStatus } from "@/app/api/recipesApi";
+import { pollRecipeJob, cancelRecipeJob, PollCancelledError, RecipeApiError, type JobStatus } from "@/app/api/recipesApi";
 import { getRecipeErrorMessage } from "@/app/lib/recipeErrorMessages";
 
 type AppState = "input" | "loading" | "result";
@@ -20,11 +20,13 @@ function AppContent() {
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [jobStatus, setJobStatus] = useState<JobStatus>("scanning");
   const pollAbortRef = useRef<AbortController | null>(null);
+  const currentJobIdRef = useRef<string | null>(null);
   const { t } = useLanguage();
 
   const handleJobCreated = ({ jobId, sourceUrl }: { jobId: string; sourceUrl: string }) => {
     setJobStatus("scanning");
     setState("loading");
+    currentJobIdRef.current = jobId;
 
     const controller = new AbortController();
     pollAbortRef.current = controller;
@@ -56,6 +58,12 @@ function AppContent() {
 
   const handleCancel = () => {
     pollAbortRef.current?.abort();
+    const jobId = currentJobIdRef.current;
+    if (jobId) {
+      cancelRecipeJob(jobId).catch((error) => {
+        console.error("Не удалось отменить задачу на сервере:", error);
+      });
+    }
     setState("input");
     setRecipe(null);
   };

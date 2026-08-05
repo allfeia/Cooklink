@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm';
+import { and, eq, notInArray } from 'drizzle-orm';
 import { db } from '../db/client';
 import { jobs } from '../db/schema';
 
@@ -11,6 +11,7 @@ export type JobStatus =
     | 'failed'       // ошибка
     | 'cancelled';   // отменено пользователем
 
+const TERMINAL_STATUSES: JobStatus[] = ['completed', 'failed', 'cancelled'];
 
 export interface RecipeJob {
     job_id: string;            // UUID v4
@@ -27,6 +28,7 @@ export interface RecipeJobRepository {
     updateStatus(jobId: string, status: JobStatus): Promise<void>;
     markFailed(jobId: string, errorCode: string, errorMessage: string): Promise<void>;
     findById(jobId: string): Promise<RecipeJob | undefined>;
+    cancel(jobId: string): Promise<boolean>;
 }
 
 export class InMemoryRecipeJobRepository implements RecipeJobRepository {
@@ -40,17 +42,15 @@ export class InMemoryRecipeJobRepository implements RecipeJobRepository {
 
     async updateStatus(jobId: string, status: JobStatus): Promise<void> {
         const job = this.jobsById.get(jobId);
-        if (!job) {
-            throw new Error(`Job not found: ${jobId}`);
-        }
+        if (!job) throw new Error(`Job not found: ${jobId}`);
+        if (TERMINAL_STATUSES.includes(job.status)) return;
         job.status = status;
     }
 
     async markFailed(jobId: string, errorCode: string, errorMessage: string): Promise<void> {
         const job = this.jobsById.get(jobId);
-        if (!job) {
-            throw new Error(`Job not found: ${jobId}`);
-        }
+        if (!job) throw new Error(`Job not found: ${jobId}`);
+        if (TERMINAL_STATUSES.includes(job.status)) return;
         job.status = 'failed';
         job.error_code = errorCode;
         job.error_message = errorMessage;
@@ -58,6 +58,15 @@ export class InMemoryRecipeJobRepository implements RecipeJobRepository {
 
     async findById(jobId: string): Promise<RecipeJob | undefined> {
         return this.jobsById.get(jobId);
+    }
+
+    async cancel(jobId: string): Promise<boolean> {
+        const job = this.jobsById.get(jobId);
+        if (!job || TERMINAL_STATUSES.includes(job.status)) {
+            return false;
+        }
+        job.status = 'cancelled';
+        return true;
     }
 }
 
@@ -87,26 +96,31 @@ export class PostgresRecipeJobRepository implements RecipeJobRepository {
     }
 
     async updateStatus(jobId: string, status: JobStatus): Promise<void> {
-        const result = await db.update(jobs).set({ status }).where(eq(jobs.id, jobId)).returning({ id: jobs.id });
-        if (result.length === 0) {
-            throw new Error(`Job not found: ${jobId}`);
-        }
+        await db
+            .update(jobs)
+            .set({ status })
+            .where(and(eq(jobs.id, jobId), notInArray(jobs.status, TERMINAL_STATUSES)));
     }
 
     async markFailed(jobId: string, errorCode: string, errorMessage: string): Promise<void> {
-        const result = await db
+        await db
             .update(jobs)
             .set({ status: 'failed', errorCode, errorMessage })
-            .where(eq(jobs.id, jobId))
-            .returning({ id: jobs.id });
-        if (result.length === 0) {
-            throw new Error(`Job not found: ${jobId}`);
-        }
+            .where(and(eq(jobs.id, jobId), notInArray(jobs.status, TERMINAL_STATUSES)));
     }
 
     async findById(jobId: string): Promise<RecipeJob | undefined> {
         const [row] = await db.select().from(jobs).where(eq(jobs.id, jobId)).limit(1);
         return row ? toDomain(row) : undefined;
+    }
+
+    async cancel(jobId: string): Promise<boolean> {
+        const result = await db
+            .update(jobs)
+            .set({ status: 'cancelled' })
+            .where(and(eq(jobs.id, jobId), notInArray(jobs.status, TERMINAL_STATUSES)))
+            .returning({ id: jobs.id });
+        return result.length > 0;
     }
 }
 

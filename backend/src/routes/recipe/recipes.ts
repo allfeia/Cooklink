@@ -17,6 +17,30 @@ interface WorkerErrorBody {
     error: { code: string; message: string; details?: Record<string, unknown> };
 }
 
+async function isCancelled(jobId: string): Promise<boolean> {
+    const current = await recipeJobStore.findById(jobId);
+    return current?.status === 'cancelled';
+}
+
+async function generatePdfOnly(job: RecipeJob, recipe: RecipeData): Promise<void> {
+    console.log(`[pipeline] job ${job.job_id}: generating_pdf (cached recipe)`);
+    const pdfRes = await fetch(`${PDF_WORKER_URL}/generate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ recipe }),
+    });
+    if (!pdfRes.ok) {
+        const body = (await pdfRes.json()) as WorkerErrorBody;
+        await recipeJobStore.markFailed(job.job_id, body.error.code, body.error.message);
+        console.error(`[pipeline] job ${job.job_id}: failed at pdf (${body.error.code})`);
+        return;
+    }
+    const pdfBuffer = Buffer.from(await pdfRes.arrayBuffer());
+    await pdfStore.save(job.job_id, pdfBuffer);
+    await recipeJobStore.updateStatus(job.job_id, 'completed');
+    console.log(`[pipeline] job ${job.job_id}: completed (cached recipe)`);
+}
+
 async function runPipeline(job: RecipeJob, parsed: ValidVideoUrl): Promise<void> {
     console.log(`[pipeline] job ${job.job_id}: scanning`);
 
@@ -34,6 +58,11 @@ async function runPipeline(job: RecipeJob, parsed: ValidVideoUrl): Promise<void>
     if (!metaRes.ok) {
         const body = (await metaRes.json()) as WorkerErrorBody;
         console.error(`[pipeline] job ${job.job_id}: failed at metadata (${body.error.code})`);
+        return;
+    }
+
+    if (await isCancelled(job.job_id)) {
+        console.log(`[pipeline] job ${job.job_id}: cancelled before subtitles`);
         return;
     }
 
@@ -55,6 +84,11 @@ async function runPipeline(job: RecipeJob, parsed: ValidVideoUrl): Promise<void>
     }
     const { transcript } = (await subRes.json()) as { transcript: Transcript };
 
+    if (await isCancelled(job.job_id)) {
+        console.log(`[pipeline] job ${job.job_id}: cancelled before llm`);
+        return;
+    }
+
     // извлечение рецепта через LLM
     console.log(`[pipeline] job ${job.job_id}: llm_processing`);
     const llmRes = await fetch(`${LLM_WORKER_URL}/extract`, {
@@ -72,6 +106,11 @@ async function runPipeline(job: RecipeJob, parsed: ValidVideoUrl): Promise<void>
         return;
     }
     const { recipe } = (await llmRes.json()) as { recipe: RecipeData };
+
+    if (await isCancelled(job.job_id)) {
+        console.log(`[pipeline] job ${job.job_id}: cancelled before pdf`);
+        return;
+    }
 
     // генерация PDF
     console.log(`[pipeline] job ${job.job_id}: generating_pdf`);
@@ -106,24 +145,28 @@ router.post('/recipes', async (req, res) => {
         });
     }
 
-    // TODO (следующий спринт): поиск по canonical_key в Redis/Postgres —
-    // если найден существующий job, вернуть его без создания нового.
-    // Пока пропускаем, job создаётся сразу.
+    const cachedRecipe = await recipeStore.get(parsed.canonicalKey);
 
     const job: RecipeJob = {
         job_id: randomUUID(),
         source_url: parsed.sourceUrl,
         canonical_key: parsed.canonicalKey,
-        status: 'scanning',
+        status: cachedRecipe ? 'generating_pdf' : 'scanning',
         created_at: new Date().toISOString(),
     };
 
     await recipeJobStore.create(job);
     res.status(202).json(job);
 
-    runPipeline(job, parsed).catch((err) => {
-        console.error(`[pipeline] job ${job.job_id}: crashed unexpectedly`, err);
-    });
+    if (cachedRecipe) {
+        generatePdfOnly(job, cachedRecipe).catch((err) => {
+            console.error(`[pipeline] job ${job.job_id}: crashed at pdf (cached)`, err);
+        });
+    } else {
+        runPipeline(job, parsed).catch((err) => {
+            console.error(`[pipeline] job ${job.job_id}: crashed unexpectedly`, err);
+        });
+    }
 });
 
 router.get('/recipes/:job_id', async (req, res) => {
@@ -147,6 +190,23 @@ router.get('/recipes/:job_id', async (req, res) => {
     }
 
     return res.status(200).json(job);
+});
+
+router.post('/recipes/:job_id/cancel', async (req, res) => {
+    const job = await recipeJobStore.findById(req.params.job_id);
+    if (!job) {
+        return res.status(404).json({
+            error: { code: 'JOB_NOT_FOUND', message: 'Задача с указанным идентификатором не найдена' },
+        });
+    }
+
+    const wasCancelled = await recipeJobStore.cancel(job.job_id);
+    if (wasCancelled) {
+        console.log(`[pipeline] job ${job.job_id}: cancel requested`);
+    }
+
+    const updated = await recipeJobStore.findById(job.job_id);
+    return res.status(200).json(updated);
 });
 
 router.get('/recipes/:job_id/pdf', async (req, res) => {

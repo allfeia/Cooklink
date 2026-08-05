@@ -78,6 +78,17 @@ export async function getRecipeJob(jobId: string, signal?: AbortSignal): Promise
     throw new RecipeApiError(code, message, body?.error?.details);
 }
 
+export async function cancelRecipeJob(jobId: string): Promise<void> {
+    const response = await fetch(`${BASE_URL}/recipes/${jobId}/cancel`, { method: "POST" });
+
+    if (!response.ok) {
+        const body = await response.json().catch(() => null);
+        const code = body?.error?.code ?? "INTERNAL_SERVER_ERROR";
+        const message = body?.error?.message ?? "Внутренняя ошибка сервера";
+        throw new RecipeApiError(code, message, body?.error?.details);
+    }
+}
+
 const POLL_INTERVAL_MS = 2000;
 
 function delay(ms: number, signal?: AbortSignal): Promise<void> {
