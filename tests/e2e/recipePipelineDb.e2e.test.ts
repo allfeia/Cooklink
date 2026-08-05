@@ -178,6 +178,16 @@ async function findJobBySourceUrl(sourceUrl: string) {
     return row;
 }
 
+async function pollJobRowById(jobId: string, { timeoutMs = 5000, intervalMs = 20 } = {}) {
+    const deadline = Date.now() + timeoutMs;
+    for (;;) {
+        const [row] = await db.select().from(jobs).where(eq(jobs.id, jobId)).limit(1);
+        if (row && (row.status === 'completed' || row.status === 'failed')) return row;
+        if (Date.now() > deadline) throw new Error(`pollJobRowById timed out, last status: ${row?.status}`);
+        await new Promise((resolve) => setTimeout(resolve, intervalMs));
+    }
+}
+
 async function pollJobRow(sourceUrl: string, { timeoutMs = 5000, intervalMs = 20 } = {}) {
     const deadline = Date.now() + timeoutMs;
     for (;;) {
@@ -191,6 +201,50 @@ async function pollJobRow(sourceUrl: string, { timeoutMs = 5000, intervalMs = 20
         await new Promise((resolve) => setTimeout(resolve, intervalMs));
     }
 }
+
+describe('GET /health', () => {
+    it('возвращает 200 и status: ok когда БД доступна', async () => {
+        const res = await fetch(`${origin}/health`);
+        expect(res.status).toBe(200);
+        const body = await res.json();
+        expect(body.status).toBe('ok');
+    });
+});
+
+describe('POST /v1/recipes — кеш рецепта по canonical_key', () => {
+    it('повторный запрос с тем же URL пропускает пайплайн и стартует с generating_pdf', async () => {
+        const sourceUrl = 'https://www.youtube.com/watch?v=jjjjjjjjjjj';
+        mockYtDlp.mockResolvedValue(
+            buildRaw({ subtitles: { ru: [{ ext: 'vtt', url: 'https://cdn.example/ru.vtt' }] } })
+        );
+        mockAxiosGet.mockResolvedValue({ data: RU_VTT });
+        mockCreate.mockResolvedValue(streamOf(VALID_RECIPE_JSON));
+
+        // Первый запрос — полный пайплайн
+        const first = await postRecipe(sourceUrl);
+        const firstJob = await first.json();
+        await pollJobRow(sourceUrl);
+
+        // Сбрасываем моки — второй запрос не должен их трогать
+        mockYtDlp.mockReset();
+        mockAxiosGet.mockReset();
+        mockCreate.mockReset();
+
+        // Второй запрос с тем же URL
+        const second = await postRecipe(sourceUrl);
+        expect(second.status).toBe(202);
+        const secondJob = await second.json();
+        expect(secondJob.status).toBe('generating_pdf');
+        expect(secondJob.canonical_key).toBe(firstJob.canonical_key);
+
+        const secondRow = await pollJobRowById(secondJob.job_id);
+        expect(secondRow?.status).toBe('completed');
+
+        expect(mockYtDlp).not.toHaveBeenCalled();
+        expect(mockAxiosGet).not.toHaveBeenCalled();
+        expect(mockCreate).not.toHaveBeenCalled();
+    });
+});
 
 describe('POST /v1/recipes — полный пайплайн пишет корректные данные в БД (e2e)', () => {
     it('happy path: в jobs/video_metadata/transcripts/recipes появляются согласованные строки', async () => {

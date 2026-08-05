@@ -71,8 +71,8 @@ describe('PostgresRecipeJobRepository (PGlite)', () => {
         expect(found?.status).toBe('transcribing');
     });
 
-    it('updateStatus on an unknown job throws "Job not found"', async () => {
-        await expect(repo.updateStatus(randomUUID(), 'transcribing')).rejects.toThrow('Job not found');
+    it('updateStatus on an unknown job id is a no-op', async () => {
+        await expect(repo.updateStatus(randomUUID(), 'transcribing')).resolves.toBeUndefined();
     });
 
     it('markFailed sets status=failed with error_code and error_message', async () => {
@@ -87,8 +87,54 @@ describe('PostgresRecipeJobRepository (PGlite)', () => {
         expect(found?.error_message).toBe('Субтитры недоступны');
     });
 
-    it('markFailed on an unknown job throws "Job not found"', async () => {
-        await expect(repo.markFailed(randomUUID(), 'NO_SUBTITLES', 'x')).rejects.toThrow('Job not found');
+    it('markFailed on an unknown job id is a no-op', async () => {
+        await expect(repo.markFailed(randomUUID(), 'NO_SUBTITLES', 'x')).resolves.toBeUndefined();
+    });
+
+    it('updateStatus не перезаписывает cancelled', async () => {
+        const job = buildJob();
+        await repo.create(job);
+        await repo.cancel(job.job_id);
+
+        await repo.updateStatus(job.job_id, 'llm_processing');
+
+        const found = await repo.findById(job.job_id);
+        expect(found?.status).toBe('cancelled');
+    });
+
+    it('updateStatus не перезаписывает completed', async () => {
+        const job = buildJob();
+        await repo.create(job);
+        await repo.updateStatus(job.job_id, 'completed');
+
+        await repo.updateStatus(job.job_id, 'failed');
+
+        const found = await repo.findById(job.job_id);
+        expect(found?.status).toBe('completed');
+    });
+
+    it('markFailed не перезаписывает cancelled', async () => {
+        const job = buildJob();
+        await repo.create(job);
+        await repo.cancel(job.job_id);
+
+        await repo.markFailed(job.job_id, 'AI_EXTRACTION_FAILED', 'ошибка');
+
+        const found = await repo.findById(job.job_id);
+        expect(found?.status).toBe('cancelled');
+        expect(found?.error_code).toBeUndefined();
+    });
+
+    it('markFailed не перезаписывает completed', async () => {
+        const job = buildJob();
+        await repo.create(job);
+        await repo.updateStatus(job.job_id, 'completed');
+
+        await repo.markFailed(job.job_id, 'PDF_GENERATION_FAILED', 'ошибка');
+
+        const found = await repo.findById(job.job_id);
+        expect(found?.status).toBe('completed');
+        expect(found?.error_code).toBeUndefined();
     });
 });
 
