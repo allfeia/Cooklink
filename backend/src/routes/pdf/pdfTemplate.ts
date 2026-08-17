@@ -53,9 +53,9 @@ export function buildRecipeHtml(recipe: RecipeData): string {
   <h1>${escapeHtml(recipe.title)}</h1>
   <div class="meta">
     <div>Время<strong>${recipe.cooking_time_minutes} мин</strong></div>
-    <div>Сложность<strong>${recipe.difficulty}/5</strong></div>
     <div>Порции<strong>${recipe.portions}</strong></div>
     <div>Тип<strong>${escapeHtml(recipe.type)}</strong></div>
+    <div>КБЖУ на 100г<strong>К ${recipe.nutrition_per_100g.calories} · Б ${recipe.nutrition_per_100g.protein} · Ж ${recipe.nutrition_per_100g.fat} · У ${recipe.nutrition_per_100g.carbs}</strong></div>
   </div>
   <h2>Ингредиенты</h2>
   <ul>

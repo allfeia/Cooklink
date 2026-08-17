@@ -9,7 +9,7 @@ export interface RecipeData {
     title: string;
     type: RecipeType;
     cooking_time_minutes: number;
-    difficulty: 1 | 2 | 3 | 4 | 5;
+    nutrition_per_100g: { calories: number; protein: number; fat: number; carbs: number };
     portions: number;
     ingredients: { name: string; quantity: string | number; unit: string }[];
     steps: { step_number: number; description: string }[];

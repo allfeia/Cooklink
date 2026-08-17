@@ -65,7 +65,7 @@ const VALID_RECIPE_JSON = JSON.stringify({
     title: 'Паста Карбонара',
     type: 'Горячее',
     cooking_time_minutes: 20,
-    difficulty: 2,
+    nutrition_per_100g: { calories: 250, protein: 12, fat: 10, carbs: 30 },
     portions: 2,
     ingredients: [{ name: 'спагетти', quantity: 200, unit: 'г' }],
     steps: [{ step_number: 1, description: 'Отварите спагетти в подсоленной воде.' }],
