@@ -7,15 +7,15 @@ export { RECIPE_TYPES } from '../recipe/recipeStore';
 
 export const MAX_RETRIES = 2;
 
-const GROQ_BASE_URL = process.env.GROQ_BASE_URL ?? 'https://api.groq.com/openai/v1';
-const GROQ_MODEL = process.env.GROQ_MODEL ?? 'llama-3.3-70b-versatile';
+const GROQ_BASE_URL = process.env.GROQ_BASE_URL ?? 'https://openrouter.ai/api/v1';
+const GROQ_MODEL = process.env.GROQ_MODEL ?? 'meta-llama/llama-3.3-70b-instruct';
 
 const RECIPE_SCHEMA = `{
   "title": "string (3-100 chars)",
   "type": ${RECIPE_TYPES.map((t) => `"${t}"`).join(' | ')},
   "cooking_time_minutes": number,
-  "difficulty": 1|2|3|4|5,
-  "portions": number,
+  "nutrition_per_100g": {"calories": number, "protein": number, "fat": number, "carbs": number},
+  "total_weight_grams": number,
   "ingredients": [{"name": "string", "quantity": string, "unit": "string"}],
   "steps": [{"step_number": number, "description": "string (max 1000 chars)"}],
   "comments": "string (optional, max 1000 chars)"
@@ -27,7 +27,7 @@ const SYSTEM_PROMPT = `Ты — эксперт по кулинарии. Извл
 1. Верни ТОЛЬКО валидный JSON без пояснений
 2. Не выдумывай ингредиенты, не упомянутые в тексте
 3. Агрегируй повторяющиеся ингредиенты (соль в шагах 1 и 3 → один раз)
-4. Оцени сложность от 1 до 5 на основе техник и количества шагов
+4. Оцени КБЖУ на 100г готового блюда (целые числа) и примерный итоговый вес блюда в граммах
 5. Строго экранируй все переносы строк внутри JSON (используй \\n)
 6. Не вставляй лишние символы или текст вне JSON
 7. Если в транскрипции нет рецепта — текст пустой, не по теме кулинарии, или представляет собой бессвязный/нечитаемый набор символов — не отвечай вообще, верни пустую строку без пояснений
@@ -58,7 +58,7 @@ const proxyDispatcher = GROQ_PROXY_URL ? new ProxyAgent(GROQ_PROXY_URL) : undefi
 function getClient(): OpenAI {
     return new OpenAI({
         baseURL: GROQ_BASE_URL,
-        apiKey: process.env.GROQ_API_KEY,
+        apiKey: process.env.OPENROUTER_API_KEY,
         ...(proxyDispatcher ? { fetchOptions: { dispatcher: proxyDispatcher } } : {}),
     });
 }
@@ -147,15 +147,37 @@ function isValidStep(value: unknown): boolean {
     );
 }
 
-function isValidRecipeData(value: unknown): value is RecipeData {
+function isValidNutrition(value: unknown): boolean {
+    if (typeof value !== 'object' || value === null) return false;
+    const n = value as Record<string, unknown>;
+    return (
+        typeof n.calories === 'number' && Number.isFinite(n.calories) && n.calories >= 0 &&
+        typeof n.protein === 'number' && Number.isFinite(n.protein) && n.protein >= 0 &&
+        typeof n.fat === 'number' && Number.isFinite(n.fat) && n.fat >= 0 &&
+        typeof n.carbs === 'number' && Number.isFinite(n.carbs) && n.carbs >= 0
+    );
+}
+
+interface LlmRawRecipe {
+    title: string;
+    type: (typeof RECIPE_TYPES)[number];
+    cooking_time_minutes: number;
+    nutrition_per_100g: { calories: number; protein: number; fat: number; carbs: number };
+    total_weight_grams: number;
+    ingredients: { name: string; quantity: string | number; unit: string }[];
+    steps: { step_number: number; description: string }[];
+    comments?: string;
+}
+
+function isValidRawRecipe(value: unknown): value is LlmRawRecipe {
     if (typeof value !== 'object' || value === null) return false;
     const candidate = value as Record<string, unknown>;
 
     if (typeof candidate.title !== 'string' || !candidate.title.trim()) return false;
     if (!RECIPE_TYPES.includes(candidate.type as (typeof RECIPE_TYPES)[number])) return false;
     if (typeof candidate.cooking_time_minutes !== 'number' || !Number.isFinite(candidate.cooking_time_minutes) || candidate.cooking_time_minutes <= 0) return false;
-    if (typeof candidate.difficulty !== 'number' || ![1, 2, 3, 4, 5].includes(candidate.difficulty)) return false;
-    if (typeof candidate.portions !== 'number' || !Number.isFinite(candidate.portions) || candidate.portions <= 0) return false;
+    if (!isValidNutrition(candidate.nutrition_per_100g)) return false;
+    if (typeof candidate.total_weight_grams !== 'number' || !Number.isFinite(candidate.total_weight_grams) || candidate.total_weight_grams <= 0) return false;
     if (!Array.isArray(candidate.ingredients) || candidate.ingredients.length === 0) return false;
     if (!candidate.ingredients.every(isValidIngredient)) return false;
     if (!Array.isArray(candidate.steps) || candidate.steps.length === 0) return false;
@@ -164,10 +186,28 @@ function isValidRecipeData(value: unknown): value is RecipeData {
     return true;
 }
 
-export async function extractRecipe(transcriptText: string, canonicalKey: string): Promise<RecipeData> {
-    console.log('[llm] extractRecipe start', { canonical_key: canonicalKey, transcript_chars: transcriptText.length });
+const MAX_TRANSCRIPT_CHARS = 20_000;
 
-    const firstResponse = await callLlm(transcriptText);
+function preprocessTranscript(text: string): string {
+    const lines = text.split('\n');
+    const deduped: string[] = [];
+    for (const line of lines) {
+        if (deduped.length === 0 || deduped[deduped.length - 1] !== line) {
+            deduped.push(line);
+        }
+    }
+    return deduped.join('\n').slice(0, MAX_TRANSCRIPT_CHARS);
+}
+
+export async function extractRecipe(transcriptText: string, canonicalKey: string): Promise<RecipeData> {
+    const processed = preprocessTranscript(transcriptText);
+    console.log('[llm] extractRecipe start', {
+        canonical_key: canonicalKey,
+        transcript_chars: transcriptText.length,
+        processed_chars: processed.length,
+    });
+
+    const firstResponse = await callLlm(processed);
 
     if (!firstResponse.trim()) {
         console.warn('[llm] empty response — treating as AI_EXTRACTION_FAILED', { canonical_key: canonicalKey });
@@ -188,7 +228,7 @@ export async function extractRecipe(transcriptText: string, canonicalKey: string
             parseError = err instanceof Error ? err.message : String(err);
         }
 
-        const schemaValid = parsed !== undefined && isValidRecipeData(parsed);
+        const schemaValid = parsed !== undefined && isValidRawRecipe(parsed);
         const isEmptyObject =
             parsed !== undefined &&
             typeof parsed === 'object' &&
@@ -204,9 +244,20 @@ export async function extractRecipe(transcriptText: string, canonicalKey: string
         });
 
         if (schemaValid) {
-            await recipeStore.save(canonicalKey, parsed as RecipeData);
+            const raw = parsed as LlmRawRecipe;
+            const recipe: RecipeData = {
+                title: raw.title,
+                type: raw.type,
+                cooking_time_minutes: raw.cooking_time_minutes,
+                nutrition_per_100g: raw.nutrition_per_100g,
+                portions: Math.max(1, Math.round(raw.total_weight_grams / 250)),
+                ingredients: raw.ingredients,
+                steps: raw.steps,
+                comments: raw.comments,
+            };
+            await recipeStore.save(canonicalKey, recipe);
             console.log('[llm] extractRecipe success', { canonical_key: canonicalKey, attempt });
-            return parsed as RecipeData;
+            return recipe;
         }
 
         if (isEmptyObject) {
@@ -229,7 +280,7 @@ export async function extractRecipe(transcriptText: string, canonicalKey: string
             });
         }
 
-        rawAnswer = await callLlm(transcriptText);
+        rawAnswer = await callLlm(processed);
     }
 
     throw new LlmExtractionError('INVALID_JSON_SCHEMA', 'Ошибка валидации ответа AI');

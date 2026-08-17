@@ -1,7 +1,14 @@
+export interface Nutrition {
+  calories: number;
+  protein: number;
+  fat: number;
+  carbs: number;
+}
+
 export interface Recipe {
   title: string;
   time: number;
-  difficulty: 1 | 2 | 3 | 4 | 5;
+  nutrition: Nutrition;
   servings: number;
   type: string;
   ingredients: Ingredient[];
@@ -25,7 +32,7 @@ export interface ApiRecipeData {
   title: string;
   type: RecipeType;
   cooking_time_minutes: number;
-  difficulty: 1 | 2 | 3 | 4 | 5;
+  nutrition_per_100g: { calories: number; protein: number; fat: number; carbs: number };
   portions: number;
   ingredients: { name: string; quantity: string | number; unit: string }[];
   steps: { step_number: number; description: string }[];
@@ -47,7 +54,7 @@ export function mapApiRecipeToRecipe(data: ApiRecipeData, sourceUrl: string, pdf
   return {
     title: data.title,
     time: data.cooking_time_minutes,
-    difficulty: data.difficulty,
+    nutrition: data.nutrition_per_100g,
     servings: data.portions,
     type: data.type,
     ingredients: data.ingredients.map((ingredient) => {
