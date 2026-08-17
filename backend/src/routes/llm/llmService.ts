@@ -15,7 +15,7 @@ const RECIPE_SCHEMA = `{
   "type": ${RECIPE_TYPES.map((t) => `"${t}"`).join(' | ')},
   "cooking_time_minutes": number,
   "nutrition_per_100g": {"calories": number, "protein": number, "fat": number, "carbs": number},
-  "total_weight_grams": number,
+  "portions": number,
   "ingredients": [{"name": "string", "quantity": string, "unit": "string"}],
   "steps": [{"step_number": number, "description": "string (max 1000 chars)"}],
   "comments": "string (optional, max 1000 chars)"
@@ -27,7 +27,7 @@ const SYSTEM_PROMPT = `Ты — эксперт по кулинарии. Извл
 1. Верни ТОЛЬКО валидный JSON без пояснений
 2. Не выдумывай ингредиенты, не упомянутые в тексте
 3. Агрегируй повторяющиеся ингредиенты (соль в шагах 1 и 3 → один раз)
-4. Оцени КБЖУ на 100г готового блюда (целые числа) и примерный итоговый вес блюда в граммах
+4. Оцени КБЖУ на 100г готового блюда (целые числа). Рассчитай количество порций: одна порция = 250г готового блюда, portions = round(итоговый вес блюда в граммах / 250), минимум 1
 5. Строго экранируй все переносы строк внутри JSON (используй \\n)
 6. Не вставляй лишние символы или текст вне JSON
 7. Если в транскрипции нет рецепта — текст пустой, не по теме кулинарии, или представляет собой бессвязный/нечитаемый набор символов — не отвечай вообще, верни пустую строку без пояснений
@@ -158,18 +158,7 @@ function isValidNutrition(value: unknown): boolean {
     );
 }
 
-interface LlmRawRecipe {
-    title: string;
-    type: (typeof RECIPE_TYPES)[number];
-    cooking_time_minutes: number;
-    nutrition_per_100g: { calories: number; protein: number; fat: number; carbs: number };
-    total_weight_grams: number;
-    ingredients: { name: string; quantity: string | number; unit: string }[];
-    steps: { step_number: number; description: string }[];
-    comments?: string;
-}
-
-function isValidRawRecipe(value: unknown): value is LlmRawRecipe {
+function isValidRecipeData(value: unknown): value is RecipeData {
     if (typeof value !== 'object' || value === null) return false;
     const candidate = value as Record<string, unknown>;
 
@@ -177,7 +166,7 @@ function isValidRawRecipe(value: unknown): value is LlmRawRecipe {
     if (!RECIPE_TYPES.includes(candidate.type as (typeof RECIPE_TYPES)[number])) return false;
     if (typeof candidate.cooking_time_minutes !== 'number' || !Number.isFinite(candidate.cooking_time_minutes) || candidate.cooking_time_minutes <= 0) return false;
     if (!isValidNutrition(candidate.nutrition_per_100g)) return false;
-    if (typeof candidate.total_weight_grams !== 'number' || !Number.isFinite(candidate.total_weight_grams) || candidate.total_weight_grams <= 0) return false;
+    if (typeof candidate.portions !== 'number' || !Number.isFinite(candidate.portions) || candidate.portions <= 0) return false;
     if (!Array.isArray(candidate.ingredients) || candidate.ingredients.length === 0) return false;
     if (!candidate.ingredients.every(isValidIngredient)) return false;
     if (!Array.isArray(candidate.steps) || candidate.steps.length === 0) return false;
@@ -228,7 +217,7 @@ export async function extractRecipe(transcriptText: string, canonicalKey: string
             parseError = err instanceof Error ? err.message : String(err);
         }
 
-        const schemaValid = parsed !== undefined && isValidRawRecipe(parsed);
+        const schemaValid = parsed !== undefined && isValidRecipeData(parsed);
         const isEmptyObject =
             parsed !== undefined &&
             typeof parsed === 'object' &&
@@ -244,17 +233,7 @@ export async function extractRecipe(transcriptText: string, canonicalKey: string
         });
 
         if (schemaValid) {
-            const raw = parsed as LlmRawRecipe;
-            const recipe: RecipeData = {
-                title: raw.title,
-                type: raw.type,
-                cooking_time_minutes: raw.cooking_time_minutes,
-                nutrition_per_100g: raw.nutrition_per_100g,
-                portions: Math.max(1, Math.round(raw.total_weight_grams / 250)),
-                ingredients: raw.ingredients,
-                steps: raw.steps,
-                comments: raw.comments,
-            };
+            const recipe = parsed as RecipeData;
             await recipeStore.save(canonicalKey, recipe);
             console.log('[llm] extractRecipe success', { canonical_key: canonicalKey, attempt });
             return recipe;

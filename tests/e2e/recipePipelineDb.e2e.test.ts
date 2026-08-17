@@ -66,7 +66,7 @@ const VALID_RECIPE_JSON = JSON.stringify({
     type: 'Горячее',
     cooking_time_minutes: 20,
     nutrition_per_100g: { calories: 250, protein: 12, fat: 10, carbs: 30 },
-    total_weight_grams: 500,
+    portions: 2,
     ingredients: [{ name: 'спагетти', quantity: 200, unit: 'г' }],
     steps: [{ step_number: 1, description: 'Отварите спагетти в подсоленной воде.' }],
 });

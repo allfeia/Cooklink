@@ -30,20 +30,10 @@ const VALID_RECIPE_JSON = JSON.stringify({
     type: 'Горячее',
     cooking_time_minutes: 20,
     nutrition_per_100g: { calories: 250, protein: 12, fat: 10, carbs: 30 },
-    total_weight_grams: 500,
+    portions: 2,
     ingredients: [{ name: 'спагетти', quantity: 200, unit: 'г' }],
     steps: [{ step_number: 1, description: 'Отварите спагетти в подсоленной воде.' }],
 });
-
-const VALID_RECIPE_DATA = {
-    title: 'Паста Карбонара',
-    type: 'Горячее',
-    cooking_time_minutes: 20,
-    nutrition_per_100g: { calories: 250, protein: 12, fat: 10, carbs: 30 },
-    portions: 2, // Math.round(500 / 250)
-    ingredients: [{ name: 'спагетти', quantity: 200, unit: 'г' }],
-    steps: [{ step_number: 1, description: 'Отварите спагетти в подсоленной воде.' }],
-};
 
 describe('extractRecipe', () => {
     beforeEach(() => {
@@ -56,7 +46,7 @@ describe('extractRecipe', () => {
 
             const result = await extractRecipe('транскрипт с рецептом', 'abc');
 
-            expect(result).toEqual(VALID_RECIPE_DATA);
+            expect(result).toEqual(JSON.parse(VALID_RECIPE_JSON));
             expect(mockCreate).toHaveBeenCalledTimes(1);
         });
 
@@ -115,10 +105,10 @@ describe('extractRecipe', () => {
             expect(mockCreate).toHaveBeenCalledTimes(MAX_RETRIES);
         });
 
-        it('rejects non-numeric total_weight_grams/nutrition values (HTML-injection guard for the PDF template)', async () => {
+        it('rejects non-numeric portions/nutrition values (HTML-injection guard for the PDF template)', async () => {
             const malicious = JSON.stringify({
                 ...JSON.parse(VALID_RECIPE_JSON),
-                total_weight_grams: '<img src=x onerror=alert(1)>',
+                portions: '<img src=x onerror=alert(1)>',
             });
             mockCreate.mockResolvedValue(streamOf(malicious));
 
