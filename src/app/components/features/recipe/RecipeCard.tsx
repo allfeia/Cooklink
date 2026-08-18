@@ -1,7 +1,6 @@
-import { ArrowLeft, Download, Share2, Clock, Users, ChefHat, ExternalLink, Gauge } from "lucide-react";
+import { ArrowLeft, Download, Share2, Clock, Users, ChefHat, ExternalLink, Flame } from "lucide-react";
 import { useState } from "react";
 import { Recipe } from "./recipe";
-import { DifficultyIndicator } from "./DifficultyIndicator";
 import { motion } from "motion/react";
 import { toast } from "sonner";
 import { useLanguage } from "../../../context/LanguageContext";
@@ -133,17 +132,6 @@ export function RecipeCard({ recipe, onBack, onNewRecipe }: RecipeCardProps) {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <Gauge className="w-5 h-5 text-muted-foreground" />
-                  <div>
-                    <p className="text-sm text-muted-foreground">{t("difficulty")}</p>
-                    <div className="flex items-center gap-2">
-                      <DifficultyIndicator level={recipe.difficulty} />
-                      <span className="font-medium">{recipe.difficulty}/5</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2">
                   <Users className="w-5 h-5 text-muted-foreground" />
                   <div>
                     <p className="text-sm text-muted-foreground">{t("servings")}</p>
@@ -156,6 +144,16 @@ export function RecipeCard({ recipe, onBack, onNewRecipe }: RecipeCardProps) {
                   <div>
                     <p className="text-sm text-muted-foreground">{t("type")}</p>
                     <p className="font-medium">{recipe.type}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <Flame className="w-5 h-5 text-muted-foreground" />
+                  <div>
+                    <p className="text-sm text-muted-foreground">КБЖУ на 100г</p>
+                    <p className="font-medium">
+                      К {recipe.nutrition.calories} · Б {recipe.nutrition.protein} · Ж {recipe.nutrition.fat} · У {recipe.nutrition.carbs}
+                    </p>
                   </div>
                 </div>
               </div>

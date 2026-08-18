@@ -6,7 +6,7 @@ const buildRecipe = (overrides: Partial<RecipeData> = {}): RecipeData => ({
     title: 'Паста Карбонара',
     type: 'Горячее',
     cooking_time_minutes: 20,
-    difficulty: 2,
+    nutrition_per_100g: { calories: 250, protein: 12, fat: 10, carbs: 30 },
     portions: 2,
     ingredients: [{ name: 'спагетти', quantity: 200, unit: 'г' }],
     steps: [{ step_number: 1, description: 'Отварите спагетти' }],
@@ -19,7 +19,7 @@ describe('buildRecipeHtml', () => {
 
         expect(html).toContain('Паста Карбонара');
         expect(html).toContain('20 мин');
-        expect(html).toContain('2/5');
+        expect(html).toContain('К 250 · Б 12 · Ж 10 · У 30');
         expect(html).toContain('спагетти');
         expect(html).toContain('200 г');
         expect(html).toContain('Отварите спагетти');
