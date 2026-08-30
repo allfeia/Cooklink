@@ -9,10 +9,14 @@ const app = express();
 app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(express.json());
 
-app.get('/health', async (_req, res) => {
+app.get('/health/live', (_req, res) => {
+    res.json({ status: 'ok' });
+});
+
+app.get('/health/ready', async (_req, res) => {
     try {
         await db.execute(sql`SELECT 1`);
-        res.json({ status: 'ok' });
+        res.json({ status: 'ok', services: { db: 'up' } });
     } catch {
         res.status(503).json({ status: 'error', services: { db: 'down' } });
     }
