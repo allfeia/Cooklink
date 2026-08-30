@@ -202,9 +202,9 @@ async function pollJobRow(sourceUrl: string, { timeoutMs = 5000, intervalMs = 20
     }
 }
 
-describe('GET /health', () => {
+describe('GET /health/ready', () => {
     it('возвращает 200 и status: ok когда БД доступна', async () => {
-        const res = await fetch(`${origin}/health`);
+        const res = await fetch(`${origin}/health/ready`);
         expect(res.status).toBe(200);
         const body = await res.json();
         expect(body.status).toBe('ok');
