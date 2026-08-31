@@ -1,13 +1,20 @@
 import express, { type NextFunction, type Request, type Response } from 'express';
 import cors from 'cors';
+import { register } from 'prom-client';
 import { sql } from 'drizzle-orm';
 import { db } from './db/client';
+import './metrics';
 import recipesRouter from './routes/recipe/recipes';
 
 const app = express();
 
 app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(express.json());
+
+app.get('/metrics', async (_req, res) => {
+    res.set('Content-Type', register.contentType);
+    res.end(await register.metrics());
+});
 
 app.get('/health/live', (_req, res) => {
     res.json({ status: 'ok' });
