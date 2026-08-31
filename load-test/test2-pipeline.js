@@ -3,11 +3,10 @@ import { check, sleep } from 'k6';
 import { Counter, Trend, Rate } from 'k6/metrics';
 
 const TEST_URLS = [
-  'https://www.youtube.com/watch?v=RDM7RpRIoD0',
-  'https://www.youtube.com/watch?v=6OfB8aFpuYA',
-  'https://www.youtube.com/watch?v=mFtbGVcTBes',
-  'https://www.youtube.com/watch?v=HERPbLuSc1Y',
-  'https://www.youtube.com/watch?v=ZJy1ajvMU1k',
+  'https://youtu.be/7oUqRIysbag?si=Dadx1SLSA0DEugGl',
+  'https://youtu.be/IH5LXD0_K0o?si=QotjmkrptT6C4HMU',
+  'https://youtu.be/MhLiVo3EqkE?si=uLrH5TIWz4q3gFgw',
+  'https://youtu.be/4TAsSXhuTow?si=nlo-c6zctqFmM93L',
 ];
 
 const BASE_URL = __ENV.BASE_URL || 'https://cooklink.ru';
