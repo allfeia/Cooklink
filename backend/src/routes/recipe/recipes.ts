@@ -17,6 +17,7 @@ import {
 const METADATA_WORKER_URL = process.env.METADATA_WORKER_URL ?? 'http://localhost:4001';
 const SUBTITLES_WORKER_URL = process.env.SUBTITLES_WORKER_URL ?? 'http://localhost:4002';
 const LLM_WORKER_URL = process.env.LLM_WORKER_URL ?? 'http://localhost:4003';
+const LLM_EXTRACT_PATH = process.env.LLM_EXTRACT_PATH ?? '/extract';
 const PDF_WORKER_URL = process.env.PDF_WORKER_URL ?? 'http://localhost:4004';
 
 const router = Router();
@@ -127,7 +128,7 @@ async function runPipeline(job: RecipeJob, parsed: ValidVideoUrl): Promise<void>
     // извлечение рецепта через LLM
     console.log(`[pipeline] job ${job.job_id}: llm_processing`);
     const llmStart = Date.now();
-    const llmRes = await fetch(`${LLM_WORKER_URL}/extract`, {
+    const llmRes = await fetch(`${LLM_WORKER_URL}${LLM_EXTRACT_PATH}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
