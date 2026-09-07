@@ -8,3 +8,7 @@ dist/
 
 backend/external_services_tests/*cookies*.txt
 youtube_cookies.txt
+
+# нагрузочное тестирование — артефакты прогонов (регенерируются)
+load-test/results-*
+load-test/*.log
