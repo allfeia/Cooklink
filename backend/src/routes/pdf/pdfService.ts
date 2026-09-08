@@ -21,6 +21,10 @@ export async function generatePdf(recipe: RecipeData): Promise<Buffer> {
 
     const form = new FormData();
     form.append('files', new Blob([html], { type: 'text/html' }), 'index.html');
+    // печатать фоновые цвета/подложки (кремовая бумага, коралловые акценты)
+    form.append('printBackground', 'true');
+    // дать Chromium время подтянуть веб-шрифты
+    form.append('waitDelay', '1s');
 
     let response: Response;
     try {

@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Youtube, Check, AlertCircle } from "lucide-react";
 import { motion } from "motion/react";
 import { useLanguage } from "../../context/LanguageContext";
 import { parseVideoUrl, type ValidVideoUrl } from "../../../../common/validation/validatePipeline";
 import { createRecipeJob, RecipeApiError } from "@/app/api/recipesApi";
 import { getRecipeErrorMessage } from "@/app/lib/recipeErrorMessages";
+import { ClArrow, ClLinkIcon } from "../decor/ClDecor";
+import { Header } from "../layout/Header";
 
 interface InputSectionProps {
     onJobCreated: (result: { jobId: string; sourceUrl: string }) => void;
@@ -57,87 +58,73 @@ export function InputSection({ onJobCreated }: InputSectionProps) {
         }
     };
 
+    const hasError = isValid === false || Boolean(errorMessage);
+    const formState = hasError ? "is-error" : isValid === true ? "is-valid" : "";
+
     return (
-        <div className="flex-1 flex items-center justify-center px-4 py-12 md:py-20">
-            <motion.div
-                className="max-w-3xl w-full space-y-8"
-                initial={{ opacity: 0, y: 20 }}
+        <>
+            <Header />
+
+            <div className="cl-body flex-1 flex flex-col">
+              <motion.section
+                className="cl-section flex-1 flex flex-col justify-center"
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-            >
-                {/* Hero Text */}
-                <div className="text-center space-y-4">
-                    <h1 className="text-3xl md:text-5xl font-bold text-foreground whitespace-pre-line">
-                        {t("heroTitle")}
-                    </h1>
-                    <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-                        {t("heroSubtitle")}
-                    </p>
-                </div>
+                transition={{ duration: 0.5, delay: 0.1 }}
+              >
+                <h2 className="cl-heading">{t("inputHeading")}</h2>
+                <p className="cl-subhead">{t("inputSubhead")}</p>
 
-                {/* Input Form */}
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="relative">
-                        <div
-                            className={`
-                relative flex items-center gap-3 px-4 py-4 rounded-xl border-2 transition-all
-                bg-background
-                ${isValid === null && !errorMessage ? "border-border" : ""}
-                ${isValid === true && !errorMessage ? "border-green-500 shadow-lg shadow-green-500/20" : ""}
-                ${(isValid === false || errorMessage) ? "border-red-500" : ""}
-                focus-within:border-[#2563EB] focus-within:shadow-lg focus-within:shadow-blue-500/20
-              `}
-                        >
-                            <Youtube className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-                            <input
-                                type="text"
-                                value={url}
-                                onChange={(e) => handleUrlChange(e.target.value)}
-                                placeholder={t("placeholder")}
-                                className="flex-1 bg-transparent outline-none text-foreground placeholder:text-muted-foreground"
-                                aria-label={t("placeholder")}
-                                disabled={isSubmitting}
-                            />
-                            {isValid === true && !errorMessage && (
-                                <motion.div
-                                    initial={{ scale: 0 }}
-                                    animate={{ scale: 1 }}
-                                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                                >
-                                    <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
-                                </motion.div>
-                            )}
-                            {(isValid === false || errorMessage) && (
-                                <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
-                            )}
-                        </div>
-                        {errorMessage && (
-                            <motion.p
-                                className="text-sm text-red-500 mt-2 ml-1"
-                                initial={{ opacity: 0, y: -10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                            >
-                                {errorMessage}
-                            </motion.p>
+                <form onSubmit={handleSubmit} className={`cl-form ${formState}`}>
+                    <label className="sr-only" htmlFor="cl-url">
+                        {t("placeholder")}
+                    </label>
+                    <span className="cl-field">
+                        <ClLinkIcon />
+                        <input
+                            id="cl-url"
+                            type="text"
+                            value={url}
+                            onChange={(e) => handleUrlChange(e.target.value)}
+                            placeholder={t("placeholder")}
+                            disabled={isSubmitting}
+                        />
+                        {isValid === true && !hasError && (
+                            <span className="cl-mark" aria-hidden="true">✓</span>
                         )}
-                    </div>
-
+                        {hasError && (
+                            <span className="cl-mark" aria-hidden="true">✕</span>
+                        )}
+                    </span>
                     <button
                         type="submit"
+                        className="cl-go"
                         disabled={!isValid || isSubmitting}
-                        className={`
-              w-full py-4 rounded-xl font-medium text-white transition-all
-              ${isValid && !isSubmitting
-                            ? "bg-[#2563EB] hover:bg-[#1d4ed8] shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40"
-                            : "bg-muted text-muted-foreground cursor-not-allowed"
-                        }
-            `}
                         aria-label={t("generateRecipe")}
+                        title={t("generateRecipe")}
                     >
-                        {t("generateRecipe")}
+                        <ClArrow />
                     </button>
                 </form>
-            </motion.div>
-        </div>
+
+                {errorMessage && (
+                    <motion.p
+                        className="cl-field-note err"
+                        initial={{ opacity: 0, y: -6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                    >
+                        {errorMessage}
+                    </motion.p>
+                )}
+              </motion.section>
+
+              <p className="cl-footlinks">
+                <span>{t("copyright")}</span>
+                <button type="button">{t("privacy")}</button>
+                <span className="sep">·</span>
+                <button type="button">{t("contacts")}</button>
+              </p>
+            </div>
+        </>
     );
 }
