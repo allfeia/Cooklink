@@ -5,6 +5,7 @@ type Language = "ru" | "en";
 interface LanguageContextType {
   language: Language;
   toggleLanguage: () => void;
+  setLanguage: (lang: Language) => void;
   t: (key: string) => string;
 }
 
@@ -17,14 +18,24 @@ const translations = {
     // Brand
     brandName: "ГОТОВЬ.ai",
     // Header
-    howItWorks: "Как это работает",
+    howItWorks: "как это работает?",
+    theme: "тема",
     // Hero
     heroTitle: "Перестань перематывать.\nНачни готовить.",
     heroSubtitle: "Вставь ссылку на YouTube, получи красивый рецепт",
     // Input
+    inputHeading: "Вставь ссылку на YouTube",
+    inputSubhead: "получи красивый рецепт",
     placeholder: "https://youtube.com/watch?v=...",
     generateRecipe: "Сгенерировать рецепт",
     invalidYouTubeUrl: "Неверная ссылка на YouTube",
+    // Панель «какие видео подойдут»
+    recoTitle: "Какие видео подойдут",
+    recoItem1: "кулинарное видео, где рецепт проговаривают вслух",
+    recoItem2: "не длиннее 15 минут",
+    recoItem3: "публичное, с субтитрами (или авто) на русском или английском",
+    recoItem4: "ссылка с YouTube",
+    recoNo: "не выйдет: клип под музыку · приватное видео · длиннее 15 минут",
     // Errors
     errorInvalidUrl: "Неверный формат ссылки",
     errorVideoUnavailable: "Видео недоступно",
@@ -64,11 +75,11 @@ const translations = {
     sourceVideo: "Оригинальное видео",
     watchOnYouTube: "Смотреть на YouTube",
     // Footer
-    copyright: "© 2026 ГОТОВЬ.ai. Все права защищены.",
+    copyright: "© 2026 cooklink.ai. Все права защищены.",
     privacy: "Политика конфиденциальности",
     contacts: "Контакты",
     // How it works modal
-    howItWorksTitle: "Как работает ГОТОВЬ.ai",
+    howItWorksTitle: "Как работает cooklink.ai",
     step1Title: "1. Вставьте ссылку",
     step1Text:
       "Скопируйте URL видео-рецепта с YouTube и вставьте в поле ввода.",
@@ -90,14 +101,24 @@ const translations = {
     // Brand
     brandName: "CookLink.ai",
     // Header
-    howItWorks: "How it works",
+    howItWorks: "how it works?",
+    theme: "theme",
     // Hero
     heroTitle: "Stop rewinding.\nStart cooking.",
     heroSubtitle: "Paste a YouTube link, get a beautiful recipe",
     // Input
+    inputHeading: "Paste a YouTube link",
+    inputSubhead: "get a beautiful recipe",
     placeholder: "https://youtube.com/watch?v=...",
     generateRecipe: "Generate recipe",
     invalidYouTubeUrl: "Invalid YouTube URL",
+    // "Which videos work" panel
+    recoTitle: "Which videos work",
+    recoItem1: "a cooking video where the recipe is spoken aloud",
+    recoItem2: "15 minutes or shorter",
+    recoItem3: "public, with subtitles (or auto-captions) in Russian or English",
+    recoItem4: "a YouTube link",
+    recoNo: "won't work: music-only clip · private video · longer than 15 min",
     // Errors
     errorInvalidUrl: "Invalid link format",
     errorVideoUnavailable: "Video unavailable",
@@ -137,11 +158,11 @@ const translations = {
     sourceVideo: "Source video",
     watchOnYouTube: "Watch on YouTube",
     // Footer
-    copyright: "© 2026 CookLink.ai. All rights reserved.",
+    copyright: "© 2026 cooklink.ai. All rights reserved.",
     privacy: "Privacy Policy",
     contacts: "Contacts",
     // How it works modal
-    howItWorksTitle: "How CookLink.ai works",
+    howItWorksTitle: "How cooklink.ai works",
     step1Title: "1. Paste a link",
     step1Text: "Copy a YouTube recipe video URL and paste it into the input field.",
     step2Title: "2. Video analysis",
@@ -166,10 +187,13 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     return stored || "ru";
   });
 
+  const changeLanguage = (lang: Language) => {
+    setLanguage(lang);
+    localStorage.setItem("language", lang);
+  };
+
   const toggleLanguage = () => {
-    const newLang = language === "ru" ? "en" : "ru";
-    setLanguage(newLang);
-    localStorage.setItem("language", newLang);
+    changeLanguage(language === "ru" ? "en" : "ru");
   };
 
   const t = (key: string): string => {
@@ -177,7 +201,9 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <LanguageContext.Provider value={{ language, toggleLanguage, t }}>
+    <LanguageContext.Provider
+      value={{ language, toggleLanguage, setLanguage: changeLanguage, t }}
+    >
       {children}
     </LanguageContext.Provider>
   );
