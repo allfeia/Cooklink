@@ -58,7 +58,7 @@ const firstSub429Iter = new Trend('first_subtitles_429_iteration'); // мин = 
 // Каждая ступень = быстрый доезд за 15s + удержание STAGE_MIN минут на плато,
 // чтобы на графике были читаемые «полки» и было ясно, на какой rps всё поехало.
 function buildStages() {
-  const targets = [1, 2, 5, 10, 15, 20, 25, 30, 40, 50].filter((t) => t <= MAX_RPS);
+  const targets = [1, 2, 3, 4, 6, 8, 10, 12, 15, 20, 25, 30, 40, 50].filter((t) => t <= MAX_RPS);
   if (targets[targets.length - 1] !== MAX_RPS) targets.push(MAX_RPS);
   const stages = [];
   for (const t of targets) {
@@ -88,8 +88,14 @@ export const options = {
   thresholds: {
     // это не «pass/fail» проекта, а маркеры где система поехала:
     'create_latency_ms': ['p(95)<2000'],
-    'http_req_failed{step:create}': ['rate<0.02'],
     'job_success_rate': ['rate>0.90'],
+    'http_req_failed{step:create}': [
+      'rate<0.02',
+      // ПРЕДОХРАНИТЕЛЬ: если >35% запросов на создание задачи не проходят
+      // (сервер отвергает/таймаутит) — прекратить прогон, а не долбить лежащий
+      // сервер до конца рампы (в прошлый раз это уронило docker-демон).
+      { threshold: 'rate<0.35', abortOnFail: true, delayAbortEval: '30s' },
+    ],
   },
 };
 
