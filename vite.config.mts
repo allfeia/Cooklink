@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
     plugins: [
         // The React and Tailwind plugins are both required for Make, even if
         // Tailwind is not being actively used – do not remove them
@@ -33,6 +33,10 @@ export default defineConfig({
 
     assetsInclude: ['**/*.svg', '**/*.csv'],
 
+    esbuild: {
+        drop: command === 'build' ? ['console', 'debugger'] : [],
+    },
+
     test: {
         server: {
             deps: {
@@ -40,4 +44,4 @@ export default defineConfig({
             },
         },
     },
-})
+}))
