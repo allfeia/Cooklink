@@ -4,7 +4,6 @@ import { videoMetadataStore, type VideoMetadata } from './videoMetadataStore';
 import { getYtDlpCookiesOption } from '../../utils/ytDlpCookies';
 import { buildMediaProbe, type MediaProbe } from '../../media/mediaProbe';
 
-/** Результат resolve-шага: метаданные + всё, что нужно дальше по пайплайну. */
 export interface MetadataCheckResult {
     metadata: VideoMetadata;
     mediaProbe: MediaProbe;
@@ -87,7 +86,5 @@ export async function checkVideoMetadata(
 
     await videoMetadataStore.save(metadata);
 
-    // Тот же `raw` уже содержит дорожки субтитров — отдаём их дальше,
-    // чтобы subtitles-воркер не делал повторный вызов yt-dlp.
     return { metadata, mediaProbe: buildMediaProbe(raw) };
 }

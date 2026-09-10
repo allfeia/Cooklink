@@ -65,10 +65,7 @@ function stripVttMarkup(raw: string): string {
         .trim();
 }
 
-/**
- * Фолбэк: свой вызов yt-dlp, если дорожки не пришли из resolve-шага
- * (прямой вызов воркера, старая версия metadata-воркера, тесты).
- */
+
 async function findSubtitleTrack(
     sourceUrl: string
 ): Promise<{ url: string; language: 'ru' | 'en' } | null> {
@@ -88,8 +85,6 @@ export async function fetchSubtitles(
     videoId: string,
     mediaProbe?: MediaProbe
 ): Promise<Transcript> {
-    // Дорожки уже нашёл metadata-воркер из того же ответа yt-dlp — берём их
-    // напрямую. Только если их нет — делаем собственный (повторный) вызов.
     const track = mediaProbe
         ? selectSubtitleTrack(mediaProbe.subtitleTracks)
         : await withRateLimitRetry(() => findSubtitleTrack(sourceUrl));
