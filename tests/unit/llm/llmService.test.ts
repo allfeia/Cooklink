@@ -59,6 +59,36 @@ describe('extractRecipe', () => {
         });
     });
 
+    describe('провайдер модели вернул ошибку', () => {
+        it('маппит 429 в LLM_RATE_LIMITED без ретраев', async () => {
+            mockCreate.mockRejectedValue(Object.assign(new Error('Too Many Requests'), { status: 429 }));
+
+            await expect(
+                extractRecipe('транскрипт с рецептом', 'abc')
+            ).rejects.toMatchObject({ code: 'LLM_RATE_LIMITED' });
+
+            expect(mockCreate).toHaveBeenCalledTimes(1);
+        });
+
+        it('маппит 402 в LLM_QUOTA_EXCEEDED (исчерпан бюджет), не в INTERNAL_SERVER_ERROR', async () => {
+            mockCreate.mockRejectedValue(Object.assign(new Error('Payment Required'), { status: 402 }));
+
+            await expect(
+                extractRecipe('транскрипт с рецептом', 'abc')
+            ).rejects.toMatchObject({ code: 'LLM_QUOTA_EXCEEDED' });
+
+            expect(mockCreate).toHaveBeenCalledTimes(1);
+        });
+
+        it('прочие ошибки провайдера пробрасывает как есть', async () => {
+            mockCreate.mockRejectedValue(Object.assign(new Error('boom'), { status: 500 }));
+
+            await expect(
+                extractRecipe('транскрипт с рецептом', 'abc')
+            ).rejects.not.toMatchObject({ code: expect.any(String) });
+        });
+    });
+
     describe('AI_EXTRACTION_FAILED', () => {
         it('throws immediately without retry when the response is empty', async () => {
             mockCreate.mockResolvedValue(streamOf(''));
