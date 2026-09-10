@@ -40,7 +40,11 @@ const SYSTEM_PROMPT = `Ты — эксперт по кулинарии. Извл
 Схема ответа:
 ${RECIPE_SCHEMA}`;
 
-export type LlmErrorCode = 'AI_EXTRACTION_FAILED' | 'INVALID_JSON_SCHEMA' | 'LLM_RATE_LIMITED';
+export type LlmErrorCode =
+    | 'AI_EXTRACTION_FAILED'
+    | 'INVALID_JSON_SCHEMA'
+    | 'LLM_RATE_LIMITED'
+    | 'LLM_QUOTA_EXCEEDED';
 
 export class LlmExtractionError extends Error {
     constructor(
@@ -102,6 +106,13 @@ async function callLlm(transcriptText: string): Promise<string> {
             throw new LlmExtractionError(
                 'LLM_RATE_LIMITED',
                 'Сервис генерации рецептов временно перегружен, попробуйте позже',
+                { status, code }
+            );
+        }
+        if (status === 402) {
+            throw new LlmExtractionError(
+                'LLM_QUOTA_EXCEEDED',
+                'Сервис генерации рецептов временно недоступен, попробуйте позже',
                 { status, code }
             );
         }

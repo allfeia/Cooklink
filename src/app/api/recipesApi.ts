@@ -130,7 +130,6 @@ export async function pollRecipeJob(
             throw err;
         }
 
-        console.log(`[poll] job ${jobId}: ${job.status}`);
         onStatusChange?.(job.status);
 
         if (job.status === "completed") {
