@@ -22,7 +22,9 @@ export async function runSubtitlesFetch(
         await recipeJobStore.markFailed(jobId, code, message);
         throw err;
     }
-    console.log('fetchSubtitles:', transcript);
+    console.log(
+        `[subtitles] job ${jobId}: ${transcript.language}, ${transcript.transcript_text.length} chars`
+    );
     await recipeJobStore.updateStatus(jobId, 'llm_processing');
 
     return transcript;
