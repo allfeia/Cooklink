@@ -91,6 +91,34 @@ describe('fetchSubtitles', () => {
         });
     });
 
+    describe('with mediaProbe (дедуп — без повторного yt-dlp)', () => {
+        it('uses tracks from the probe and does NOT call yt-dlp', async () => {
+            mockAxiosGet.mockResolvedValue({ data: RU_VTT });
+
+            const result = await fetchSubtitles('https://youtube.com/watch?v=abc', 'abc', {
+                subtitleTracks: {
+                    manual: { ru: [{ ext: 'vtt', url: 'https://cdn/ru.vtt' }] },
+                    auto: {},
+                },
+            });
+
+            expect(mockYtDlp).not.toHaveBeenCalled();
+            expect(mockAxiosGet).toHaveBeenCalledWith('https://cdn/ru.vtt', expect.anything());
+            expect(result.language).toBe('ru');
+            expect(result.transcript_text).toContain('Привет, сегодня готовим пасту карбонара');
+        });
+
+        it('throws NO_SUBTITLES when the probe has no ru/en tracks, still without yt-dlp', async () => {
+            await expect(
+                fetchSubtitles('https://youtube.com/watch?v=abc', 'abc', {
+                    subtitleTracks: { manual: {}, auto: {} },
+                })
+            ).rejects.toMatchObject({ code: 'NO_SUBTITLES' });
+
+            expect(mockYtDlp).not.toHaveBeenCalled();
+        });
+    });
+
     describe('NO_SUBTITLES', () => {
         it('throws when neither ru nor en tracks exist', async () => {
             mockYtDlp.mockResolvedValue(buildInfo());

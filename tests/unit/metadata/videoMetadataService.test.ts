@@ -21,12 +21,16 @@ const buildRaw = (overrides: Partial<{
     duration: number;
     availability: string;
     has_audio: boolean;
+    subtitles: Record<string, { ext: string; url: string }[]>;
+    automatic_captions: Record<string, { ext: string; url: string }[]>;
 }> = {}) => ({
     title: 'Паста Карбонара',
     channel: 'Chef Channel',
     duration: 300,
     availability: 'public',
     has_audio: true,
+    subtitles: {},
+    automatic_captions: {},
     ...overrides,
 } as any);
 
@@ -41,7 +45,7 @@ describe('checkVideoMetadata', () => {
 
             const result = await checkVideoMetadata('https://youtube.com/watch?v=abc', 'abc', 'youtube');
 
-            expect(result).toEqual({
+            expect(result.metadata).toEqual({
                 video_id: 'abc',
                 platform: 'youtube',
                 title: 'Паста Карбонара',
@@ -51,6 +55,29 @@ describe('checkVideoMetadata', () => {
             });
         });
 
+        it('extracts ru/en subtitle tracks into mediaProbe from the same yt-dlp response', async () => {
+            mockYtDlp.mockResolvedValue(
+                buildRaw({
+                    subtitles: { ru: [{ ext: 'vtt', url: 'https://cdn/ru.vtt' }], fr: [{ ext: 'vtt', url: 'https://cdn/fr.vtt' }] },
+                    automatic_captions: { en: [{ ext: 'json3', url: 'https://cdn/en.json' }] },
+                })
+            );
+
+            const { mediaProbe } = await checkVideoMetadata('https://youtube.com/watch?v=abc', 'abc', 'youtube');
+
+            expect(mediaProbe.subtitleTracks).toEqual({
+                manual: { ru: [{ ext: 'vtt', url: 'https://cdn/ru.vtt' }] },
+                auto: { en: [{ ext: 'json3', url: 'https://cdn/en.json' }] },
+            });
+        });
+
+        it('returns empty subtitleTracks when the video has none', async () => {
+            mockYtDlp.mockResolvedValue(buildRaw());
+
+            const { mediaProbe } = await checkVideoMetadata('https://youtube.com/watch?v=abc', 'abc', 'youtube');
+
+            expect(mediaProbe.subtitleTracks).toEqual({ manual: {}, auto: {} });
+        });
     });
 
     describe('VIDEO_UNAVAILABLE', () => {

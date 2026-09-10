@@ -5,6 +5,7 @@ import { recipeJobStore, type RecipeJob } from '../recipeJobStore';
 import { pdfStore } from '../pdf/pdfStore';
 import { recipeStore, type RecipeData } from '../recipe/recipeStore';
 import type { Transcript } from '../subtitles/subtitlesStore';
+import type { MediaProbe } from '../../media/mediaProbe';
 
 const METADATA_WORKER_URL = process.env.METADATA_WORKER_URL ?? 'http://localhost:4001';
 const SUBTITLES_WORKER_URL = process.env.SUBTITLES_WORKER_URL ?? 'http://localhost:4002';
@@ -63,6 +64,9 @@ async function runPipeline(job: RecipeJob, parsed: ValidVideoUrl): Promise<void>
         console.error(`[pipeline] job ${job.job_id}: failed at metadata (${body.error.code}) ${t()}`);
         return;
     }
+    // metadata-воркер уже сходил в yt-dlp — забираем оттуда дорожки субтитров,
+    // чтобы subtitles-воркер не делал повторный вызов.
+    const { mediaProbe } = (await metaRes.json()) as { mediaProbe?: MediaProbe };
     console.log(`[pipeline] job ${job.job_id}: metadata done in ${Date.now() - metaStart}ms ${t()}`);
 
     if (await isCancelled(job.job_id)) {
@@ -80,6 +84,7 @@ async function runPipeline(job: RecipeJob, parsed: ValidVideoUrl): Promise<void>
             jobId: job.job_id,
             sourceUrl: parsed.sourceUrl,
             videoId: parsed.videoId,
+            mediaProbe,
         }),
     });
     if (!subRes.ok) {

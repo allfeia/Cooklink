@@ -14,8 +14,8 @@ app.post('/check', async (req, res) => {
     };
 
     try {
-        const metadata = await runMetadataCheck(jobId, sourceUrl, videoId, platform);
-        res.status(200).json({ metadata });
+        const { metadata, mediaProbe } = await runMetadataCheck(jobId, sourceUrl, videoId, platform);
+        res.status(200).json({ metadata, mediaProbe });
     } catch (err) {
         if (err instanceof MetadataError) {
             sendError(res, 400, err);

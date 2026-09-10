@@ -1,18 +1,20 @@
 import 'dotenv/config';
 import { createWorkerApp, sendError, withCatchAll } from './httpServerUtils';
 import { runSubtitlesFetch, SubtitlesError } from '../workers/subtitlesWorker';
+import type { MediaProbe } from '../media/mediaProbe';
 
 export const app = createWorkerApp();
 
 app.post('/fetch', async (req, res) => {
-    const { jobId, sourceUrl, videoId } = req.body as {
+    const { jobId, sourceUrl, videoId, mediaProbe } = req.body as {
         jobId: string;
         sourceUrl: string;
         videoId: string;
+        mediaProbe?: MediaProbe;
     };
 
     try {
-        const transcript = await runSubtitlesFetch(jobId, sourceUrl, videoId);
+        const transcript = await runSubtitlesFetch(jobId, sourceUrl, videoId, mediaProbe);
         res.status(200).json({ transcript });
     } catch (err) {
         if (err instanceof SubtitlesError) {

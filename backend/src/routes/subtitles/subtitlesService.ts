@@ -3,12 +3,14 @@ import axios from 'axios';
 import { sleep } from '../../utils/sleep';
 import { getYtDlpCookiesOption } from '../../utils/ytDlpCookies';
 import { subtitlesStore, type Transcript } from './subtitlesStore';
+import {
+    buildMediaProbe,
+    selectSubtitleTrack,
+    type MediaProbe,
+} from '../../media/mediaProbe';
 
 export const MAX_RETRIES = 3;
 export const BASE_RETRY_DELAY_MS = 500;
-
-const SUPPORTED_LANGUAGES = ['ru', 'en'] as const;
-type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number];
 
 export type SubtitlesErrorCode = 'NO_SUBTITLES' | 'SUBTITLES_FETCH_FAILED';
 
@@ -52,11 +54,6 @@ async function withRateLimitRetry<T>(fn: () => Promise<T>): Promise<T> {
     });
 }
 
-function pickTrack<T extends { ext: string; url: string }>(tracks?: T[]): T | undefined {
-    if (!tracks || tracks.length === 0) return undefined;
-    return tracks.find((track) => track.ext === 'vtt') ?? tracks[0];
-}
-
 function stripVttMarkup(raw: string): string {
     return raw
         .replace(/WEBVTT[^\n]*\n/g, '')
@@ -68,9 +65,13 @@ function stripVttMarkup(raw: string): string {
         .trim();
 }
 
+/**
+ * Фолбэк: свой вызов yt-dlp, если дорожки не пришли из resolve-шага
+ * (прямой вызов воркера, старая версия metadata-воркера, тесты).
+ */
 async function findSubtitleTrack(
     sourceUrl: string
-): Promise<{ url: string; language: SupportedLanguage } | null> {
+): Promise<{ url: string; language: 'ru' | 'en' } | null> {
     const raw = await ytDlp(sourceUrl, {
         dumpSingleJson: true,
         noWarnings: true,
@@ -79,18 +80,19 @@ async function findSubtitleTrack(
         ...getYtDlpCookiesOption(),
     });
 
-    for (const language of SUPPORTED_LANGUAGES) {
-        const track = pickTrack(raw.subtitles?.[language]) ?? pickTrack(raw.automatic_captions?.[language]);
-        if (track) {
-            return { url: track.url, language };
-        }
-    }
-
-    return null;
+    return selectSubtitleTrack(buildMediaProbe(raw).subtitleTracks);
 }
 
-export async function fetchSubtitles(sourceUrl: string, videoId: string): Promise<Transcript> {
-    const track = await withRateLimitRetry(() => findSubtitleTrack(sourceUrl));
+export async function fetchSubtitles(
+    sourceUrl: string,
+    videoId: string,
+    mediaProbe?: MediaProbe
+): Promise<Transcript> {
+    // Дорожки уже нашёл metadata-воркер из того же ответа yt-dlp — берём их
+    // напрямую. Только если их нет — делаем собственный (повторный) вызов.
+    const track = mediaProbe
+        ? selectSubtitleTrack(mediaProbe.subtitleTracks)
+        : await withRateLimitRetry(() => findSubtitleTrack(sourceUrl));
 
     if (!track) {
         throw new SubtitlesError('NO_SUBTITLES', 'Субтитры недоступны', { source_url: sourceUrl });

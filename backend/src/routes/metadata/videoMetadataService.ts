@@ -2,6 +2,13 @@ import ytDlp from 'yt-dlp-exec';
 import type { Platform } from '../../../../common/validation/domainDetection';
 import { videoMetadataStore, type VideoMetadata } from './videoMetadataStore';
 import { getYtDlpCookiesOption } from '../../utils/ytDlpCookies';
+import { buildMediaProbe, type MediaProbe } from '../../media/mediaProbe';
+
+/** Результат resolve-шага: метаданные + всё, что нужно дальше по пайплайну. */
+export interface MetadataCheckResult {
+    metadata: VideoMetadata;
+    mediaProbe: MediaProbe;
+}
 
 export const MAX_DURATION_SEC = 900; // 15 минут
 
@@ -65,7 +72,7 @@ export async function checkVideoMetadata(
     sourceUrl: string,
     videoId: string,
     platform: Platform
-): Promise<VideoMetadata> {
+): Promise<MetadataCheckResult> {
     const raw = await fetchRawMetadata(sourceUrl);
     validateMetadata(sourceUrl, raw);
 
@@ -80,5 +87,7 @@ export async function checkVideoMetadata(
 
     await videoMetadataStore.save(metadata);
 
-    return metadata;
+    // Тот же `raw` уже содержит дорожки субтитров — отдаём их дальше,
+    // чтобы subtitles-воркер не делал повторный вызов yt-dlp.
+    return { metadata, mediaProbe: buildMediaProbe(raw) };
 }
