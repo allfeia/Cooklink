@@ -211,6 +211,10 @@ describe('POST /v1/recipes — полный пайплайн (e2e, через HT
         expect(body.data.ingredients).toHaveLength(1);
         expect(body.pdf_url).toBe(`/v1/recipes/${body.job_id}/pdf`);
 
+        // дедуп: metadata-воркер сходил в yt-dlp один раз, subtitles-воркер
+        // взял дорожки из mediaProbe и повторно yt-dlp не дёргал
+        expect(mockYtDlp).toHaveBeenCalledTimes(1);
+
         const pdfResponse = await fetch(`${origin}${body.pdf_url}`);
         expect(pdfResponse.status).toBe(200);
         expect(pdfResponse.headers.get('content-type')).toBe('application/pdf');

@@ -27,7 +27,6 @@ const MOCK_RECIPE = {
 
 export const app = createWorkerApp();
 
-// Мок для нагрузочного тестирования — не вызывает реальный LLM, не сохраняет в кэш
 app.post('/extract-mock', async (req, res) => {
     const { jobId } = req.body as { jobId: string };
     const delayMs = parseInt(process.env.LLM_MOCK_DELAY_MS ?? '0', 10);
