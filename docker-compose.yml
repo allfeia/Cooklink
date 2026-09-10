@@ -1,11 +1,19 @@
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
 services:
   gotenberg:
     image: gotenberg/gotenberg:8
+    logging: *default-logging
     ports:
       - "3000:3000"
 
   postgres:
     image: postgres:16
+    logging: *default-logging
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -24,6 +32,7 @@ services:
     build:
       context: .
       dockerfile: backend/Dockerfile.metadata-worker
+    logging: *default-logging
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       PORT: 4001
@@ -38,6 +47,7 @@ services:
     build:
       context: .
       dockerfile: backend/Dockerfile.subtitles-worker
+    logging: *default-logging
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       PORT: 4002
@@ -52,6 +62,7 @@ services:
     build:
       context: .
       dockerfile: backend/Dockerfile.llm-worker
+    logging: *default-logging
     env_file:
       - backend/.env
     environment:
@@ -65,6 +76,7 @@ services:
     build:
       context: .
       dockerfile: backend/Dockerfile.pdf-worker
+    logging: *default-logging
     environment:
       GOTENBERG_URL: http://gotenberg:3000
       PORT: 4004
@@ -75,6 +87,7 @@ services:
     build:
       context: .
       dockerfile: backend/Dockerfile
+    logging: *default-logging
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       METADATA_WORKER_URL: http://metadata-worker:4001
@@ -106,6 +119,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.frontend
+    logging: *default-logging
     ports:
       - "127.0.0.1:8080:80"
     depends_on:

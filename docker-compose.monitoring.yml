@@ -1,13 +1,21 @@
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
 services:
   prometheus:
     image: prom/prometheus:v2.53.0
+    logging: *default-logging
     volumes:
       - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
       - prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
-      - '--storage.tsdb.retention.time=30d'
+      - '--storage.tsdb.retention.time=15d'
+      - '--storage.tsdb.retention.size=2GB'
       - '--web.enable-lifecycle'
     extra_hosts:
       - "host.docker.internal:host-gateway"
@@ -17,6 +25,7 @@ services:
 
   node-exporter:
     image: prom/node-exporter:v1.8.2
+    logging: *default-logging
     pid: host
     volumes:
       - /proc:/host/proc:ro
@@ -33,6 +42,7 @@ services:
 
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:v0.51.0
+    logging: *default-logging
     privileged: true
     volumes:
       - /:/rootfs:ro
@@ -50,6 +60,7 @@ services:
 
   grafana:
     image: grafana/grafana:11.1.0
+    logging: *default-logging
     volumes:
       - grafana_data:/var/lib/grafana
       - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
@@ -68,6 +79,7 @@ services:
 
   loki:
     image: grafana/loki:3.1.0
+    logging: *default-logging
     volumes:
       - ./monitoring/loki.yml:/etc/loki/local-config.yaml:ro
       - loki_data:/loki
@@ -78,6 +90,7 @@ services:
 
   promtail:
     image: grafana/promtail:3.1.0
+    logging: *default-logging
     volumes:
       - ./monitoring/promtail.yml:/etc/promtail/config.yaml:ro
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
