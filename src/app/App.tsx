@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
 import { toast } from "sonner";
-import { Header } from "./components/layout/Header";
 import { InputSection } from "./components/forms/InputSection";
 import { LoadingState } from "./components/states/LoadingState";
 import { RecipeCard } from "./components/features/recipe/RecipeCard";
@@ -77,63 +76,32 @@ function AppContent() {
     setRecipe(null);
   };
 
+  const pageTransition = {
+    initial: { opacity: 0, x: 32 },
+    animate: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: -32 },
+    transition: { duration: 0.35, ease: [0.4, 0, 0.2, 1] as const },
+  };
+
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      <Header />
+    <div className="cl-app">
+      <div className="cl-grain" aria-hidden="true" />
 
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="wait" initial={false}>
         {state === "input" && (
-          <motion.div
-            key="input"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="flex-1 flex flex-col"
-          >
+          <motion.div key="input" className="cl-screen" {...pageTransition}>
             <InputSection onJobCreated={handleJobCreated} />
-
-            {/* Footer */}
-            <footer className="border-t border-border py-6">
-              <div className="container mx-auto px-4 md:px-8">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-                  <p>{t("copyright")}</p>
-                  <div className="flex gap-6">
-                    <button className="hover:text-foreground transition-colors">
-                      {t("privacy")}
-                    </button>
-                    <button className="hover:text-foreground transition-colors">
-                      {t("contacts")}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </footer>
           </motion.div>
         )}
 
         {state === "loading" && (
-          <motion.div
-            key="loading"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="flex-1"
-          >
+          <motion.div key="loading" className="cl-screen" {...pageTransition}>
             <LoadingState status={jobStatus} onCancel={handleCancel} />
           </motion.div>
         )}
 
         {state === "result" && recipe && (
-          <motion.div
-            key="result"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="flex-1 flex flex-col"
-          >
+          <motion.div key="result" className="cl-screen" {...pageTransition}>
             <RecipeCard
               recipe={recipe}
               onBack={handleBack}

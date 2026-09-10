@@ -1,0 +1,22 @@
+# Оверлей для нагрузочного тестирования системы БЕЗ реального LLM.
+#
+# Включить мок на проде:
+#   docker compose -f docker-compose.yml -f docker-compose.loadtest.yml up -d --build backend llm-worker
+#
+# Вернуть обратно (реальный LLM):
+#   docker compose -f docker-compose.yml up -d --build backend llm-worker
+#     (или просто `make run`)
+#
+# Что делает:
+#   - backend шлёт запросы на /extract-mock вместо /extract
+#   - llm-worker на /extract-mock отдаёт подставной рецепт с задержкой
+#     LLM_MOCK_DELAY_MS (имитируем ~4s реального ответа модели), в кэш не пишет
+
+services:
+  backend:
+    environment:
+      LLM_EXTRACT_PATH: /extract-mock
+
+  llm-worker:
+    environment:
+      LLM_MOCK_DELAY_MS: "4000"
