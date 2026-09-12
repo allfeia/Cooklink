@@ -97,6 +97,9 @@ services:
       PORT: 8000
     ports:
       - "127.0.0.1:8000:8000"
+    networks:
+      - default
+      - monitoring
     depends_on:
       postgres:
         condition: service_healthy
@@ -128,3 +131,12 @@ services:
 
 volumes:
   postgres_data:
+
+networks:
+  default:
+  # Та же сеть, что и в docker-compose.monitoring.yml (bridge, имя совпадает —
+  # при совместном запуске сливается в одну). Объявлена и здесь, чтобы backend
+  # мог к ней подключиться даже при обычном `docker compose up` без монитринг-
+  # оверлея (сеть просто создастся и останется неиспользуемой).
+  monitoring:
+    driver: bridge
