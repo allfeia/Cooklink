@@ -2,7 +2,7 @@ services:
   gotenberg:
     image: gotenberg/gotenberg:8
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3000:3000"
 
   postgres:
     image: postgres:16
@@ -11,7 +11,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
     ports:
-      - "5434:5432"
+      - "127.0.0.1:5434:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -83,7 +83,7 @@ services:
       PDF_WORKER_URL: http://pdf-worker:4004
       PORT: 8000
     ports:
-      - "8000:8000"
+      - "127.0.0.1:8000:8000"
     depends_on:
       postgres:
         condition: service_healthy
