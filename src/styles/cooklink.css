@@ -1,5 +1,6 @@
 /* ---------- полноэкранные страницы ---------- */
 .cl-app {
+  min-height: 100vh;
   min-height: 100dvh;
   background: var(--paper);
   overflow-x: hidden;
@@ -7,6 +8,7 @@
 }
 
 .cl-screen {
+  min-height: 100vh;
   min-height: 100dvh;
   width: 100%;
   display: flex;
