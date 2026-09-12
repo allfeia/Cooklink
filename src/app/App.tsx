@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { InputSection } from "./components/forms/InputSection";
 import { LoadingState } from "./components/states/LoadingState";
@@ -14,6 +14,22 @@ import { getRecipeErrorMessage } from "@/app/lib/recipeErrorMessages";
 
 type AppState = "input" | "loading" | "result";
 
+const JOB_QUERY_PARAM = "job";
+
+function getJobIdFromUrl(): string | null {
+  return new URLSearchParams(window.location.search).get(JOB_QUERY_PARAM);
+}
+
+function setJobIdInUrl(jobId: string | null) {
+  const url = new URL(window.location.href);
+  if (jobId) {
+    url.searchParams.set(JOB_QUERY_PARAM, jobId);
+  } else {
+    url.searchParams.delete(JOB_QUERY_PARAM);
+  }
+  window.history.replaceState(null, "", url);
+}
+
 function AppContent() {
   const [state, setState] = useState<AppState>("input");
   const [recipe, setRecipe] = useState<Recipe | null>(null);
@@ -22,22 +38,24 @@ function AppContent() {
   const currentJobIdRef = useRef<string | null>(null);
   const { t } = useLanguage();
 
-  const handleJobCreated = ({ jobId, sourceUrl }: { jobId: string; sourceUrl: string }) => {
+  const trackJob = (jobId: string) => {
     setJobStatus("scanning");
     setState("loading");
     currentJobIdRef.current = jobId;
+    setJobIdInUrl(jobId);
 
     const controller = new AbortController();
     pollAbortRef.current = controller;
 
     pollRecipeJob(jobId, { onStatusChange: setJobStatus, signal: controller.signal })
       .then(async (job) => {
+        setJobIdInUrl(null);
         if (!job.data) {
           toast.error(t("errorInternalServer"));
           setState("input");
           return;
         }
-        const mapped = mapApiRecipeToRecipe(job.data, sourceUrl, job.pdf_url);
+        const mapped = mapApiRecipeToRecipe(job.data, job.source_url, job.pdf_url);
         const dishImage = await searchDishImage(mapped.title);
         setRecipe({ ...mapped, dishImage });
         setState("result");
@@ -46,6 +64,7 @@ function AppContent() {
         if (error instanceof PollCancelledError) {
           return;
         }
+        setJobIdInUrl(null);
         const message =
           error instanceof RecipeApiError
             ? getRecipeErrorMessage(error.code, t)
@@ -55,6 +74,17 @@ function AppContent() {
       });
   };
 
+  const handleJobCreated = ({ jobId }: { jobId: string; sourceUrl: string }) => {
+    trackJob(jobId);
+  };
+
+  useEffect(() => {
+    const jobId = getJobIdFromUrl();
+    if (jobId) {
+      trackJob(jobId);
+    }
+  }, []);
+
   const handleCancel = () => {
     pollAbortRef.current?.abort();
     const jobId = currentJobIdRef.current;
@@ -63,6 +93,7 @@ function AppContent() {
         console.error("Не удалось отменить задачу на сервере:", error);
       });
     }
+    setJobIdInUrl(null);
     setState("input");
     setRecipe(null);
   };
