@@ -70,7 +70,7 @@ export function buildRecipeHtml(recipe: RecipeData): string {
 
   .head {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     gap: 16px;
     border-bottom: 2px solid var(--rule);
