@@ -6,6 +6,14 @@ import { pdfStore } from '../pdf/pdfStore';
 import { recipeStore, type RecipeData } from '../recipe/recipeStore';
 import type { Transcript } from '../subtitles/subtitlesStore';
 import type { MediaProbe } from '../../media/mediaProbe';
+import {
+    jobsCreatedTotal,
+    jobsCompletedTotal,
+    pipelineFailuresTotal,
+    llmRateLimitTotal,
+    pdfDownloadsTotal,
+    pipelineDurationSeconds,
+} from '../../metrics';
 
 const METADATA_WORKER_URL = process.env.METADATA_WORKER_URL ?? 'http://localhost:4001';
 const SUBTITLES_WORKER_URL = process.env.SUBTITLES_WORKER_URL ?? 'http://localhost:4002';
@@ -24,6 +32,7 @@ async function isCancelled(jobId: string): Promise<boolean> {
 }
 
 async function generatePdfOnly(job: RecipeJob, recipe: RecipeData): Promise<void> {
+    const endTimer = pipelineDurationSeconds.startTimer();
     console.log(`[pipeline] job ${job.job_id}: generating_pdf (cached recipe)`);
     const pdfRes = await fetch(`${PDF_WORKER_URL}/generate`, {
         method: 'POST',
@@ -34,17 +43,31 @@ async function generatePdfOnly(job: RecipeJob, recipe: RecipeData): Promise<void
         const body = (await pdfRes.json()) as WorkerErrorBody;
         await recipeJobStore.markFailed(job.job_id, body.error.code, body.error.message);
         console.error(`[pipeline] job ${job.job_id}: failed at pdf (${body.error.code})`);
+        pipelineFailuresTotal.inc({ stage: 'pdf' });
+        jobsCompletedTotal.inc({ status: 'failed' });
+        endTimer({ status: 'failed' });
         return;
     }
     const pdfBuffer = Buffer.from(await pdfRes.arrayBuffer());
     await pdfStore.save(job.job_id, pdfBuffer);
     await recipeJobStore.updateStatus(job.job_id, 'completed');
     console.log(`[pipeline] job ${job.job_id}: completed (cached recipe)`);
+    jobsCompletedTotal.inc({ status: 'completed' });
+    endTimer({ status: 'completed' });
 }
 
 async function runPipeline(job: RecipeJob, parsed: ValidVideoUrl): Promise<void> {
     const t = () => `+${((Date.now() - pipelineStart) / 1000).toFixed(1)}s`;
     const pipelineStart = Date.now();
+    const endTimer = pipelineDurationSeconds.startTimer();
+
+    const failAt = (stage: string, errorCode: string) => {
+        pipelineFailuresTotal.inc({ stage });
+        if (errorCode === 'LLM_RATE_LIMITED') llmRateLimitTotal.inc();
+        jobsCompletedTotal.inc({ status: 'failed' });
+        endTimer({ status: 'failed' });
+    };
+
     console.log(`[pipeline] job ${job.job_id}: scanning`);
 
     // метаданные
@@ -62,6 +85,7 @@ async function runPipeline(job: RecipeJob, parsed: ValidVideoUrl): Promise<void>
     if (!metaRes.ok) {
         const body = (await metaRes.json()) as WorkerErrorBody;
         console.error(`[pipeline] job ${job.job_id}: failed at metadata (${body.error.code}) ${t()}`);
+        failAt('metadata', body.error.code);
         return;
     }
     // metadata-воркер уже сходил в yt-dlp — забираем оттуда дорожки субтитров,
@@ -71,6 +95,8 @@ async function runPipeline(job: RecipeJob, parsed: ValidVideoUrl): Promise<void>
 
     if (await isCancelled(job.job_id)) {
         console.log(`[pipeline] job ${job.job_id}: cancelled before subtitles`);
+        jobsCompletedTotal.inc({ status: 'cancelled' });
+        endTimer({ status: 'failed' });
         return;
     }
 
@@ -90,6 +116,7 @@ async function runPipeline(job: RecipeJob, parsed: ValidVideoUrl): Promise<void>
     if (!subRes.ok) {
         const body = (await subRes.json()) as WorkerErrorBody;
         console.error(`[pipeline] job ${job.job_id}: failed at subtitles (${body.error.code}) ${t()}`);
+        failAt('subtitles', body.error.code);
         return;
     }
     const { transcript } = (await subRes.json()) as { transcript: Transcript };
@@ -97,6 +124,8 @@ async function runPipeline(job: RecipeJob, parsed: ValidVideoUrl): Promise<void>
 
     if (await isCancelled(job.job_id)) {
         console.log(`[pipeline] job ${job.job_id}: cancelled before llm`);
+        jobsCompletedTotal.inc({ status: 'cancelled' });
+        endTimer({ status: 'failed' });
         return;
     }
 
@@ -115,6 +144,7 @@ async function runPipeline(job: RecipeJob, parsed: ValidVideoUrl): Promise<void>
     if (!llmRes.ok) {
         const body = (await llmRes.json()) as WorkerErrorBody;
         console.error(`[pipeline] job ${job.job_id}: failed at llm (${body.error.code}) ${t()}`);
+        failAt('llm', body.error.code);
         return;
     }
     const { recipe } = (await llmRes.json()) as { recipe: RecipeData };
@@ -122,6 +152,8 @@ async function runPipeline(job: RecipeJob, parsed: ValidVideoUrl): Promise<void>
 
     if (await isCancelled(job.job_id)) {
         console.log(`[pipeline] job ${job.job_id}: cancelled before pdf`);
+        jobsCompletedTotal.inc({ status: 'cancelled' });
+        endTimer({ status: 'failed' });
         return;
     }
 
@@ -137,6 +169,7 @@ async function runPipeline(job: RecipeJob, parsed: ValidVideoUrl): Promise<void>
         const body = (await pdfRes.json()) as WorkerErrorBody;
         await recipeJobStore.markFailed(job.job_id, body.error.code, body.error.message);
         console.error(`[pipeline] job ${job.job_id}: failed at pdf (${body.error.code}) ${t()}`);
+        failAt('pdf', body.error.code);
         return;
     }
     const pdfBuffer = Buffer.from(await pdfRes.arrayBuffer());
@@ -144,6 +177,8 @@ async function runPipeline(job: RecipeJob, parsed: ValidVideoUrl): Promise<void>
     await recipeJobStore.updateStatus(job.job_id, 'completed');
     console.log(`[pipeline] job ${job.job_id}: pdf done in ${Date.now() - pdfStart}ms ${t()}`);
     console.log(`[pipeline] job ${job.job_id}: completed — total ${Date.now() - pipelineStart}ms`);
+    jobsCompletedTotal.inc({ status: 'completed' });
+    endTimer({ status: 'completed' });
 }
 
 router.post('/recipes', async (req, res) => {
@@ -171,6 +206,7 @@ router.post('/recipes', async (req, res) => {
     };
 
     await recipeJobStore.create(job);
+    jobsCreatedTotal.inc({ cache: cachedRecipe ? 'hit' : 'miss' });
     res.status(202).json(job);
 
     if (cachedRecipe) {
@@ -218,6 +254,7 @@ router.post('/recipes/:job_id/cancel', async (req, res) => {
     const wasCancelled = await recipeJobStore.cancel(job.job_id);
     if (wasCancelled) {
         console.log(`[pipeline] job ${job.job_id}: cancel requested`);
+        jobsCompletedTotal.inc({ status: 'cancelled' });
     }
 
     const updated = await recipeJobStore.findById(job.job_id);
@@ -239,6 +276,7 @@ router.get('/recipes/:job_id/pdf', async (req, res) => {
         });
     }
 
+    pdfDownloadsTotal.inc();
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader('Content-Disposition', `attachment; filename="${job.job_id}.pdf"`);
     return res.send(pdf);
