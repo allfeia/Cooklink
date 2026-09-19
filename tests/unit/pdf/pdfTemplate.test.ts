@@ -25,6 +25,12 @@ describe('buildRecipeHtml', () => {
         expect(html).toContain('Отварите спагетти');
     });
 
+    it('renders the header brand as a clickable link to the site', () => {
+        const html = buildRecipeHtml(buildRecipe());
+
+        expect(html).toMatch(/<div class="brand"><a href="https:\/\/cooklink\.ru">cooklink<i>\.ai<\/i><\/a><\/div>/);
+    });
+
     it('renders steps in step_number order regardless of input order', () => {
         const html = buildRecipeHtml(
             buildRecipe({

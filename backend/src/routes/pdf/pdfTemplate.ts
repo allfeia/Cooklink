@@ -15,6 +15,8 @@ function formatAmount(quantity: string | number, unit: string): string {
 
 const BURST = `<svg class="burst" viewBox="0 0 120 120" aria-hidden="true"><polygon fill="currentColor" points="60,2 65.9,37.8 89,9.8 76.3,43.7 110.2,31 82.2,54 118,60 82.2,66 110.2,89 76.3,76.3 89,110.2 65.9,82.2 60,118 54,82.2 31,110.2 43.7,76.3 9.8,89 37.8,66 2,60 37.8,54 9.8,31 43.7,43.7 31,9.8 54,37.8"/></svg>`;
 
+const SITE_URL = 'https://cooklink.ru';
+
 export function buildRecipeHtml(recipe: RecipeData): string {
     const ingredientsHtml = recipe.ingredients
         .map((ingredient) => {
@@ -79,6 +81,7 @@ export function buildRecipeHtml(recipe: RecipeData): string {
   }
   .brand { font-family: "Playfair Display", Georgia, serif; font-weight: 700; font-size: 15px; color: var(--display); letter-spacing: .02em; }
   .brand i { font-style: normal; color: var(--burst); }
+  .brand a { color: inherit; text-decoration: none; }
   .burst { width: 34px; height: 34px; color: var(--burst); flex: 0 0 auto; }
 
   h1 {
@@ -155,7 +158,7 @@ export function buildRecipeHtml(recipe: RecipeData): string {
 <body>
   <div class="head">
     <div>
-      <div class="brand">cooklink<i>.ai</i></div>
+      <div class="brand"><a href="${SITE_URL}">cooklink<i>.ai</i></a></div>
     </div>
     ${BURST}
   </div>
