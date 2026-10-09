@@ -3,6 +3,13 @@ import { useLanguage } from "../../context/LanguageContext";
 import { useState, useEffect } from "react";
 import type { JobStatus } from "@/app/api/recipesApi";
 import { ClBurst } from "../decor/ClDecor";
+import {
+  HINT_INTERVAL_MS,
+  PROGRESS_TICK_MS,
+  nextProgress,
+  stageRange,
+  waitNoteKey,
+} from "./loadingProgress";
 
 interface LoadingStateProps {
   status: JobStatus;
@@ -40,31 +47,48 @@ const STAGE_HINTS: Partial<Record<JobStatus, string[]>> = {
 export function LoadingState({ status, onCancel }: LoadingStateProps) {
   const { t } = useLanguage();
   const [hintIndex, setHintIndex] = useState(0);
+  const [progress, setProgress] = useState(() => stageRange(status).floor);
+  const [elapsedSec, setElapsedSec] = useState(0);
 
-  const ACTIVE_STAGE_BY_STATUS: Partial<Record<JobStatus, { text: string; progress: number }>> = {
-    scanning: { text: t("analyzing"), progress: 20 },
-    transcribing: { text: t("fetchingSubtitles"), progress: 45 },
-    llm_processing: { text: t("extracting"), progress: 70 },
-    generating_pdf: { text: t("generating"), progress: 95 },
+  const stageText: Partial<Record<JobStatus, string>> = {
+    scanning: t("analyzing"),
+    transcribing: t("fetchingSubtitles"),
+    llm_processing: t("extracting"),
+    generating_pdf: t("generating"),
   };
-
-  const stage = ACTIVE_STAGE_BY_STATUS[status] ?? ACTIVE_STAGE_BY_STATUS.generating_pdf!;
+  const text = stageText[status] ?? stageText.generating_pdf!;
   const hints = STAGE_HINTS[status] ?? [];
 
   useEffect(() => {
     setHintIndex(0);
-    if (hints.length <= 1) return;
+    if (hints.length === 0) return;
     const id = setInterval(() => {
-      setHintIndex((i) => (i + 1) % hints.length);
-    }, 1500);
+      setHintIndex((i) => Math.min(i + 1, hints.length));
+    }, HINT_INTERVAL_MS);
     return () => clearInterval(id);
   }, [status]);
+
+  useEffect(() => {
+    setProgress((p) => Math.max(p, stageRange(status).floor));
+    const id = setInterval(() => {
+      setProgress((p) => nextProgress(p, status));
+    }, PROGRESS_TICK_MS);
+    return () => clearInterval(id);
+  }, [status]);
+
+  useEffect(() => {
+    const startedAt = Date.now();
+    const id = setInterval(() => {
+      setElapsedSec(Math.floor((Date.now() - startedAt) / 1000));
+    }, 1000);
+    return () => clearInterval(id);
+  }, []);
 
   return (
     <section className="cl-center cl-loading">
         <ClBurst className="cl-loader-burst" />
 
-        <div className="cl-status">
+        <div className="cl-status" role="status" aria-live="polite">
           <AnimatePresence mode="wait">
             <motion.h2
               key={`${status}-${hintIndex}`}
@@ -74,14 +98,16 @@ export function LoadingState({ status, onCancel }: LoadingStateProps) {
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.25 }}
             >
-              {hints[hintIndex] ?? stage.text}
+              {hints[hintIndex] ?? text}
             </motion.h2>
           </AnimatePresence>
         </div>
 
         <div className="cl-bar" aria-hidden="true">
-          <i style={{ width: `${stage.progress}%` }} />
+          <i style={{ width: `${progress}%` }} />
         </div>
+
+        <p className="cl-wait-note">{t(waitNoteKey(elapsedSec))}</p>
 
         <div className="cl-actions">
           <button type="button" className="cl-pill two" onClick={onCancel}>

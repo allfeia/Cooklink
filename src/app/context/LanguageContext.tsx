@@ -53,6 +53,9 @@ const translations = {
     extracting: "Извлекаем ингредиенты и шаги...",
     generating: "Генерируем красивый рецепт...",
     cancel: "Отмена",
+    loadingExpect: "Это может занять около минуты",
+    loadingSlow: "Видео сложное или сервис загружен — всё ещё работаем, это нормально",
+    loadingVerySlow: "Дольше обычного. Можно подождать ещё или отменить и попробовать снова",
     // Recipe
     back: "Назад",
     share: "Поделиться",
@@ -136,6 +139,9 @@ const translations = {
     extracting: "Extracting ingredients and steps...",
     generating: "Generating beautiful recipe...",
     cancel: "Cancel",
+    loadingExpect: "This can take about a minute",
+    loadingSlow: "The video is complex or the service is busy — still working, this is normal",
+    loadingVerySlow: "Taking longer than usual. You can keep waiting, or cancel and try again",
     // Recipe
     back: "Back",
     share: "Share",
