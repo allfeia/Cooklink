@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import { toast } from "sonner";
 import { Recipe } from "./recipe";
+import { DISH_IMAGE_ENABLED } from "../image/imageSearch";
 import { useLanguage } from "../../../context/LanguageContext";
 
 interface RecipeCardProps {
@@ -90,13 +91,15 @@ export function RecipeCard({ recipe, onBack, onNewRecipe }: RecipeCardProps) {
           </span>
         </p>
 
-        <div className="cl-photo">
-          {recipe.dishImage ? (
-            <img src={recipe.dishImage} alt={recipe.title} />
-          ) : (
-            <span>{recipe.title}</span>
-          )}
-        </div>
+        {DISH_IMAGE_ENABLED && (
+          <div className="cl-photo">
+            {recipe.dishImage ? (
+              <img src={recipe.dishImage} alt={recipe.title} />
+            ) : (
+              <span>{recipe.title}</span>
+            )}
+          </div>
+        )}
 
         <div className="cl-rgrid">
           <div>

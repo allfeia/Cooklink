@@ -8,7 +8,7 @@ import { Recipe, mapApiRecipeToRecipe } from "./components/features/recipe/recip
 import { motion, AnimatePresence } from "motion/react";
 import { ThemeProvider } from "./context/ThemeContext";
 import { LanguageProvider, useLanguage } from "./context/LanguageContext";
-import { searchDishImage } from "@/app/components/features/image/imageSearch";
+import { DISH_IMAGE_ENABLED, searchDishImage } from "@/app/components/features/image/imageSearch";
 import { pollRecipeJob, cancelRecipeJob, PollCancelledError, RecipeApiError, type JobStatus } from "@/app/api/recipesApi";
 import { getRecipeErrorMessage } from "@/app/lib/recipeErrorMessages";
 
@@ -56,7 +56,7 @@ function AppContent() {
           return;
         }
         const mapped = mapApiRecipeToRecipe(job.data, job.source_url, job.pdf_url);
-        const dishImage = await searchDishImage(mapped.title);
+        const dishImage = DISH_IMAGE_ENABLED ? await searchDishImage(mapped.title) : "";
         setRecipe({ ...mapped, dishImage });
         setState("result");
       })

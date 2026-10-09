@@ -115,7 +115,7 @@
       },
       "targets": [
         {
-          "expr": "rate(recipe_pipeline_duration_seconds_sum[1h]) / clamp_min(rate(recipe_pipeline_duration_seconds_count[1h]), 0.001)",
+          "expr": "sum(rate(recipe_pipeline_duration_seconds_sum{status=\"completed\"}[1h])) / clamp_min(sum(rate(recipe_pipeline_duration_seconds_count{status=\"completed\"}[1h])), 0.001)",
           "legendFormat": "avg",
           "refId": "A"
         }
@@ -213,7 +213,7 @@
       },
       "targets": [
         {
-          "expr": "rate(recipe_pipeline_duration_seconds_sum[$__interval]) / clamp_min(rate(recipe_pipeline_duration_seconds_count[$__interval]), 0.001)",
+          "expr": "sum(rate(recipe_pipeline_duration_seconds_sum{status=\"completed\"}[$__interval])) / clamp_min(sum(rate(recipe_pipeline_duration_seconds_count{status=\"completed\"}[$__interval])), 0.001)",
           "legendFormat": "среднее",
           "refId": "A"
         },

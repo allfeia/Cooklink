@@ -4,6 +4,11 @@
  */
 
 /**
+ * Фото блюда не входит в MVP: пока false, блок не показывается и картинка не запрашивается.
+ */
+export const DISH_IMAGE_ENABLED = false;
+
+/**
  * Search for a dish image based on dish name
  * @param dishName - The name of the dish to search for
  * @returns URL of the dish image
