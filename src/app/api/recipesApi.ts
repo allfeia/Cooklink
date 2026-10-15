@@ -64,7 +64,7 @@ export async function createRecipeJob(sourceUrl: string): Promise<RecipeJobRespo
 }
 
 export async function getRecipeJob(jobId: string, signal?: AbortSignal): Promise<RecipeJobResponse> {
-    const response = await fetch(`${BASE_URL}/recipes/${jobId}`, { signal });
+    const response = await fetch(`${BASE_URL}/recipes/${encodeURIComponent(jobId)}`, { signal });
 
     if (response.ok) {
         const body: RecipeJobResponse = await response.json();
@@ -79,7 +79,7 @@ export async function getRecipeJob(jobId: string, signal?: AbortSignal): Promise
 }
 
 export async function cancelRecipeJob(jobId: string): Promise<void> {
-    const response = await fetch(`${BASE_URL}/recipes/${jobId}/cancel`, { method: "POST" });
+    const response = await fetch(`${BASE_URL}/recipes/${encodeURIComponent(jobId)}/cancel`, { method: "POST" });
 
     if (!response.ok) {
         const body = await response.json().catch(() => null);

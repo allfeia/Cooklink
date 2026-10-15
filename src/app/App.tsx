@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { BrowserRouter, useLocation, useMatch, useNavigate } from "react-router";
 import { toast } from "sonner";
 import { InputSection } from "./components/forms/InputSection";
 import { LoadingState } from "./components/states/LoadingState";
@@ -14,21 +15,7 @@ import { getRecipeErrorMessage } from "@/app/lib/recipeErrorMessages";
 
 type AppState = "input" | "loading" | "result";
 
-const JOB_QUERY_PARAM = "job";
-
-function getJobIdFromUrl(): string | null {
-  return new URLSearchParams(window.location.search).get(JOB_QUERY_PARAM);
-}
-
-function setJobIdInUrl(jobId: string | null) {
-  const url = new URL(window.location.href);
-  if (jobId) {
-    url.searchParams.set(JOB_QUERY_PARAM, jobId);
-  } else {
-    url.searchParams.delete(JOB_QUERY_PARAM);
-  }
-  window.history.replaceState(null, "", url);
-}
+const JOB_ID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 function AppContent() {
   const [state, setState] = useState<AppState>("input");
@@ -37,22 +24,31 @@ function AppContent() {
   const pollAbortRef = useRef<AbortController | null>(null);
   const currentJobIdRef = useRef<string | null>(null);
   const { t } = useLanguage();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const routeMatch = useMatch("/recipe/:jobId");
+  const routeJobId = routeMatch?.params.jobId ?? null;
+
+  const stopTracking = () => {
+    pollAbortRef.current?.abort();
+    pollAbortRef.current = null;
+    currentJobIdRef.current = null;
+  };
 
   const trackJob = (jobId: string) => {
+    pollAbortRef.current?.abort();
     setJobStatus("scanning");
     setState("loading");
     currentJobIdRef.current = jobId;
-    setJobIdInUrl(jobId);
 
     const controller = new AbortController();
     pollAbortRef.current = controller;
 
     pollRecipeJob(jobId, { onStatusChange: setJobStatus, signal: controller.signal })
       .then(async (job) => {
-        setJobIdInUrl(null);
         if (!job.data) {
           toast.error(t("errorInternalServer"));
-          setState("input");
+          navigate("/", { replace: true });
           return;
         }
         const mapped = mapApiRecipeToRecipe(job.data, job.source_url, job.pdf_url);
@@ -64,47 +60,60 @@ function AppContent() {
         if (error instanceof PollCancelledError) {
           return;
         }
-        setJobIdInUrl(null);
         const message =
           error instanceof RecipeApiError
             ? getRecipeErrorMessage(error.code, t)
             : t("errorInternalServer");
         toast.error(message);
-        setState("input");
+        navigate("/", { replace: true });
       });
   };
 
   const handleJobCreated = ({ jobId }: { jobId: string; sourceUrl: string }) => {
     trackJob(jobId);
+    navigate(`/recipe/${jobId}`);
   };
 
   useEffect(() => {
-    const jobId = getJobIdFromUrl();
-    if (jobId) {
-      trackJob(jobId);
+    if (routeJobId) {
+      if (!JOB_ID_PATTERN.test(routeJobId)) {
+        navigate("/", { replace: true });
+        return;
+      }
+      if (currentJobIdRef.current !== routeJobId) {
+        trackJob(routeJobId);
+      }
+      return;
     }
-  }, []);
+
+    stopTracking();
+    setState("input");
+    if (pathname !== "/") {
+      navigate("/", { replace: true });
+    }
+  }, [routeJobId, pathname]);
+
+  useEffect(() => stopTracking, []);
 
   const handleCancel = () => {
-    pollAbortRef.current?.abort();
     const jobId = currentJobIdRef.current;
+    stopTracking();
     if (jobId) {
       cancelRecipeJob(jobId).catch((error) => {
         console.error("Не удалось отменить задачу на сервере:", error);
       });
     }
-    setJobIdInUrl(null);
-    setState("input");
     setRecipe(null);
+    navigate("/");
   };
 
   const handleBack = () => {
-    setState("input");
+    navigate("/");
   };
 
   const handleNewRecipe = () => {
-    setState("input");
     setRecipe(null);
+    navigate("/");
   };
 
   const pageTransition = {
@@ -151,7 +160,9 @@ export default function App() {
   return (
     <ThemeProvider>
       <LanguageProvider>
-        <AppContent />
+        <BrowserRouter>
+          <AppContent />
+        </BrowserRouter>
       </LanguageProvider>
     </ThemeProvider>
   );
