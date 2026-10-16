@@ -1,4 +1,5 @@
 import { recipeJobStore } from '../routes/recipeJobStore';
+import { logger } from '../logging/logger';
 import { extractRecipe, LlmExtractionError } from '../routes/llm/llmService';
 import type { RecipeData } from '../routes/recipe/recipeStore';
 
@@ -10,17 +11,18 @@ export async function runRecipeExtraction(
     transcriptText: string,
     canonicalKey: string
 ): Promise<RecipeData> {
+    const log = logger.child({ job_id: jobId });
     let recipe: RecipeData;
     try {
-        recipe = await extractRecipe(transcriptText, canonicalKey);
+        recipe = await extractRecipe(transcriptText, canonicalKey, log);
     } catch (err) {
-        console.error('extractRecipe failed:', err);
+        log.error({ err, stage: 'llm' }, 'extractRecipe failed');
         const code = err instanceof LlmExtractionError ? err.code : 'INTERNAL_SERVER_ERROR';
         const message = err instanceof Error ? err.message : 'Внутренняя ошибка сервера';
         await recipeJobStore.markFailed(jobId, code, message);
         throw err;
     }
-    console.log('extractRecipe:', recipe);
+    log.info({ stage: 'llm', ingredients: recipe.ingredients.length, steps: recipe.steps.length }, 'recipe extracted');
     await recipeJobStore.updateStatus(jobId, 'generating_pdf');
 
     return recipe;

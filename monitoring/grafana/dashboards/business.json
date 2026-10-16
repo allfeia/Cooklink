@@ -237,23 +237,117 @@
       "collapsed": false
     },
     {
-      "type": "timeseries",
-      "title": "Ошибки по стадиям",
+      "type": "bargauge",
+      "title": "Ошибки по этапам (за период)",
+      "description": "Сколько запросов упало на каждом этапе пайплайна за выбранный период (по порядку выполнения). Все четыре этапа показываются всегда, у этапов без ошибок будет 0.",
       "id": 10,
-      "gridPos": { "h": 8, "w": 16, "x": 0, "y": 15 },
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 15 },
       "datasource": { "type": "prometheus", "uid": "${datasource}" },
       "options": {
-        "tooltip": { "mode": "multi", "sort": "none" },
-        "legend": { "displayMode": "list", "placement": "bottom" }
+        "orientation": "horizontal",
+        "displayMode": "gradient",
+        "showUnfilled": true,
+        "valueMode": "color",
+        "namePlacement": "top",
+        "reduceOptions": { "calcs": ["lastNotNull"] }
       },
       "fieldConfig": {
-        "defaults": { "unit": "short", "custom": { "lineWidth": 2 } }
+        "defaults": {
+          "min": 0,
+          "decimals": 0,
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "orange", "value": 1 },
+              { "color": "red", "value": 5 }
+            ]
+          }
+        },
+        "overrides": []
       },
       "targets": [
         {
-          "expr": "sum(increase(recipe_pipeline_failures_total[$__interval])) by (stage)",
-          "legendFormat": "{{ stage }}",
+          "expr": "sum(increase(recipe_pipeline_failures_total{stage=\"metadata\"}[$__range])) or vector(0)",
+          "legendFormat": "1. Метаданные видео",
+          "instant": true,
           "refId": "A"
+        },
+        {
+          "expr": "sum(increase(recipe_pipeline_failures_total{stage=\"subtitles\"}[$__range])) or vector(0)",
+          "legendFormat": "2. Субтитры",
+          "instant": true,
+          "refId": "B"
+        },
+        {
+          "expr": "sum(increase(recipe_pipeline_failures_total{stage=\"llm\"}[$__range])) or vector(0)",
+          "legendFormat": "3. Нейросеть (LLM)",
+          "instant": true,
+          "refId": "C"
+        },
+        {
+          "expr": "sum(increase(recipe_pipeline_failures_total{stage=\"pdf\"}[$__range])) or vector(0)",
+          "legendFormat": "4. Генерация PDF",
+          "instant": true,
+          "refId": "D"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Когда возникали ошибки (по часам)",
+      "description": "Число ошибок по этапам за каждый час. Цвета этапов те же, что на панели слева.",
+      "id": 17,
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 15 },
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "options": {
+        "tooltip": { "mode": "multi", "sort": "desc" },
+        "legend": { "displayMode": "list", "placement": "bottom" }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 0,
+          "min": 0,
+          "custom": {
+            "drawStyle": "bars",
+            "fillOpacity": 85,
+            "lineWidth": 0,
+            "barAlignment": 0,
+            "stacking": { "mode": "normal", "group": "A" }
+          }
+        },
+        "overrides": [
+          { "matcher": { "id": "byName", "options": "1. Метаданные видео" }, "properties": [ { "id": "color", "value": { "mode": "fixed", "fixedColor": "#378ADD" } } ] },
+          { "matcher": { "id": "byName", "options": "2. Субтитры" }, "properties": [ { "id": "color", "value": { "mode": "fixed", "fixedColor": "#1D9E75" } } ] },
+          { "matcher": { "id": "byName", "options": "3. Нейросеть (LLM)" }, "properties": [ { "id": "color", "value": { "mode": "fixed", "fixedColor": "#7F77DD" } } ] },
+          { "matcher": { "id": "byName", "options": "4. Генерация PDF" }, "properties": [ { "id": "color", "value": { "mode": "fixed", "fixedColor": "#D85A30" } } ] }
+        ]
+      },
+      "targets": [
+        {
+          "expr": "sum(increase(recipe_pipeline_failures_total{stage=\"metadata\"}[1h])) or vector(0)",
+          "legendFormat": "1. Метаданные видео",
+          "interval": "1h",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(increase(recipe_pipeline_failures_total{stage=\"subtitles\"}[1h])) or vector(0)",
+          "legendFormat": "2. Субтитры",
+          "interval": "1h",
+          "refId": "B"
+        },
+        {
+          "expr": "sum(increase(recipe_pipeline_failures_total{stage=\"llm\"}[1h])) or vector(0)",
+          "legendFormat": "3. Нейросеть (LLM)",
+          "interval": "1h",
+          "refId": "C"
+        },
+        {
+          "expr": "sum(increase(recipe_pipeline_failures_total{stage=\"pdf\"}[1h])) or vector(0)",
+          "legendFormat": "4. Генерация PDF",
+          "interval": "1h",
+          "refId": "D"
         }
       ]
     },
@@ -324,17 +418,62 @@
       ]
     },
     {
+      "type": "table",
+      "title": "Причины ошибок (из логов)",
+      "description": "Сколько раз на каком этапе возникла какая ошибка за период. Данные из логов (Loki), доступны с момента, когда backend начал писать структурные логи.",
+      "id": 18,
+      "gridPos": { "h": 7, "w": 24, "x": 0, "y": 23 },
+      "datasource": { "type": "loki", "uid": "${logs}" },
+      "options": {
+        "showHeader": true,
+        "sortBy": [ { "displayName": "Количество", "desc": true } ]
+      },
+      "fieldConfig": {
+        "defaults": { "custom": { "align": "left" } },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "Этап" },
+            "properties": [
+              { "id": "mappings", "value": [ { "type": "value", "options": {
+                "metadata": { "text": "1. Метаданные видео" },
+                "subtitles": { "text": "2. Субтитры" },
+                "llm": { "text": "3. Нейросеть (LLM)" },
+                "pdf": { "text": "4. Генерация PDF" }
+              } } ] }
+            ]
+          }
+        ]
+      },
+      "transformations": [
+        { "id": "labelsToFields", "options": { "mode": "columns" } },
+        { "id": "merge", "options": {} },
+        { "id": "organize", "options": {
+          "excludeByName": { "Time": true },
+          "renameByName": { "stage": "Этап", "error_code": "Код ошибки", "Value #A": "Количество" },
+          "indexByName": { "stage": 0, "error_code": 1, "Value #A": 2 }
+        } },
+        { "id": "sortBy", "options": { "fields": {}, "sort": [ { "field": "Количество", "desc": true } ] } }
+      ],
+      "targets": [
+        {
+          "expr": "sum by (stage, error_code) (count_over_time({service=\"backend\"} | json | msg=\"stage failed\" [$__range]))",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ]
+    },
+    {
       "type": "row",
       "title": "Использование",
       "id": 13,
-      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 23 },
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 31 },
       "collapsed": false
     },
     {
       "type": "stat",
       "title": "Запросов за 24ч",
       "id": 14,
-      "gridPos": { "h": 4, "w": 8, "x": 0, "y": 24 },
+      "gridPos": { "h": 4, "w": 8, "x": 0, "y": 32 },
       "datasource": { "type": "prometheus", "uid": "${datasource}" },
       "options": {
         "reduceOptions": { "calcs": ["lastNotNull"] },
@@ -363,7 +502,7 @@
       "type": "stat",
       "title": "PDF скачано за 24ч",
       "id": 15,
-      "gridPos": { "h": 4, "w": 8, "x": 8, "y": 24 },
+      "gridPos": { "h": 4, "w": 8, "x": 8, "y": 32 },
       "datasource": { "type": "prometheus", "uid": "${datasource}" },
       "options": {
         "reduceOptions": { "calcs": ["lastNotNull"] },
@@ -392,7 +531,7 @@
       "type": "timeseries",
       "title": "PDF скачивания по времени",
       "id": 16,
-      "gridPos": { "h": 4, "w": 8, "x": 16, "y": 24 },
+      "gridPos": { "h": 4, "w": 8, "x": 16, "y": 32 },
       "datasource": { "type": "prometheus", "uid": "${datasource}" },
       "options": {
         "tooltip": { "mode": "single" },
@@ -417,6 +556,18 @@
         "name": "datasource",
         "label": "Datasource",
         "pluginId": "prometheus",
+        "query": "prometheus",
+        "refresh": 1,
+        "current": {},
+        "hide": 0
+      },
+      {
+        "type": "datasource",
+        "name": "logs",
+        "label": "Logs",
+        "pluginId": "loki",
+        "query": "loki",
+        "refresh": 1,
         "current": {},
         "hide": 0
       }

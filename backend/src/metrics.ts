@@ -36,3 +36,9 @@ export const pipelineDurationSeconds = new Histogram({
     labelNames: ['status'] as const,
     buckets: [10, 30, 60, 90, 120, 180, 300, 600],
 });
+
+
+export const PIPELINE_STAGES = ['metadata', 'subtitles', 'llm', 'pdf'] as const;
+for (const stage of PIPELINE_STAGES) pipelineFailuresTotal.inc({ stage }, 0);
+for (const cache of ['hit', 'miss']) jobsCreatedTotal.inc({ cache }, 0);
+for (const status of ['completed', 'failed', 'cancelled']) jobsCompletedTotal.inc({ status }, 0);

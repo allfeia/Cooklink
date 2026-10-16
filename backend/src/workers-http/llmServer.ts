@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import { createWorkerApp, sendError, withCatchAll } from './httpServerUtils';
+import { logger } from '../logging/logger';
 import { runRecipeExtraction, LlmExtractionError } from '../workers/llmWorker';
 import { recipeJobStore } from '../routes/recipeJobStore';
 
@@ -52,7 +53,7 @@ app.post('/extract', async (req, res) => {
             sendError(res, httpStatus, err);
             return;
         }
-        console.error('[llm-worker] unexpected error', err);
+        logger.error({ err, error_code: 'INTERNAL_SERVER_ERROR' }, 'unexpected error');
         sendError(res, 500, { code: 'INTERNAL_SERVER_ERROR', message: 'Внутренняя ошибка сервера' });
     }
 });
@@ -61,5 +62,5 @@ withCatchAll(app);
 
 if (require.main === module) {
     const PORT = process.env.PORT || 4003;
-    app.listen(PORT, () => console.log(`llm-worker listening on port ${PORT}`));
+    app.listen(PORT, () => logger.info({ port: Number(PORT) }, 'listening'));
 }

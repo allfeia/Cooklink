@@ -1,4 +1,5 @@
 import { recipeJobStore } from '../routes/recipeJobStore';
+import { logger } from '../logging/logger';
 import { fetchSubtitles, SubtitlesError } from '../routes/subtitles/subtitlesService';
 import type { Transcript } from '../routes/subtitles/subtitlesStore';
 import type { MediaProbe } from '../media/mediaProbe';
@@ -12,18 +13,20 @@ export async function runSubtitlesFetch(
     videoId: string,
     mediaProbe?: MediaProbe
 ): Promise<Transcript> {
+    const log = logger.child({ job_id: jobId });
     let transcript: Transcript;
     try {
         transcript = await fetchSubtitles(sourceUrl, videoId, mediaProbe);
     } catch (err) {
-        console.error('fetchSubtitles failed:', err);
+        log.error({ err, stage: 'subtitles' }, 'fetchSubtitles failed');
         const code = err instanceof SubtitlesError ? err.code : 'INTERNAL_SERVER_ERROR';
         const message = err instanceof Error ? err.message : 'Внутренняя ошибка сервера';
         await recipeJobStore.markFailed(jobId, code, message);
         throw err;
     }
-    console.log(
-        `[subtitles] job ${jobId}: ${transcript.language}, ${transcript.transcript_text.length} chars`
+    log.info(
+        { stage: 'subtitles', language: transcript.language, chars: transcript.transcript_text.length },
+        'subtitles fetched',
     );
     await recipeJobStore.updateStatus(jobId, 'llm_processing');
 
