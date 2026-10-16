@@ -5,10 +5,13 @@ import { sql } from 'drizzle-orm';
 import { db } from './db/client';
 import './metrics';
 import recipesRouter from './routes/recipe/recipes';
+import { logger } from './logging/logger';
+import { requestContext } from './logging/requestContext';
 
 const app = express();
 
 app.use(cors({ origin: 'http://localhost:5173' }));
+app.use(requestContext);
 app.use(express.json());
 
 app.get('/metrics', async (_req, res) => {
@@ -32,7 +35,7 @@ app.get('/health/ready', async (_req, res) => {
 app.use('/v1', recipesRouter);
 
 app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
-    console.error('[error]', req.method, req.originalUrl, err);
+    logger.error({ err, method: req.method, path: req.path, error_code: 'INTERNAL_SERVER_ERROR' }, 'unhandled error');
     if (res.headersSent) {
         next(err);
         return;

@@ -21,8 +21,21 @@ scrape_configs:
             output: log
             stream: stream
             timestamp: time
+            attrs: attrs
+
+      - json:
+          source: attrs
+          expressions:
+            service: '"com.docker.compose.service"'
+      - json:
+          source: output
+          expressions:
+            level: level
+
       - labels:
           stream:
+          service:
+          level:
       - timestamp:
           source: timestamp
           format: RFC3339Nano

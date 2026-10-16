@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import { createWorkerApp, sendError, withCatchAll } from './httpServerUtils';
+import { logger } from '../logging/logger';
 import { runMetadataCheck, MetadataError } from '../routes/metadata/metadataCheck';
 import type { Platform } from '../../../common/validation/domainDetection';
 
@@ -21,7 +22,7 @@ app.post('/check', async (req, res) => {
             sendError(res, 400, err);
             return;
         }
-        console.error('[metadata-worker] unexpected error', err);
+        logger.error({ err, error_code: 'INTERNAL_SERVER_ERROR' }, 'unexpected error');
         sendError(res, 500, { code: 'INTERNAL_SERVER_ERROR', message: 'Внутренняя ошибка сервера' });
     }
 });
@@ -30,5 +31,5 @@ withCatchAll(app);
 
 if (require.main === module) {
     const PORT = process.env.PORT || 4001;
-    app.listen(PORT, () => console.log(`metadata-worker listening on port ${PORT}`));
+    app.listen(PORT, () => logger.info({ port: Number(PORT) }, 'listening'));
 }

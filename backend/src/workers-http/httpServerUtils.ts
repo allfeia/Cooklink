@@ -1,4 +1,6 @@
 import express, { type Express, type NextFunction, type Request, type Response } from 'express';
+import { logger } from '../logging/logger';
+import { requestContext } from '../logging/requestContext';
 
 interface ErrorLike {
     code: string;
@@ -8,6 +10,7 @@ interface ErrorLike {
 
 export function createWorkerApp(): Express {
     const app = express();
+    app.use(requestContext);
     app.use(express.json());
     return app;
 }
@@ -24,7 +27,7 @@ export function sendError(res: Response, status: number, err: ErrorLike): void {
 
 export function withCatchAll(app: Express): void {
     app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
-        console.error('[worker error]', req.method, req.originalUrl, err);
+        logger.error({ err, method: req.method, path: req.path, error_code: 'INTERNAL_SERVER_ERROR' }, 'unhandled error');
         if (res.headersSent) {
             next(err);
             return;

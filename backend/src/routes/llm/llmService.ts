@@ -1,5 +1,7 @@
 import OpenAI from 'openai';
 import { ProxyAgent } from 'undici';
+import type { Logger } from 'pino';
+import { logger } from '../../logging/logger';
 import { recipeStore, RECIPE_TYPES, type RecipeData } from '../recipe/recipeStore';
 
 export type { RecipeData } from '../recipe/recipeStore';
@@ -72,15 +74,11 @@ function preview(text: string, maxChars = 300): string {
     return text.length > maxChars ? `${text.slice(0, maxChars)}… (${text.length} chars total)` : text;
 }
 
-async function callLlm(transcriptText: string): Promise<string> {
+async function callLlm(transcriptText: string, log: Logger): Promise<string> {
     const client = getClient();
 
-    console.log('[llm] sending request', {
-        model: GROQ_MODEL,
-        base_url: GROQ_BASE_URL,
-        transcript_chars: transcriptText.length,
-        transcript_preview: preview(transcriptText, 200),
-    });
+    log.info({ stage: 'llm', model: GROQ_MODEL, transcript_chars: transcriptText.length }, 'sending request');
+    log.debug({ transcript_preview: preview(transcriptText, 200) }, 'request transcript preview');
 
     let stream;
     try {
@@ -97,11 +95,10 @@ async function callLlm(transcriptText: string): Promise<string> {
     } catch (err) {
         const status = (err as { status?: number })?.status;
         const code = (err as { code?: string })?.code;
-        console.error('[llm] request failed', {
-            status,
-            code,
-            message: err instanceof Error ? err.message : String(err),
-        });
+        log.error(
+            { stage: 'llm', upstream_status: status, upstream_code: code, message: err instanceof Error ? err.message : String(err) },
+            'llm request failed',
+        );
         if (status === 429) {
             throw new LlmExtractionError(
                 'LLM_RATE_LIMITED',
@@ -124,10 +121,8 @@ async function callLlm(transcriptText: string): Promise<string> {
         result += chunk.choices[0]?.delta?.content ?? '';
     }
 
-    console.log('[llm] received response', {
-        response_chars: result.length,
-        response_preview: preview(result),
-    });
+    log.info({ stage: 'llm', response_chars: result.length }, 'received response');
+    log.debug({ response_preview: preview(result) }, 'response preview');
 
     return result;
 }
@@ -200,18 +195,21 @@ function preprocessTranscript(text: string): string {
     return deduped.join('\n').slice(0, MAX_TRANSCRIPT_CHARS);
 }
 
-export async function extractRecipe(transcriptText: string, canonicalKey: string): Promise<RecipeData> {
+export async function extractRecipe(
+    transcriptText: string,
+    canonicalKey: string,
+    log: Logger = logger,
+): Promise<RecipeData> {
     const processed = preprocessTranscript(transcriptText);
-    console.log('[llm] extractRecipe start', {
-        canonical_key: canonicalKey,
-        transcript_chars: transcriptText.length,
-        processed_chars: processed.length,
-    });
+    log.info(
+        { stage: 'llm', canonical_key: canonicalKey, transcript_chars: transcriptText.length, processed_chars: processed.length },
+        'extractRecipe start',
+    );
 
-    const firstResponse = await callLlm(processed);
+    const firstResponse = await callLlm(processed, log);
 
     if (!firstResponse.trim()) {
-        console.warn('[llm] empty response — treating as AI_EXTRACTION_FAILED', { canonical_key: canonicalKey });
+        log.warn({ stage: 'llm', error_code: 'AI_EXTRACTION_FAILED', canonical_key: canonicalKey }, 'empty response');
         throw new LlmExtractionError('AI_EXTRACTION_FAILED', 'Не удалось извлечь рецепт');
     }
 
@@ -236,42 +234,35 @@ export async function extractRecipe(transcriptText: string, canonicalKey: string
             parsed !== null &&
             !Array.isArray(parsed) &&
             Object.keys(parsed).length === 0;
-        console.log('[llm] parse attempt', {
-            canonical_key: canonicalKey,
-            attempt,
-            json_parse_ok: parsed !== undefined,
-            parse_error: parseError,
-            schema_valid: schemaValid,
-        });
+        log.info(
+            { stage: 'llm', attempt, json_parse_ok: parsed !== undefined, parse_error: parseError, schema_valid: schemaValid },
+            'parse attempt',
+        );
 
         if (schemaValid) {
             const recipe = parsed as RecipeData;
             await recipeStore.save(canonicalKey, recipe);
-            console.log('[llm] extractRecipe success', { canonical_key: canonicalKey, attempt });
+            log.info({ stage: 'llm', canonical_key: canonicalKey, attempt }, 'extractRecipe success');
             return recipe;
         }
 
         if (isEmptyObject) {
-            console.warn('[llm] empty object response — treating as AI_EXTRACTION_FAILED', {
-                canonical_key: canonicalKey,
-                attempt,
-            });
+            log.warn({ stage: 'llm', error_code: 'AI_EXTRACTION_FAILED', canonical_key: canonicalKey, attempt }, 'empty object response');
             throw new LlmExtractionError('AI_EXTRACTION_FAILED', 'Не удалось извлечь рецепт');
         }
 
         if (attempt === MAX_RETRIES) {
-            console.error('[llm] extractRecipe failed — INVALID_JSON_SCHEMA', {
-                canonical_key: canonicalKey,
-                retry_count: attempt - 1,
-                ai_ans: preview(cleaned),
-            });
+            log.error(
+                { stage: 'llm', error_code: 'INVALID_JSON_SCHEMA', canonical_key: canonicalKey, retry_count: attempt - 1, ai_ans: preview(cleaned) },
+                'extractRecipe failed',
+            );
             throw new LlmExtractionError('INVALID_JSON_SCHEMA', 'Ошибка валидации ответа AI', {
                 retry_count: attempt - 1,
                 ai_ans: cleaned,
             });
         }
 
-        rawAnswer = await callLlm(processed);
+        rawAnswer = await callLlm(processed, log);
     }
 
     throw new LlmExtractionError('INVALID_JSON_SCHEMA', 'Ошибка валидации ответа AI');

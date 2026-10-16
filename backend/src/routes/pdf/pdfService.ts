@@ -1,3 +1,5 @@
+import type { Logger } from 'pino';
+import { logger } from '../../logging/logger';
 import { buildRecipeHtml } from './pdfTemplate';
 import type { RecipeData } from '../recipe/recipeStore';
 
@@ -16,7 +18,7 @@ export class PdfGenerationError extends Error {
     }
 }
 
-export async function generatePdf(recipe: RecipeData): Promise<Buffer> {
+export async function generatePdf(recipe: RecipeData, log: Logger = logger): Promise<Buffer> {
     const html = buildRecipeHtml(recipe);
 
     const form = new FormData();
@@ -32,7 +34,7 @@ export async function generatePdf(recipe: RecipeData): Promise<Buffer> {
         });
     } catch (err) {
         const message = err instanceof Error ? err.message : String(err);
-        console.error('[pdf] request to Gotenberg failed', { message });
+        log.error({ stage: 'pdf', error_code: 'PDF_GENERATION_FAILED', reason: message }, 'request to Gotenberg failed');
         throw new PdfGenerationError('PDF_GENERATION_FAILED', 'Не удалось сгенерировать PDF', {
             reason: message,
         });
@@ -40,7 +42,10 @@ export async function generatePdf(recipe: RecipeData): Promise<Buffer> {
 
     if (!response.ok) {
         const body = await response.text().catch(() => '');
-        console.error('[pdf] Gotenberg returned an error', { status: response.status, body: body.slice(0, 500) });
+        log.error(
+            { stage: 'pdf', error_code: 'PDF_GENERATION_FAILED', upstream_status: response.status, body: body.slice(0, 500) },
+            'Gotenberg returned an error',
+        );
         throw new PdfGenerationError('PDF_GENERATION_FAILED', 'Не удалось сгенерировать PDF', {
             reason: `Gotenberg responded with ${response.status}`,
         });

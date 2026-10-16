@@ -3,12 +3,14 @@ x-logging: &default-logging
   options:
     max-size: "10m"
     max-file: "3"
+    labels: "com.docker.compose.service"
 
 x-logging-busy: &busy-logging
   driver: json-file
   options:
     max-size: "20m"
     max-file: "3"
+    labels: "com.docker.compose.service"
 
 services:
   gotenberg:
@@ -42,6 +44,7 @@ services:
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       PORT: 4001
+      SERVICE_NAME: metadata-worker
       YOUTUBE_COOKIES_PATH: /app/youtube_cookies.txt
     volumes:
       - ./youtube_cookies.txt:/app/youtube_cookies.txt
@@ -57,6 +60,7 @@ services:
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       PORT: 4002
+      SERVICE_NAME: subtitles-worker
       YOUTUBE_COOKIES_PATH: /app/youtube_cookies.txt
     volumes:
       - ./youtube_cookies.txt:/app/youtube_cookies.txt
@@ -74,6 +78,7 @@ services:
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       PORT: 4003
+      SERVICE_NAME: llm-worker
     depends_on:
       postgres:
         condition: service_healthy
@@ -86,6 +91,7 @@ services:
     environment:
       GOTENBERG_URL: http://gotenberg:3000
       PORT: 4004
+      SERVICE_NAME: pdf-worker
     depends_on:
       - gotenberg
 
